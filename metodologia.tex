@@ -1,0 +1,824 @@
+% ============================================================
+% Capítulo: Metodologia
+% ============================================================
+
+\chapter{Metodologia}
+\label{cap:metodologia}
+
+Esta seção tem como objetivo apresentar e descrever a metodologia adotada no presente trabalho. Inicialmente, realizamos o processo de seleção do conjunto de dados, seguido da escolha das tarefas e dos modelos. Em seguida, efetuamos a otimização dos hiperparâmetros e definimos o modelo final selecionado. Avaliamos, por meio do \textit{cross-validation}, a presença de \textit{overfitting} ou \textit{underfitting} no modelo, e posteriormente definimos as métricas e os \textit{baselines} utilizados para comparação com o trabalho proposto. O fluxo desse processo pode ser visualizado na Figura~\ref{fig:pipeline}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{Dissertação/Imagens/pipeline_metodologia.png}
+    \caption{Pipeline Metodologia.}
+    \label{fig:pipeline}
+\end{figure}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Seleção do Conjunto de Dados e das Tarefas}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection*{Conjunto de Dados}
+
+O conjunto de dados adotado para o processo de concepção do \textit{parser} é o
+Porttinari~\citep{stil}. Esse conjunto foi criado em 2023 com o objetivo de ser um recurso
+multigênero para a área de PLN. O processo de anotação durou quase três anos e envolveu
+diversos anotadores treinados.
+
+Existem conjuntos de dados que possuem até cerca de 4 milhões de sentenças anotadas de acordo
+com as normas da UD. Esses conjuntos continuam recebendo atualizações e estão disponíveis no
+repositório do GitHub\footnote{\url{https://github.com/UniversalDependencies/UD_Portuguese-Porttinari}}.
+
+Há, porém, algumas variações desse conjunto de dados: Porttinari-base, Porttinari-check e
+Porttinari-automatic. O \textbf{Porttinari-base} é um corpus revisado manualmente em detalhe
+para servir como padrão; ele apresenta alta concordância entre os anotadores, medida pela
+métrica Kappa, de 97,8\% e 96,2\%. O Porttinari-check é um pequeno corpus estruturalmente
+semelhante ao Porttinari-base, concebido para servir como banco de testes para avaliações
+adicionais e diversificadas. Já o Porttinari-automatic é um corpus anotado automaticamente por
+um \textit{parser} de última geração, baseado no Porttinari-base.
+
+Para o presente trabalho, selecionou-se o Porttinari-base, devido à sua robustez, comprovada
+por meio da métrica Kappa. A versão utilizada, disponível no repositório do GitHub, contém
+168.080 tokens, totalizando 8.418 sentenças, sendo 117.972 (70\%) tokens destinados ao
+conjunto de treino, 16.528 (10\%) ao conjunto de desenvolvimento e 33.580 (20\%) ao conjunto
+de teste, conforme disposto na Tabela~\ref{tab:porttinari}.
+
+\begin{table}[h!]
+\centering
+\caption{Distribuição dos dados no conjunto Porttinari-base.}
+\label{tab:porttinari}
+\begin{tabular}{lccc}
+\hline
+\textbf{Conjunto} & \textbf{Tokens} & \textbf{Percentual} & \textbf{Sentenças} \\ \hline
+Treino            & 117.972         & 70\%                & 5.893 \\
+Desenvolvimento   & 16.528          & 10\%                & 842   \\
+Teste             & 33.580          & 20\%                & 1.683 \\ \hline
+\textbf{Total}    & \textbf{168.080} & \textbf{100\%}     & \textbf{8.418} \\ \hline
+\end{tabular}
+\end{table}
+
+\subsection*{Seleção das Tarefas}
+
+As tarefas abordadas neste trabalho são UPOS, DEPREL e HEAD. A tarefa de UPOS apresenta, nos
+três conjuntos, distribuição desbalanceada, o que reflete a distribuição natural das categorias
+gramaticais em textos, nos quais aparecem muitos substantivos e preposições e poucos símbolos e
+interjeições. Esse desbalanceamento implica uma possível dificuldade para o modelo aprender a
+identificar as categorias de menor frequência. A distribuição nos três conjuntos pode ser
+observada nas Figuras~\ref{fig:upos_train}, \ref{fig:upos_desenvolvimento} e
+\ref{fig:upos_teste}. O mesmo ocorre para as tags relacionadas à tarefa DEPREL, conforme
+mostrado nas Figuras~\ref{fig:deprel_train}, \ref{fig:deprel_desenvolvimento} e
+\ref{fig:deprel_teste}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{Dissertação/Imagens/frequencia_upos_train.png}
+    \caption{Frequência UPOS conjunto de Treino.}
+    \label{fig:upos_train}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{Dissertação/Imagens/frequencia_upos_desenv.png}
+    \caption{Frequência UPOS conjunto de Desenvolvimento.}
+    \label{fig:upos_desenvolvimento}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{Dissertação/Imagens/frequencia_upos_teste.png}
+    \caption{Frequência UPOS conjunto de Teste.}
+    \label{fig:upos_teste}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.1\textwidth]{Dissertação/Imagens/frequencia_deprel_train.png}
+    \caption{Frequência DEPREL conjunto de Treino.}
+    \label{fig:deprel_train}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.1\textwidth]{Dissertação/Imagens/frequencia_deprel_desenvolvimento.png}
+    \caption{Frequência DEPREL conjunto de Desenvolvimento.}
+    \label{fig:deprel_desenvolvimento}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.1\textwidth]{Dissertação/Imagens/frequencia_deprel_teste.png}
+    \caption{Frequência DEPREL conjunto de Teste.}
+    \label{fig:deprel_teste}
+\end{figure}
+
+O conjunto de treino possui comprimento médio de 20,02 tokens por sentença e mediana de 18
+tokens. Nas Figuras~\ref{fig:box_plot_train}, \ref{fig:box_plot_desenv}
+e~\ref{fig:box_plot_test} observam-se \textit{outliers} nos três conjuntos. A maior sentença
+presente no corpus possui 79 tokens.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{Dissertação/Imagens/tamanho_sentenca_train_cloud.png}
+    \caption{Box plot do conjunto de treino, mostrando a distribuição do tamanho das sentenças
+             em tokens, incluindo outliers.}
+    \label{fig:box_plot_train}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{Dissertação/Imagens/tamanho_sentenca_valid_cloud.png}
+    \caption{Box plot do conjunto de desenvolvimento, mostrando a distribuição do tamanho das
+             sentenças em tokens, incluindo outliers.}
+    \label{fig:box_plot_desenv}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{Dissertação/Imagens/tamanho_sentenca_test_cloud.png}
+    \caption{Box plot do conjunto de teste, mostrando a distribuição do tamanho das sentenças
+             em tokens, incluindo outliers.}
+    \label{fig:box_plot_test}
+\end{figure}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Seleção dos Modelos}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection*{Modelos Abordados}
+
+Para a escolha do modelo, foram abordados tipos de arquiteturas existentes e atualmente
+disponíveis — apenas encoders, apenas decoders e encoder-decoder — mesclando abordagens
+monolíngues e multilíngues de diversos tamanhos. Devido a limitações de hardware, selecionamos
+modelos com menos de 1 bilhão de parâmetros. Os modelos escolhidos foram:
+mBERT (multilíngue)\footnote{\url{https://huggingface.co/google-bert/bert-base-multilingual-cased}},
+BERTimbau Base (monolíngue)\footnote{\url{https://huggingface.co/neuralmind/bert-base-portuguese-cased}},
+BERTimbau Large (monolíngue)\footnote{\url{https://huggingface.co/neuralmind/bert-large-portuguese-cased}}
+e ModernJabuticaBERT-Base-1k (monolíngue)\footnote{\url{https://huggingface.co/amadeusai/modernJabuticaBERT-Base-1k}}.
+
+Modelos monolíngues são especializados em um idioma específico, úteis em línguas com morfologia
+rica e nuances complexas. Tendem a apresentar melhor desempenho em idiomas com poucos recursos
+disponíveis, pois o pré-treinamento focado permite extrair mais informações mesmo de corpora
+limitados~\citep{lima2025generative}. Modelos multilíngues, por outro lado, são pré-treinados
+em várias línguas simultaneamente, o que os torna eficazes em idiomas com abundância de
+recursos, embora seu desempenho possa ser inferior ao de modelos monolíngues em idiomas com
+morfologia complexa ou poucos dados~\citep{silveira2025small}.
+
+\subsubsection*{mBERT}
+
+O mBERT é um modelo multilíngue baseado na arquitetura BERT~\citep{devlin2019bert},
+pré-treinado com textos de 104 línguas, incluindo o português. O BERT é um modelo
+\textit{Transformer} que aprende representações bidirecionais do texto por meio de dois
+objetivos de pré-treinamento: MLM (\textit{Masked Language Modeling}), no qual o modelo
+prediz tokens mascarados aleatoriamente no texto de entrada, e NSP (\textit{Next Sentence
+Prediction}), que determina se duas sentenças são consecutivas no corpus original. O modelo
+opera com contexto de até 512 tokens e conta com 110 milhões de parâmetros.
+
+\subsubsection*{BERTimbau Base e Large}
+
+O BERTimbau~\citep{souza2020bertimbau} é um modelo treinado especificamente para o português,
+a partir do corpus BrWaC por 1.000.000 de passos de otimização com estratégia de
+\textit{whole-word masking}. Esse corpus possui 3,53 milhões de documentos; para o
+pré-treinamento, o BERTimbau utilizou apenas o corpo dos documentos. O modelo possui contexto
+de 512 tokens e está disponível em duas versões: Base, com 110 milhões de parâmetros, e Large,
+com 330 milhões de parâmetros.
+
+\subsubsection*{JabuticaBERT}
+
+O JabuticaBERT~\citep{thiago} é um modelo monolíngue baseado na arquitetura BERT, desenvolvido
+com foco específico no português brasileiro e em cenários de maior escala de dados. O modelo
+foi pré-treinado em um conjunto de dados ampliado, combinando múltiplas fontes textuais de alta
+qualidade, o que contribui para representações linguísticas mais robustas. O treinamento segue
+o paradigma de MLM, com adaptações modernas nas estratégias de tokenização e otimização
+alinhadas com práticas recentes da literatura. O modelo mantém suporte a sequências de até 512
+tokens e utiliza o vocabulário expandido da versão \textit{ModernBERT}, posicionando-se como
+alternativa entre modelos base e large em termos de capacidade de representação.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsection*{Pré-processamento e Tokenização}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsubsection*{Carregamento e Estrutura dos Dados}
+
+O corpus Porttinari-base foi armazenado em arquivos CSV com uma sentença por linha. Cada linha
+contém listas serializadas com os tokens, rótulos UPOS, DEPREL e os índices inteiros de HEAD.
+Esses arquivos foram carregados com a biblioteca Pandas e convertidos para o formato
+\texttt{Dataset} da biblioteca HuggingFace Datasets~\citep{wolf2020transformers}, criando um
+\texttt{DatasetDict} com as três partições: treino (\texttt{train\_outxpos.csv}),
+desenvolvimento (\texttt{val\_outxpos.csv}) e teste (\texttt{test\_outxpos.csv}).
+
+Cada exemplo no conjunto de dados contém os seguintes campos:
+
+\begin{itemize}
+    \item \texttt{tokens}: lista de strings com os tokens da sentença;
+    \item \texttt{head\_tags}: lista de inteiros (0-indexados) indicando o índice do token
+          regente (HEAD) para cada posição. Para os modelos com cabeçote linear, o HEAD é
+          predito como classificação sobre 100 posições; para o cabeçote biaffine, o espaço
+          de predição abrange 200 posições, cobrindo todas as sentenças do corpus;
+    \item \texttt{deprel\_tags}: lista de inteiros mapeando cada token ao índice de seu rótulo
+          de relação de dependência (DEPREL) em um vocabulário fechado de 44 rótulos;
+    \item \texttt{upos\_tags}: lista de inteiros mapeando cada token ao índice de sua
+          categoria morfossintática universal (UPOS).
+\end{itemize}
+
+\subsubsection*{Tokenização por Subpalavras}
+
+A tokenização foi realizada pelo tokenizador nativo de cada encoder pré-treinado, carregado
+via \texttt{AutoTokenizer.from\_pretrained} da biblioteca HuggingFace
+Transformers~\citep{wolf2020transformers}. Todos os encoders avaliados utilizam a estratégia
+WordPiece~\citep{wu2016google} para segmentação de palavras em subpalavras.
+
+Como as sentenças do Porttinari já estão pré-segmentadas ao nível de palavra, a tokenização
+foi realizada com o parâmetro \texttt{is\_split\_into\_words=True}, que instrui o tokenizador
+a processar cada elemento da lista de entrada como uma palavra previamente delimitada,
+aplicando a segmentação em subpalavras internamente. Os demais parâmetros foram configurados
+da seguinte forma:
+
+\begin{itemize}
+    \item \textbf{Comprimento máximo} (\texttt{max\_length=512}): reflete o limite de contexto
+          dos encoders baseados em BERT. Como a maior sentença do corpus possui 79 tokens, e
+          a relação de expansão de palavras para subpalavras é tipicamente pequena para o
+          português, nenhuma sentença do Porttinari-base exigiu truncação após a tokenização;
+    \item \textbf{Truncação} (\texttt{truncation=True}): ativada como salvaguarda para
+          sentenças que eventualmente ultrapassem 512 subpalavras após expansão;
+    \item \textbf{Preenchimento} (\texttt{padding="max\_length"}): todas as sequências são
+          completadas com o token de preenchimento (\textit{[PAD]}) até 512 posições,
+          garantindo lotes de tamanho uniforme na fase de pré-processamento.
+\end{itemize}
+
+\subsubsection*{Alinhamento de Rótulos com Subpalavras}
+
+A segmentação em subpalavras introduz um desalinhamento entre os índices dos tokens originais
+e os das subpalavras geradas. Por exemplo, a palavra ``\textit{realização}'' pode ser
+segmentada em duas subpalavras: ``\textit{realiza}'' e ``\textit{\#\#ção}'', resultando em
+dois vetores de saída do encoder para uma única entrada anotada. Para que os rótulos de
+DEPREL, HEAD e UPOS sejam corretamente associados a cada subpalavra, foi aplicada a seguinte
+estratégia de alinhamento:
+
+\begin{enumerate}
+    \item O método \texttt{word\_ids(batch\_index)} da saída do tokenizador retorna, para cada
+          posição da sequência tokenizada, o índice da palavra original correspondente, ou
+          \texttt{None} para tokens especiais (\texttt{[CLS]}, \texttt{[SEP]}) e posições de
+          preenchimento;
+    \item Posições com \texttt{word\_id = None} recebem o rótulo sentinela $-100$, que é
+          ignorado pela função de perda \texttt{CrossEntropyLoss} durante o treinamento;
+    \item Para cada subpalavra resultante da segmentação de uma palavra $w_i$, o rótulo de
+          $w_i$ é atribuído a \textbf{todas} as subpalavras geradas por aquela palavra —
+          incluindo fragmentos intermediários como ``\textit{\#\#ção}'' — que recebem
+          o mesmo índice de rótulo que a subpalavra inicial.
+\end{enumerate}
+
+Essa estratégia garante que todas as subpalavras de uma palavra contribuam igualmente para
+o cálculo da perda durante o treinamento. O Trecho de Código~\ref{cod:alinhamento} apresenta
+a implementação da função de alinhamento utilizada:
+
+\begin{lstlisting}[language=Python,
+                   caption={Função de alinhamento de rótulos com subpalavras.},
+                   label={cod:alinhamento}]
+def align_labels_with_tokens(labels, word_ids):
+    new_labels, current_word = [], None
+    for word_id in word_ids:
+        if word_id != current_word:
+            current_word = word_id
+            label = -100 if word_id is None else labels[word_id]
+        elif word_id is None:
+            label = -100
+        else:
+            label = labels[word_id]  # mesma etiqueta para subpalavras seguintes
+        new_labels.append(label)
+    return new_labels
+\end{lstlisting}
+
+\subsubsection*{Estratégia de Predição na Inferência}
+
+Durante o treinamento, todas as subpalavras de uma palavra contribuem para o gradiente com
+o mesmo rótulo da palavra original. Durante a inferência, entretanto, apenas a
+\textbf{primeira subpalavra} de cada token original é utilizada para extrair a predição final:
+
+\[
+\hat{y}_i = \arg\max \; f_\theta\!\left(\mathbf{h}_{\mathrm{first}(i)}\right),
+\]
+
+em que $\mathbf{h}_{\mathrm{first}(i)}$ é a representação da primeira subpalavra do token
+$i$ na saída do encoder e $f_\theta$ é o cabeçote de predição. Essa assimetria treino/inferência
+é uma escolha deliberada: ao treinar com todas as subpalavras, o modelo recebe mais exemplos
+supervisionados por sentença; ao predizer com apenas a primeira, evita-se ambiguidade sobre
+qual subpalavra deve representar a palavra inteira. Essa prática é amplamente adotada em
+tarefas de anotação ao nível de token com encoders pré-treinados~\citep{devlin2019bert}.
+
+\subsubsection*{Colator de Dados (\textit{Data Collator})}
+
+Os exemplos pré-processados foram agrupados em lotes por meio de um colator de dados
+personalizado implementado em PyTorch. O colator recebe uma lista de exemplos já
+tokenizados e alinhados, e os combina em tensores, aplicando preenchimento dinâmico ao
+comprimento máximo do lote. As convenções de preenchimento são:
+
+\begin{itemize}
+    \item \texttt{input\_ids}: preenchidos com \texttt{pad\_token\_id} do tokenizador;
+    \item \texttt{attention\_mask}: preenchidos com 0 (posições de \textit{padding} são
+          mascaradas);
+    \item \texttt{deprel\_label}, \texttt{head\_label} e \texttt{upos\_label}: preenchidos
+          com $-100$, garantindo que posições de preenchimento não influenciem o cálculo
+          da perda.
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsection*{Arquitetura}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsubsection*{Correlação entre as Tarefas de UPOS e DEPREL}
+
+Inicialmente, foi avaliado o grau de dependência entre as tarefas de rotulagem morfossintática
+(UPOS) e de rotulagem sintática (DEPREL) no corpus utilizado. O objetivo é quantificar o
+nível de interdependência entre essas tarefas — ou seja, em que medida o conhecimento da
+classe gramatical de um token fornece informações relevantes sobre sua função sintática.
+
+\paragraph{Métricas de correlação.}
+Como UPOS e DEPREL são variáveis categóricas nominais, foram empregadas métricas de associação
+estatística adequadas para esse tipo de dado.
+
+\paragraph{Informação Mútua (\textit{Mutual Information} — MI).}
+A Informação Mútua mede a quantidade de informação compartilhada entre duas variáveis
+aleatórias. No contexto deste trabalho, a MI quantifica a redução de incerteza sobre o rótulo
+DEPREL ao se conhecer o rótulo UPOS de um token:
+
+\[
+\mathrm{MI}(U, D) =
+\sum_{u \in U}\sum_{d \in D}
+p(u,d)\log_2\frac{p(u,d)}{p(u)p(d)},
+\]
+
+em que $U$ e $D$ representam os conjuntos de rótulos de UPOS e DEPREL, respectivamente,
+enquanto $p(u,d)$, $p(u)$ e $p(d)$ correspondem às probabilidades conjunta e marginais
+estimadas a partir do corpus.
+
+\paragraph{Informação Mútua Normalizada (\textit{Normalized Mutual Information} — NMI).}
+Para permitir comparação entre corpora distintos, a MI foi normalizada para o intervalo
+$[0,1]$:
+
+\[
+\mathrm{NMI}(U, D) =
+\frac{\mathrm{MI}(U, D)}
+{\frac{1}{2}(H(U)+H(D))},
+\]
+
+em que $H(\cdot)$ representa a entropia de Shannon.
+
+\paragraph{V de Cramér.}
+O V de Cramér é uma medida de tamanho de efeito baseada no teste qui-quadrado:
+
+\[
+V =
+\sqrt{
+\frac{\chi^2}
+{N \cdot (\min(r,c)-1)}
+},
+\]
+
+em que $\chi^2$ é a estatística do teste, $N$ é o número total de observações, e $r$ e $c$
+indicam o número de categorias de UPOS e DEPREL. O valor de $V$ varia entre 0 (ausência de
+associação) e 1 (associação máxima).
+
+\paragraph{Resultados.}
+A análise foi realizada sobre a totalidade do corpus Porttinari-base (168.080 tokens):
+
+\begin{itemize}
+    \item \textbf{MI}: 2,0306
+    \item \textbf{NMI}: 0,7600
+    \item \textbf{V de Cramér}: 0,7962
+    \item \textbf{Qui-quadrado ($\chi^2$)}: 1.812.777,35 (\textit{p-value} $< 10^{-10}$)
+\end{itemize}
+
+Os resultados indicam forte associação estatística entre UPOS e DEPREL. O valor de NMI igual
+a 0,76 evidencia elevado compartilhamento informacional entre as variáveis analisadas, e o
+V de Cramér de 0,7962 confirma que a associação não é marginal. O teste qui-quadrado também
+rejeita a hipótese de independência estatística com \textit{p-value} praticamente nulo.
+
+Esses resultados fornecem evidências favoráveis ao uso de aprendizado multitarefa, pois a
+classe gramatical de um token fornece informações relevantes sobre sua função sintática.
+Entretanto, embora as métricas indiquem forte dependência estatística entre UPOS e DEPREL,
+tais medidas não implicam causalidade. A predição do HEAD, por envolver a identificação do
+índice do token regente, continua dependendo de informações estruturais globais da sentença,
+especialmente em construções sintáticas ambíguas ou dependências de longa distância.
+
+\subsubsection*{Arquitetura Linear Multitarefa}
+
+Com base na forte dependência estatística entre UPOS e DEPREL, foi proposta uma arquitetura
+multitarefa composta exclusivamente por camadas lineares específicas para cada tarefa,
+mantendo o compartilhamento dos parâmetros do encoder.
+
+O encoder pré-treinado recebe como entrada a sequência tokenizada e produz um tensor de
+representações contextuais $\mathbf{H} \in \mathbb{R}^{B \times L \times d}$, em que $B$ é
+o tamanho do lote, $L$ é o comprimento máximo da sequência e $d$ é a dimensão oculta do
+encoder ($d = 768$ para modelos Base e $d = 1024$ para modelos Large). Após a aplicação de
+\textit{dropout} (com taxa determinada pela configuração \texttt{hidden\_dropout\_prob} ou
+\texttt{classifier\_dropout} de cada encoder), o tensor é projetado por três camadas
+\texttt{nn.Linear} independentes:
+
+\begin{itemize}
+    \item \textbf{HEAD}: $\mathbf{W}_h \in \mathbb{R}^{100 \times d}$, projetando para um
+          espaço de 100 posições candidatas a token regente;
+    \item \textbf{DEPREL}: $\mathbf{W}_d \in \mathbb{R}^{44 \times d}$, projetando para os
+          44 rótulos de dependência do Porttinari;
+    \item \textbf{UPOS}: $\mathbf{W}_u \in \mathbb{R}^{N_u \times d}$, projetando para os
+          $N_u$ rótulos morfossintáticos do corpus.
+\end{itemize}
+
+A função de perda total é a soma das perdas \texttt{CrossEntropyLoss} para cada tarefa,
+calculadas apenas sobre posições com rótulo $\neq -100$:
+
+\[
+\mathcal{L} = \mathcal{L}_{\text{HEAD}} + \mathcal{L}_{\text{DEPREL}} + \mathcal{L}_{\text{UPOS}}.
+\]
+
+Diferentemente de abordagens amplamente utilizadas na literatura, como UDify~\citep{kondratyuk201975},
+UDPipe 2.0~\citep{straka2017tokenizing} e Stanza~\citep{qi-etal-2020-stanza}, a arquitetura
+proposta não incorpora mecanismos explícitos de interação entre pares de tokens para a predição
+de dependências sintáticas. Em vez disso, investiga-se até que ponto as representações
+compartilhadas produzidas pelo encoder são capazes de capturar informações suficientes para a
+predição conjunta de UPOS, HEAD e DEPREL por projeção linear direta. A
+Figura~\ref{fig:arquitetura_linear} apresenta a arquitetura multitarefa linear.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{Dissertação/Imagens/linear_mtl.png}
+    \caption{Arquitetura multitarefa baseada em camadas lineares.}
+    \label{fig:arquitetura_linear}
+\end{figure}
+
+\paragraph{Comparação com o UDify.}
+O UDify~\citep{kondratyuk201975} propõe uma arquitetura multitarefa e multilíngue baseada no
+mBERT para análise linguística segundo o framework UD, realizando simultaneamente etiquetagem
+morfossintática, predição de características morfológicas, lematização e análise de dependências.
+Para a tarefa de \textit{parsing}, o modelo utiliza classificadores biaffine que modelam
+explicitamente relações estruturais entre palavras. Embora ambas as abordagens explorem
+aprendizado multitarefa, seus objetivos são distintos: o UDify foi concebido como solução
+universal para múltiplos idiomas e tarefas, enquanto o ParseH2IA concentra-se especificamente
+na análise sintática do português com arquiteturas mais simples e sem encoder multilíngue.
+
+\paragraph{Comparação com o UDPipe 2.0.}
+O UDPipe 2.0~\citep{straka2017tokenizing} é um sistema modular em \textit{pipeline} que
+contempla tokenização, lematização, etiquetagem morfossintática e \textit{parsing}. Cada etapa
+é tratada por componentes especializados sequencialmente. A presente abordagem diferencia-se
+por adotar aprendizado multitarefa com compartilhamento de parâmetros, permitindo que UPOS,
+HEAD e DEPREL sejam aprendidas simultaneamente a partir de um único encoder contextualizado.
+
+\paragraph{Comparação com o Stanza.}
+O Stanza~\citep{qi-etal-2020-stanza} é um \textit{toolkit} neural completo para PLN
+multilíngue, com módulos especializados para cada tarefa. Esta dissertação difere por
+investigar especificamente o impacto do aprendizado multitarefa sobre HEAD e DEPREL com
+arquiteturas simples, em vez de priorizar cobertura de múltiplas tarefas e idiomas.
+
+\subsubsection*{Arquitetura Biaffine Multitarefa}
+
+Além da arquitetura linear, foi avaliada uma segunda abordagem multitarefa que incorpora o
+mecanismo biaffine~\citep{dozat2016deep} para as tarefas de predição de HEAD e DEPREL. O
+objetivo é investigar se a modelagem explícita das relações entre pares de tokens proporciona
+ganhos em relação à abordagem linear.
+
+Nesta variante, a tarefa de UPOS continua sendo realizada por uma camada linear sobre a saída
+do encoder. Para as tarefas de HEAD e DEPREL, o tensor de saída do encoder é projetado por
+quatro MLPs especializadas (Linear\,+\,ELU\,+\,LayerNorm\,+\,Dropout):
+
+\begin{itemize}
+    \item $\text{arc\_head\_mlp}$: projeta cada token para o papel de \textit{cabeça de arco},
+          com dimensão oculta $d_\text{arc} = 500$;
+    \item $\text{arc\_dep\_mlp}$: projeta cada token para o papel de \textit{dependente de arco},
+          com dimensão oculta $d_\text{arc} = 500$;
+    \item $\text{rel\_head\_mlp}$: projeta cada token para o papel de \textit{cabeça de relação},
+          com dimensão oculta $d_\text{rel} = 100$;
+    \item $\text{rel\_dep\_mlp}$: projeta cada token para o papel de \textit{dependente de
+          relação}, com dimensão oculta $d_\text{rel} = 100$.
+\end{itemize}
+
+Em seguida, dois mecanismos de atenção biaffine calculam escores entre pares de representações:
+
+\begin{align}
+\text{score}_\text{arc}(i,j)  &= \mathbf{h}^{(\text{arc-dep})}_i \mathbf{W}_\text{arc}\, \mathbf{h}^{(\text{arc-head})}_j, \\
+\text{score}_\text{rel}(i,j)  &= \mathbf{h}^{(\text{rel-dep})}_i \mathbf{W}_\text{rel}\, \mathbf{h}^{(\text{rel-head})}_j,
+\end{align}
+
+em que $\mathbf{W}_\text{arc} \in \mathbb{R}^{1 \times (d_\text{arc}+1) \times (d_\text{arc}+1)}$
+e $\mathbf{W}_\text{rel} \in \mathbb{R}^{44 \times (d_\text{rel}+1) \times (d_\text{rel}+1)}$
+são parâmetros aprendidos, e os termos de viés são incorporados ao vetor antes da multiplicação
+(bias\_x=True para ambos; bias\_y=False para o arco e bias\_y=True para a relação,
+conforme~\citet{dozat2016deep}).
+
+A função de perda total do modelo biaffine é a soma das três perdas \texttt{CrossEntropyLoss}:
+
+\[
+\mathcal{L} = \mathcal{L}_{\text{arc}} + \mathcal{L}_{\text{rel}} + \mathcal{L}_{\text{UPOS}}.
+\]
+
+A Figura~\ref{fig:arquitetura_biaffine} apresenta a arquitetura multitarefa biaffine.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{Dissertação/Imagens/biaffine_mtl.png}
+\caption{Arquitetura multitarefa com mecanismo biaffine para predição de HEAD e DEPREL.}
+\label{fig:arquitetura_biaffine}
+\end{figure}
+
+A Tabela~\ref{tab:architectures} apresenta um resumo comparativo das camadas utilizadas em
+cada arquitetura para as três tarefas.
+
+\begin{table}[htbp]
+\centering
+\caption{Comparação entre as arquiteturas avaliadas para as tarefas de UPOS, DEPREL e HEAD.}
+\label{tab:architectures}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Abordagem} & \textbf{UPOS} & \textbf{DEPREL} & \textbf{HEAD} \\
+\midrule
+Linear MTL   & Linear & Linear   & Linear \\
+Biaffine MTL & Linear & Biaffine & Biaffine \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+As duas arquiteturas caracterizam aprendizado multitarefa com compartilhamento de parâmetros:
+um único encoder produz representações utilizadas simultaneamente nas três tarefas. A diferença
+reside exclusivamente no cabeçote de predição para HEAD e DEPREL.
+
+\subsubsection*{Estudo de Ablação: Regime sem UPOS}
+
+Para avaliar a contribuição isolada da tarefa auxiliar de UPOS sobre o desempenho do
+\textit{parsing}, foram treinadas versões ablativas dos modelos em que a cabeça de predição
+de UPOS é removida. Nesse regime, o encoder é ajustado apenas pelos gradientes provenientes
+das tarefas de HEAD e DEPREL, e a função de perda se reduz a:
+
+\[
+\mathcal{L}_\text{ablação} = \mathcal{L}_{\text{HEAD}} + \mathcal{L}_{\text{DEPREL}}.
+\]
+
+Os hiperparâmetros do regime de ablação foram os mesmos obtidos na busca bayesiana para cada
+combinação encoder $\times$ cabeçote, garantindo que a comparação entre MTL e ablação não seja
+confundida por diferenças de otimização. Ao todo, foram treinados e avaliados \textbf{16
+modelos}: 4 encoders $\times$ 2 arquiteturas (linear e biaffine) $\times$ 2 regimes (MTL com
+UPOS e ablação sem UPOS).
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsection*{Métricas}
+% ─────────────────────────────────────────────────────────────────────────────
+
+A avaliação do desempenho do \textit{parser} foi definida conforme a adoção na literatura, com
+as métricas LAS, UAS e acurácia UPOS.
+
+\paragraph{Labeled Attachment Score (LAS).}
+O LAS avalia simultaneamente a precisão da predição do HEAD e do rótulo sintático associado
+à dependência~\citep{nivre2006labeled}:
+
+\[
+\text{LAS} =
+\frac{
+\sum_{i=1}^{N}
+\mathbb{1}
+[(\hat{h}_i,\hat{r}_i)=(h_i,r_i)]
+}
+{N},
+\]
+
+em que $\hat{h}_i$ e $\hat{r}_i$ representam o HEAD e o rótulo sintático preditos para o
+token $i$, enquanto $h_i$ e $r_i$ correspondem aos valores de referência anotados no corpus.
+
+\paragraph{Unlabeled Attachment Score (UAS).}
+O UAS mede a precisão da estrutura sintática predita, considerando apenas a identificação
+correta do HEAD, independentemente do rótulo~\citep{chen2008dependency}:
+
+\[
+\text{UAS} =
+\frac{
+\sum_{i=1}^{N}
+\mathbb{1}
+[\hat{h}_i = h_i]
+}
+{N}.
+\]
+
+\paragraph{Acurácia de etiquetas UPOS.}
+A acurácia UPOS avalia a precisão da classificação morfossintática~\citep{paul2023bengali}:
+
+\[
+\text{UPOS} =
+\frac{
+\sum_{i=1}^{N}
+\mathbb{1}
+[\hat{y}_i = y_i]
+}
+{N},
+\]
+
+em que $\hat{y}_i$ é a etiqueta morfossintática predita e $y_i$ é a anotação de referência.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsection*{Hiperparâmetros}
+% ─────────────────────────────────────────────────────────────────────────────
+
+Os hiperparâmetros dos modelos foram definidos por meio do framework Optuna~\citep{akiba2019optuna}.
+O Optuna é uma ferramenta de otimização automática de hiperparâmetros voltada para aprendizado
+de máquina, caracterizada pela alta modularidade e pela possibilidade de construção dinâmica
+dos espaços de busca. O framework combina otimização bayesiana, amostragem probabilística e
+parada antecipada de \textit{trials} não promissores (\textit{pruning}).
+
+Para a seleção dos hiperparâmetros candidatos, o Optuna utiliza o algoritmo TPE
+(\textit{Tree-structured Parzen Estimator})~\citep{bergstra2011algorithms}, adotado como
+padrão pelo framework. O TPE é um método de otimização bayesiana que modela separadamente
+a distribuição de hiperparâmetros associados a bons resultados e àqueles associados a
+resultados ruins, guiando a busca para regiões do espaço com maior probabilidade de bom
+desempenho.
+
+Os intervalos de busca foram baseados em recomendações da literatura recente sobre ajuste
+fino de modelos de linguagem pré-treinados~\citep{halfon2024staytunedempiricalstudy,
+gupta2023continualpretraininglargelanguage,ibrahim2024simplescalablestrategiescontinually,
+pareja2024unveilingsecretrecipeguide}.
+
+O processo de otimização teve como objetivo \textbf{maximizar o LAS} no conjunto de validação.
+Foram realizados 10 \textit{trials} por combinação de encoder e arquitetura (8 combinações
+no total), cada \textit{trial} executando a validação cruzada de 5 \textit{folds}. As
+variáveis de otimização foram:
+
+\begin{itemize}
+    \item taxa de aprendizado (\texttt{learning\_rate}): $1\times10^{-5}$ a $5\times10^{-5}$, escala log-uniforme;
+    \item decaimento de peso (\texttt{weight\_decay}): 0,1 a 0,3, escala uniforme;
+    \item fator de \textit{warmup} (\texttt{warmup\_ratio}): 0,3 a 0,5, escala uniforme.
+\end{itemize}
+
+As Tabelas~\ref{tab:hyperparams_fixed} e~\ref{tab:hyperparams_optuna} apresentam,
+respectivamente, os hiperparâmetros mantidos fixos e o espaço de busca do Optuna.
+
+\begin{table}[h]
+\centering
+\setlength{\tabcolsep}{12pt}
+\caption{Hiperparâmetros fixos utilizados durante o treinamento.}
+\label{tab:hyperparams_fixed}
+\begin{tabular}{ll}
+\toprule
+\textbf{Hiperparâmetro}          & \textbf{Valor} \\
+\midrule
+Épocas de treinamento            & 40 \\
+Estratégia de avaliação          & por época \\
+Acumulação de gradiente          & 1 \\
+Norma máxima do gradiente        & 1,0 \\
+Tipo de agendador de LR          & linear (\textit{warmup} + decaimento) \\
+Métrica para melhor modelo       & LAS \\
+\textit{Label smoothing}         & 0,0 \\
+Otimizador                       & AdamW \\
+\textit{Batch size} — treino     & 16 amostras/dispositivo \\
+\textit{Batch size} — avaliação  & 32 amostras/dispositivo \\
+Carregadores de dados (\textit{workers}) & 4 \\
+fp16 / bf16                      & desabilitado \\
+\textit{Gradient checkpointing}  & desabilitado \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\setlength{\tabcolsep}{12pt}
+\caption{Espaço de busca utilizado na otimização de hiperparâmetros com Optuna.}
+\label{tab:hyperparams_optuna}
+\begin{tabular}{lll}
+\toprule
+\textbf{Hiperparâmetro} & \textbf{Intervalo} & \textbf{Distribuição} \\
+\midrule
+\texttt{learning\_rate} & $1\times10^{-5}$ -- $5\times10^{-5}$ & log-uniforme \\
+\texttt{weight\_decay}  & 0,1 -- 0,3 & uniforme \\
+\texttt{warmup\_ratio}  & 0,3 -- 0,5 & uniforme \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsection*{K-Fold Cross-Validation}
+% ─────────────────────────────────────────────────────────────────────────────
+
+Para avaliar a estabilidade do modelo e reduzir a dependência de uma única partição dos dados,
+foi empregada a validação cruzada \textit{k}-fold com $k = 5$. Essa abordagem divide os dados
+(união das partições de treino e desenvolvimento) em cinco subconjuntos de tamanhos semelhantes.
+A cada iteração, um subconjunto é utilizado para avaliação e os demais para treinamento,
+alternando-se sucessivamente, conforme ilustrado na Figura~\ref{fig:Kfolds}. A divisão foi
+realizada com embaralhamento aleatório (\texttt{shuffle=True}) e semente fixada em 42
+(\texttt{random\_state=42}) para reprodutibilidade.
+
+Ao final das cinco iterações, foi reportada a \textbf{média do LAS} como estimativa do
+desempenho esperado de cada configuração, e o \textit{trial} com maior média foi selecionado
+como conjunto ótimo de hiperparâmetros para o treinamento final.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{Dissertação/Imagens/kfolds.png}
+    \caption{Exemplo da aplicação da técnica de validação cruzada com $k = 5$.}
+    \label{fig:Kfolds}
+\end{figure}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsection*{Monitoramento}
+% ─────────────────────────────────────────────────────────────────────────────
+
+Para o monitoramento dos experimentos, foi utilizada a plataforma
+WandB\footnote{\url{https://wandb.ai}}~\citep{wandb}. O WandB é uma ferramenta de MLOps
+(\textit{Machine Learning Operations}) voltada ao rastreamento, visualização e gerenciamento
+de experimentos. A ferramenta permite acompanhar métricas de treinamento, funções de perda,
+consumo de memória, utilização de hardware e comportamento do processo de otimização ao longo
+das épocas, auxiliando na análise da estabilidade do treinamento e na identificação de
+problemas de convergência. A Figura~\ref{fig:wandb} apresenta um exemplo da interface de
+monitoramento utilizada durante os experimentos.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{Dissertação/Imagens/wandb.png}
+    \caption{Interface de monitoramento dos experimentos utilizando WandB.}
+    \label{fig:wandb}
+\end{figure}
+
+Para garantir a reprodutibilidade dos experimentos, a semente aleatória foi fixada em 42 para
+todos os frameworks e bibliotecas utilizados, conforme apresentado na
+Tabela~\ref{tab:reproducibility}.
+
+\begin{table}[t]
+\centering
+\caption{Configurações de reprodutibilidade aplicadas a todos os experimentos.}
+\label{tab:reproducibility}
+\begin{tabular}{ll}
+\toprule
+\textbf{Componente} & \textbf{Configuração} \\
+\midrule
+Semente (\textit{seed})         & 42 \\
+Python \texttt{random}          & semente fixada \\
+NumPy \texttt{random}           & semente fixada \\
+PyTorch (CPU)                   & semente fixada \\
+PyTorch (CUDA)                  & semente fixada \\
+CuDNN determinístico            & habilitado \\
+CuDNN \textit{benchmark}        & desabilitado \\
+\texttt{PYTHONHASHSEED}         & 42 \\
+\texttt{TOKENIZERS\_PARALLELISM}& \texttt{false} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsection*{Modelo Selecionado}
+% ─────────────────────────────────────────────────────────────────────────────
+
+A otimização de hiperparâmetros resultou nos valores apresentados na
+Tabela~\ref{tab:hiperparametros_modelos}. Os valores correspondem ao \textit{trial} com maior
+média de LAS no \textit{k-fold} para cada combinação de encoder e arquitetura.
+
+\begin{table}[h]
+\centering
+\setlength{\tabcolsep}{8pt}
+\caption{Hiperparâmetros selecionados para cada modelo após otimização com Optuna.}
+\label{tab:hiperparametros_modelos}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Modelo} & \textbf{Learning Rate} & \textbf{Weight Decay} & \textbf{Warmup Ratio} \\
+\midrule
+mBERT (Linear)              & $3{,}63 \times 10^{-5}$ & 0,197 & 0,421 \\
+mBERT (Biaffine)            & $2{,}96 \times 10^{-5}$ & 0,238 & 0,328 \\
+BERTimbau-Base (Linear)     & $4{,}42 \times 10^{-5}$ & 0,214 & 0,367 \\
+BERTimbau-Base (Biaffine)   & $3{,}12 \times 10^{-5}$ & 0,129 & 0,410 \\
+BERTimbau-Large (Linear)    & $3{,}76 \times 10^{-5}$ & 0,126 & 0,404 \\
+BERTimbau-Large (Biaffine)  & $3{,}00 \times 10^{-5}$ & 0,116 & 0,417 \\
+JabuticaBERT (Linear)       & $4{,}93 \times 10^{-5}$ & 0,150 & 0,435 \\
+JabuticaBERT (Biaffine)     & $3{,}50 \times 10^{-5}$ & 0,158 & 0,303 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A Tabela~\ref{tab:hardware} apresenta as configurações de hardware utilizadas durante a
+execução dos experimentos de busca de hiperparâmetros e treinamento final.
+
+\begin{table}[t]
+\centering
+\setlength{\tabcolsep}{10pt}
+\caption{Configuração de hardware utilizada nos experimentos.}
+\label{tab:hardware}
+\begin{tabular}{lllll}
+\hline
+\textbf{Modelo} & \textbf{CPU} & \textbf{RAM} & \textbf{GPU} & \textbf{VRAM} \\
+\hline
+mBERT              & i7-7700K         & 64,2 GB & TITAN X (Pascal) & 12 GB \\
+BERTimbau-Base     & Ryzen 7 5700X    & 96,5 GB & TITAN Xp         & 12 GB \\
+BERTimbau-Large    & Ryzen 9 5900X    & 128,7 GB & RTX 4090        & 24 GB \\
+JabuticaBERT       & Ryzen 5 2600X    & 16,0 GB & TITAN Xp         & 12 GB \\
+\hline
+\end{tabular}
+\end{table}
+
+Entre as arquiteturas avaliadas, o modelo BERTimbau-Large com abordagem Linear MTL apresentou
+o melhor desempenho geral, considerando conjuntamente as métricas UPOS, UAS e LAS. Esse
+resultado sugere que o compartilhamento de representações aliado a camadas lineares específicas
+para cada tarefa foi suficiente para capturar padrões relevantes das estruturas sintáticas do
+corpus analisado.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Estado da Arte}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection*{Baseline: PortParser}
+
+Para fins de comparação experimental, foi selecionado como \textit{baseline} o modelo
+PortParser~\citep{lopes2024towards}, considerado uma das principais referências para
+\textit{parsing} de dependências em português. O modelo foi avaliado no mesmo corpus Porttinari-base
+adotado neste trabalho, permitindo comparação direta. De acordo com os resultados reportados
+na literatura, o PortParser alcança 99,09\% de acurácia em UPOS, 96,08\% de UAS e 94,61\% de
+LAS, demonstrando elevado desempenho em análise sintática para o português.

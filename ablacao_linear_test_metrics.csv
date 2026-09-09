@@ -1,0 +1,2 @@
+model,uas,las,total_tokens,architecture
+neuralmind/bert-base-portuguese-cased,0.9351697438951757,0.922275163787969,33580,linear_ablacao_sem_upos

@@ -1,0 +1,51 @@
+% BERTimbau Large — Biaffine (sem UPOS) (BtL-Biaff-sU)
+
+
+\begin{table}[ht]
+\centering
+\caption{Instabilidade DEPREL (esq.) e UAS por época (dir.) --- BtL-Biaff-sU. N\,=\,n.º tokens, Forg.\,=\,esquecimentos, Rec.\,=\,recuperações.}
+\label{tab:inst-bert-large-portuguese-cased-predictions-ablacao-biaffine}
+\begin{minipage}[t]{0.54\linewidth}
+\centering\tiny
+\begin{tabular}{lrrrrrrrr}
+\toprule
+\textbf{Rótulo} & \textbf{N} & \textbf{Forg.} & \textbf{Rec.} & \textbf{Osc.} & \textbf{A+E} & \textbf{Pico} & \textbf{Final} & \textbf{Drop} \\
+\midrule
+\texttt{nmod} & 1,729 & 895 & 2,197 & 3,092 & 81 & 0.9630 & 0.9514 & 0.0116 \\
+\texttt{obl} & 1,132 & 866 & 1,791 & 2,657 & 95 & 0.9187 & 0.9002 & 0.0186 \\
+\texttt{advcl} & 333 & 293 & 585 & 878 & 21 & 0.8979 & 0.8769 & 0.0210 \\
+\texttt{nsubj} & 1,243 & 272 & 1,272 & 1,544 & 22 & 0.9823 & 0.9767 & 0.0056 \\
+\texttt{acl} & 186 & 221 & 384 & 605 & 16 & 0.8978 & 0.8763 & 0.0215 \\
+\texttt{amod} & 927 & 206 & 1,090 & 1,296 & 21 & 0.9752 & 0.9655 & 0.0097 \\
+\texttt{conj} & 630 & 204 & 816 & 1,020 & 13 & 0.9762 & 0.9746 & 0.0016 \\
+\texttt{obj} & 862 & 179 & 1,018 & 1,197 & 19 & 0.9780 & 0.9745 & 0.0035 \\
+\texttt{flat\!:\!name} & 532 & 179 & 698 & 877 & 11 & 0.9868 & 0.9774 & 0.0094 \\
+\texttt{parataxis} & 101 & 162 & 240 & 402 & 12 & 0.8020 & 0.7723 & 0.0297 \\
+\texttt{root} & 1,144 & 143 & 762 & 905 & 14 & 0.9860 & 0.9851 & 0.0009 \\
+\texttt{xcomp} & 293 & 92 & 373 & 465 & 7 & 0.9727 & 0.9590 & 0.0137 \\
+\texttt{acl\!:\!relcl} & 252 & 91 & 338 & 429 & 5 & 0.9921 & 0.9802 & 0.0119 \\
+\texttt{advmod} & 575 & 89 & 644 & 733 & 6 & 0.9809 & 0.9757 & 0.0052 \\
+\texttt{case} & 2,234 & 85 & 829 & 914 & 6 & 0.9982 & 0.9973 & 0.0009 \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.42\linewidth}
+\centering\tiny
+\begin{tabular}{rrrrrr}
+\toprule
+\textbf{Ép.} & \textbf{UAS} & \textbf{Corr.} & \textbf{Forg.} & \textbf{Rec.} & \textbf{$\Delta$} \\
+\midrule
+1 & 0.1025 & 1,972 & 0 & 0 & +0 \\
+6 & 0.7160 & 13,775 & 715 & 2,420 & +1,705 \\
+11 & 0.8637 & 16,617 & 494 & 971 & +477 \\
+16 & 0.8800 & 16,931 & 725 & 648 & -77 \\
+21 & 0.9014 & 17,342 & 533 & 496 & -37 \\
+26 & 0.9044 & 17,399 & 420 & 426 & +6 \\
+31 & 0.9083 & 17,474 & 270 & 254 & -16 \\
+36 & 0.9099 & 17,506 & 296 & 222 & -74 \\
+41 & 0.9138 & 17,580 & 30 & 43 & +13 \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\end{table}

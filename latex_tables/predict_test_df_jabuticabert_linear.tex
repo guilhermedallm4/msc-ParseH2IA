@@ -1,0 +1,85 @@
+% Modelo: JabuticaBERT — Linear (com UPOS)
+\begin{table}[ht]
+\centering
+\caption{Acurácia por rótulo --- JaB-Lin-cU (JabuticaBERT — Linear (com UPOS)). DEPREL Acc.\,=\,0.9646, UPOS Acc.\,=\,0.9881.}
+\label{tab:acc-predict-test-df-jabuticabert-linear}
+\begin{minipage}[t]{0.55\linewidth}
+\centering\scriptsize
+\begin{tabular}{lrrr}
+\toprule
+\textbf{DEPREL} & \textbf{Tot.} & \textbf{Ok} & \textbf{Acc.} \\
+\midrule
+\texttt{det} & 4,853 & 4,822 & 0.9936 \\
+\texttt{case} & 4,532 & 4,510 & 0.9951 \\
+\texttt{punct} & 4,443 & 4,439 & 0.9991 \\
+\texttt{nmod} & 2,607 & 2,445 & 0.9379 \\
+\texttt{nsubj} & 1,895 & 1,806 & 0.9530 \\
+\texttt{obl} & 1,746 & 1,599 & 0.9158 \\
+\texttt{root} & 1,683 & 1,647 & 0.9786 \\
+\texttt{obj} & 1,476 & 1,421 & 0.9627 \\
+\texttt{amod} & 1,318 & 1,254 & 0.9514 \\
+\texttt{advmod} & 1,222 & 1,179 & 0.9648 \\
+\texttt{conj} & 960 & 894 & 0.9313 \\
+\texttt{cc} & 833 & 826 & 0.9916 \\
+\texttt{mark} & 828 & 809 & 0.9771 \\
+\texttt{flat\!:\!name} & 686 & 653 & 0.9519 \\
+\texttt{cop} & 595 & 589 & 0.9899 \\
+\texttt{xcomp} & 475 & 443 & 0.9326 \\
+\texttt{advcl} & 437 & 393 & 0.8993 \\
+\texttt{acl\!:\!relcl} & 401 & 380 & 0.9476 \\
+\texttt{nummod} & 341 & 320 & 0.9384 \\
+\texttt{acl} & 307 & 255 & 0.8306 \\
+\texttt{fixed} & 230 & 220 & 0.9565 \\
+\texttt{ccomp} & 218 & 200 & 0.9174 \\
+\texttt{appos} & 208 & 189 & 0.9087 \\
+\texttt{aux\!:\!pass} & 203 & 202 & 0.9951 \\
+\texttt{parataxis} & 160 & 106 & 0.6625 \\
+\texttt{aux} & 145 & 134 & 0.9241 \\
+\texttt{nsubj\!:\!pass} & 144 & 140 & 0.9722 \\
+\texttt{ccomp\!:\!speech} & 130 & 114 & 0.8769 \\
+\texttt{expl} & 124 & 112 & 0.9032 \\
+\texttt{obl\!:\!agent} & 110 & 104 & 0.9455 \\
+\texttt{csubj} & 83 & 65 & 0.7831 \\
+\texttt{discourse} & 51 & 33 & 0.6471 \\
+\texttt{expl\!:\!impers} & 27 & 24 & 0.8889 \\
+\texttt{iobj} & 19 & 15 & 0.7895 \\
+\texttt{dislocated} & 17 & 7 & 0.4118 \\
+\texttt{flat} & 17 & 16 & 0.9412 \\
+\texttt{nsubj\!:\!outer} & 15 & 12 & 0.8000 \\
+\texttt{flat\!:\!foreign} & 15 & 8 & 0.5333 \\
+\texttt{orphan} & 14 & 3 & 0.2143 \\
+\texttt{vocative} & 6 & 1 & 0.1667 \\
+\midrule
+\textbf{Total} & \textbf{33,574} & \textbf{32,389} & \textbf{0.9647} \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.42\linewidth}
+\centering\scriptsize
+\begin{tabular}{lrrr}
+\toprule
+\textbf{UPOS} & \textbf{Tot.} & \textbf{Ok} & \textbf{Acc.} \\
+\midrule
+\texttt{NOUN} & 6,309 & 6,238 & 0.9887 \\
+\texttt{ADP} & 5,019 & 5,003 & 0.9968 \\
+\texttt{DET} & 4,904 & 4,870 & 0.9931 \\
+\texttt{PUNCT} & 4,443 & 4,439 & 0.9991 \\
+\texttt{VERB} & 3,368 & 3,328 & 0.9881 \\
+\texttt{PROPN} & 2,209 & 2,190 & 0.9914 \\
+\texttt{ADJ} & 1,691 & 1,607 & 0.9503 \\
+\texttt{PRON} & 1,286 & 1,260 & 0.9798 \\
+\texttt{ADV} & 1,272 & 1,244 & 0.9780 \\
+\texttt{AUX} & 968 & 958 & 0.9897 \\
+\texttt{CCONJ} & 823 & 814 & 0.9891 \\
+\texttt{NUM} & 622 & 601 & 0.9662 \\
+\texttt{SCONJ} & 456 & 439 & 0.9627 \\
+\texttt{SYM} & 120 & 119 & 0.9917 \\
+\texttt{X} & 85 & 65 & 0.7647 \\
+\texttt{INTJ} & 5 & 4 & 0.8000 \\
+\midrule
+\textbf{Total} & \textbf{33,580} & \textbf{33,179} & \textbf{0.9881} \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\end{table}

@@ -1,0 +1,97 @@
+%Resumo em Portugues (no maximo 500 palavras)
+\begin{abstract}
+
+A análise de dependências sintáticas é uma tarefa fundamental do Processamento de Linguagem
+Natural (PLN), responsável por identificar as relações gramaticais entre as palavras de uma
+sentença e produzir uma representação estrutural que serve de base para tarefas mais complexas,
+como extração de informação, análise de sentimento e tradução automática. Para o português
+brasileiro, o estado da arte é representado pelo PortParser, que combina o encoder BERTimbau
+Large com uma camada BiLSTM bidirecional e mecanismo biaffine, atingindo 96,08\% de
+\textit{Unlabeled Attachment Score} (UAS) e 94,61\% de \textit{Labeled Attachment Score}
+(LAS) no corpus Porttinari.
+
+Esta dissertação apresenta o \textbf{ParseH2IA}, um \textit{parser} de dependências para o
+português brasileiro que suprime o BiLSTM presente no PortParser e conecta o encoder
+diretamente a cabeçotes de predição com ajuste fino completo de todos os parâmetros.
+O trabalho conduz uma comparação sistemática de quatro encoders pré-treinados --- BERTimbau
+Large, BERTimbau Base, mBERT e JabuticaBERT --- em cruzamento com duas arquiteturas de
+cabeçote (linear e biaffine) e dois regimes de treinamento (aprendizado multi-tarefa com UPOS
+e ablação sem UPOS), totalizando 16 configurações experimentais. O cabeçote linear projeta
+a saída do encoder por três camadas densas independentes para HEAD, DEPREL e UPOS; o cabeçote
+biaffine utiliza quatro MLPs especializadas e dois mecanismos de atenção biaffine para HEAD e
+DEPREL. Os hiperparâmetros de cada configuração foram otimizados independentemente por busca
+bayesiana com validação cruzada em cinco partições.
+
+O melhor resultado foi obtido pela configuração BERTimbau Large com cabeçote linear e
+aprendizado multi-tarefa, alcançando UAS de 94,99\%, LAS de 93,84\% e acurácia de UPOS de
+99,28\%, a menos de 1,1 pontos percentuais do PortParser em UAS. O achado mais relevante é a
+\textbf{superioridade consistente do cabeçote linear sobre o biaffine} em três dos quatro
+encoders avaliados, com margens de até 5,78 pontos percentuais, contrariando a expectativa da
+literatura para cenários de ajuste fino completo. Esse resultado é interpretado à luz das
+características do corpus de avaliação: com apenas 5.893 sentenças de treinamento no
+Porttinari, o cabeçote biaffine --- com suas quatro MLPs e matrizes bilineares --- apresenta
+maior risco de sobreajuste em comparação ao cabeçote linear, cuja menor capacidade paramétrica
+atua como regularização implícita e resulta em generalização mais estável.
+
+Como contribuição metodológica, o trabalho propõe uma análise de instabilidade do treinamento
+por rastreamento de predições por época, quantificando eventos de \textit{forgetting}
+(acerto\,$\to$\,erro) e \textit{recovery} (erro\,$\to$\,acerto) por rótulo de dependência.
+Essa análise revela que o cabeçote biaffine é sistematicamente mais instável durante a
+convergência, e que rótulos de alta frequência com fronteiras de decisão difusas ---
+\texttt{nmod} e \texttt{obl} --- concentram a maior parte dos eventos de instabilidade,
+independentemente da arquitetura utilizada.
+
+Os resultados demonstram que é possível construir \textit{parsers} de dependências competitivos
+para o português brasileiro sem o BiLSTM intermediário, com cabeçotes conectados diretamente
+ao encoder com ajuste fino completo, e estabelecem a preferência pelo cabeçote linear em
+cenários de corpus limitado como diretriz prática para o desenvolvimento de sistemas de PLN.
+
+\end{abstract}
+
+%Resumo em Inglês (no maximo 500 palavras)
+\begin{englishabstract}{ParseH2IA: Development of a Parser for Syntactic Dependency Analysis of Brazilian Portuguese with Deep Learning}
+
+Syntactic dependency parsing is a fundamental Natural Language Processing (NLP) task that
+identifies grammatical relations between words in a sentence and produces a structural
+representation serving as a foundation for higher-level tasks such as information extraction,
+sentiment analysis, and machine translation. For Brazilian Portuguese, the state of the art is
+represented by PortParser, which combines the BERTimbau Large encoder with a bidirectional
+BiLSTM layer and a biaffine mechanism, achieving 96.08\% Unlabeled Attachment Score (UAS) and
+94.61\% Labeled Attachment Score (LAS) on the Porttinari corpus.
+
+This dissertation presents \textbf{ParseH2IA}, a dependency parser for Brazilian Portuguese
+that removes the BiLSTM present in PortParser and connects the encoder directly to prediction
+heads with full fine-tuning of all parameters. The work conducts a systematic comparison of
+four pre-trained encoders --- BERTimbau Large, BERTimbau Base, mBERT, and JabuticaBERT ---
+crossed with two head architectures (linear and biaffine) and two training regimes (multi-task
+learning with UPOS and ablation without UPOS), totaling 16 experimental configurations. The
+linear head projects the encoder output through three independent dense layers for HEAD, DEPREL,
+and UPOS; the biaffine head uses four specialized MLPs and two biaffine attention mechanisms for
+HEAD and DEPREL. Hyperparameters for each configuration were independently optimized through
+Bayesian search with five-fold cross-validation.
+
+The best result was achieved by BERTimbau Large with a linear head and multi-task learning,
+reaching 94.99\% UAS, 93.84\% LAS, and 99.28\% UPOS accuracy, within 1.1 percentage points of
+PortParser in UAS. The most significant finding is the \textbf{consistent superiority of the
+linear head over the biaffine head} in three of the four encoders evaluated, with margins of
+up to 5.78 percentage points in UAS, contradicting the literature's expectation for full
+fine-tuning scenarios. This result is interpreted in light of the corpus characteristics: with
+only 5,893 training sentences in Porttinari, the biaffine head --- with its four MLPs and
+bilinear weight matrices --- presents a higher risk of overfitting compared to the linear head,
+whose lower parametric capacity acts as implicit regularization and yields more stable
+generalization.
+
+As a methodological contribution, this work proposes a training instability analysis based on
+epoch-level prediction tracking, quantifying \textit{forgetting} events (correct-to-incorrect
+transitions) and \textit{recovery} events (incorrect-to-correct transitions) per dependency
+label. This analysis reveals that the biaffine head is systematically more unstable during
+convergence, and that high-frequency labels with diffuse decision boundaries ---
+\texttt{nmod} and \texttt{obl} --- concentrate most instability events regardless of
+architecture.
+
+The results demonstrate that competitive dependency parsers for Brazilian Portuguese can be
+built without the intermediate BiLSTM, with heads connected directly to a fully fine-tuned
+encoder, and establish a preference for the linear head in limited-corpus scenarios as a
+practical guideline for NLP system development.
+
+\end{englishabstract}

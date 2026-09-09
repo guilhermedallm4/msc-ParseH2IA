@@ -1,0 +1,466 @@
+% ============================================================
+% Capítulo: Resultados e Discussão
+% ============================================================
+
+\chapter{Resultados e Discussão}
+\label{cap:resultados}
+
+Este capítulo apresenta e discute os resultados obtidos pelos modelos de \textit{parsing} de
+dependências desenvolvidos neste trabalho, avaliados no conjunto de teste do corpus
+Porttinari. A análise está organizada em cinco eixos principais: desempenho
+geral comparado ao PortParser; impacto da arquitetura do cabeçote de predição; efeito do MTL;
+análise de desempenho por rótulo de dependência; e dinâmica de instabilidade durante o
+treinamento. As definições completas dos rótulos de dependência citados ao longo do capítulo
+encontram-se no Apêndice~\ref{cap:classe_deprel}. Os resultados detalhados da busca de
+hiperparâmetros e as curvas de treinamento por época de cada modelo estão disponíveis,
+respectivamente, nos Apêndices~\ref{cap:resultados_hiperparametros}
+e~\ref{cap:modelos_avaliados}.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Desempenho Geral}
+\label{sec:desempenho_geral}
+% ─────────────────────────────────────────────────────────────────────────────
+
+A Tabela~\ref{tab:comparation} e a Figura~\ref{fig:resultados_geral} apresentam os resultados
+de todos os modelos avaliados em termos de \textit{Unlabeled Attachment Score} (UAS),
+\textit{Labeled Attachment Score} (LAS) e acurácia de UPOS. O melhor resultado obtido neste
+trabalho foi alcançado pelo modelo \textbf{BERTimbau Large com cabeçote linear e aprendizado
+multi-tarefa} (\textit{BtL-Lin-MTL}), com UAS de 94,99\% e LAS de 93,84\%.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=\textwidth]{Dissertação/Imagens/resultados_geral.pdf}
+  \caption{Comparação de desempenho (UAS e LAS) de todos os modelos avaliados, ordenados por UAS
+           decrescente. As linhas tracejadas indicam o desempenho do PortParser como referência
+           (\textbf{UAS\,=\,96,08\%}, \textbf{LAS\,=\,94,61\%}).
+           cU\,=\,com UPOS (MTL); sU\,=\,sem UPOS (ablação).}
+  \label{fig:resultados_geral}
+\end{figure}
+
+Em relação ao \textbf{PortParser}~\citep{lopes2024towards}, modelo de referência para o português
+brasileiro, o melhor resultado deste trabalho apresenta uma diferença de \textbf{1,09 pontos
+percentuais} em UAS e \textbf{0,77 pontos percentuais} em LAS. A principal diferença arquitetural
+que explica essa lacuna é a \textbf{ausência de uma camada BiLSTM bidirecional} no ParseH2IA:
+enquanto o PortParser insere uma camada BiLSTM entre o encoder e os cabeçotes de predição para
+contextualização adicional e realiza ajuste fino completo, o ParseH2IA conecta o encoder
+diretamente aos cabeçotes com ajuste fino completo de todos os parâmetros, sem camada
+intermediária. Essa arquitetura mais simples permite uma análise controlada da contribuição
+do cabeçote de predição isolado da influência do BiLSTM.
+
+Nota-se que a lacuna de desempenho é consideravelmente pequena dada a supressão do BiLSTM:
+o BtL-Lin-MTL aproxima-se do PortParser a menos de 1,1 pontos percentuais em UAS, sugerindo
+que o BERTimbau Large com ajuste fino completo produz representações suficientemente ricas para
+suportar o \textit{parsing} diretamente, sem a camada de contextualização adicional.
+
+Quanto à \textbf{acurácia de UPOS}, todos os modelos MTL superam o PortParser
+(99,09\%), com valores entre 98,81\% (JabuticaBERT Linear) e 99,34\% (BERTimbau Large
+Biaffine). Esse resultado indica que a tarefa de classificação morfológica está próxima do
+limite superior de desempenho para o Porttinari, independentemente da arquitetura do cabeçote.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Comparação entre Encoders}
+\label{sec:encoders}
+% ─────────────────────────────────────────────────────────────────────────────
+
+A Figura~\ref{fig:curvas_enc} mostra as curvas de aprendizado (UAS no conjunto de teste por
+época) para os modelos com cabeçote linear e MTL de cada encoder. A hierarquia de desempenho
+final é consistente ao longo de praticamente todo o treinamento:
+
+\[
+  \text{BERTimbau Large} > \text{BERTimbau Base} > \text{mBERT} > \text{JabuticaBERT}
+\]
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.92\textwidth]{Dissertação/Imagens/curvas_treinamento_enc.pdf}
+  \caption{Curvas de UAS por época para os modelos Linear MTL de cada encoder. O eixo vertical
+           indica o UAS (\%) no conjunto de teste ao final de cada época.}
+  \label{fig:curvas_enc}
+\end{figure}
+
+O \textbf{BERTimbau Large} lidera em todas as configurações, confirmando que modelos pré-treinados
+em português com maior capacidade oferecem representações mais adequadas para a tarefa. O
+\textbf{BERTimbau Base}, treinado no mesmo corpus mas com menor capacidade, apresenta desempenho
+próximo ao Large, com diferença de apenas 1,25 pontos percentuais em UAS no melhor caso
+(94,99\% vs.\ 93,74\%).
+
+O \textbf{mBERT}, apesar de ser multilíngue, supera o JabuticaBERT em todas as métricas, exceto
+na variante Biaffine sem UPOS. Isso é notável, pois o JabuticaBERT é um modelo monolíngue para o
+português. A explicação mais provável está no tamanho e arquitetura do JabuticaBERT: trata-se de
+um modelo \textit{Base} treinado com técnicas de aprendizado modernas (\textit{continual
+pretraining}, vocabulário expandido), o que pode gerar uma distribuição de representações
+subótima para a interface direta com os cabeçotes de predição. Além
+disso, o JabuticaBERT utiliza um vocabulário maior e tokenização diferente do BERTimbau,
+gerando potencialmente mais subpalavras por token e introduzindo ruído na etapa de extração
+do primeiro subtoken por palavra.
+
+As curvas de aprendizado revelam ainda um padrão de \textbf{convergência em duas fases} para os
+modelos com mais épocas: um crescimento rápido nas primeiras 20 épocas (fase de alta taxa de
+aprendizado, $\eta = 10^{-3}$), seguido de uma fase de refinamento mais lenta. As curvas
+completas por época, incluindo \textit{training loss} e \textit{validation loss}, estão
+disponíveis no Apêndice~\ref{cap:modelos_avaliados} e corroboram que todos os modelos
+convergiram sem sinais de sobreajuste grave na fase inicial, com a \textit{validation loss}
+estabilizando antes do fim do treinamento. Esse comportamento é coerente com o esquema de
+taxa de aprendizado em dois estágios adotado durante o treinamento, cujos hiperparâmetros
+ótimos por encoder foram determinados pela busca apresentada no
+Apêndice~\ref{cap:resultados_hiperparametros}.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Impacto da Arquitetura do Cabeçote}
+\label{sec:arquitetura}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection{Linear versus Biaffine}
+
+O resultado mais surpreendente deste trabalho é a \textbf{superioridade consistente dos cabeçotes
+lineares sobre os biaffines} em UAS e LAS (Figura~\ref{fig:linear_biaffine}). Em três dos quatro
+encoders (BtL, BtB e mBERT), o cabeçote linear supera o biaffine em UAS por uma margem
+substancial: 3,47 pontos para BERTimbau Large (94,99\% vs.\ 91,52\%), 3,90 pontos para
+BERTimbau Base (93,74\% vs.\ 89,84\%) e 5,78 pontos para mBERT (92,70\% vs.\ 86,92\%). A
+única exceção é o JabuticaBERT, onde o Biaffine supera levemente o Linear (88,94\% vs.\ 87,78\%
+em UAS para a variante MTL, e 90,04\% vs.\ 87,00\% sem UPOS).
+
+Vale observar que essa diferença não é artefato da escolha de hiperparâmetros: como mostra o
+Apêndice~\ref{cap:resultados_hiperparametros}, a busca bayesiana de hiperparâmetros foi
+conduzida \textbf{independentemente} para cada combinação de encoder e arquitetura, e os
+hiperparâmetros ótimos do biaffine foram aplicados no treinamento final. Para o BERTimbau
+Large, por exemplo, os melhores hiperparâmetros do biaffine (Trial~0: LR\,=\,$3{,}0\times
+10^{-5}$, \textit{weight decay}\,=\,0,116, \textit{warmup ratio}\,=\,0,417) produziram
+LAS médio de 0,887 na validação cruzada — substancialmente inferior ao LAS médio do linear
+(0,926, Trial~2). A diferença persiste no conjunto de teste final, confirmando que a superioridade
+do linear é sistemática e não decorre de sub-otimização do biaffine.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.92\textwidth]{Dissertação/Imagens/linear_vs_biaffine.pdf}
+  \caption{UAS (\%) por variante de arquitetura (Lin/Biaff × cU/sU) e encoder. A superioridade
+           do cabeçote linear sobre o biaffine é consistente em três dos quatro encoders.}
+  \label{fig:linear_biaffine}
+\end{figure}
+
+Na literatura, o cabeçote biaffine é amplamente reconhecido como superior para o
+\textit{parsing} de dependências~\citep{dozat2016deep}, o que torna este resultado inesperado.
+Quatro hipóteses, complementares entre si, explicam esse comportamento no contexto específico
+deste trabalho:
+
+\begin{enumerate}
+  \item \textbf{Codificação sintática implícita nas representações BERT}: Estudos de
+        \textit{probing}~\citep{tenney2019bert,hewitt2019structural,jawahar2019does} demonstraram
+        que modelos de linguagem pré-treinados como o BERT codificam, de forma implícita,
+        informação sintática substancial em seus vetores de saída — incluindo relações de
+        dependência, distâncias na árvore sintática e papéis gramaticais. Mesmo após o ajuste
+        fino completo, essa organização sintática do espaço de representações tende a ser
+        preservada~\citep{hewitt2019structural}. Nesse cenário, um cabeçote linear atua como
+        uma \textit{sonda linear} (\textit{linear probe}) direta sobre a estrutura já organizada
+        pelo encoder, aprendendo de forma eficiente e estável. O cabeçote biaffine, ao introduzir
+        transformações MLP e bilineares adicionais, adiciona graus de liberdade que, em corpus
+        pequeno, podem não convergir para uma solução melhor do que a leitura direta pelo linear.
+        Essa hipótese é corroborada pelo fato de que a vantagem do linear é mais pronunciada
+        nos encoders de maior capacidade (BERTimbau Large e Base), que tendem a codificar mais
+        ricamente a estrutura sintática em suas representações.
+
+  \item \textbf{Corpus limitado e sobreajuste}: O cabeçote biaffine introduz substancialmente
+        mais parâmetros treináveis: quatro MLPs (Linear\,+\,ELU\,+\,LayerNorm\,+\,Dropout)
+        com $d_\text{arc}=500$ e $d_\text{rel}=100$, mais duas matrizes bilineares. Com apenas
+        5.893 sentenças de treinamento no Porttinari, essa capacidade adicional aumenta o risco
+        de sobreajuste às particularidades do corpus, enquanto o cabeçote linear — com suas
+        três projeções independentes — atua como regularização implícita.
+
+  \item \textbf{Instabilidade de treinamento}: Como será discutido na Seção~\ref{sec:instabilidade},
+        o cabeçote biaffine apresenta maior número de eventos de \textit{forgetting} durante o
+        treinamento. As curvas detalhadas no Apêndice~\ref{cap:modelos_avaliados} confirmam que
+        os modelos biaffines exibem oscilações mais acentuadas entre \textit{validation loss} e
+        UAS ao longo das épocas, sugerindo que sua otimização é mais instável em corpus pequeno,
+        o que prejudica o desempenho final.
+\end{enumerate}
+
+A hipótese da codificação sintática implícita é particularmente relevante porque inverte a
+lógica da escolha arquitetural usual: ao invés de projetar um cabeçote mais expressivo para
+capturar relações complexas, o encoder com ajuste fino já capturou essas relações — e o papel
+do cabeçote é simplesmente lê-las, tarefa para a qual a simplicidade do linear é uma vantagem,
+não uma limitação, especialmente com corpus de treinamento restrito.
+
+\subsection{Impacto do Multi-Task Learning}
+
+A Figura~\ref{fig:impacto_mtl} mostra a diferença de UAS e LAS entre os modelos com e sem a
+tarefa auxiliar de UPOS (MTL versus ablação). O impacto geral é \textbf{pequeno e assimétrico}:
+o MTL beneficia consistentemente os modelos lineares (ganho médio de +0,33 pp em UAS para o
+BERTimbau), mas prejudica os modelos biaffines (perda média de $-$1,10 pp em UAS), com a exceção
+do JabuticaBERT Biaffine.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.92\textwidth]{Dissertação/Imagens/impacto_mtl.pdf}
+  \caption{Diferença de UAS e LAS (em pontos percentuais) entre modelos MTL (com UPOS) e de
+           ablação (sem UPOS), por variante e encoder. Valores positivos indicam que o MTL
+           beneficia o \textit{parsing}; negativos indicam prejuízo.}
+  \label{fig:impacto_mtl}
+\end{figure}
+
+Esse resultado sugere que a tarefa de UPOS — já próxima do teto de desempenho ($>$99\%) — adiciona
+pouca informação de gradiente útil ao ajuste fino do encoder sobre o corpus Porttinari. O ganho
+marginal nos modelos lineares pode decorrer de uma leve regularização implícita introduzida pela
+tarefa auxiliar, enquanto o prejuízo nos modelos biaffines pode resultar de um conflito de
+gradientes: as tarefas de HEAD e UPOS competem pelos parâmetros das MLPs com sinais de grandezas
+muito diferentes, prejudicando a convergência do mecanismo biaffine.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Análise por Rótulo de Dependência}
+\label{sec:por_rotulo}
+% ─────────────────────────────────────────────────────────────────────────────
+
+A análise por rótulo DEPREL (Tabelas~\ref{tab:acc-mbert}--\ref{tab:acc-jab} no
+Apêndice~\ref{ap:tabelas}) revela uma variação expressiva de desempenho entre rótulos. As
+definições de cada rótulo citado nesta seção encontram-se no Apêndice~\ref{cap:classe_deprel}.
+
+\subsection{Rótulos de Alta Acurácia}
+
+Os rótulos \texttt{punct} (0,9982--0,9991), \texttt{case} (0,9956--0,9982) e \texttt{cop}
+(0,9849--0,9983) apresentam alta acurácia consistente em todos os modelos. Esses rótulos
+correspondem a palavras com forte restrição gramatical: pontuação, preposições/posposições e
+verbos de ligação têm pouca ambiguidade de dependência e são frequentes no Porttinari
+(para suas definições, ver Apêndice~\ref{cap:classe_deprel}). A alta frequência de
+ocorrência fornece mais exemplos de treinamento, enquanto a baixa ambiguidade resulta em
+padrões altamente previsíveis. Esses são também os rótulos mais facilmente extraíveis por um
+cabeçote linear, pois a informação sintática correspondente tende a estar fortemente codificada
+nas representações do BERT — reforçando a hipótese de leitura direta discutida anteriormente.
+
+\subsection{Rótulos Difíceis}
+
+A Figura~\ref{fig:labels_dificeis} apresenta os rótulos com menor acurácia nos quatro melhores
+modelos. Os rótulos \texttt{orphan}, \texttt{dislocated}, \texttt{vocative} e \texttt{parataxis}
+são consistentemente os mais desafiadores (ver Apêndice~\ref{cap:classe_deprel} para
+definições detalhadas).
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.92\textwidth]{Dissertação/Imagens/labels_dificeis.pdf}
+  \caption{Acurácia (\%) nos rótulos DEPREL mais difíceis para os quatro melhores modelos.
+           \texttt{orphan} e \texttt{dislocated} apresentam desempenho inferior a 50\% na
+           maioria dos modelos.}
+  \label{fig:labels_dificeis}
+\end{figure}
+
+\paragraph{orphan e dislocated.} Com acurácia abaixo de 50\% na maioria dos modelos, esses
+rótulos são raros no Porttinari (14 e 17 ocorrências no conjunto de teste, respectivamente) e
+semanticamente complexos: \texttt{orphan} marca dependentes de um núcleo elidido em estruturas
+de elipse, enquanto \texttt{dislocated} é usado em deslocamentos sintáticos
+(ver Apêndice~\ref{cap:classe_deprel}). A raridade extrema impede o aprendizado de padrões
+robustos, e a natureza não-local dessas construções dificulta sua codificação implícita pelo
+BERT, que opera com viés de proximidade na atenção.
+
+\paragraph{parataxis e discourse.} Esses rótulos codificam relações semanticamente difusas,
+com acurácia variando de 62,75\% a 78,12\% para \texttt{parataxis} e de 56,86\% a 74,51\% para
+\texttt{discourse}. Ambos são frequentemente confundidos entre si e com outros rótulos de alta
+abstração (e.g., \texttt{advcl}, \texttt{ccomp}). Trata-se de relações que dependem de
+conhecimento discursivo e pragmático que o BERT capta apenas parcialmente via \textit{masked
+language modeling}, e que não são recuperáveis linearmente das representações de tokens isolados.
+
+\paragraph{acl e advcl.} Com acurácia em torno de 89--93\%, as cláusulas adverbiais e
+adnominais apresentam dificuldade moderada, refletindo a ambiguidade de adjunção em português:
+uma mesma construção pode ser analisada como modificador nominal (\texttt{acl}) ou adverbial
+(\texttt{advcl}) dependendo do contexto discursivo. Seus contornos de decisão envolvem
+informação semântica que transcende o nível local da sentença.
+
+\paragraph{nmod e obl.} Os rótulos nominais modificadores apresentam acurácia entre
+93--96\%, mas são os que geram mais eventos de \textit{forgetting} durante o treinamento (ver
+Seção~\ref{sec:instabilidade}), o que sugere que o modelo aprende padrões para esses rótulos,
+mas os perde em ajustes posteriores de gradiente. A confusão frequente entre \texttt{nmod} e
+\texttt{obl} — ambos expressando nominais associados a predicados ou outros nominais via
+preposição, com distinção dependente de papéis temáticos — é coerente com a dificuldade de
+codificação linear desse contraste (ver definições no Apêndice~\ref{cap:classe_deprel}).
+
+A análise por rótulo revela ainda que a diferença entre modelos é mais pronunciada nos rótulos
+de dificuldade moderada (90--95\%) do que nos extremos (rótulos fáceis $>$99\% ou muito
+difíceis $<$50\%), onde a tarefa é inerentemente trivial ou insolúvel sem mais dados de
+treinamento.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Análise de Instabilidade do Treinamento}
+\label{sec:instabilidade}
+% ─────────────────────────────────────────────────────────────────────────────
+
+A análise de instabilidade, realizada com base nas predições por época sobre o conjunto de teste,
+quantifica dois fenômenos distintos: \textbf{forgetting} (transição de acerto para erro em
+épocas consecutivas) e \textbf{recovery} (transição inversa). Esses fenômenos indicam que o
+modelo não converge monotonicamente: certos tokens são classificados corretamente em épocas
+intermediárias mas perdem essa classificação em ajustes posteriores de gradiente.
+
+\subsection{Curvas de Aprendizado do BERTimbau Large}
+
+A Figura~\ref{fig:curvas_btl} mostra a progressão do UAS por época para as quatro variantes do
+BERTimbau Large. Observa-se que o \textbf{cabeçote linear} converge de forma mais suave e
+estável, enquanto o cabeçote \textbf{biaffine} apresenta oscilações mais pronunciadas nas
+primeiras épocas, compatível com a maior instabilidade quantificada na análise de
+\textit{forgetting}. As tabelas de treinamento completas por época — com UAS, LAS, UPOS,
+\textit{training loss} e \textit{validation loss} para cada modelo — estão disponíveis no
+Apêndice~\ref{cap:modelos_avaliados}, permitindo verificar em detalhe os pontos de inflexão
+e as épocas de maior volatilidade de cada variante.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.92\textwidth]{Dissertação/Imagens/curvas_treinamento_btl.pdf}
+  \caption{Curvas de UAS por época para as quatro variantes do BERTimbau Large. A variante
+           Linear MTL converge de forma mais estável que a Biaffine MTL, que registra mais
+           oscilações nas primeiras 20 épocas.}
+  \label{fig:curvas_btl}
+\end{figure}
+
+Nota-se ainda que a variante Linear sem UPOS (sU) apresenta UAS final ligeiramente inferior ao
+Linear MTL (+0,26 pp), confirmando o benefício marginal da tarefa auxiliar para o cabeçote
+linear. Para o Biaffine, o comportamento é inverso: a variante sem UPOS alcança UAS maior que
+a MTL, sugerindo que a tarefa de UPOS introduz conflito de gradientes nessa configuração.
+
+\subsection{Instabilidade por Rótulo DEPREL}
+
+A Figura~\ref{fig:instabilidade} apresenta o número de eventos de \textit{forgetting} para os
+15 rótulos DEPREL mais instáveis do BERTimbau Large. Os resultados complementam a análise de
+acurácia: enquanto rótulos como \texttt{parataxis} e \texttt{discourse} têm baixa acurácia por
+dificuldade intrínseca, rótulos como \texttt{nmod} e \texttt{obl} têm acurácia razoável (93--96\%)
+mas alta instabilidade, o que indica que o modelo os aprende e desaprende repetidamente durante
+o treinamento. Isso sugere que as fronteiras de decisão para esses rótulos são próximas de
+outros rótulos de alta frequência no espaço de representações, o que os torna vulneráveis a
+deslocamentos de gradiente em épocas subsequentes.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.92\textwidth]{Dissertação/Imagens/instabilidade_deprel.pdf}
+  \caption{Número de eventos de \textit{forgetting} (acerto\,$\to$\,erro) por rótulo DEPREL
+           para as quatro variantes do BERTimbau Large. Rótulos de alta frequência com
+           fronteiras de decisão difusas (\texttt{nmod}, \texttt{obl}) são os mais instáveis.}
+  \label{fig:instabilidade}
+\end{figure}
+
+O rótulo \texttt{nmod} (modificador nominal) registra o maior número de \textit{forgettings}
+em praticamente todas as variantes, com até 2.057 eventos na variante BtL-Biaff-MTL. Isso
+se deve à alta ambiguidade de adjunção em português: sintagmas preposicionados podem ser
+analisados como \texttt{nmod}, \texttt{obl} ou \texttt{advcl}, e a decisão correta depende
+frequentemente de informação semântica não captada pelo cabeçote sintático. O rótulo \texttt{obl}
+(oblíquo nominal) é o segundo mais instável, com padrão semelhante (para as definições formais
+desses rótulos, ver Apêndice~\ref{cap:classe_deprel}).
+
+A comparação entre variantes revela que a \textbf{variante Biaffine MTL é consistentemente a
+mais instável}, com totais de \textit{forgetting} superiores às variantes Linear em todos os
+rótulos analisados, exceto \texttt{conj} e \texttt{root}. Isso é coerente com a hipótese de
+que o cabeçote biaffine, com maior capacidade e dependência de geometria das representações,
+oscila mais ao longo do treinamento em corpus de tamanho limitado — e também com a hipótese da
+codificação implícita: o cabeçote linear, ao operar como uma sonda (\textit{probe}) direta
+sobre representações já organizadas sintaticamente pelo encoder, aprende uma fronteira de decisão
+mais estável e menos suscetível a oscilações de gradiente.
+
+A análise de instabilidade das Tabelas~\ref{tab:instab-mbert}--\ref{tab:instab-jab} no
+Apêndice~\ref{ap:tabelas} mostra ainda que a diferença de instabilidade entre variantes com
+e sem UPOS é pequena para o cabeçote linear (o MTL não aumenta nem reduz significativamente o
+\textit{forgetting}), mas é mais expressiva para o biaffine (o MTL aumenta a instabilidade
+em alguns rótulos).
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Discussão Geral}
+\label{sec:discussao_geral}
+% ─────────────────────────────────────────────────────────────────────────────
+
+Os resultados apresentados permitem extrair as seguintes conclusões:
+
+\paragraph{1.\ A ausência do BiLSTM é o principal fator diferencial em relação ao PortParser.}
+A lacuna de 1,09 pp em UAS em relação ao PortParser não é explicada pela diferença de
+arquitetura do cabeçote, mas pela ausência da camada BiLSTM bidirecional que o PortParser
+utiliza entre o encoder e o cabeçote biaffine. As curvas de treinamento no
+Apêndice~\ref{cap:modelos_avaliados} mostram que os modelos convergem sem sinais de
+sobreajuste grave, indicando que o teto de desempenho observado é imposto pela ausência da
+contextualização adicional fornecida pelo BiLSTM, não pela capacidade de generalização do
+cabeçote. Trabalhos futuros com a adição de um BiLSTM ao ParseH2IA devem reduzir
+substancialmente essa lacuna.
+
+\paragraph{2.\ O cabeçote linear é mais eficaz em corpus pequeno com ajuste fino completo,
+possivelmente por explorar a codificação sintática implícita do BERT.}
+A superioridade consistente do cabeçote linear sobre o biaffine em três dos quatro encoders,
+mesmo em regime de ajuste fino completo, constitui o principal achado empírico deste trabalho.
+A interpretação mais plausível, à luz dos resultados de instabilidade e da literatura de
+\textit{probing}, combina dois mecanismos. Primeiro, estudos demonstram que modelos de
+linguagem pré-treinados codificam implicitamente estrutura sintática em suas
+representações~\citep{tenney2019bert,hewitt2019structural}: relações de dependência, distâncias
+na árvore sintática e papéis gramaticais estão linearmente acessíveis no espaço vetorial
+produzido pelo encoder. Um cabeçote linear funciona essencialmente como uma sonda direta
+(\textit{linear probe}) sobre essa informação codificada, aprendendo de forma eficiente e
+estável. O cabeçote biaffine, com suas quatro MLPs e operações bilineares, adiciona graus de
+liberdade que não produzem ganho quando a informação relevante já está linearmente acessível.
+Segundo, com apenas 5.893 sentenças de treino no Porttinari, a capacidade paramétrica
+adicional do biaffine se manifesta como maior risco de sobreajuste em vez de melhor
+generalização. A conclusão prática é que, ao trabalhar em corpus pequeno e sem BiLSTM,
+arquiteturas de cabeçote mais simples não apenas bastam — elas são preferíveis. Essa conclusão
+é reforçada pela consistência dos resultados da busca de hiperparâmetros
+(Apêndice~\ref{cap:resultados_hiperparametros}): mesmo com configurações otimizadas
+independentemente, o biaffine não alcança o linear em três dos quatro encoders.
+
+\paragraph{3.\ O aprendizado multi-tarefa tem impacto marginal no \textit{parsing}.}
+A tarefa auxiliar de UPOS, já próxima do teto de desempenho, não fornece gradiente suficiente
+para melhorar substancialmente o desempenho em HEAD e DEPREL no Porttinari. O ganho marginalmente
+positivo para os modelos lineares (+0,33 pp em UAS em média) e o impacto ligeiramente negativo
+para os biaffines ($-$1,10 pp em média) sugerem que o sinal UPOS interage de forma distinta com
+as duas arquiteturas de cabeçote: para o linear, atua como leve regularizador; para o biaffine,
+pode introduzir conflito de gradiente entre as MLPs da tarefa principal e o classificador de UPOS.
+
+\paragraph{4.\ JabuticaBERT apresenta desempenho abaixo do esperado.} A suposição de que um
+modelo pré-treinado exclusivamente em português deveria superar o BERTimbau em tarefas para
+o português não se confirma. Diferenças de tokenização e arquitetura do vocabulário podem
+estar influenciando negativamente a extração de representações por subtoken nesta configuração.
+Adicionalmente, a hipótese da codificação implícita sugere que a qualidade da codificação
+sintática — e não apenas a língua do pré-treinamento — é determinante; nesse sentido, o
+BERTimbau Large, por sua maior capacidade e treinamento, codificaria sintaxe de forma mais
+rica que o JabuticaBERT Base. Nota-se também que os resultados da busca de hiperparâmetros
+(Apêndice~\ref{cap:resultados_hiperparametros}) mostram maior variância (\textit{std LAS}) para
+o JabuticaBERT em comparação aos demais encoders, o que indica maior sensibilidade aos
+hiperparâmetros — possivelmente reflexo da mesma instabilidade de representações observada.
+
+\paragraph{5.\ Rótulos de alta ambiguidade semântica permanecem desafiadores.} \texttt{parataxis},
+\texttt{discourse} e \texttt{orphan} apresentam acurácia baixa e alta variabilidade entre
+modelos, sugerindo que esses rótulos requerem informação discursiva e contextual que vai além
+do que um cabeçote sintático treinado sobre o nível de sentença pode capturar — e que,
+diferentemente dos rótulos gramaticalmente determinísticos, não está linearmente codificada
+nas representações do encoder (ver definições formais no Apêndice~\ref{cap:classe_deprel}).
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Limitações}
+\label{sec:limitacoes}
+% ─────────────────────────────────────────────────────────────────────────────
+
+Este trabalho apresenta as seguintes limitações que devem ser consideradas na interpretação dos
+resultados:
+
+\begin{itemize}
+  \item \textbf{Corpus único}: Os modelos foram treinados e avaliados exclusivamente no corpus
+        Porttinari, o que restringe a generalização dos resultados a outros domínios e gêneros
+        textuais. Avaliação em corpora de notícias, redes sociais ou textos jurídicos pode
+        produzir resultados distintos.
+
+  \item \textbf{Ausência de BiLSTM}: O ParseH2IA suprime a camada BiLSTM bidirecional presente
+        no PortParser, o que impede comparação direta em condições arquiteturais idênticas. Os
+        resultados refletem a escolha deliberada de avaliar o cabeçote de predição sem a influência
+        da contextualização adicional fornecida pelo BiLSTM. Trabalhos futuros que adicionem o
+        BiLSTM ao ParseH2IA permitirão isolar sua contribuição.
+
+  \item \textbf{Ausência de decodificação estrutural}: Os modelos implementados utilizam
+        decodificação gulosa (\textit{greedy}), sem garantir que a estrutura de árvore seja
+        válida. O PortParser e outros modelos de estado da arte utilizam algoritmos de
+        decodificação exata (e.g., algoritmo de Eisner) para garantir arborescências projetivas
+        válidas, o que pode explicar parte da diferença de desempenho.
+
+  \item \textbf{Avaliação de uma única execução}: Os resultados reportados correspondem a uma
+        única execução de treinamento por configuração. Experimentos com múltiplas sementes
+        aleatórias permitiriam estimar a variância dos resultados e tornar as comparações
+        estatisticamente mais robustas.
+
+  \item \textbf{Hiperparâmetros fixos por arquitetura}: A busca de hiperparâmetros foi conduzida
+        individualmente para cada combinação de encoder e arquitetura
+        (Apêndice~\ref{cap:resultados_hiperparametros}), replicando os intervalos de busca do
+        PortParser original. Uma busca com espaço ampliado poderia beneficiar especialmente o
+        cabeçote biaffine, que demonstrou maior sensibilidade aos hiperparâmetros.
+\end{itemize}
+
+Apesar dessas limitações, os resultados demonstram que é possível construir modelos de
+\textit{parsing} competitivos para o português brasileiro com arquiteturas relativamente simples,
+desde que se utilize um encoder pré-treinado de alta qualidade como o BERTimbau Large. A hipótese
+de codificação sintática implícita, em particular, oferece uma contribuição interpretativa
+relevante ao sugerir que a superioridade do cabeçote linear não é um artefato experimental,
+mas reflexo de uma propriedade fundamental dos encoders BERT: a organização sintática latente
+de suas representações.

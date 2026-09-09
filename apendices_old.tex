@@ -1,0 +1,2296 @@
+% Apêndices (Opcional) - Material produzido pelo autor
+\apendices
+\section{Classes de Dependencia}
+\label{cap:classe_deprel}
+\begin{itemize}
+
+\item \textbf{acl}: Uma oração finita ou não finita que modifica um substantivo. \textbf{Exemplo}: as questões como ele as vê. acl(questões, vê). Variação de \textbf{acl} é \textbf{acl:relcl}, modificador de oração relativa.
+
+\item\textbf{advcl}: Uma cláusula que modifica um verbo ou outro predicado como modificador, não como complemento central. \textbf{Exemplo}: O acidente aconteceu enquanto a noite caía. advcl(aconteceu, caía). Variação de \textbf{advcl} é \textbf{advcl:relcl}, modificador de oração adverbial relativa.
+
+\item\textbf{advmod}: Um advérbio ou frase adverbial que modifica um predicado ou modificador. \textbf{Exemplo}: Alimento geneticamente modificado. advmod(modificado, geneticamente). Variações de \textbf{advmod} são, \textbf{advmod:emph}, palavra enfatizadora, itensificador e \textbf{advmod:lmod} modificador de adverbial locativo.
+
+\item\textbf{amod}: Uma frase adjetiva que modifica um substantivo. \textbf{Exemplo}: Pedro come cachorros-quentes grandes. amod(cachorros-quentes, grandes).
+
+\item\textbf{appos}: Um nominal que define ou descreve outro nominal imediatamente após. \textbf{Exemplo}: Tiago, meu irmão, chegou. appos(Tiago, irmão).
+
+\item\textbf{aux}: Uma palavra funcional associada a um verbo léxico que expressa categorias gramaticais como tempo ou modo. \textbf{Exemplo}: Pedro já chegou. aux(chegou, já). Variação de \textbf{aux} é \textbf{aaux:pass}, auxiliar passivo, Tiago foi embora. aux:pass(embora, foi).
+
+\item\textbf{case}: Uma palavra funcional que indica o caso gramatical de um nominal. \textbf{Exemplo}: O escritório do presidente. case(presidente, do).
+
+\item\textbf{cc}: Uma palavra que liga palavras ou constituintes maiores. \textbf{Exemplo}: Pedro é grande e honesto. cc(é, e). Variação de \textbf{cc} é \textbf{cc:preconj}, um elemento antes de uma conjunção coordenativa. \textbf{Exemplo}: Tanto os meninos quanto as meninas estão aqui. cc:preconj(meninos, tanto) 
+
+\item\textbf{ccomp}: Uma oração dependente que completa o significado de um verbo. \textbf{Exemplo}: Ele diz que você gosta de nadar. ccomp(diz, gosta)
+
+\item\textbf{clf}: Uma palavra que categoriza um substantivo, usada com numerais. \textbf{Exemplo}: Três unidades de lapís. clf(lapís, unidades).
+
+\item\textbf{compound}: Um termo que forma um composto com sua cabeça. \textbf{Exemplo}: Livro telefônico. compound(livro, telefônico). Variações de \textbf{compound} são, \textbf{compound:lvc}, um verbo auxiliar em uma construção de verbo leve. \textbf{Exemplo}: Eles preferem o trem. compound: lvc(preferem, o); \textbf{compound:prt}, partícula de verbo frasal. \textbf{Exemplo}: Eles desligaram a estação. compound:prt(desligaram, desligar); \textbf{compound:redup}, elementos em compostos por reduplicação. \textbf{Exemplo}: Homens grandes (+ênfase) estão jogando jogos. compound:redup(grandes, ênfase); \textbf{compound:svc}, compostos de verbos seriais. \textbf{Exemplo}: Musa veio pegar a faca. compound:svc(veio, pegar).
+
+\item\textbf{conj}: Um coordenado ligado por conjunção. \textbf{Exemplo}: Pedro é grande e honesto. conj(é, honesto).
+
+\item\textbf{cop}: Uma palavra que liga um sujeito a um predicado, tipicamente ``ser''. \textbf{Exemplo}: Tiago é honesto. cop(é, é).
+
+\item\textbf{csubj}: Um oracional que funciona como sujeito sintático. \textbf{Exemplo}: Que ele mentiu me surpreendeu. csubj(surpreendeu, mentiu). As variações de \textbf{csubj} são, \textbf{csubj:outer}, sujeito de uma oração copulativa cujo predicado é uma oração. \textbf{Exemplo}: Caminhar nas montanhas é experimentar o melhor da natureza. csubj:outer(é, caminhar) e \textbf{csubj:pass} sujeito passivo de uma oração. \textbf{Exemplo}: Que ela mentiu foi suspeitado por todos. csubj:pass(for, mentiu).
+
+\item\textbf{dep}: Dependência não especificada. Usado quando nenhuma outra etiqueta se aplica. \textbf{Exemplo}: Meu amigo não faz isso tão bem. dep(faz, não).
+
+\item\textbf{det}: Determinante. Uma palavra que introduz uma frase nominal e expressa noção gramatical como definitude. \textbf{Exemplo}: O homem está aqui. det(está, o). As variações de \textbf{det} são, \textbf{det:numgov}] quantificador pronominal que governa o caso do substantivo. \textbf{Exemplo}: Quantos homens jogaram cartas. det:numgov(homens, quantos); \textbf{det:nummod} quantificador pronominal que concorda em caso com o substantivo. \textbf{Exemplo}: Com quantos homens eu joguei cartas. det:nummod(homens, quantos); \textbf{det:poss} determinante possessivo. \textbf{Exemplo}: Vai ser meu cuidado verificar. det:poss(é, meu).
+
+\item\textbf{discourse}: Um marcador discursivo ou conector. \textbf{Exemplo}: Eu tenho 21 anos, bem, vou fazer em novembro. discourse(tenho, bem).
+
+\item\textbf{dislocated}: Elementos deslocados. Elementos no início ou fim de uma cláusula relacionados a uma posição interna. \textbf{Exemplo}: Elefante, tópico, nariz, sujeito, longo. dislocated(é, elefante).
+
+\item\textbf{expl}: Expletivo. Um pronome sem conteúdo semântico em posição de argumento central. \textbf{Exemplo}: Há um fantasma no quarto. expl(há, há). As variações de \textbf{expl} são \textbf{expl:impers} Expletivo em construções impessoais. \textbf{Exemplo}: Espera-se que viaje. expl:impers(espera-se, se); \textbf{expl:pass} pronome reflexivo usado no passivo reflexivo. \textbf{Exemplo}: É dito facilmente. expl:pass(dito, é); \textbf{expl:pv} Clítico reflexivo com verbo inherentemente reflexivo. \textbf{Exemplo}: Martin teme animais. expl:pv(teme, se).
+
+\item\textbf{fixed}: Uma expressão fixa composta de múltiplas palavras. \textbf{Exemplo}: Eu gosto de cachorros assim como de gatos. fixed(gosto, assim).
+
+\item\textbf{flat}: Expressão plana. Uma expressão multi-palavra onde a cabeça não é clara. \textbf{Exemplo}: Hillary Rodham Clinton. flat(Hillary, Rodham). Algumas variações de \textbf{flat} são \textbf{flat:foreign} Termos estrangeiros em uma expressão plana. \textbf{Exemplo}: Azul no Rosto. flat:foreign(Azul, no) e \textbf{flat:name}, componentes de nomes próprios. \textbf{Exemplo}: Eis o discurso de Tiziana Maiolo. flat:name(Tiziana, Maiolo).
+
+\item\textbf{goeswith}: Um espaço ou hífen inserido incorretamente. \textbf{Exemplo}: Eles vêm aqui sem permissão legal. goeswith(vêm, aqui).
+
+\item\textbf{iobj}: Objeto indireto. O objeto indireto de um verbo. \textbf{Exemplo}: Ele me deu um aumento. iobj(deu, me).
+
+\item\textbf{list}: Lista. Usado para cadeias de itens comparáveis \textbf{Exemplo}: Steve Jones sj@abc.xyz Universidade do Arizona. list(Steve, sj@abc.xyz).
+
+\item\textbf{mark}: Uma palavra que marca uma cláusula como subordinada. \textbf{Exemplo}: Forças se envolveram em luta após insurgentes atacarem. mark(atacarem, após).
+
+\item\textbf{nmod}: Modificador nominal. Dependentes nominais de outro nominal, como atributo ou complemento genitivo. \textbf{Exemplo}: O escritório da presidente. nmod(escritório, presidente). As variações de \textbf{nmod} são, \textbf{nmod:poss} modificador possessivo marcado com genitivo. \textbf{Exemplo}: O livro de Marie. nmod:poss(livro, Marie) e \textbf{nmod:tmod}: Modificador que especifica tempo. \textbf{Exemplo}: Você está livre para o almoço algum dia esta semana? nmod:tmod(dia, semana).
+
+\item\textbf{nsubj}: Sujeito nominal. O sujeito sintático e proto-agente de uma cláusula. \textbf{Exemplo}: Clinton derrotou Dole. nsubj(derrotou, Clinton). As variações de \textbf{nsubj} são \textbf{nsubj:outer} sujeito de cláusula copulativa cujo predicado é cláusula. \textbf{Exemplo}: O problema é que isso nunca foi tentado. nsubj:outer(é, problema). \textbf{nsubj:pass}, frase nominal sujeito de cláusula passiva. \textbf{Exemplo}: Schwarzenberg foi derrotado por Zeman. nsubj:pass(foi, Schwarzenberg)
+
+\item\textbf{nummod}: Um número que modifica um nominal. \textbf{Exemplo}: Sam comeu 3 ovelhas. nummod(comeu, 3). A variação do \textbf{nummod} é \textbf{nummod:gov}, modificador numérico que governa o caso do substantivo. \textbf{Exemplo}: Cinco homens jogaram cartas. nummod:gov(homens, cinco).
+
+\item\textbf{obj}: O argumento central secundário de um verbo. \textbf{Exemplo}:: Ela me deu um aumento. obj(deu, aumento)
+
+\item\textbf{obl}: Nominal oblíquo. Nominal não central atuando como argumento ou adjunto. \textbf{Exemplo}: Ontem à noite, nadei na piscina. obl(nadei, noite). As variações do \textbf{obl} são, \textbf{obl:agent} Agentes de verbos passivos.  \textbf{Exemplo}: O gato foi perseguido pelo cachorro. obl:agent(perseguido, cachorro). \textbf{obl:arg} Argumentos oblíquos distintos de adjuntos. \textbf{Exemplo}: Confio no instinto dele. obl:arg(confio, instinto). \textbf{obl:lmod} modificador especificando localização. \textbf{Exemplo}: Dirija por aquela estrada, você recebe instruções nela. obl:lmod(estrada, por). \textbf{obl:tmod}, modificador especificando tempo. \textbf{Exemplo}: Ontem à noite, nadei na piscina. obl:tmod(nadei, noite).
+
+\item\textbf{orphan}: Usado em elipse de cabeça onde promoção resultaria em relação não natural. \textbf{Exemplo}: Marie ganhou ouro e Peter bronze. orphan(ganhou, Peter).
+
+\item\textbf{parataxis}: Relação entre elementos justapostos sem coordenação explícita. \textbf{Exemplo}: Vamos encarar, estamos irritados. parataxis(estamos, encarar).
+
+\item\textbf{punct} Qualquer peça de pontuação em uma cláusula. \textbf{Exemplo}: Vá para casa! punct(vá, !).
+
+\item\textbf{reparandum} Indica disfluências em reparos de fala. \textbf{Exemplo}: Vá para a direi- para a esquerda. reparandum(esquerda, direi).
+
+\item\textbf{root}: Aponta para a raiz da sentença. \textbf{Exemplo}: Eu amo batatas fritas francesas. root(amo, ROOT).
+
+\item\textbf{vocative}: Marca um participante do diálogo endereçado. \textbf{Exemplo}: Rapazes, relaxem!. vocative(relaxem, rapazes).
+
+\item\textbf{xcomp}: Complemento clausal aberto. Cláusula sem sujeito próprio, compartilhando com a cláusula matriz. \textbf{Exemplo}: Esperamos que eles mudem de ideia. xcomp(esperamos, mudem).
+
+\end{itemize}
+
+\section{Resultado: Busca de Hiperparametros Avaliados}
+\label{cap:resultados_hiperparametros}
+
+%%LINEAR
+
+\begin{table}[ht]
+\centering
+\caption{Resultados dos experimentos com mBERT (Linear)}
+\label{tab:mbert-results}
+\begin{tabular}{c c c c c c}
+\hline
+\textbf{Trial} & \textbf{Mean LAS} & \textbf{Std LAS} & \textbf{Learning Rate} & \textbf{Weight Decay} & \textbf{Warmup Ratio} \\
+\hline
+\textbf{1} & \textbf{0.885058} & \textbf{0.006380} & \textbf{0.000036} & \textbf{0.196730} & \textbf{0.420505} \\
+3 & 0.884417 & 0.006255 & 0.000034 & 0.129981 & 0.399405 \\
+2 & 0.880640 & 0.005876 & 0.000029 & 0.216720 & 0.498847 \\
+7 & 0.869962 & 0.004572 & 0.000021 & 0.192942 & 0.381000 \\
+9 & 0.869878 & 0.004654 & 0.000021 & 0.101991 & 0.438022 \\
+5 & 0.859672 & 0.004352 & 0.000017 & 0.130814 & 0.347393 \\
+6 & 0.857565 & 0.004750 & 0.000016 & 0.240849 & 0.462004 \\
+4 & 0.855767 & 0.004519 & 0.000016 & 0.182946 & 0.305832 \\
+0 & 0.854372 & 0.004344 & 0.000015 & 0.108845 & 0.389569 \\
+8 & 0.839878 & 0.005863 & 0.000012 & 0.292299 & 0.366276 \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Resultados dos experimentos com BERTimbau-Base (Linear)}
+\label{tab:bertimbau-base-results}
+\begin{tabular}{c c c c c c}
+\hline
+\textbf{Trial} & \textbf{Mean LAS} & \textbf{Std LAS} & \textbf{Learning Rate} & \textbf{Weight Decay} & \textbf{Warmup Ratio} \\
+\hline
+\textbf{4} & \textbf{0.908692} & \textbf{0.005915} & \textbf{0.000044} & \textbf{0.214306} & \textbf{0.367460} \\
+0 & 0.906738 & 0.007174 & 0.000041 & 0.285090 & 0.419238 \\
+8 & 0.905483 & 0.006857 & 0.000034 & 0.272302 & 0.311038 \\
+6 & 0.905474 & 0.007546 & 0.000039 & 0.215511 & 0.471784 \\
+7 & 0.904887 & 0.005722 & 0.000033 & 0.220988 & 0.342784 \\
+3 & 0.902560 & 0.006051 & 0.000031 & 0.108977 & 0.451542 \\
+9 & 0.896193 & 0.006148 & 0.000025 & 0.182029 & 0.398756 \\
+1 & 0.870862 & 0.007976 & 0.000015 & 0.242467 & 0.300276 \\
+5 & 0.869476 & 0.008027 & 0.000015 & 0.177760 & 0.469774 \\
+2 & 0.863406 & 0.007812 & 0.000014 & 0.126214 & 0.452487 \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\begin{table}[ht]
+\centering
+\caption{Resultados dos experimentos com BERTimbau-Large (Linear)}
+\label{tab:bertimbau-large-results}
+\begin{tabular}{c c c c c c}
+\hline
+\textbf{Trial} & \textbf{Mean LAS} & \textbf{Std LAS} & \textbf{Learning Rate} & \textbf{Weight Decay} & \textbf{Warmup Ratio} \\
+\hline
+\textbf{2} & \textbf{0.925713} & \textbf{0.002624} & \textbf{0.000038} & \textbf{0.126153} & \textbf{0.403698} \\
+1 & 0.925066 & 0.002479 & 0.000029 & 0.214964 & 0.349256 \\
+6 & 0.924980 & 0.002818 & 0.000025 & 0.169615 & 0.432424 \\
+7 & 0.922653 & 0.007954 & 0.000046 & 0.124523 & 0.417075 \\
+4 & 0.922128 & 0.003095 & 0.000020 & 0.198165 & 0.423723 \\
+0 & 0.920267 & 0.003849 & 0.000019 & 0.168731 & 0.461301 \\
+8 & 0.918754 & 0.003464 & 0.000017 & 0.232271 & 0.408937 \\
+5 & 0.916199 & 0.003033 & 0.000015 & 0.110463 & 0.328853 \\
+9 & 0.911381 & 0.004579 & 0.000013 & 0.283695 & 0.318210 \\
+3 & 0.901764 & 0.004516 & 0.000010 & 0.173628 & 0.433841 \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Resultados dos experimentos com modernJabuticaBERT-Base-1k (Linear)}
+\label{tab:modernjabuticabert-base-1k-results}
+\begin{tabular}{c c c c c c}
+\hline
+\textbf{Trial} & \textbf{Mean LAS} & \textbf{Std LAS} & \textbf{Learning Rate} & \textbf{Weight Decay} & \textbf{Warmup Ratio} \\
+\hline
+\textbf{3} & \textbf{0.825660} & \textbf{0.012153} & \textbf{0.000049} & \textbf{0.149677} & \textbf{0.435433} \\
+1 & 0.818081 & 0.012015 & 0.000046 & 0.274902 & 0.346220 \\
+4 & 0.816004 & 0.006392 & 0.000041 & 0.185580 & 0.483414 \\
+7 & 0.764761 & 0.021123 & 0.000029 & 0.240583 & 0.388557 \\
+2 & 0.760194 & 0.025240 & 0.000029 & 0.124826 & 0.354958 \\
+0 & 0.726410 & 0.011366 & 0.000022 & 0.227242 & 0.359989 \\
+6 & 0.690056 & 0.025080 & 0.000015 & 0.262750 & 0.484973 \\
+8 & 0.675433 & 0.007994 & 0.000013 & 0.198784 & 0.451598 \\
+9 & 0.675348 & 0.017714 & 0.000013 & 0.163394 & 0.356288 \\
+5 & 0.634587 & 0.010357 & 0.000010 & 0.205283 & 0.352006 \\
+\hline
+\end{tabular}
+\end{table}
+
+%%BIAFFINE
+
+\begin{table}[ht]
+\centering
+\caption{Resultados dos experimentos com mBERT (Biaffine)}
+\label{tab:mbert-biaffine-results}
+\begin{tabular}{c c c c c c}
+\hline
+\textbf{Trial} & \textbf{Mean LAS} & \textbf{Std LAS} & \textbf{Learning Rate} & \textbf{Weight Decay} & \textbf{Warmup Ratio} \\
+\hline
+\textbf{8} & \textbf{0.833259} & \textbf{0.005840} &  \textbf{0.000030} & \textbf{0.237547} & \textbf{0.327849} \\
+2 & 0.832299 & 0.003669 &  0.000027 & 0.124994 & 0.472556 \\
+3 & 0.831644 & 0.003540 &  0.000021 & 0.295586 & 0.383554 \\
+7 & 0.831031 & 0.004162 &  0.000021 & 0.203839 & 0.469646 \\
+9 & 0.826412 & 0.003292 &  0.000047 & 0.124138 & 0.306292 \\
+0 & 0.826105 & 0.003719 &  0.000016 & 0.255733 & 0.313032 \\
+1 & 0.826067 & 0.004637 &  0.000048 & 0.171161 & 0.344204 \\
+5 & 0.824835 & 0.003819 &  0.000017 & 0.250622 & 0.466429 \\
+4 & 0.812010 & 0.004949 &  0.000013 & 0.288138 & 0.487158 \\
+6 & 0.807205 & 0.004583 &  0.000012 & 0.102060 & 0.464783 \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\begin{table}[ht]
+\centering
+\caption{Resultados dos experimentos com BERTimbau Base (Biaffine)}
+\label{tab:bertimbau-large-results}
+\begin{tabular}{c c c c c c}
+\hline
+\textbf{Trial} & \textbf{Mean LAS} & \textbf{Std LAS} & \textbf{Learning Rate} & \textbf{Weight Decay} & \textbf{Warmup Ratio} \\
+\hline
+\textbf{6} & \textbf{0.863257} & \textbf{0.003916} & \textbf{0.000031} & \textbf{0.128855} & \textbf{0.410144} \\
+2 & 0.862503 & 0.005636 & 0.000031 & 0.296217 & 0.356121 \\
+5 & 0.861592 & 0.004908 & 0.000029 & 0.263890 & 0.405889 \\
+9 & 0.861510 & 0.006410 & 0.000037 & 0.282828 & 0.460082 \\
+7 & 0.860582 & 0.006276 & 0.000023 & 0.164334 & 0.308330 \\
+3 & 0.860180 & 0.009311 & 0.000046 & 0.259406 & 0.484412 \\
+8 & 0.860107 & 0.007456 & 0.000048 & 0.233779 & 0.437821 \\
+4 & 0.860095 & 0.005602 & 0.000024 & 0.101319 & 0.476664 \\
+1 & 0.857603 & 0.005675 & 0.000019 & 0.247379 & 0.475622 \\
+0 & 0.839351 & 0.006066 & 0.000011 & 0.222736 & 0.476501 \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Resultados dos experimentos com BERTimbau Large (Biaffine)}
+\label{tab:bertimbau-large-results}
+\begin{tabular}{c c c c c c}
+\hline
+\textbf{Trial} & \textbf{Mean LAS} & \textbf{Std LAS} & \textbf{Learning Rate} & \textbf{Weight Decay} & \textbf{Warmup Ratio} \\
+\hline
+\textbf{0} & \textbf{0.887366} & \textbf{0.006817} & \textbf{0.000030} & \textbf{0.116483} & \textbf{0.417290} \\
+4 & 0.885584 & 0.009068 & 0.000018 & 0.147112 & 0.307553 \\
+7 & 0.885084 & 0.005630 & 0.000017 & 0.116782 & 0.488933 \\
+8 & 0.878930 & 0.013033 & 0.000016 & 0.294734 & 0.385474 \\
+6 & 0.878894 & 0.016560 & 0.000019 & 0.124715 & 0.302827 \\
+5 & 0.877394 & 0.010739 & 0.000018 & 0.146182 & 0.425536 \\
+3 & 0.874395 & 0.018661 & 0.000049 & 0.175856 & 0.439879 \\
+2 & 0.874045 & 0.020230 & 0.000039 & 0.142492 & 0.330243 \\
+9 & 0.862019 & 0.016939 & 0.000049 & 0.184893 & 0.482496 \\
+1 & 0.861821 & 0.025160 & 0.000036 & 0.210631 & 0.458091 \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\begin{table}[ht]
+\centering
+\caption{Resultados dos experimentos com JabuticaBERT (Biaffine)}
+\label{tab:bertimbau-large-results}
+\begin{tabular}{c c c c c c}
+\hline
+\textbf{Trial} & \textbf{Mean LAS} & \textbf{Std LAS} & \textbf{Learning Rate} & \textbf{Weight Decay} & \textbf{Warmup Ratio} \\
+\hline
+\textbf{6} & \textbf{0.818719} & \textbf{0.025180} & \textbf{0.000035} & \textbf{0.158349} & \textbf{0.302796} \\
+3 & 0.808947 & 0.034193 & 0.000045 & 0.168110 & 0.473429 \\
+5 & 0.792397 & 0.033073 & 0.000036 & 0.169727 & 0.347370 \\
+1 & 0.747085 & 0.047024 & 0.000020 & 0.122321 & 0.322066 \\
+7 & 0.702396 & 0.048477 & 0.000021 & 0.105447 & 0.449218 \\
+2 & 0.674189 & 0.066415 & 0.000022 & 0.294030 & 0.468165 \\
+8 & 0.664172 & 0.041053 & 0.000020 & 0.257532 & 0.373692 \\
+4 & 0.621514 & 0.053323 & 0.000013 & 0.179855 & 0.457334 \\
+9 & 0.588667 & 0.061754 & 0.000013 & 0.257362 & 0.415505 \\
+0 & 0.560711 & 0.036098 & 0.000011 & 0.233061 & 0.344830 \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Resultado: Treinamento Modelos Avaliados}
+\label{cap:modelos_avaliados}
+
+%%LINEAR
+
+\begin{table}[ht]
+\centering
+\caption{Resultados do treinamento por época para o modelo mBERT (Linear)}
+\label{tab:mbert-training-results}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{c c c c c c}
+\hline
+\textbf{Epoch} & \textbf{Training Loss} & \textbf{Validation Loss} & \textbf{UAS} & \textbf{LAS} & \textbf{UPOS Accuracy} \\
+\hline
+1 & 9.784786 & 6.575181 & 0.112768 & 0.090611 & 0.777003 \\
+2 & 5.680443 & 4.400321 & 0.161281 & 0.144849 & 0.954856 \\
+3 & 4.105455 & 3.332325 & 0.228167 & 0.214088 & 0.970919 \\
+4 & 3.175950 & 2.573829 & 0.345504 & 0.330271 & 0.976228 \\
+5 & 2.490882 & 2.061388 & 0.472258 & 0.456102 & 0.976459 \\
+6 & 1.987491 & 1.735117 & 0.557976 & 0.541082 & 0.977705 \\
+7 & 1.616225 & 1.439901 & 0.649788 & 0.630631 & 0.979228 \\
+8 & 1.349968 & 1.284263 & 0.698071 & 0.679930 & 0.980336 \\
+9 & 1.139671 & 1.184959 & 0.720227 & 0.700379 & 0.980798 \\
+10 & 0.982604 & 1.117782 & 0.743630 & 0.722904 & 0.980428 \\
+11 & 0.867634 & 1.072143 & 0.755908 & 0.735275 & 0.981444 \\
+12 & 0.765230 & 0.984507 & 0.800775 & 0.779819 & 0.981167 \\
+13 & 0.690611 & 0.994038 & 0.798329 & 0.776588 & 0.980936 \\
+14 & 0.629238 & 0.966288 & 0.804791 & 0.784297 & 0.982321 \\
+15 & 0.588444 & 0.966376 & 0.827133 & 0.806361 & 0.980798 \\
+16 & 0.541444 & 1.077217 & 0.812315 & 0.789282 & 0.980198 \\
+17 & 0.506546 & 1.051257 & 0.804653 & 0.784250 & 0.980382 \\
+18 & 0.453457 & 0.984063 & 0.835441 & 0.813839 & 0.979459 \\
+19 & 0.397804 & 1.128150 & 0.777511 & 0.758263 & 0.981121 \\
+20 & 0.347073 & 1.026234 & 0.844904 & 0.824040 & 0.979459 \\
+21 & 0.303266 & 0.957418 & 0.873200 & 0.851828 & 0.982044 \\
+22 & 0.268382 & 0.992165 & 0.872877 & 0.851736 & 0.980105 \\
+23 & 0.246756 & 1.146256 & 0.804053 & 0.783789 & 0.980567 \\
+24 & 0.202736 & 1.027355 & 0.873661 & 0.851782 & 0.980244 \\
+25 & 0.173859 & 0.998692 & 0.886309 & 0.864937 & 0.980936 \\
+26 & 0.150304 & 1.039968 & 0.884832 & 0.863322 & 0.981444 \\
+27 & 0.125447 & 0.954554 & 0.896418 & 0.875877 & 0.981582 \\
+28 & 0.106853 & 1.054003 & 0.888109 & 0.868076 & 0.981213 \\
+29 & 0.093519 & 0.969124 & 0.902557 & 0.883355 & 0.982690 \\
+30 & 0.080641 & 1.009441 & 0.903527 & 0.884278 & 0.983106 \\
+31 & 0.068464 & 1.025494 & 0.904865 & 0.884694 & 0.983152 \\
+32 & 0.057137 & 1.040346 & 0.902419 & 0.883586 & 0.982598 \\
+33 & 0.043171 & 1.020306 & 0.910543 & 0.890371 & 0.982229 \\
+34 & 0.033366 & 1.067205 & 0.907542 & 0.888294 & 0.982875 \\
+35 & 0.026204 & 1.039534 & 0.914143 & 0.895079 & 0.983475 \\
+36 & 0.022319 & 1.046280 & 0.916174 & 0.897341 & 0.984213 \\
+37 & 0.016075 & 1.069643 & 0.915482 & 0.896510 & 0.983798 \\
+38 & 0.014255 & 1.071471 & 0.913959 & 0.896141 & 0.984213 \\
+39 & 0.011247 & 1.063762 & 0.916359 & 0.897618 & 0.983752 \\
+40 & 0.008834 & 1.065175 & 0.916636 & 0.898172 & 0.983475 \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Resultados do treinamento por época - Bertimbau-Base (Linear)}
+\label{tab:training-results}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{c c c c c c}
+\hline
+\textbf{Epoch} & \textbf{Training Loss} & \textbf{Validation Loss} & \textbf{UAS} & \textbf{LAS} & \textbf{UPOS Accuracy} \\
+\hline
+1 & 10.372640 & 7.025009 & 0.106139 & 0.083424 & 0.761578 \\
+2 & 5.646849 & 4.342153 & 0.146057 & 0.131556 & 0.969333 \\
+3 & 3.935340 & 3.168088 & 0.245283 & 0.233848 & 0.979417 \\
+4 & 2.926033 & 2.341689 & 0.404647 & 0.390353 & 0.982587 \\
+5 & 2.203649 & 1.774119 & 0.559021 & 0.543739 & 0.985602 \\
+6 & 1.695705 & 1.416780 & 0.647123 & 0.631374 & 0.987058 \\
+7 & 1.327780 & 1.137280 & 0.722127 & 0.705598 & 0.988409 \\
+8 & 1.060664 & 0.982709 & 0.745985 & 0.730132 & 0.988981 \\
+9 & 0.866159 & 0.871984 & 0.796975 & 0.781901 & 0.988305 \\
+10 & 0.722717 & 0.837625 & 0.803212 & 0.787307 & 0.988617 \\
+11 & 0.620572 & 0.807819 & 0.817194 & 0.801445 & 0.987577 \\
+12 & 0.534410 & 0.768929 & 0.839337 & 0.823224 & 0.988929 \\
+13 & 0.464331 & 0.859188 & 0.800821 & 0.786527 & 0.988201 \\
+14 & 0.417534 & 0.830679 & 0.819845 & 0.806435 & 0.988357 \\
+15 & 0.372993 & 0.757753 & 0.860700 & 0.844327 & 0.987993 \\
+16 & 0.332850 & 0.713535 & 0.879983 & 0.864130 & 0.987785 \\
+17 & 0.285960 & 0.742749 & 0.878684 & 0.863143 & 0.988097 \\
+18 & 0.248571 & 0.743175 & 0.891211 & 0.875513 & 0.988617 \\
+19 & 0.213999 & 0.767109 & 0.886948 & 0.871355 & 0.988721 \\
+20 & 0.183067 & 0.735175 & 0.903581 & 0.887104 & 0.988045 \\
+21 & 0.160177 & 0.772020 & 0.894121 & 0.879620 & 0.988409 \\
+22 & 0.138446 & 0.763390 & 0.907636 & 0.892510 & 0.988721 \\
+23 & 0.119382 & 0.813734 & 0.902958 & 0.887936 & 0.987941 \\
+24 & 0.102905 & 0.760321 & 0.912521 & 0.896876 & 0.987993 \\
+25 & 0.091771 & 0.766994 & 0.912833 & 0.896876 & 0.989293 \\
+26 & 0.071640 & 0.825432 & 0.902646 & 0.888872 & 0.989397 \\
+27 & 0.061192 & 0.829208 & 0.906596 & 0.892458 & 0.988721 \\
+28 & 0.053004 & 0.806675 & 0.915224 & 0.900982 & 0.988305 \\
+29 & 0.041582 & 0.830843 & 0.915016 & 0.901294 & 0.988825 \\
+30 & 0.035287 & 0.782852 & 0.926296 & 0.912054 & 0.989345 \\
+31 & 0.029436 & 0.827815 & 0.918967 & 0.905400 & 0.989345 \\
+32 & 0.024266 & 0.892762 & 0.916992 & 0.902906 & 0.988825 \\
+33 & 0.017819 & 0.867486 & 0.920526 & 0.905608 & 0.989345 \\
+34 & 0.013759 & 0.837314 & 0.926763 & 0.912521 & 0.989345 \\
+35 & 0.010295 & 0.885999 & 0.922033 & 0.908051 & 0.989500 \\
+36 & 0.008239 & 0.842982 & 0.927335 & 0.913301 & 0.989449 \\
+37 & 0.006734 & 0.847912 & 0.927803 & 0.913977 & 0.989760 \\
+38 & 0.004899 & 0.865180 & 0.927647 & 0.914029 & 0.989708 \\
+39 & 0.004361 & 0.860932 & 0.928583 & 0.915328 & 0.989500 \\
+40 & 0.003333 & 0.862260 & 0.928271 & 0.914912 & 0.989656 \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+
+\begin{table}[ht]
+\centering
+\caption{Resultados do treinamento por época - BERTimbau-Large (Linear)}
+\label{tab:training-results-2}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{c c c c c c}
+\hline
+\textbf{Epoch} & \textbf{Training Loss} & \textbf{Validation Loss} & \textbf{UAS} & \textbf{LAS} & \textbf{UPOS Accuracy} \\
+\hline
+1 & 9.876456 & 5.880204 & 0.109257 & 0.088466 & 0.852487 \\
+2 & 4.857795 & 3.572459 & 0.186808 & 0.169292 & 0.972348 \\
+3 & 3.236737 & 2.503597 & 0.310307 & 0.295597 & 0.980196 \\
+4 & 2.358057 & 1.880307 & 0.460107 & 0.445709 & 0.983263 \\
+5 & 1.785010 & 1.428331 & 0.605853 & 0.589272 & 0.985654 \\
+6 & 1.372180 & 1.150877 & 0.688082 & 0.673684 & 0.988357 \\
+7 & 1.067261 & 0.923696 & 0.774157 & 0.757056 & 0.988565 \\
+8 & 0.863936 & 0.845216 & 0.784656 & 0.770362 & 0.989604 \\
+9 & 0.713046 & 0.817122 & 0.810229 & 0.796663 & 0.988097 \\
+10 & 0.613907 & 0.822485 & 0.803940 & 0.789698 & 0.988929 \\
+11 & 0.527644 & 0.695295 & 0.848589 & 0.835334 & 0.989085 \\
+12 & 0.471626 & 0.712244 & 0.866677 & 0.852487 & 0.986278 \\
+13 & 0.427845 & 0.759945 & 0.835179 & 0.820625 & 0.988045 \\
+14 & 0.379899 & 0.737954 & 0.852175 & 0.837725 & 0.988929 \\
+15 & 0.357007 & 0.732695 & 0.876865 & 0.861791 & 0.989033 \\
+16 & 0.327183 & 0.762744 & 0.867249 & 0.850824 & 0.987733 \\
+17 & 0.315721 & 0.720203 & 0.889443 & 0.873330 & 0.986018 \\
+18 & 0.259311 & 0.679714 & 0.895213 & 0.880243 & 0.989137 \\
+19 & 0.219348 & 0.663645 & 0.901086 & 0.887000 & 0.988929 \\
+20 & 0.192366 & 0.618323 & 0.927907 & 0.912729 & 0.988409 \\
+21 & 0.157941 & 0.643311 & 0.922293 & 0.907895 & 0.989604 \\
+22 & 0.137575 & 0.682865 & 0.916888 & 0.901606 & 0.988669 \\
+23 & 0.114743 & 0.664303 & 0.925308 & 0.910546 & 0.989397 \\
+24 & 0.099422 & 0.647212 & 0.930454 & 0.914808 & 0.988981 \\
+25 & 0.081560 & 0.669267 & 0.928427 & 0.913665 & 0.989085 \\
+26 & 0.066682 & 0.710384 & 0.926348 & 0.911170 & 0.989500 \\
+27 & 0.057516 & 0.701615 & 0.924372 & 0.910286 & 0.988409 \\
+28 & 0.043702 & 0.705665 & 0.934716 & 0.920526 & 0.990124 \\
+29 & 0.037281 & 0.754914 & 0.930558 & 0.916108 & 0.989293 \\
+30 & 0.026778 & 0.735343 & 0.935340 & 0.920786 & 0.988877 \\
+31 & 0.022306 & 0.760168 & 0.931233 & 0.917875 & 0.990228 \\
+32 & 0.016596 & 0.780705 & 0.933468 & 0.919850 & 0.989708 \\
+33 & 0.011084 & 0.763185 & 0.939654 & 0.926607 & 0.990384 \\
+34 & 0.008637 & 0.788380 & 0.939498 & 0.925568 & 0.989033 \\
+35 & 0.006158 & 0.761091 & 0.943084 & 0.930350 & 0.989656 \\
+36 & 0.003569 & 0.774513 & 0.943604 & 0.930662 & 0.990488 \\
+37 & 0.002618 & 0.777236 & 0.942928 & 0.929414 & 0.989812 \\
+38 & 0.002136 & 0.768134 & 0.946463 & 0.933001 & 0.990176 \\
+39 & 0.001743 & 0.783440 & 0.943136 & 0.929830 & 0.990124 \\
+40 & 0.002136 & 0.777716 & 0.944280 & 0.930974 & 0.990124 \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+
+
+
+\begin{table}[ht]
+\centering
+\caption{Resultados do treinamento por época para o modeo JabuticaBERT (Linear)}
+\label{tab:training-results-3}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{c c c c c c}
+\hline
+\textbf{Epoch} & \textbf{Training Loss} & \textbf{Validation Loss} & \textbf{UAS} & \textbf{LAS} & \textbf{UPOS Accuracy} \\
+\hline
+1 & 9.803177 & 6.818684 & 0.111143 & 0.082859 & 0.687876 \\
+2 & 5.411188 & 4.301930 & 0.183661 & 0.160527 & 0.930556 \\
+3 & 3.695162 & 3.186497 & 0.261536 & 0.240852 & 0.961208 \\
+4 & 2.804156 & 2.537012 & 0.350916 & 0.332392 & 0.969182 \\
+5 & 2.213399 & 2.118947 & 0.444823 & 0.426922 & 0.974125 \\
+6 & 1.782714 & 1.845442 & 0.480915 & 0.462350 & 0.974872 \\
+7 & 1.451035 & 1.699578 & 0.512647 & 0.493542 & 0.975661 \\
+8 & 1.190737 & 1.508857 & 0.584832 & 0.563941 & 0.977613 \\
+9 & 0.968267 & 1.443441 & 0.612369 & 0.592350 & 0.979358 \\
+10 & 0.796088 & 1.276843 & 0.696972 & 0.673797 & 0.979441 \\
+11 & 0.679309 & 1.343255 & 0.661793 & 0.640902 & 0.979026 \\
+12 & 0.579242 & 1.124826 & 0.762180 & 0.740707 & 0.981642 \\
+13 & 0.506046 & 1.131747 & 0.763010 & 0.742161 & 0.980521 \\
+14 & 0.446337 & 1.237296 & 0.731860 & 0.711924 & 0.980936 \\
+15 & 0.399411 & 1.152712 & 0.784026 & 0.761307 & 0.980147 \\
+16 & 0.366940 & 1.198923 & 0.768077 & 0.749263 & 0.981642 \\
+17 & 0.333551 & 1.097938 & 0.802384 & 0.781950 & 0.981933 \\
+18 & 0.298900 & 1.121107 & 0.817253 & 0.796445 & 0.980355 \\
+19 & 0.253773 & 1.084486 & 0.827553 & 0.807036 & 0.981725 \\
+20 & 0.212675 & 1.124565 & 0.812809 & 0.792831 & 0.982805 \\
+21 & 0.162066 & 1.123202 & 0.828176 & 0.809029 & 0.982058 \\
+22 & 0.129207 & 1.059192 & 0.855547 & 0.837438 & 0.982971 \\
+23 & 0.104424 & 1.082864 & 0.859825 & 0.840470 & 0.983096 \\
+24 & 0.078587 & 1.129784 & 0.852266 & 0.833742 & 0.982348 \\
+25 & 0.059787 & 1.204039 & 0.848362 & 0.829962 & 0.983096 \\
+26 & 0.042106 & 1.168908 & 0.858122 & 0.840595 & 0.984093 \\
+27 & 0.032310 & 1.141175 & 0.867052 & 0.849151 & 0.984176 \\
+28 & 0.022569 & 1.221780 & 0.859492 & 0.841550 & 0.984342 \\
+29 & 0.018911 & 1.220996 & 0.863770 & 0.846617 & 0.984633 \\
+30 & 0.015608 & 1.273313 & 0.853553 & 0.835777 & 0.985131 \\
+31 & 0.008594 & 1.264320 & 0.858080 & 0.841882 & 0.985463 \\
+32 & 0.006704 & 1.229602 & 0.871288 & 0.854135 & 0.985006 \\
+33 & 0.004620 & 1.281679 & 0.866304 & 0.849109 & 0.985048 \\
+34 & 0.003282 & 1.267262 & 0.868256 & 0.850438 & 0.984840 \\
+35 & 0.003048 & 1.264561 & 0.871869 & 0.853678 & 0.985380 \\
+36 & 0.002288 & 1.239354 & 0.877103 & 0.859534 & 0.985546 \\
+37 & 0.001067 & 1.238567 & 0.876770 & 0.859576 & 0.986045 \\
+38 & 0.000790 & 1.241940 & 0.878847 & 0.862026 & 0.985671 \\
+39 & 0.000674 & 1.248937 & 0.876355 & 0.859409 & 0.985837 \\
+40 & 0.000532 & 1.245967 & 0.877892 & 0.860822 & 0.985754 \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+
+%AJUSTADO BIAFFINE
+\begin{table}[ht]
+\centering
+\caption{Resultados do treinamento por época para o modelo mBERT (Biaffine)}
+\label{tab:mbert-biaffine-training}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{c c c c c c}
+\hline
+\textbf{Epoch} & \textbf{Training Loss} & \textbf{Validation Loss} & \textbf{UAS} & \textbf{LAS} & \textbf{UPOS Accuracy} \\
+\hline
+1  & 9.943626 & 6.761981 & 0.131785 & 0.099197 & 0.487768 \\
+2  & 5.900317 & 3.591131 & 0.245153 & 0.215565 & 0.892125 \\
+3  & 3.770547 & 2.585422 & 0.336134 & 0.311623 & 0.959010 \\
+4 & 2.853947 & 2.038078 & 0.431453 & 0.410081 & 0.967504 \\
+5 & 2.283768 & 1.669670 & 0.521695 & 0.502031 & 0.970919 \\
+6 & 1.873197 & 1.441020 & 0.595089 & 0.575517 & 0.975905 \\
+7 & 1.584075 & 1.325079 & 0.630355 & 0.611752 & 0.976597 \\
+8 & 1.357088 & 1.251108 & 0.671436 & 0.651819 & 0.978167 \\
+9 & 1.179196 & 1.171223 & 0.703979 & 0.683069 & 0.977705 \\
+10 & 1.028053 & 1.070744 & 0.737722 & 0.718011 & 0.981305 \\
+11 & 0.904653 & 1.099649 & 0.737952 & 0.717411 & 0.981536 \\
+12 & 0.814786 & 1.027820 & 0.758955 & 0.738322 & 0.981859 \\
+13 & 0.730801 & 1.011102 & 0.777234 & 0.757801 & 0.982321 \\
+14 & 0.667866 & 1.005841 & 0.789420 & 0.769249 & 0.981075 \\
+15 & 0.603963 & 1.060188 & 0.786835 & 0.766571 & 0.980198 \\
+16 & 0.525432 & 1.003042 & 0.810654 & 0.789974 & 0.980198 \\
+17 & 0.459322 & 1.011761 & 0.808853 & 0.787666 & 0.980521 \\
+18 & 0.418677 & 1.021525 & 0.824409 & 0.803822 & 0.981075 \\
+19 & 0.372103 & 1.012364 & 0.834749 & 0.813239 & 0.981167 \\
+20 & 0.336289 & 1.007745 & 0.835441 & 0.816654 & 0.982506 \\
+21 & 0.293265 & 1.096428 & 0.831425 & 0.812731 & 0.981813 \\
+22 & 0.262227 & 1.110891 & 0.838765 & 0.819886 & 0.981444 \\
+23 & 0.233395 & 1.149395 & 0.837703 & 0.819609 & 0.983013 \\
+24 & 0.204886 & 1.164659 & 0.840011 & 0.821917 & 0.981398 \\
+25 & 0.184191 & 1.199049 & 0.841627 & 0.823024 & 0.981952 \\
+26 & 0.162222 & 1.197551 & 0.848135 & 0.828794 & 0.981813 \\
+27 & 0.146732 & 1.246256 & 0.855705 & 0.837518 & 0.982367 \\
+28 & 0.119596 & 1.263536 & 0.855613 & 0.836180 & 0.982367 \\
+29 & 0.111399 & 1.355260 & 0.848458 & 0.829302 & 0.982875 \\
+30 & 0.095316 & 1.402977 & 0.853259 & 0.833503 & 0.982044 \\
+31 & 0.086596 & 1.440888 & 0.851828 & 0.833549 & 0.982875 \\
+32 & 0.074913 & 1.435824 & 0.854921 & 0.836918 & 0.982644 \\
+33 & 0.064436 & 1.466542 & 0.855382 & 0.838026 & 0.982598 \\
+34 & 0.056028 & 1.511367 & 0.856859 & 0.839688 & 0.982967 \\
+35 & 0.051092 & 1.531169 & 0.861614 & 0.844212 & 0.982506 \\
+36 & 0.039822 & 1.676730 & 0.857229 & 0.839180 & 0.982921 \\
+37 & 0.038069 & 1.719510 & 0.861706 & 0.843427 & 0.982598 \\
+38 & 0.031814 & 1.738831 & 0.862306 & 0.844719 & 0.982506 \\
+39 & 0.028887 & 1.775959 & 0.861798 & 0.843935 & 0.982921 \\
+40 & 0.025581 & 1.784062 & 0.863506 & 0.845689 & 0.982736 \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+
+\begin{table}[ht]
+\centering
+\caption{Resultados de treinamento do BERTimbau Base (Biaffine)}
+\label{tab:bertimbau-large-biaffine}
+\begin{tabular}{c c c c c c}
+\hline
+\textbf{Epoch} & \textbf{Training Loss} & \textbf{Validation Loss} & \textbf{UAS} & \textbf{LAS} & \textbf{UPOS Accuracy} \\
+\hline
+1 & 10.744893 & 7.806105 & 0.124643 & 0.061074 & 0.242840 \\
+2 & 7.384517 & 4.804198 & 0.265139 & 0.220542 & 0.700348 \\
+3 & 4.488308 & 2.925152 & 0.375071 & 0.342637 & 0.929154 \\
+4 & 3.135164 & 2.153723 & 0.443786 & 0.420136 & 0.960081 \\
+5 & 2.378841 & 1.599825 & 0.577629 & 0.556734 & 0.969749 \\
+6 & 1.815575 & 1.256761 & 0.671397 & 0.651697 & 0.977857 \\
+7 & 1.430790 & 1.073896 & 0.720360 & 0.700764 & 0.978897 \\
+8 & 1.154242 & 0.953516 & 0.760175 & 0.742138 & 0.981808 \\
+9 & 0.973175 & 0.874549 & 0.784136 & 0.769583 & 0.984563 \\
+10 & 0.829021 & 0.815433 & 0.808462 & 0.793129 & 0.986382 \\
+11 & 0.717660 & 0.765756 & 0.823120 & 0.809034 & 0.986798 \\
+12 & 0.603471 & 0.740093 & 0.834971 & 0.821560 & 0.987369 \\
+13 & 0.514159 & 0.758722 & 0.834035 & 0.819897 & 0.987265 \\
+14 & 0.455546 & 0.794554 & 0.841520 & 0.827954 & 0.988045 \\
+15 & 0.407162 & 0.729942 & 0.854254 & 0.838921 & 0.988513 \\
+16 & 0.364358 & 0.775365 & 0.859504 & 0.845678 & 0.988929 \\
+17 & 0.332764 & 0.778382 & 0.856333 & 0.842975 & 0.988981 \\
+18 & 0.298891 & 0.777890 & 0.866001 & 0.852487 & 0.989085 \\
+19 & 0.251013 & 0.900337 & 0.854046 & 0.841000 & 0.989085 \\
+20 & 0.219512 & 0.823003 & 0.867977 & 0.854930 & 0.989708 \\
+21 & 0.183658 & 0.893747 & 0.866053 & 0.853319 & 0.988513 \\
+22 & 0.161404 & 0.874244 & 0.871719 & 0.858672 & 0.990020 \\
+23 & 0.135765 & 0.966728 & 0.871303 & 0.858361 & 0.989968 \\
+24 & 0.122133 & 0.982696 & 0.874318 & 0.861687 & 0.989397 \\
+25 & 0.104440 & 1.061165 & 0.873018 & 0.860076 & 0.989708 \\
+26 & 0.087850 & 1.060507 & 0.876709 & 0.865014 & 0.989449 \\
+27 & 0.079003 & 1.147307 & 0.872135 & 0.860752 & 0.989241 \\
+28 & 0.065216 & 1.166297 & 0.880659 & 0.868548 & 0.989345 \\
+29 & 0.058847 & 1.169885 & 0.879048 & 0.867613 & 0.989864 \\
+30 & 0.050158 & 1.244593 & 0.881647 & 0.869796 & 0.990124 \\
+31 & 0.044464 & 1.272071 & 0.881855 & 0.870419 & 0.990280 \\
+32 & 0.035928 & 1.311424 & 0.885337 & 0.873590 & 0.990332 \\
+33 & 0.032463 & 1.345211 & 0.886533 & 0.875097 & 0.990488 \\
+34 & 0.029251 & 1.463682 & 0.879464 & 0.868548 & 0.989812 \\
+35 & 0.023208 & 1.501278 & 0.885389 & 0.874162 & 0.990384 \\
+36 & 0.017859 & 1.541077 & 0.885285 & 0.874058 & 0.990540 \\
+37 & 0.016408 & 1.597981 & 0.884505 & 0.872966 & 0.990488 \\
+38 & 0.015029 & 1.656509 & 0.882010 & 0.870783 & 0.990540 \\
+39 & 0.013188 & 1.663841 & 0.882634 & 0.871095 & 0.990644 \\
+40 & 0.011540 & 1.660877 & 0.883570 & 0.872135 & 0.990696 \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Resultados de treinamento do BERTimbau Large (Biaffine)}
+\label{tab:bertimbau-large-biaffine}
+\begin{tabular}{c c c c c c}
+\hline
+\textbf{Epoch} & \textbf{Training Loss} & \textbf{Validation Loss} & \textbf{UAS} & \textbf{LAS} & \textbf{UPOS Accuracy} \\
+\hline
+1 & 10.512833 & 7.375972 & 0.131920 & 0.085763 & 0.433494 \\
+2 & 6.025387 & 3.373855 & 0.306461 & 0.273871 & 0.915016 \\
+3 & 3.445530 & 2.314519 & 0.402724 & 0.377774 & 0.965383 \\
+4 & 2.559693 & 1.673118 & 0.535787 & 0.515359 & 0.974063 \\
+5 & 1.879633 & 1.258283 & 0.651177 & 0.631374 & 0.979677 \\
+6 & 1.416966 & 1.047377 & 0.706690 & 0.690421 & 0.981912 \\
+7 & 1.108526 & 0.909266 & 0.750819 & 0.736109 & 0.984511 \\
+8 & 0.893560 & 0.784839 & 0.799418 & 0.785020 & 0.985966 \\
+9 & 0.748319 & 0.752893 & 0.828317 & 0.812932 & 0.986330 \\
+10 & 0.626098 & 0.729485 & 0.846614 & 0.831176 & 0.986954 \\
+11 & 0.547924 & 0.670887 & 0.862363 & 0.847549 & 0.987525 \\
+12 & 0.464688 & 0.711784 & 0.844535 & 0.830501 & 0.988877 \\
+13 & 0.412185 & 0.672016 & 0.874838 & 0.861843 & 0.988929 \\
+14 & 0.367261 & 0.659369 & 0.880191 & 0.865897 & 0.988877 \\
+15 & 0.336941 & 0.662387 & 0.878216 & 0.864962 & 0.989293 \\
+16 & 0.308120 & 0.692987 & 0.880815 & 0.866989 & 0.989293 \\
+17 & 0.287169 & 0.735954 & 0.878632 & 0.864806 & 0.989449 \\
+18 & 0.246611 & 0.723502 & 0.883206 & 0.867405 & 0.989449 \\
+19 & 0.227644 & 0.756360 & 0.884298 & 0.871511 & 0.989552 \\
+20 & 0.191040 & 0.730509 & 0.897084 & 0.884090 & 0.990020 \\
+21 & 0.153508 & 0.762474 & 0.894381 & 0.880815 & 0.989864 \\
+22 & 0.130891 & 0.828688 & 0.898435 & 0.884817 & 0.989293 \\
+23 & 0.112817 & 0.856280 & 0.893913 & 0.880815 & 0.990748 \\
+24 & 0.100263 & 0.829937 & 0.904361 & 0.891107 & 0.990124 \\
+25 & 0.087344 & 0.892806 & 0.895993 & 0.882686 & 0.989708 \\
+26 & 0.070365 & 0.907649 & 0.904829 & 0.892770 & 0.989552 \\
+27 & 0.059181 & 1.019990 & 0.899995 & 0.887988 & 0.989604 \\
+28 & 0.051826 & 1.019897 & 0.904153 & 0.892562 & 0.988981 \\
+29 & 0.043866 & 1.076574 & 0.903945 & 0.891366 & 0.989500 \\
+30 & 0.038549 & 1.107225 & 0.900567 & 0.888716 & 0.989137 \\
+31 & 0.033144 & 1.207375 & 0.897812 & 0.885597 & 0.989449 \\
+32 & 0.026743 & 1.332794 & 0.894849 & 0.882946 & 0.989760 \\
+33 & 0.024400 & 1.224570 & 0.904829 & 0.893394 & 0.989345 \\
+34 & 0.019296 & 1.348810 & 0.901762 & 0.889911 & 0.990176 \\
+35 & 0.014300 & 1.334421 & 0.906284 & 0.894589 & 0.989293 \\
+36 & 0.011883 & 1.402111 & 0.907428 & 0.895473 & 0.989708 \\
+37 & 0.009700 & 1.477472 & 0.904153 & 0.893238 & 0.989968 \\
+38 & 0.006236 & 1.521442 & 0.904465 & 0.893446 & 0.990072 \\
+39 & 0.005849 & 1.510334 & 0.905608 & 0.894433 & 0.989968 \\
+40 & 0.004790 & 1.505415 & 0.905193 & 0.893965 & 0.989968 \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\begin{table}[ht]
+\centering
+\caption{Resultados de treinamento do JabuticaBERT (Biaffine)}
+\label{tab:bertimbau-large-biaffine}
+\begin{tabular}{c c c c c c}
+\hline
+\textbf{Epoch} & \textbf{Training Loss} & \textbf{Validation Loss} & \textbf{UAS} & \textbf{LAS} & \textbf{UPOS Accuracy} \\
+\hline
+1 & 9.354714 & 6.127495 & 0.146571 & 0.104955 & 0.613947 \\
+2 & 5.221494 & 3.597127 & 0.262242 & 0.228849 & 0.885742 \\
+3 & 3.473840 & 2.674963 & 0.337708 & 0.311418 & 0.944428 \\ 
+4 & 2.671645 & 2.197135 & 0.402625 & 0.378120 & 0.960917 \\
+5 & 2.151891 & 1.899414 & 0.464219 & 0.441126 & 0.969141 \\
+6 & 1.731539 & 1.634654 & 0.540557 & 0.517756 & 0.971716 \\
+7 & 1.359810 & 1.370629 & 0.644889 & 0.621672 & 0.973211 \\
+8 & 1.051941 & 1.913915 & 0.472858 & 0.455372 & 0.974000 \\
+9 & 0.837061 & 1.112549 & 0.744736 & 0.720979 & 0.978070 \\
+10 & 0.690763 & 1.086161 & 0.769406 & 0.744362 & 0.980022 \\
+11 & 0.555576 & 1.055949 & 0.786975 & 0.763052 & 0.980147 \\
+12 & 0.492671 & 1.024116 & 0.793620 & 0.771400 & 0.979898 \\
+13 & 0.414462 & 0.987794 & 0.827138 & 0.802259 & 0.980853 \\
+14 & 0.338138 & 1.366410 & 0.760934 & 0.739752 & 0.980313 \\
+15 & 0.271236 & 1.124688 & 0.823857 & 0.803132 & 0.981185 \\
+16 & 0.233744 & 1.070727 & 0.846991 & 0.825684 & 0.982639 \\
+17 & 0.185835 & 1.105435 & 0.847905 & 0.825809 & 0.983262 \\
+18 & 0.150538 & 1.184686 & 0.848029 & 0.827719 & 0.982930 \\
+19 & 0.121581 & 1.177323 & 0.863397 & 0.842173 & 0.982390 \\
+20 & 0.103997 & 1.338099 & 0.857333 & 0.837521 & 0.982722 \\
+21 & 0.085576 & 1.278244 & 0.859077 & 0.840470 & 0.984674 \\
+22 & 0.078455 & 1.319509 & 0.861237 & 0.843253 & 0.983927 \\
+23 & 0.061212 & 1.501688 & 0.849483 & 0.830253 & 0.983802 \\
+24 & 0.053116 & 1.533521 & 0.865349 & 0.848320 & 0.984882 \\
+25 & 0.045079 & 1.441699 & 0.878058 & 0.859576 & 0.985173 \\
+26 & 0.035138 & 1.551463 & 0.874943 & 0.856710 & 0.984467 \\
+27 & 0.025113 & 1.762924 & 0.870000 & 0.852100 & 0.985090 \\
+28 & 0.028401 & 1.851935 & 0.873531 & 0.855671 & 0.984010 \\
+29 & 0.025035 & 1.909725 & 0.873821 & 0.855007 & 0.985173 \\
+30 & 0.016642 & 1.900559 & 0.870997 & 0.853138 & 0.985006 \\
+31 & 0.015411 & 1.856799 & 0.875483 & 0.856959 & 0.984799 \\
+32 & 0.015004 & 1.980777 & 0.878016 & 0.860282 & 0.984591 \\
+33 & 0.008519 & 2.185527 & 0.867301 & 0.849400 & 0.984965 \\
+34 & 0.006564 & 2.129559 & 0.874112 & 0.856045 & 0.985297 \\
+35 & 0.004540 & 2.199263 & 0.874528 & 0.856502 & 0.985006 \\
+36 & 0.004031 & 2.201184 & 0.878058 & 0.860406 & 0.985339 \\
+37 & 0.002096 & 2.248716 & 0.878473 & 0.860572 & 0.985339 \\
+38 & 0.002245 & 2.231646 & 0.880633 & 0.862151 & 0.985505 \\
+39 & 0.001431 & 2.268286 & 0.880924 & 0.862774 & 0.985546 \\
+40 & 0.001049 & 2.287051 & 0.880093 & 0.862068 & 0.985380 \\
+\hline
+\end{tabular}
+\end{table}
+
+
+%ABLAÇÃO LINEAR SEM UPOS
+\begin{table}[ht]
+\centering
+\caption{Resultados do treinamento por época para o modelo mBERT (Linear) Sem UPOS}
+\label{tab:mbert-training-results_sem_upos}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{c c c c c c}
+\hline
+\textbf{Epoch} & \textbf{Training Loss} & \textbf{Validation Loss} & \textbf{UAS} & \textbf{LAS} \\
+\hline
+1 & 8.150240 & 6.619714 & 0.102105 & 0.039836 \\
+2 & 5.619763 & 4.416279 & 0.176099 & 0.152234 \\
+3 & 4.065923 & 3.299242 & 0.242799 & 0.224289 \\
+4 & 3.170976 & 2.611413 & 0.347858 & 0.324040 \\
+5 & 2.545582 & 2.127528 & 0.443778 & 0.419544 \\
+6 & 2.090486 & 1.790254 & 0.518002 & 0.495015 \\
+7 & 1.745438 & 1.508040 & 0.623061 & 0.602890 \\
+8 & 1.468736 & 1.436210 & 0.572840 & 0.554607 \\
+9 & 1.254815 & 1.181029 & 0.716073 & 0.694516 \\
+10 & 1.095208 & 1.113833 & 0.717965 & 0.696917 \\
+11 & 0.954613 & 1.059393 & 0.753693 & 0.732598 \\
+12 & 0.848605 & 1.008936 & 0.764633 & 0.744184 \\
+13 & 0.755302 & 1.042695 & 0.749908 & 0.730336 \\
+14 & 0.685851 & 0.932580 & 0.810146 & 0.787482 \\
+15 & 0.637814 & 0.984839 & 0.782312 & 0.760617 \\
+16 & 0.586609 & 0.928459 & 0.814346 & 0.792236 \\
+17 & 0.551760 & 1.056953 & 0.770126 & 0.747784 \\
+18 & 0.511376 & 1.034414 & 0.780881 & 0.759278 \\
+19 & 0.449649 & 0.802804 & 0.854782 & 0.832256 \\
+20 & 0.404061 & 0.881222 & 0.846843 & 0.825748 \\
+21 & 0.342129 & 0.871673 & 0.848274 & 0.826902 \\
+22 & 0.316446 & 0.849857 & 0.867338 & 0.847858 \\
+23 & 0.276518 & 0.857203 & 0.874954 & 0.853859 \\
+24 & 0.242369 & 0.865407 & 0.870338 & 0.848643 \\
+25 & 0.216404 & 0.854697 & 0.884555 & 0.862722 \\
+26 & 0.187581 & 0.808410 & 0.892633 & 0.871076 \\
+27 & 0.170229 & 0.848775 & 0.894895 & 0.873800 \\
+28 & 0.144753 & 0.888662 & 0.879108 & 0.859583 \\
+29 & 0.128580 & 0.849000 & 0.895772 & 0.875415 \\
+30 & 0.113630 & 0.850119 & 0.897618 & 0.876708 \\
+31 & 0.095868 & 0.855741 & 0.899326 & 0.878877 \\
+32 & 0.083291 & 0.855123 & 0.905050 & 0.884694 \\
+33 & 0.071942 & 0.919655 & 0.895864 & 0.876016 \\
+34 & 0.061711 & 0.881402 & 0.906665 & 0.886078 \\
+35 & 0.053539 & 0.867034 & 0.909204 & 0.890048 \\
+36 & 0.046673 & 0.876005 & 0.909297 & 0.890740 \\
+37 & 0.039507 & 0.875080 & 0.912482 & 0.893879 \\
+38 & 0.032562 & 0.893581 & 0.911281 & 0.892818 \\
+39 & 0.029647 & 0.888009 & 0.913543 & 0.894572 \\
+40 & 0.026736 & 0.890262 & 0.912435 & 0.893510 \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Resultados do treinamento por época - Bertimbau-Base (Linear) Sem UPOS}
+\label{tab:training-results_sem_upos}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{c c c c c c}
+\hline
+\textbf{Epoch} & \textbf{Training Loss} & \textbf{Validation Loss} & \textbf{UAS} & \textbf{LAS} \\
+\hline
+1 & 8.150240 & 6.619714 & 0.102105 & 0.039836 \\
+2 & 5.619763 & 4.416279 & 0.176099 & 0.152234 \\
+3 & 4.065923 & 3.299242 & 0.242799 & 0.224289 \\
+4 & 3.170976 & 2.611413 & 0.347858 & 0.324040 \\
+5 & 2.545582 & 2.127528 & 0.443778 & 0.419544 \\
+6 & 2.090486 & 1.790254 & 0.518002 & 0.495015 \\
+7 & 1.745438 & 1.508040 & 0.623061 & 0.602890 \\
+8 & 1.468736 & 1.436210 & 0.572840 & 0.554607 \\
+9 & 1.254815 & 1.181029 & 0.716073 & 0.694516 \\
+10 & 1.095208 & 1.113833 & 0.717965 & 0.696917 \\
+11 & 0.954613 & 1.059393 & 0.753693 & 0.732598 \\
+12 & 0.848605 & 1.008936 & 0.764633 & 0.744184 \\
+13 & 0.755302 & 1.042695 & 0.749908 & 0.730336 \\
+14 & 0.685851 & 0.932580 & 0.810146 & 0.787482 \\
+15 & 0.637814 & 0.984839 & 0.782312 & 0.760617 \\
+16 & 0.586609 & 0.928459 & 0.814346 & 0.792236 \\
+17 & 0.551760 & 1.056953 & 0.770126 & 0.747784 \\
+18 & 0.511376 & 1.034414 & 0.780881 & 0.759278 \\
+19 & 0.449649 & 0.802804 & 0.854782 & 0.832256 \\
+20 & 0.404061 & 0.881222 & 0.846843 & 0.825748 \\
+21 & 0.342129 & 0.871673 & 0.848274 & 0.826902 \\
+22 & 0.316446 & 0.849857 & 0.867338 & 0.847858 \\
+23 & 0.276518 & 0.857203 & 0.874954 & 0.853859 \\
+24 & 0.242369 & 0.865407 & 0.870338 & 0.848643 \\
+25 & 0.216404 & 0.854697 & 0.884555 & 0.862722 \\
+26 & 0.187581 & 0.808410 & 0.892633 & 0.871076 \\
+27 & 0.170229 & 0.848775 & 0.894895 & 0.873800 \\
+28 & 0.144753 & 0.888662 & 0.879108 & 0.859583 \\
+29 & 0.128580 & 0.849000 & 0.895772 & 0.875415 \\
+30 & 0.113630 & 0.850119 & 0.897618 & 0.876708 \\
+31 & 0.095868 & 0.855741 & 0.899326 & 0.878877 \\
+32 & 0.083291 & 0.855123 & 0.905050 & 0.884694 \\
+33 & 0.071942 & 0.919655 & 0.895864 & 0.876016 \\
+34 & 0.061711 & 0.881402 & 0.906665 & 0.886078 \\
+35 & 0.053539 & 0.867034 & 0.909204 & 0.890048 \\
+36 & 0.046673 & 0.876005 & 0.909297 & 0.890740 \\
+37 & 0.039507 & 0.875080 & 0.912482 & 0.893879 \\
+38 & 0.032562 & 0.893581 & 0.911281 & 0.892818 \\
+39 & 0.029647 & 0.888009 & 0.913543 & 0.894572 \\
+40 & 0.026736 & 0.890262 & 0.912435 & 0.893510 \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+
+\begin{table}[ht]
+\centering
+\caption{Resultados do treinamento por época - BERTimbau-Large (Linear) Sem UPOS}
+\label{tab:training-results-2_sem_upos}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{c c c c c c}
+\hline
+\textbf{Epoch} & \textbf{Training Loss} & \textbf{Validation Loss} & \textbf{UAS} & \textbf{LAS} \\
+\hline
+1 & 8.215374 & 6.113919 & 0.080098 & 0.022506 \\
+2 & 4.986060 & 3.656616 & 0.191902 & 0.171942 \\
+3 & 3.265369 & 2.515021 & 0.315609 & 0.299080 \\
+4 & 2.405930 & 1.903592 & 0.456573 & 0.438432 \\
+5 & 1.830124 & 1.506409 & 0.550340 & 0.532460 \\
+6 & 1.446923 & 1.301511 & 0.596653 & 0.579344 \\
+7 & 1.177829 & 0.982229 & 0.764801 & 0.746712 \\
+8 & 0.968323 & 0.890154 & 0.781693 & 0.761214 \\
+9 & 0.795304 & 0.751432 & 0.831072 & 0.811944 \\
+10 & 0.694583 & 0.793444 & 0.807630 & 0.790893 \\
+11 & 0.605494 & 0.714480 & 0.836478 & 0.820001 \\
+12 & 0.537141 & 0.746705 & 0.825303 & 0.809554 \\
+13 & 0.483831 & 0.712548 & 0.837414 & 0.820885 \\
+14 & 0.430120 & 0.621788 & 0.874734 & 0.858984 \\
+15 & 0.385220 & 0.668646 & 0.871563 & 0.855918 \\
+16 & 0.363455 & 0.704325 & 0.853059 & 0.838089 \\
+17 & 0.347504 & 0.661008 & 0.875825 & 0.857685 \\
+18 & 0.279107 & 0.856187 & 0.822704 & 0.807630 \\
+19 & 0.240815 & 0.661839 & 0.880919 & 0.865845 \\
+20 & 0.208194 & 0.631141 & 0.888768 & 0.872343 \\
+21 & 0.180183 & 0.610746 & 0.912625 & 0.897604 \\
+22 & 0.156965 & 0.562344 & 0.920630 & 0.905037 \\
+23 & 0.129332 & 0.597815 & 0.919954 & 0.905608 \\
+24 & 0.112699 & 0.568391 & 0.929830 & 0.915224 \\
+25 & 0.097474 & 0.572644 & 0.930194 & 0.913093 \\
+26 & 0.081098 & 0.623580 & 0.923697 & 0.909611 \\
+27 & 0.067831 & 0.609429 & 0.935859 & 0.921618 \\
+28 & 0.059689 & 0.560806 & 0.941525 & 0.927283 \\
+29 & 0.049726 & 0.610842 & 0.934664 & 0.920786 \\
+30 & 0.041135 & 0.603998 & 0.938718 & 0.923697 \\
+31 & 0.029775 & 0.617214 & 0.940330 & 0.926711 \\
+32 & 0.023638 & 0.617630 & 0.945319 & 0.931545 \\
+33 & 0.020226 & 0.636995 & 0.942669 & 0.929466 \\
+34 & 0.015905 & 0.626582 & 0.947866 & 0.933209 \\
+35 & 0.010595 & 0.658026 & 0.945579 & 0.931805 \\
+36 & 0.009660 & 0.641626 & 0.946983 & 0.933572 \\
+37 & 0.007608 & 0.650092 & 0.947866 & 0.933728 \\
+38 & 0.004905 & 0.648605 & 0.948126 & 0.934404 \\
+39 & 0.003914 & 0.652137 & 0.949114 & 0.935392 \\
+40 & 0.003465 & 0.655823 & 0.948490 & 0.934924 \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+
+
+
+\begin{table}[ht]
+\centering
+\caption{Resultados do treinamento por época para o modelo JabuticaBERT (Linear) Sem UPOS}
+\label{tab:training-results-3_sem_upos}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{c c c c c c}
+\hline
+\textbf{Epoch} & \textbf{Training Loss} & \textbf{Validation Loss} & \textbf{UAS} & \textbf{LAS} \\
+\hline
+1 & 8.393768 & 6.428660 & 0.086680 & 0.025377 \\
+2 & 5.378833 & 4.437797 & 0.180836 & 0.147984 \\
+3 & 3.875141 & 3.311655 & 0.257383 & 0.231756 \\
+4 & 2.987793 & 2.653744 & 0.344021 & 0.316443 \\
+5 & 2.397018 & 2.231774 & 0.433027 & 0.405283 \\
+6 & 1.972485 & 1.994680 & 0.455912 & 0.428999 \\
+7 & 1.637555 & 1.737154 & 0.503427 & 0.479628 \\
+8 & 1.357048 & 1.536455 & 0.594717 & 0.567180 \\
+9 & 1.131365 & 1.410976 & 0.637787 & 0.612119 \\
+10 & 0.953565 & 1.314130 & 0.667359 & 0.641774 \\
+11 & 0.826351 & 1.260309 & 0.692113 & 0.666736 \\
+12 & 0.722533 & 1.260356 & 0.692362 & 0.667234 \\
+13 & 0.639915 & 1.404780 & 0.637413 & 0.616688 \\
+14 & 0.566562 & 1.221430 & 0.699464 & 0.676870 \\
+15 & 0.495308 & 1.158324 & 0.744320 & 0.718860 \\
+16 & 0.467804 & 1.191760 & 0.734643 & 0.710886 \\
+17 & 0.436218 & 1.280523 & 0.713170 & 0.690202 \\
+18 & 0.385081 & 1.088923 & 0.782074 & 0.756739 \\
+19 & 0.327297 & 1.119284 & 0.764506 & 0.739793 \\
+20 & 0.293407 & 0.997818 & 0.821697 & 0.799352 \\
+21 & 0.235995 & 1.028641 & 0.818790 & 0.795863 \\
+22 & 0.187532 & 1.001492 & 0.840553 & 0.817585 \\
+23 & 0.157733 & 1.050212 & 0.832039 & 0.808448 \\
+24 & 0.129583 & 1.069665 & 0.840262 & 0.817627 \\
+25 & 0.095414 & 1.049261 & 0.839598 & 0.818333 \\
+26 & 0.078788 & 1.058600 & 0.849857 & 0.828010 \\
+27 & 0.057904 & 1.042759 & 0.855630 & 0.833493 \\
+28 & 0.041248 & 1.049101 & 0.858413 & 0.837646 \\
+29 & 0.034084 & 1.068309 & 0.861195 & 0.840429 \\
+30 & 0.022675 & 1.088302 & 0.855381 & 0.834074 \\
+31 & 0.016738 & 1.093525 & 0.859659 & 0.838435 \\
+32 & 0.010978 & 1.152028 & 0.855879 & 0.836317 \\
+33 & 0.006988 & 1.115545 & 0.862151 & 0.842630 \\
+34 & 0.004810 & 1.139670 & 0.864435 & 0.843170 \\
+35 & 0.003518 & 1.137361 & 0.866429 & 0.845911 \\
+36 & 0.002794 & 1.146439 & 0.864975 & 0.843917 \\
+37 & 0.002158 & 1.161517 & 0.866429 & 0.845703 \\
+38 & 0.001923 & 1.162787 & 0.867924 & 0.846908 \\
+39 & 0.001706 & 1.164500 & 0.867425 & 0.846866 \\
+40 & 0.001558 & 1.168091 & 0.867508 & 0.846908 \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+
+%ABLAÇÃO BIAFFINE SEM UPOS
+\begin{table}[ht]
+\centering
+\caption{Resultados do treinamento por época para o modelo mBERT (Biaffine) Sem UPOS}
+\label{tab:mbert-biaffine-training_sem_upos}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{c c c c c c}
+\hline
+\textbf{Epoch} & \textbf{Training Loss} & \textbf{Validation Loss} & \textbf{UAS} & \textbf{LAS} \\
+\hline
+1 & 7.759808 & 5.437845 & 0.124908 & 0.082210 \\
+2 & 5.402070 & 3.582396 & 0.219442 & 0.182838 \\
+3 & 3.775309 & 2.580805 & 0.310423 & 0.283466 \\
+4 & 2.868056 & 2.008706 & 0.405234 & 0.380124 \\
+5 & 2.279641 & 1.610968 & 0.510663 & 0.486337 \\
+6 & 1.879259 & 1.421743 & 0.574409 & 0.552576 \\
+7 & 1.581678 & 1.249412 & 0.638155 & 0.615630 \\
+8 & 1.358529 & 1.194827 & 0.662482 & 0.642310 \\
+9 & 1.173147 & 1.083292 & 0.699732 & 0.679237 \\
+10 & 1.034544 & 1.022796 & 0.730613 & 0.710072 \\
+11 & 0.914724 & 0.945467 & 0.757109 & 0.737906 \\
+12 & 0.814309 & 0.929939 & 0.777049 & 0.755678 \\
+13 & 0.728459 & 0.974770 & 0.777142 & 0.755816 \\
+14 & 0.662365 & 0.929487 & 0.804330 & 0.781112 \\
+15 & 0.595818 & 0.877709 & 0.806684 & 0.786789 \\
+16 & 0.510786 & 1.020973 & 0.786143 & 0.766848 \\
+17 & 0.460190 & 0.874932 & 0.828564 & 0.808761 \\
+18 & 0.423094 & 0.864438 & 0.839457 & 0.820255 \\
+19 & 0.372433 & 0.889751 & 0.841904 & 0.821086 \\
+20 & 0.343712 & 0.853045 & 0.851136 & 0.831472 \\
+21 & 0.308123 & 0.891527 & 0.851551 & 0.831841 \\
+22 & 0.280008 & 0.859199 & 0.862537 & 0.843704 \\
+23 & 0.249363 & 0.927171 & 0.851459 & 0.833318 \\
+24 & 0.230431 & 0.981467 & 0.853397 & 0.833872 \\
+25 & 0.202458 & 0.992962 & 0.861660 & 0.842596 \\
+26 & 0.191651 & 1.000617 & 0.847027 & 0.827594 \\
+27 & 0.177132 & 0.943651 & 0.863091 & 0.844165 \\
+28 & 0.151807 & 1.057460 & 0.865122 & 0.846520 \\
+29 & 0.138156 & 1.013918 & 0.872738 & 0.853859 \\
+30 & 0.125380 & 1.141869 & 0.855613 & 0.837426 \\
+31 & 0.114610 & 1.041115 & 0.875369 & 0.858475 \\
+32 & 0.102079 & 1.124564 & 0.868861 & 0.851689 \\
+33 & 0.093654 & 1.122144 & 0.877539 & 0.860367 \\
+34 & 0.084596 & 1.149899 & 0.876477 & 0.859537 \\
+35 & 0.073892 & 1.209540 & 0.873338 & 0.855705 \\
+36 & 0.068892 & 1.195242 & 0.879616 & 0.862906 \\
+37 & 0.064009 & 1.216493 & 0.878508 & 0.861198 \\
+38 & 0.057695 & 1.222018 & 0.879570 & 0.862583 \\
+39 & 0.051822 & 1.230577 & 0.881555 & 0.864660 \\
+40 & 0.047604 & 1.241329 & 0.881693 & 0.864845 \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+
+\begin{table}[ht]
+\centering
+\caption{Resultados de treinamento do BERTimbau Base (Biaffine) Sem UPOS}
+\label{tab:bertimbau-large-biaffine_sem_upos}
+\begin{tabular}{c c c c c c}
+\hline
+\textbf{Epoch} & \textbf{Training Loss} & \textbf{Validation Loss} & \textbf{UAS} & \textbf{LAS}\\
+\hline
+1 & 8.261358 & 5.832484 & 0.085607 & 0.029679 \\
+2 & 5.918988 & 4.157014 & 0.212277 & 0.161079 \\
+3 & 4.171156 & 2.796542 & 0.343209 & 0.306097 \\
+4 & 3.020113 & 2.151899 & 0.408493 & 0.381933 \\
+5 & 2.360491 & 1.625537 & 0.525079 & 0.502157 \\
+6 & 1.817737 & 1.236911 & 0.647487 & 0.626488 \\
+7 & 1.426862 & 1.023299 & 0.713707 & 0.693695 \\
+8 & 1.153245 & 0.908387 & 0.751702 & 0.733042 \\
+9 & 0.964673 & 0.802758 & 0.792141 & 0.773845 \\
+10 & 0.828843 & 0.755234 & 0.810905 & 0.795000 \\
+11 & 0.725128 & 0.717474 & 0.829097 & 0.811944 \\
+12 & 0.637698 & 0.722164 & 0.835594 & 0.819689 \\
+13 & 0.562536 & 0.685269 & 0.857581 & 0.841104 \\
+14 & 0.494730 & 0.683316 & 0.856282 & 0.841104 \\
+15 & 0.421545 & 0.663316 & 0.860596 & 0.845158 \\
+16 & 0.369445 & 0.722794 & 0.854462 & 0.840168 \\
+17 & 0.334421 & 0.658971 & 0.870991 & 0.855710 \\
+18 & 0.299391 & 0.655941 & 0.878164 & 0.862779 \\
+19 & 0.256314 & 0.672381 & 0.879568 & 0.863870 \\
+20 & 0.227256 & 0.697399 & 0.880035 & 0.865586 \\
+21 & 0.194420 & 0.708089 & 0.892510 & 0.879048 \\
+22 & 0.174149 & 0.764380 & 0.885597 & 0.871563 \\
+23 & 0.150600 & 0.755259 & 0.886948 & 0.872447 \\
+24 & 0.131660 & 0.785224 & 0.893030 & 0.878684 \\
+25 & 0.121811 & 0.773659 & 0.892874 & 0.879516 \\
+26 & 0.105457 & 0.824429 & 0.893809 & 0.879516 \\
+27 & 0.093952 & 0.843190 & 0.894433 & 0.879983 \\
+28 & 0.081563 & 0.864881 & 0.894901 & 0.881075 \\
+29 & 0.071073 & 0.888191 & 0.895941 & 0.882426 \\
+30 & 0.062444 & 0.908094 & 0.898643 & 0.885025 \\
+31 & 0.056762 & 0.928456 & 0.899735 & 0.886117 \\
+32 & 0.048228 & 0.978915 & 0.898124 & 0.885233 \\
+33 & 0.043846 & 1.008818 & 0.895941 & 0.883050 \\
+34 & 0.039522 & 1.045037 & 0.895265 & 0.882218 \\
+35 & 0.035929 & 1.039541 & 0.899891 & 0.886221 \\
+36 & 0.030681 & 1.070201 & 0.897708 & 0.884661 \\
+37 & 0.029352 & 1.089875 & 0.897604 & 0.884609 \\
+38 & 0.025439 & 1.100933 & 0.900151 & 0.887052 \\
+39 & 0.021568 & 1.147125 & 0.896928 & 0.883778 \\
+40 & 0.020110 & 1.114936 & 0.900203 & 0.886948 \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Resultados de treinamento do BERTimbau Large (Biaffine) Sem UPOS}
+\label{tab:bertimbau-large-biaffine_sem_upos}
+\begin{tabular}{c c c c c c}
+\hline
+\textbf{Epoch} & \textbf{Training Loss} & \textbf{Validation Loss} & \textbf{UAS} & \textbf{LAS} \\
+\hline
+1 & 7.970501 & 5.626317 & 0.102500 & 0.055564 \\
+2 & 5.501441 & 3.528320 & 0.246115 & 0.211342 \\
+3 & 3.500025 & 2.342637 & 0.381309 & 0.351941 \\
+4 & 2.537255 & 1.698753 & 0.497427 & 0.472738 \\
+5 & 1.903137 & 1.287655 & 0.627371 & 0.604553 \\
+6 & 1.460230 & 0.983849 & 0.715994 & 0.695722 \\
+7 & 1.125629 & 0.850731 & 0.765788 & 0.746453 \\
+8 & 0.911996 & 0.751084 & 0.792297 & 0.775716 \\
+9 & 0.767728 & 0.702197 & 0.820729 & 0.805655 \\
+10 & 0.657252 & 0.670040 & 0.838921 & 0.823536 \\
+11 & 0.571510 & 0.599906 & 0.863714 & 0.847913 \\
+12 & 0.496154 & 0.594108 & 0.867665 & 0.852747 \\
+13 & 0.434177 & 0.701172 & 0.840584 & 0.826446 \\
+14 & 0.390089 & 0.660707 & 0.873694 & 0.857893 \\
+15 & 0.352079 & 0.618206 & 0.884038 & 0.869172 \\
+16 & 0.309127 & 0.656994 & 0.880035 & 0.865689 \\
+17 & 0.289667 & 0.669776 & 0.887260 & 0.872499 \\
+18 & 0.255981 & 0.661114 & 0.883414 & 0.871095 \\
+19 & 0.227414 & 0.660025 & 0.899891 & 0.886585 \\
+20 & 0.193257 & 0.661338 & 0.903321 & 0.889651 \\
+21 & 0.158622 & 0.704594 & 0.901398 & 0.888404 \\
+22 & 0.142006 & 0.735202 & 0.897344 & 0.882998 \\
+23 & 0.126697 & 0.765111 & 0.895629 & 0.882478 \\
+24 & 0.113648 & 0.721873 & 0.900878 & 0.887104 \\
+25 & 0.093369 & 0.794418 & 0.904049 & 0.890951 \\
+26 & 0.074199 & 0.830130 & 0.904361 & 0.890951 \\
+27 & 0.069375 & 0.816384 & 0.910858 & 0.898695 \\
+28 & 0.057987 & 0.840667 & 0.906128 & 0.893238 \\
+29 & 0.045908 & 0.898323 & 0.910806 & 0.898332 \\
+30 & 0.042089 & 0.897851 & 0.909091 & 0.895889 \\
+31 & 0.035482 & 0.949999 & 0.908259 & 0.895733 \\
+32 & 0.030325 & 0.949684 & 0.912314 & 0.900307 \\
+33 & 0.026720 & 1.027281 & 0.910182 & 0.897604 \\
+34 & 0.022483 & 1.019642 & 0.911222 & 0.899215 \\
+35 & 0.018302 & 1.081149 & 0.913769 & 0.901242 \\
+36 & 0.014730 & 1.113931 & 0.909923 & 0.896928 \\
+37 & 0.013268 & 1.139365 & 0.911274 & 0.898903 \\
+38 & 0.009692 & 1.113553 & 0.913769 & 0.901398 \\
+39 & 0.009604 & 1.157441 & 0.913769 & 0.901606 \\
+40 & 0.008185 & 1.166806 & 0.913093 & 0.90113 \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\begin{table}[ht]
+\centering
+\caption{Resultados de treinamento do JabuticaBERT (Biaffine) Sem UPOS}
+\label{tab:bertimbau-large-biaffine_sem_upos}
+\begin{tabular}{c c c c c c}
+\hline
+\textbf{Epoch} & \textbf{Training Loss} & \textbf{Validation Loss} & \textbf{UAS} & \textbf{LAS} \\
+\hline
+1 & 7.470867 & 5.216873 & 0.108734 & 0.081156 \\
+2 & 4.841999 & 3.536611 & 0.227354 & 0.180753 \\
+3 & 3.438372 & 2.582774 & 0.321427 & 0.289156 \\
+4 & 2.616234 & 2.082240 & 0.402791 & 0.374424 \\
+5 & 2.087964 & 1.758234 & 0.473232 & 0.446484 \\
+6 & 1.683992 & 1.503693 & 0.558957 & 0.532417 \\
+7 & 1.360143 & 1.313698 & 0.639905 & 0.613365 \\
+8 & 1.077190 & 1.209507 & 0.682477 & 0.655730 \\
+9 & 0.861823 & 1.066322 & 0.745317 & 0.717407 \\
+10 & 0.693986 & 1.048824 & 0.756365 & 0.731570 \\
+11 & 0.575143 & 1.018641 & 0.790838 & 0.764838 \\
+12 & 0.496442 & 0.912803 & 0.811480 & 0.787100 \\
+13 & 0.410853 & 1.006194 & 0.805956 & 0.782157 \\
+14 & 0.331785 & 0.905823 & 0.833617 & 0.811771 \\
+15 & 0.291736 & 0.978692 & 0.830502 & 0.807949 \\
+16 & 0.254058 & 0.893040 & 0.860988 & 0.839723 \\
+17 & 0.198626 & 0.980588 & 0.858620 & 0.836774 \\
+18 & 0.149987 & 1.069976 & 0.856128 & 0.833119 \\
+19 & 0.141900 & 1.491528 & 0.798148 & 0.777256 \\
+20 & 0.114110 & 1.089457 & 0.866179 & 0.846991 \\
+21 & 0.091424 & 1.199443 & 0.870416 & 0.850770 \\
+22 & 0.082324 & 1.131833 & 0.871952 & 0.850355 \\
+23 & 0.067043 & 1.262494 & 0.875940 & 0.856710 \\
+24 & 0.055294 & 1.205063 & 0.884122 & 0.864560 \\
+25 & 0.043282 & 1.368658 & 0.874569 & 0.854301 \\
+26 & 0.040146 & 1.362649 & 0.884371 & 0.864601 \\
+27 & 0.035361 & 1.371629 & 0.881547 & 0.862607 \\
+28 & 0.028529 & 1.406064 & 0.883540 & 0.863230 \\
+29 & 0.027225 & 1.443492 & 0.884537 & 0.865473 \\
+30 & 0.019172 & 1.605498 & 0.884163 & 0.865307 \\
+31 & 0.017265 & 1.534620 & 0.892387 & 0.872368 \\
+32 & 0.012036 & 1.575720 & 0.888566 & 0.869460 \\
+33 & 0.010778 & 1.663178 & 0.888067 & 0.868630 \\
+34 & 0.009578 & 1.786623 & 0.887984 & 0.868464 \\
+35 & 0.006085 & 1.743962 & 0.893010 & 0.874735 \\
+36 & 0.004764 & 1.773588 & 0.891473 & 0.873406 \\
+37 & 0.003392 & 1.789937 & 0.893841 & 0.874901 \\
+38 & 0.002817 & 1.814949 & 0.895377 & 0.876563 \\
+39 & 0.001928 & 1.841999 & 0.896083 & 0.877227 \\
+40 & 0.001563 & 1.861034 & 0.894713 & 0.876230 \\
+\hline
+\end{tabular}
+\end{table}
+\begin{table}[ht]
+\centering
+\caption{Selected training epochs of PortParser.}
+\label{tab:portparser_training}
+\begin{tabular}{cccccc}
+\hline
+Epoch & Train Loss & Val Loss & UPOS & UAS & LAS \\
+\hline
+1  & 5.917 & 1.771 & 75.71 & 70.27 & 95.94 \\
+10 & 0.121 & 0.616 & 95.14 & 93.60 & 98.97 \\
+20 & 0.059 & 0.710 & 95.48 & 93.96 & 99.06 \\
+30 & 0.044 & 0.693 & 95.73 & 94.24 & 99.08 \\
+40 & 0.038 & 0.776 & 95.72 & 94.31 & 98.91 \\
+50 & 0.012 & 0.854 & 96.05 & 94.72 & 98.99 \\
+60 & 0.008 & 0.924 & 96.07 & 94.79 & 99.03 \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Resultado: Validação Modelos Avaliados}
+\label{cap:modelos_validacao}
+
+
+%%LINEAR
+
+\begin{table}[ht]
+\centering
+\caption{Resultados validação - mBert (Linear)}
+\label{tab:training-results}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{c c c c c c}
+\hline
+\textbf{Training Loss} & \textbf{Validation Loss} & \textbf{Epoch} & \textbf{UAS} & \textbf{LAS} & \textbf{UPOS Accuracy} \\
+\hline
+0.008834 & 1.065175 & 40 & 0.916636 & 0.898172 & 0.983475 \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Resultados validação - Bertimbau-Base (Linear)}
+\label{tab:training-results}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{c c c c c c}
+\hline
+\textbf{Training Loss} & \textbf{Validation Loss} & \textbf{Epoch} & \textbf{UAS} & \textbf{LAS} & \textbf{UPOS Accuracy} \\
+\hline
+0.003333 & 0.860932 & 40 & 0.928583 & 0.915328 & 0.989500 \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+
+\begin{table}[ht]
+\centering
+\caption{Resultados validação - Bertimbau-Large (Linear)}
+\label{tab:training-results}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{c c c c c c}
+\hline
+\textbf{Training Loss} & \textbf{Validation Loss} & \textbf{Epoch} & \textbf{UAS} & \textbf{LAS} & \textbf{UPOS Accuracy} \\
+\hline
+0.002136 & 0.777716 & 40 & 0.944280 & 0.930974 & 0.990124 \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+
+\begin{table}[ht]
+\centering
+\caption{Resultados validação - JabuticaBERT (Linear)}
+\label{tab:training-results}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{c c c c c c}
+\hline
+\textbf{Training Loss} & \textbf{Validation Loss} & \textbf{Epoch} & \textbf{UAS} & \textbf{LAS} & \textbf{UPOS Accuracy} \\
+\hline
+0.000532 & 1.245967 & 40 & 0.877892 & 0.860822 & 0.985754
+
+\hline
+\end{tabular}
+}
+\end{table}
+
+%%BIAFFINE
+
+\begin{table}[ht]
+\centering
+\caption{Resultados validação - mBert (Biaffine)}
+\label{tab:training-results}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{c c c c c c}
+\hline
+\textbf{Training Loss} & \textbf{Validation Loss} & \textbf{Epoch} & \textbf{UAS} & \textbf{LAS} & \textbf{UPOS Accuracy} \\
+\hline
+0.025581 & 1.784062 & 40 & 0.863506 & 0.845689 & 0.982736 \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Resultados validação - BERTimbau Base (Biaffine)}
+\label{tab:training-results}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{c c c c c c}
+\hline
+\textbf{Training Loss} & \textbf{Validation Loss} & \textbf{Epoch} & \textbf{UAS} & \textbf{LAS} & \textbf{UPOS Accuracy} \\
+\hline
+0.011540 & 1.660877 & 40 & 0.883570 & 0.872135 & 0.990696 \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Resultados validação - BERTimbau Large (Biaffine)}
+\label{tab:training-results}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{c c c c c c}
+\hline
+\textbf{Training Loss} & \textbf{Validation Loss} & \textbf{Epoch} & \textbf{UAS} & \textbf{LAS} & \textbf{UPOS Accuracy} \\
+\hline
+0.004790 & 1.505415 & 40 & 0.905193 & 0.893965 & 0.989968 \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Resultados validação - JabuticaBERT (Biaffine)}
+\label{tab:training-results}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{c c c c c c}
+\hline
+\textbf{Training Loss} & \textbf{Validation Loss} & \textbf{Epoch} & \textbf{UAS} & \textbf{LAS} & \textbf{UPOS Accuracy} \\
+\hline
+0.001049 & 2.287051 & 40 & 0.880093 & 0.862068 & 0.985380 \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+%%LINEAR ABLACAO SEM UPOS
+
+\begin{table}[ht]
+\centering
+\caption{Resultados validação - mBert (Linear) Sem UPOS}
+\label{tab:training-results_sem_upos}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{c c c c c }
+\hline
+\textbf{Training Loss} & \textbf{Validation Loss} & \textbf{Epoch} & \textbf{UAS} & \textbf{LAS}\\
+\hline
+-- & -- & -- & 0.913543 & 0.894572 \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Resultados validação - Bertimbau-Base (Linear) Sem UPOS}
+\label{tab:training-results_sem_upos}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{c c c c c }
+\hline
+\textbf{Training Loss} & \textbf{Validation Loss} & \textbf{Epoch} & \textbf{UAS} & \textbf{LAS} \\
+\hline
+-- & -- & -- & 0.929778 & 0.916420 \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+
+\begin{table}[ht]
+\centering
+\caption{Resultados validação - Bertimbau-Large (Linear) Sem UPOS}
+\label{tab:training-results_sem_upos}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{c c c c c }
+\hline
+\textbf{Training Loss} & \textbf{Validation Loss} & \textbf{Epoch} & \textbf{UAS} & \textbf{LAS} \\
+\hline
+-- & -- & -- & 0.949114 & 0.935392 \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+
+\begin{table}[ht]
+\centering
+\caption{Resultados validação - JabuticaBERT (Linear) Sem UPOS}
+\label{tab:training-results_sem_upos}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{c c c c c }
+\hline
+\textbf{Training Loss} & \textbf{Validation Loss} & \textbf{Epoch} & \textbf{UAS} & \textbf{LAS} \\
+\hline
+-- & -- & -- & 0.867924 & 0.846908 \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+%%BIAFFINE ABLACAO SEM UPOS
+
+\begin{table}[ht]
+\centering
+\caption{Resultados validação - mBert (Biaffine) Sem UPOS}
+\label{tab:training-results_sem_upos}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{c c c c c}
+\hline
+\textbf{Training Loss} & \textbf{Validation Loss} & \textbf{Epoch} & \textbf{UAS} & \textbf{LAS} \\
+\hline
+0.047604 & 1.241329 & 40 & 0.881693 & 0.864845 \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Resultados validação - BERTimbau Base (Biaffine) Sem UPOS}
+\label{tab:training-results_sem_upos}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{c c c c c }
+\hline
+\textbf{Training Loss} & \textbf{Validation Loss} & \textbf{Epoch} & \textbf{UAS} & \textbf{LAS} \\
+\hline
+0.020110 & 1.100933 & 40 & 0.900151 & 0.887052 \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Resultados validação - BERTimbau Large (Biaffine) Sem UPOS}
+\label{tab:training-results_sem_upos}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{c c c c c }
+\hline
+\textbf{Training Loss} & \textbf{Validation Loss} & \textbf{Epoch} & \textbf{UAS} & \textbf{LAS} \\
+\hline
+0.008185 & 1.157441 & 40 & 0.913769 & 0.901606 \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Resultados validação - JabuticaBERT (Biaffine) Sem UPOS}
+\label{tab:training-results_sem_upos}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{c c c c c }
+\hline
+\textbf{Training Loss} & \textbf{Validation Loss} & \textbf{Epoch} & \textbf{UAS} & \textbf{LAS} \\
+\hline
+0.001563 & 1.841999 & 40 & 0.896083 & 0.877227 \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Resultados validação - PortParser}
+\label{tab:training-results}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{c c c c c c}
+\hline
+\textbf{Training Loss} & \textbf{Validation Loss} & \textbf{Epoch} & \textbf{UAS} & \textbf{LAS} & \textbf{UPOS Accuracy} \\
+\hline
+\hline
+-- & -- & -- & 0.960840 & 0.946129 & 0.990947 \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+\section{Frequência das Tags e instabilidade}
+\label{ap:tabelas}
+% Tabelas comparativas por modelo base — geradas por latex_comparison_tables.py
+% Lin=Linear cU  Biaff=Biaffine cU  sLin=sem UPOS Linear  sBiaff=sem UPOS Biaffine
+% mB=mBERT  BtB=BERTimbau Base  BtL=BERTimbau Large  JaB=JabuticaBERT
+% \textbf{Negrito} = melhor resultado por rótulo.
+
+
+\begin{table}[ht]
+\centering\scriptsize
+\setlength{\tabcolsep}{3pt}
+\caption{Acurácia por rótulo --- mBERT (mB). \textbf{Lin}\,=\,Linear com UPOS, \textbf{Biaff}\,=\,Biaffine com UPOS, \textbf{sLin}\,=\,sem UPOS Linear, \textbf{sBiaff}\,=\,sem UPOS Biaffine. \textbf{Negrito}\,=\,melhor por rótulo.}
+\label{tab:acc-mbert}
+\begin{minipage}[t]{0.60\linewidth}
+\centering
+\begin{tabular}{l r  r r r r}
+\toprule
+\textbf{DEPREL} & \textbf{N} & \textbf{Lin} & \textbf{Biaff} & \textbf{sLin} & \textbf{sBiaff} \\
+\midrule
+\texttt{det} & 4,853 & 0.9948 & 0.9944 & 0.9936 & \textbf{0.9951} \\
+\texttt{nsubj} & 1,895 & \textbf{0.9546} & 0.9530 & \textbf{0.9546} & 0.9536 \\
+\texttt{root} & 1,683 & 0.9750 & \textbf{0.9774} & 0.9733 & 0.9750 \\
+\texttt{obj} & 1,476 & 0.9587 & 0.9587 & 0.9600 & \textbf{0.9621} \\
+\texttt{xcomp} & 475 & 0.9242 & 0.9284 & 0.9305 & \textbf{0.9326} \\
+\texttt{punct} & 4,443 & 0.9986 & 0.9984 & 0.9986 & \textbf{0.9989} \\
+\texttt{mark} & 828 & 0.9674 & 0.9686 & 0.9686 & \textbf{0.9698} \\
+\texttt{advcl} & 437 & 0.8741 & 0.8764 & 0.8741 & \textbf{0.8924} \\
+\texttt{case} & 4,532 & \textbf{0.9958} & \textbf{0.9958} & 0.9949 & 0.9954 \\
+\texttt{obl} & 1,746 & \textbf{0.9170} & 0.9026 & 0.9049 & 0.9066 \\
+\texttt{amod} & 1,318 & 0.9545 & \textbf{0.9598} & 0.9568 & 0.9522 \\
+\texttt{conj} & 960 & 0.9344 & 0.9417 & \textbf{0.9448} & 0.9406 \\
+\texttt{cc} & 833 & \textbf{0.9940} & 0.9916 & \textbf{0.9940} & 0.9928 \\
+\texttt{nmod} & 2,607 & 0.9425 & \textbf{0.9448} & 0.9444 & 0.9344 \\
+\texttt{advmod} & 1,222 & 0.9664 & \textbf{0.9681} & 0.9656 & 0.9632 \\
+\texttt{flat\!:\!name} & 686 & 0.9738 & 0.9781 & 0.9781 & \textbf{0.9825} \\
+\texttt{ccomp} & 218 & \textbf{0.9358} & 0.9174 & 0.9174 & 0.9174 \\
+\texttt{cop} & 595 & 0.9832 & 0.9849 & 0.9832 & \textbf{0.9899} \\
+\texttt{acl} & 307 & \textbf{0.8599} & 0.8306 & \textbf{0.8599} & 0.8436 \\
+\texttt{nummod} & 341 & 0.9472 & \textbf{0.9589} & 0.9472 & 0.9472 \\
+\texttt{acl\!:\!relcl} & 401 & \textbf{0.9526} & 0.9451 & 0.9501 & 0.9501 \\
+\texttt{ccomp\!:\!speech} & 130 & \textbf{0.9154} & 0.8692 & \textbf{0.9154} & 0.8923 \\
+\texttt{parataxis} & 160 & 0.7063 & 0.6937 & 0.6813 & \textbf{0.7250} \\
+\texttt{csubj} & 83 & \textbf{0.8193} & 0.7470 & \textbf{0.8193} & 0.7831 \\
+\texttt{aux\!:\!pass} & 203 & 0.9951 & 0.9901 & 0.9951 & \textbf{1.0000} \\
+\texttt{appos} & 208 & 0.9183 & \textbf{0.9375} & 0.9087 & 0.9279 \\
+\texttt{fixed} & 230 & 0.9696 & 0.9696 & 0.9739 & \textbf{0.9783} \\
+\texttt{nsubj\!:\!pass} & 144 & \textbf{0.9861} & 0.9722 & 0.9792 & 0.9792 \\
+\texttt{aux} & 145 & \textbf{0.9655} & 0.9517 & 0.9586 & 0.9448 \\
+\texttt{nsubj\!:\!outer} & 15 & \textbf{0.8667} & 0.8000 & 0.8000 & 0.8000 \\
+\texttt{obl\!:\!agent} & 110 & \textbf{0.9636} & \textbf{0.9636} & \textbf{0.9636} & 0.9364 \\
+\texttt{expl\!:\!impers} & 27 & 0.8148 & 0.8148 & 0.7778 & \textbf{0.8519} \\
+\texttt{expl} & 124 & 0.8952 & \textbf{0.9113} & \textbf{0.9113} & \textbf{0.9113} \\
+\texttt{discourse} & 51 & \textbf{0.6078} & 0.5686 & 0.5882 & 0.5490 \\
+\texttt{orphan} & 14 & \textbf{0.2857} & 0.1429 & 0.0714 & \textbf{0.2857} \\
+\texttt{dislocated} & 17 & 0.3529 & \textbf{0.5294} & 0.4118 & 0.3529 \\
+\texttt{flat} & 17 & \textbf{1.0000} & \textbf{1.0000} & \textbf{1.0000} & \textbf{1.0000} \\
+\texttt{flat\!:\!foreign} & 15 & \textbf{0.8000} & \textbf{0.8000} & 0.6000 & 0.6000 \\
+\texttt{iobj} & 19 & 0.7368 & \textbf{0.7895} & 0.7368 & \textbf{0.7895} \\
+\texttt{vocative} & 6 & 0.1667 & 0.1667 & 0.0000 & \textbf{0.3333} \\
+\midrule
+\textbf{Global} & \textbf{33,574} & \textbf{0.9665} & 0.9657 & 0.9657 & 0.9655 \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.37\linewidth}
+\centering
+\begin{tabular}{l r  r r}
+\toprule
+\textbf{UPOS} & \textbf{N} & \textbf{Lin} & \textbf{Biaff} \\
+\midrule
+\texttt{DET} & 4,904 & \textbf{0.9951} & \textbf{0.9951} \\
+\texttt{NOUN} & 6,309 & 0.9886 & \textbf{0.9892} \\
+\texttt{VERB} & 3,368 & 0.9857 & \textbf{0.9866} \\
+\texttt{PUNCT} & 4,443 & \textbf{0.9986} & \textbf{0.9986} \\
+\texttt{SCONJ} & 456 & 0.9408 & \textbf{0.9518} \\
+\texttt{ADP} & 5,019 & \textbf{0.9980} & 0.9974 \\
+\texttt{ADJ} & 1,691 & 0.9568 & \textbf{0.9574} \\
+\texttt{CCONJ} & 823 & \textbf{0.9927} & 0.9915 \\
+\texttt{ADV} & 1,272 & 0.9764 & \textbf{0.9780} \\
+\texttt{PROPN} & 2,209 & 0.9959 & \textbf{0.9964} \\
+\texttt{AUX} & 968 & \textbf{0.9979} & 0.9969 \\
+\texttt{NUM} & 622 & 0.9695 & \textbf{0.9775} \\
+\texttt{PRON} & 1,286 & \textbf{0.9821} & 0.9813 \\
+\texttt{SYM} & 120 & \textbf{1.0000} & \textbf{1.0000} \\
+\texttt{X} & 85 & 0.7059 & \textbf{0.7412} \\
+\texttt{INTJ} & 5 & \textbf{0.8000} & 0.6000 \\
+\midrule
+\textbf{Global} & \textbf{33,580} & 0.9888 & \textbf{0.9893} \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\end{table}
+
+
+\begin{table}[ht]
+\centering\scriptsize
+\setlength{\tabcolsep}{3pt}
+\caption{Acurácia por rótulo --- BERTimbau Base (BtB). \textbf{Lin}\,=\,Linear com UPOS, \textbf{Biaff}\,=\,Biaffine com UPOS, \textbf{sLin}\,=\,sem UPOS Linear, \textbf{sBiaff}\,=\,sem UPOS Biaffine. \textbf{Negrito}\,=\,melhor por rótulo.}
+\label{tab:acc-btb}
+\begin{minipage}[t]{0.60\linewidth}
+\centering
+\begin{tabular}{l r  r r r r}
+\toprule
+\textbf{DEPREL} & \textbf{N} & \textbf{Lin} & \textbf{Biaff} & \textbf{sLin} & \textbf{sBiaff} \\
+\midrule
+\texttt{det} & 4,853 & 0.9963 & 0.9963 & 0.9965 & \textbf{0.9967} \\
+\texttt{nsubj} & 1,895 & 0.9641 & \textbf{0.9689} & 0.9641 & 0.9668 \\
+\texttt{root} & 1,683 & 0.9804 & \textbf{0.9863} & 0.9828 & 0.9846 \\
+\texttt{obj} & 1,476 & 0.9763 & 0.9763 & 0.9722 & \textbf{0.9824} \\
+\texttt{xcomp} & 475 & 0.9579 & 0.9495 & 0.9516 & \textbf{0.9621} \\
+\texttt{punct} & 4,443 & 0.9984 & 0.9986 & 0.9991 & \textbf{0.9993} \\
+\texttt{mark} & 828 & 0.9807 & 0.9807 & 0.9819 & \textbf{0.9855} \\
+\texttt{advcl} & 437 & 0.9176 & \textbf{0.9268} & 0.9039 & 0.9016 \\
+\texttt{case} & 4,532 & 0.9971 & \textbf{0.9982} & 0.9978 & 0.9976 \\
+\texttt{obl} & 1,746 & 0.9318 & \textbf{0.9376} & 0.9341 & 0.9296 \\
+\texttt{amod} & 1,318 & 0.9697 & 0.9689 & 0.9605 & \textbf{0.9742} \\
+\texttt{conj} & 960 & 0.9510 & 0.9500 & 0.9385 & \textbf{0.9573} \\
+\texttt{cc} & 833 & 0.9964 & 0.9964 & \textbf{0.9976} & 0.9964 \\
+\texttt{nmod} & 2,607 & 0.9490 & 0.9517 & 0.9524 & \textbf{0.9532} \\
+\texttt{advmod} & 1,222 & 0.9673 & \textbf{0.9755} & 0.9705 & 0.9697 \\
+\texttt{flat\!:\!name} & 686 & \textbf{0.9723} & 0.9679 & 0.9694 & 0.9679 \\
+\texttt{ccomp} & 218 & 0.9404 & 0.9404 & \textbf{0.9541} & 0.9312 \\
+\texttt{cop} & 595 & 0.9933 & \textbf{0.9966} & \textbf{0.9966} & 0.9933 \\
+\texttt{acl} & 307 & 0.8567 & \textbf{0.8893} & 0.8697 & 0.8730 \\
+\texttt{nummod} & 341 & 0.9501 & \textbf{0.9619} & 0.9501 & 0.9531 \\
+\texttt{acl\!:\!relcl} & 401 & 0.9551 & \textbf{0.9601} & 0.9526 & 0.9576 \\
+\texttt{ccomp\!:\!speech} & 130 & \textbf{0.9462} & 0.9231 & 0.9385 & 0.9231 \\
+\texttt{parataxis} & 160 & 0.7438 & 0.6875 & \textbf{0.7688} & 0.7562 \\
+\texttt{csubj} & 83 & 0.8554 & 0.9277 & 0.9157 & \textbf{0.9398} \\
+\texttt{aux\!:\!pass} & 203 & \textbf{1.0000} & 0.9901 & 0.9951 & 0.9951 \\
+\texttt{appos} & 208 & 0.9279 & 0.9375 & 0.9279 & \textbf{0.9423} \\
+\texttt{fixed} & 230 & \textbf{0.9783} & 0.9739 & 0.9652 & 0.9739 \\
+\texttt{nsubj\!:\!pass} & 144 & \textbf{0.9931} & 0.9514 & 0.9861 & 0.9792 \\
+\texttt{aux} & 145 & \textbf{0.9724} & \textbf{0.9724} & \textbf{0.9724} & 0.9655 \\
+\texttt{nsubj\!:\!outer} & 15 & \textbf{0.8667} & 0.7333 & \textbf{0.8667} & 0.7333 \\
+\texttt{obl\!:\!agent} & 110 & 0.9636 & \textbf{0.9909} & 0.9818 & 0.9727 \\
+\texttt{expl\!:\!impers} & 27 & 0.8889 & \textbf{0.9259} & \textbf{0.9259} & 0.8889 \\
+\texttt{expl} & 124 & 0.9194 & \textbf{0.9274} & 0.9113 & 0.8871 \\
+\texttt{discourse} & 51 & \textbf{0.6863} & 0.6471 & \textbf{0.6863} & 0.6667 \\
+\texttt{orphan} & 14 & 0.1429 & 0.1429 & 0.1429 & \textbf{0.2143} \\
+\texttt{dislocated} & 17 & 0.4706 & \textbf{0.5294} & 0.3529 & 0.4706 \\
+\texttt{flat} & 17 & \textbf{1.0000} & \textbf{1.0000} & \textbf{1.0000} & \textbf{1.0000} \\
+\texttt{flat\!:\!foreign} & 15 & 0.7333 & 0.7333 & 0.7333 & \textbf{0.8667} \\
+\texttt{iobj} & 19 & 0.8947 & 0.8947 & \textbf{0.9474} & 0.8947 \\
+\texttt{vocative} & 6 & 0.3333 & 0.3333 & \textbf{0.5000} & 0.1667 \\
+\midrule
+\textbf{Global} & \textbf{33,574} & 0.9734 & \textbf{0.9750} & 0.9734 & 0.9749 \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.37\linewidth}
+\centering
+\begin{tabular}{l r  r r}
+\toprule
+\textbf{UPOS} & \textbf{N} & \textbf{Lin} & \textbf{Biaff} \\
+\midrule
+\texttt{DET} & 4,904 & \textbf{0.9969} & 0.9967 \\
+\texttt{NOUN} & 6,309 & 0.9921 & \textbf{0.9933} \\
+\texttt{VERB} & 3,368 & \textbf{0.9911} & \textbf{0.9911} \\
+\texttt{PUNCT} & 4,443 & 0.9984 & \textbf{0.9986} \\
+\texttt{SCONJ} & 456 & 0.9605 & \textbf{0.9649} \\
+\texttt{ADP} & 5,019 & \textbf{0.9992} & 0.9990 \\
+\texttt{ADJ} & 1,691 & \textbf{0.9746} & \textbf{0.9746} \\
+\texttt{CCONJ} & 823 & \textbf{0.9951} & \textbf{0.9951} \\
+\texttt{ADV} & 1,272 & 0.9796 & \textbf{0.9827} \\
+\texttt{PROPN} & 2,209 & \textbf{0.9964} & 0.9959 \\
+\texttt{AUX} & 968 & 0.9979 & \textbf{1.0000} \\
+\texttt{NUM} & 622 & 0.9759 & \textbf{0.9807} \\
+\texttt{PRON} & 1,286 & \textbf{0.9860} & 0.9852 \\
+\texttt{SYM} & 120 & \textbf{1.0000} & \textbf{1.0000} \\
+\texttt{X} & 85 & \textbf{0.7647} & 0.7529 \\
+\texttt{INTJ} & 5 & \textbf{0.8000} & \textbf{0.8000} \\
+\midrule
+\textbf{Global} & \textbf{33,580} & 0.9922 & \textbf{0.9927} \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\end{table}
+
+
+\begin{table}[ht]
+\centering\scriptsize
+\setlength{\tabcolsep}{3pt}
+\caption{Acurácia por rótulo --- BERTimbau Large (BtL). \textbf{Lin}\,=\,Linear com UPOS, \textbf{Biaff}\,=\,Biaffine com UPOS, \textbf{sLin}\,=\,sem UPOS Linear, \textbf{sBiaff}\,=\,sem UPOS Biaffine. \textbf{Negrito}\,=\,melhor por rótulo.}
+\label{tab:acc-btl}
+\begin{minipage}[t]{0.60\linewidth}
+\centering
+\begin{tabular}{l r  r r r r}
+\toprule
+\textbf{DEPREL} & \textbf{N} & \textbf{Lin} & \textbf{Biaff} & \textbf{sLin} & \textbf{sBiaff} \\
+\midrule
+\texttt{det} & 4,853 & \textbf{0.9965} & 0.9953 & 0.9963 & 0.9963 \\
+\texttt{nsubj} & 1,895 & 0.9699 & \textbf{0.9736} & 0.9704 & 0.9715 \\
+\texttt{root} & 1,683 & 0.9857 & 0.9881 & 0.9822 & \textbf{0.9899} \\
+\texttt{obj} & 1,476 & 0.9776 & \textbf{0.9810} & 0.9756 & 0.9770 \\
+\texttt{xcomp} & 475 & \textbf{0.9579} & \textbf{0.9579} & \textbf{0.9579} & \textbf{0.9579} \\
+\texttt{punct} & 4,443 & 0.9984 & 0.9982 & 0.9986 & \textbf{0.9989} \\
+\texttt{mark} & 828 & 0.9831 & 0.9855 & 0.9795 & \textbf{0.9867} \\
+\texttt{advcl} & 437 & \textbf{0.9359} & 0.9176 & 0.9153 & 0.9108 \\
+\texttt{case} & 4,532 & 0.9967 & \textbf{0.9978} & 0.9965 & 0.9969 \\
+\texttt{obl} & 1,746 & 0.9341 & \textbf{0.9376} & 0.9364 & \textbf{0.9376} \\
+\texttt{amod} & 1,318 & 0.9734 & \textbf{0.9810} & 0.9689 & 0.9750 \\
+\texttt{conj} & 960 & 0.9604 & 0.9635 & 0.9521 & \textbf{0.9656} \\
+\texttt{cc} & 833 & \textbf{0.9964} & 0.9928 & 0.9952 & 0.9940 \\
+\texttt{nmod} & 2,607 & \textbf{0.9586} & 0.9582 & 0.9501 & 0.9513 \\
+\texttt{advmod} & 1,222 & 0.9746 & \textbf{0.9763} & 0.9722 & 0.9730 \\
+\texttt{flat\!:\!name} & 686 & 0.9796 & 0.9738 & 0.9767 & \textbf{0.9825} \\
+\texttt{ccomp} & 218 & 0.9541 & 0.9541 & 0.9587 & \textbf{0.9633} \\
+\texttt{cop} & 595 & 0.9950 & \textbf{0.9983} & \textbf{0.9983} & 0.9950 \\
+\texttt{acl} & 307 & \textbf{0.8958} & 0.8925 & 0.8893 & 0.8795 \\
+\texttt{nummod} & 341 & 0.9560 & 0.9589 & 0.9501 & \textbf{0.9648} \\
+\texttt{acl\!:\!relcl} & 401 & \textbf{0.9676} & 0.9626 & 0.9576 & 0.9576 \\
+\texttt{ccomp\!:\!speech} & 130 & 0.9385 & 0.9385 & \textbf{0.9538} & 0.9462 \\
+\texttt{parataxis} & 160 & 0.7312 & \textbf{0.7812} & 0.7500 & 0.7562 \\
+\texttt{csubj} & 83 & 0.9036 & \textbf{0.9398} & 0.9036 & 0.9277 \\
+\texttt{aux\!:\!pass} & 203 & 0.9951 & 0.9951 & \textbf{1.0000} & 0.9901 \\
+\texttt{appos} & 208 & \textbf{0.9375} & 0.9327 & 0.9279 & 0.9231 \\
+\texttt{fixed} & 230 & 0.9739 & 0.9739 & \textbf{0.9783} & \textbf{0.9783} \\
+\texttt{nsubj\!:\!pass} & 144 & \textbf{0.9931} & 0.9861 & 0.9861 & 0.9861 \\
+\texttt{aux} & 145 & 0.9586 & \textbf{0.9793} & 0.9586 & 0.9448 \\
+\texttt{nsubj\!:\!outer} & 15 & \textbf{0.9333} & 0.8000 & 0.8667 & 0.8000 \\
+\texttt{obl\!:\!agent} & 110 & \textbf{1.0000} & 0.9727 & 0.9818 & 0.9818 \\
+\texttt{expl\!:\!impers} & 27 & \textbf{0.8889} & 0.8519 & 0.8148 & 0.8519 \\
+\texttt{expl} & 124 & 0.9274 & 0.9274 & 0.9194 & \textbf{0.9677} \\
+\texttt{discourse} & 51 & 0.7059 & \textbf{0.7451} & 0.6275 & 0.6667 \\
+\texttt{orphan} & 14 & 0.3571 & \textbf{0.4286} & 0.2143 & 0.2143 \\
+\texttt{dislocated} & 17 & 0.4706 & \textbf{0.5882} & 0.3529 & 0.4706 \\
+\texttt{flat} & 17 & \textbf{1.0000} & \textbf{1.0000} & \textbf{1.0000} & \textbf{1.0000} \\
+\texttt{flat\!:\!foreign} & 15 & \textbf{0.9333} & 0.8667 & 0.8000 & 0.8667 \\
+\texttt{iobj} & 19 & \textbf{0.8947} & \textbf{0.8947} & 0.8421 & \textbf{0.8947} \\
+\texttt{vocative} & 6 & \textbf{0.6667} & 0.5000 & \textbf{0.6667} & 0.3333 \\
+\midrule
+\textbf{Global} & \textbf{33,574} & 0.9771 & \textbf{0.9780} & 0.9748 & 0.9766 \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.37\linewidth}
+\centering
+\begin{tabular}{l r  r r}
+\toprule
+\textbf{UPOS} & \textbf{N} & \textbf{Lin} & \textbf{Biaff} \\
+\midrule
+\texttt{DET} & 4,904 & \textbf{0.9967} & 0.9957 \\
+\texttt{NOUN} & 6,309 & 0.9921 & \textbf{0.9933} \\
+\texttt{VERB} & 3,368 & 0.9920 & \textbf{0.9923} \\
+\texttt{PUNCT} & 4,443 & 0.9982 & \textbf{0.9984} \\
+\texttt{SCONJ} & 456 & 0.9649 & \textbf{0.9759} \\
+\texttt{ADP} & 5,019 & 0.9984 & \textbf{0.9988} \\
+\texttt{ADJ} & 1,691 & 0.9787 & \textbf{0.9840} \\
+\texttt{CCONJ} & 823 & \textbf{0.9951} & 0.9939 \\
+\texttt{ADV} & 1,272 & \textbf{0.9843} & \textbf{0.9843} \\
+\texttt{PROPN} & 2,209 & \textbf{0.9964} & 0.9959 \\
+\texttt{AUX} & 968 & 0.9969 & \textbf{0.9990} \\
+\texttt{NUM} & 622 & 0.9775 & \textbf{0.9807} \\
+\texttt{PRON} & 1,286 & 0.9883 & \textbf{0.9907} \\
+\texttt{SYM} & 120 & \textbf{0.9917} & \textbf{0.9917} \\
+\texttt{X} & 85 & \textbf{0.8353} & 0.7765 \\
+\texttt{INTJ} & 5 & \textbf{0.8000} & \textbf{0.8000} \\
+\midrule
+\textbf{Global} & \textbf{33,580} & 0.9928 & \textbf{0.9934} \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\end{table}
+
+
+\begin{table}[ht]
+\centering\scriptsize
+\setlength{\tabcolsep}{3pt}
+\caption{Acurácia por rótulo --- JabuticaBERT (JaB). \textbf{Lin}\,=\,Linear com UPOS, \textbf{Biaff}\,=\,Biaffine com UPOS, \textbf{sLin}\,=\,sem UPOS Linear, \textbf{sBiaff}\,=\,sem UPOS Biaffine. \textbf{Negrito}\,=\,melhor por rótulo.}
+\label{tab:acc-jab}
+\begin{minipage}[t]{0.60\linewidth}
+\centering
+\begin{tabular}{l r  r r r r}
+\toprule
+\textbf{DEPREL} & \textbf{N} & \textbf{Lin} & \textbf{Biaff} & \textbf{sLin} & \textbf{sBiaff} \\
+\midrule
+\texttt{det} & 4,853 & \textbf{0.9936} & \textbf{0.9936} & 0.9920 & 0.9928 \\
+\texttt{nsubj} & 1,895 & 0.9530 & \textbf{0.9546} & 0.9520 & 0.9520 \\
+\texttt{root} & 1,683 & 0.9786 & \textbf{0.9840} & 0.9762 & 0.9780 \\
+\texttt{obj} & 1,476 & 0.9627 & \textbf{0.9634} & 0.9593 & 0.9593 \\
+\texttt{xcomp} & 475 & \textbf{0.9326} & 0.9305 & 0.8947 & \textbf{0.9326} \\
+\texttt{punct} & 4,443 & \textbf{0.9991} & \textbf{0.9991} & 0.9989 & \textbf{0.9991} \\
+\texttt{mark} & 828 & \textbf{0.9771} & 0.9758 & 0.9638 & 0.9722 \\
+\texttt{advcl} & 437 & \textbf{0.8993} & 0.8810 & 0.8856 & 0.8810 \\
+\texttt{case} & 4,532 & 0.9951 & 0.9956 & 0.9943 & \textbf{0.9962} \\
+\texttt{obl} & 1,746 & \textbf{0.9158} & 0.9055 & 0.9015 & 0.9021 \\
+\texttt{amod} & 1,318 & 0.9514 & \textbf{0.9552} & 0.9476 & 0.9476 \\
+\texttt{conj} & 960 & \textbf{0.9313} & 0.9260 & 0.9198 & 0.9240 \\
+\texttt{cc} & 833 & 0.9916 & \textbf{0.9940} & 0.9928 & 0.9892 \\
+\texttt{nmod} & 2,607 & 0.9379 & \textbf{0.9428} & 0.9367 & 0.9382 \\
+\texttt{advmod} & 1,222 & \textbf{0.9648} & \textbf{0.9648} & 0.9558 & 0.9599 \\
+\texttt{flat\!:\!name} & 686 & 0.9519 & 0.9548 & 0.9490 & \textbf{0.9577} \\
+\texttt{ccomp} & 218 & \textbf{0.9174} & \textbf{0.9174} & \textbf{0.9174} & 0.8945 \\
+\texttt{cop} & 595 & \textbf{0.9899} & \textbf{0.9899} & 0.9832 & \textbf{0.9899} \\
+\texttt{acl} & 307 & \textbf{0.8306} & \textbf{0.8306} & 0.8274 & 0.8176 \\
+\texttt{nummod} & 341 & 0.9384 & \textbf{0.9472} & 0.9443 & 0.9443 \\
+\texttt{acl\!:\!relcl} & 401 & 0.9476 & \textbf{0.9576} & 0.9476 & 0.9401 \\
+\texttt{ccomp\!:\!speech} & 130 & 0.8769 & 0.8615 & \textbf{0.8846} & 0.8462 \\
+\texttt{parataxis} & 160 & 0.6625 & 0.6813 & 0.6813 & \textbf{0.7188} \\
+\texttt{csubj} & 83 & 0.7831 & \textbf{0.8193} & 0.7711 & 0.7711 \\
+\texttt{aux\!:\!pass} & 203 & \textbf{0.9951} & 0.9852 & 0.9852 & 0.9803 \\
+\texttt{appos} & 208 & 0.9087 & 0.9038 & \textbf{0.9231} & 0.9135 \\
+\texttt{fixed} & 230 & \textbf{0.9565} & \textbf{0.9565} & 0.9478 & 0.9304 \\
+\texttt{nsubj\!:\!pass} & 144 & \textbf{0.9722} & 0.9583 & 0.9514 & 0.9653 \\
+\texttt{aux} & 145 & 0.9241 & \textbf{0.9448} & 0.9241 & 0.9241 \\
+\texttt{nsubj\!:\!outer} & 15 & \textbf{0.8000} & 0.6667 & \textbf{0.8000} & \textbf{0.8000} \\
+\texttt{obl\!:\!agent} & 110 & 0.9455 & \textbf{0.9545} & 0.9364 & 0.9455 \\
+\texttt{expl\!:\!impers} & 27 & \textbf{0.8889} & 0.8519 & \textbf{0.8889} & \textbf{0.8889} \\
+\texttt{expl} & 124 & 0.9032 & \textbf{0.9274} & 0.9032 & 0.8871 \\
+\texttt{discourse} & 51 & 0.6471 & 0.5882 & 0.5882 & \textbf{0.6667} \\
+\texttt{orphan} & 14 & 0.2143 & \textbf{0.3571} & 0.0714 & 0.0000 \\
+\texttt{dislocated} & 17 & \textbf{0.4118} & 0.2353 & 0.3529 & 0.2353 \\
+\texttt{flat} & 17 & \textbf{0.9412} & \textbf{0.9412} & \textbf{0.9412} & \textbf{0.9412} \\
+\texttt{flat\!:\!foreign} & 15 & 0.5333 & \textbf{0.7333} & 0.3333 & 0.4667 \\
+\texttt{iobj} & 19 & \textbf{0.7895} & \textbf{0.7895} & 0.7368 & 0.6842 \\
+\texttt{vocative} & 6 & \textbf{0.1667} & 0.0000 & 0.0000 & \textbf{0.1667} \\
+\midrule
+\textbf{Global} & \textbf{33,574} & 0.9647 & \textbf{0.9651} & 0.9608 & 0.9622 \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.37\linewidth}
+\centering
+\begin{tabular}{l r  r r}
+\toprule
+\textbf{UPOS} & \textbf{N} & \textbf{Lin} & \textbf{Biaff} \\
+\midrule
+\texttt{DET} & 4,904 & 0.9931 & \textbf{0.9941} \\
+\texttt{NOUN} & 6,309 & 0.9887 & \textbf{0.9914} \\
+\texttt{VERB} & 3,368 & \textbf{0.9881} & 0.9863 \\
+\texttt{PUNCT} & 4,443 & \textbf{0.9991} & \textbf{0.9991} \\
+\texttt{SCONJ} & 456 & \textbf{0.9627} & 0.9583 \\
+\texttt{ADP} & 5,019 & 0.9968 & \textbf{0.9976} \\
+\texttt{ADJ} & 1,691 & 0.9503 & \textbf{0.9556} \\
+\texttt{CCONJ} & 823 & 0.9891 & \textbf{0.9939} \\
+\texttt{ADV} & 1,272 & \textbf{0.9780} & 0.9748 \\
+\texttt{PROPN} & 2,209 & \textbf{0.9914} & \textbf{0.9914} \\
+\texttt{AUX} & 968 & 0.9897 & \textbf{0.9948} \\
+\texttt{NUM} & 622 & 0.9662 & \textbf{0.9727} \\
+\texttt{PRON} & 1,286 & \textbf{0.9798} & \textbf{0.9798} \\
+\texttt{SYM} & 120 & 0.9917 & \textbf{1.0000} \\
+\texttt{X} & 85 & \textbf{0.7647} & \textbf{0.7647} \\
+\texttt{INTJ} & 5 & \textbf{0.8000} & \textbf{0.8000} \\
+\midrule
+\textbf{Global} & \textbf{33,580} & 0.9881 & \textbf{0.9892} \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\end{table}
+
+
+% Tabelas de instabilidade — geradas automaticamente dos CSVs
+% 4 encoders × 3 tabelas (DEPREL · UPOS · HEAD) = 12 tabelas
+
+\providecommand{\instablegendaFull}{%
+  \par\smallskip
+  {\footnotesize\raggedright
+  \textbf{Legenda:}
+  \textbf{Lin}\,=\,Linear com UPOS;
+  \textbf{Biaff}\,=\,Biaffine com UPOS;
+  \textbf{sLin}\,=\,sem UPOS Linear;
+  \textbf{sBiaff}\,=\,sem UPOS Biaffine.
+  Fg.\,=\,\textit{forgetting events} (acerto\,$\to$\,erro);
+  Ac.F\,=\,acur\'acia final no conjunto de teste.
+  Fg.\ m\'aximo e Ac.F m\'axima por linha em \textbf{negrito}.\par}%
+}
+\providecommand{\instablegendaMTL}{%
+  \par\smallskip
+  {\footnotesize\raggedright
+  \textbf{Legenda:}
+  \textbf{Lin}\,=\,Linear com UPOS;
+  \textbf{Biaff}\,=\,Biaffine com UPOS.
+  Fg.\,=\,\textit{forgetting events} (acerto\,$\to$\,erro);
+  Ac.F\,=\,acur\'acia final no conjunto de teste.
+  Fg.\ m\'aximo e Ac.F m\'axima por linha em \textbf{negrito}.\par}%
+}
+
+% ══ mBERT (mB) — DEPREL ═══════════════════════════════════════════
+\clearpage
+\begin{table}[p]
+\centering
+\caption{Instabilidade por r\'otulo de depend\^encia (DEPREL) --- mBERT (mB).
+As 20 categorias com maior n\'umero de esquecimentos (Lin) s\~ao exibidas.
+Fg.\ m\'aximo e Ac.F m\'axima por linha em \textbf{negrito}.}
+\label{tab:instab-mb-deprel}
+\begingroup
+\scriptsize\setlength{\tabcolsep}{2pt}\renewcommand{\arraystretch}{1.25}%
+\begin{tabular}{l r| r r| r r| r r| r r}
+\toprule
+\multicolumn{2}{c|}{}
+  & \multicolumn{2}{c|}{\textbf{Lin}}
+  & \multicolumn{2}{c|}{\textbf{Biaff}}
+  & \multicolumn{2}{c|}{\textbf{sLin}}
+  & \multicolumn{2}{c}{\textbf{sBiaff}} \\
+\textbf{DEPREL} & \textbf{N}
+  & \textit{Fg.} & \textit{Ac.F}
+  & \textit{Fg.} & \textit{Ac.F}
+  & \textit{Fg.} & \textit{Ac.F}
+  & \textit{Fg.} & \textit{Ac.F} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}\cmidrule(lr){7-8}\cmidrule(lr){9-10}
+  \texttt{nmod} & 2,035 & 1,517 & 0.9263 & \textbf{1,543} & 0.9366 & 1,263 & \textbf{0.9425} & 1,403 & 0.9351 \\
+  \texttt{obl} & 1,348 & 1,307 & \textbf{0.8895} & \textbf{1,423} & 0.8709 & 1,192 & 0.8642 & 1,187 & 0.8858 \\
+  \texttt{amod} & 1,190 & \textbf{544} & \textbf{0.9521} & \textbf{544} & 0.9420 & 470 & 0.9471 & 438 & 0.9471 \\
+  \texttt{nsubj} & 1,444 & \textbf{533} & \textbf{0.9550} & 472 & 0.9460 & 440 & 0.9488 & 485 & 0.9536 \\
+  \texttt{conj} & 832 & \textbf{525} & 0.9315 & 519 & 0.9339 & 373 & \textbf{0.9447} & 444 & 0.9423 \\
+  \texttt{advcl} & 406 & 524 & 0.8448 & \textbf{538} & 0.8498 & 433 & 0.8276 & 401 & \textbf{0.8621} \\
+  \texttt{acl} & 270 & 430 & 0.8037 & \textbf{462} & 0.8074 & 226 & 0.8148 & 373 & \textbf{0.8185} \\
+  \texttt{root} & 1,508 & \textbf{407} & \textbf{0.9808} & 398 & 0.9761 & 346 & 0.9781 & 379 & 0.9748 \\
+  \texttt{obj} & 1,143 & 349 & \textbf{0.9615} & \textbf{390} & \textbf{0.9615} & 312 & 0.9589 & 351 & 0.9563 \\
+  \texttt{parataxis} & 122 & 201 & 0.6885 & 226 & 0.7131 & 164 & 0.7377 & \textbf{248} & \textbf{0.7705} \\
+  \texttt{xcomp} & 390 & 198 & 0.9487 & \textbf{227} & 0.9385 & 224 & 0.9436 & 189 & \textbf{0.9564} \\
+  \texttt{case} & 2,239 & \textbf{184} & 0.9924 & 169 & 0.9942 & 167 & \textbf{0.9951} & 139 & 0.9924 \\
+  \texttt{flat\!:\!name} & 561 & 178 & 0.9608 & 137 & 0.9643 & \textbf{225} & 0.9590 & 215 & \textbf{0.9661} \\
+  \texttt{acl\!:\!relcl} & 342 & 171 & 0.9708 & \textbf{233} & 0.9620 & 176 & \textbf{0.9795} & 226 & 0.9766 \\
+  \texttt{advmod} & 602 & \textbf{159} & 0.9718 & 112 & 0.9718 & 153 & 0.9734 & 95 & \textbf{0.9751} \\
+  \texttt{appos} & 165 & 116 & \textbf{0.9273} & \textbf{137} & 0.8970 & 102 & \textbf{0.9273} & 136 & 0.9212 \\
+  \texttt{mark} & 404 & 107 & 0.9678 & \textbf{137} & \textbf{0.9728} & 104 & 0.9653 & 108 & 0.9678 \\
+  \texttt{det} & 2,406 & 106 & 0.9954 & \textbf{122} & \textbf{0.9958} & 104 & \textbf{0.9958} & 108 & 0.9946 \\
+  \texttt{nsubj\!:\!pass} & 127 & 95 & 0.8976 & \textbf{132} & \textbf{0.9449} & 61 & 0.9213 & 92 & 0.9213 \\
+  \texttt{ccomp} & 192 & 92 & \textbf{0.9635} & \textbf{134} & 0.9479 & 67 & 0.9375 & \textbf{134} & 0.9375 \\
+\midrule
+  \textbf{Global} & \textbf{21,664} & 8,501 & 0.9561 & \textbf{8,867} & 0.9539 & 7,140 & 0.9551 & 7,808 & \textbf{0.9566} \\
+\bottomrule
+\end{tabular}
+\endgroup
+\instablegendaFull
+\end{table}
+
+% ══ mBERT (mB) — UPOS ════════════════════════════════════════════
+\clearpage
+\begin{table}[p]
+\centering
+\caption{Instabilidade por categoria morfossint\'atica (UPOS) --- mBERT (mB).
+Apenas modelos MTL. Fg.\ m\'aximo e Ac.F m\'axima por linha em \textbf{negrito}.}
+\label{tab:instab-mb-upos}
+\begingroup
+\small\setlength{\tabcolsep}{6pt}\renewcommand{\arraystretch}{1.2}%
+\begin{tabular}{l r| r r| r r}
+\toprule
+\multicolumn{2}{c|}{}
+  & \multicolumn{2}{c|}{\textbf{Lin}}
+  & \multicolumn{2}{c}{\textbf{Biaff}} \\
+\textbf{UPOS} & \textbf{N}
+  & \textit{Fg.} & \textit{Ac.F}
+  & \textit{Fg.} & \textit{Ac.F} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}
+  \texttt{ADJ} & 1,611 & \textbf{851} & \textbf{0.9497} & 766 & 0.9423 \\
+  \texttt{VERB} & 3,075 & \textbf{769} & \textbf{0.9805} & 559 & \textbf{0.9805} \\
+  \texttt{NOUN} & 5,041 & \textbf{756} & \textbf{0.9808} & 669 & 0.9804 \\
+  \texttt{PROPN} & 1,821 & \textbf{213} & \textbf{0.9907} & 141 & \textbf{0.9907} \\
+  \texttt{ADV} & 631 & \textbf{134} & 0.9794 & 101 & \textbf{0.9826} \\
+  \texttt{ADP} & 2,473 & \textbf{121} & 0.9943 & 103 & \textbf{0.9968} \\
+  \texttt{DET} & 2,425 & \textbf{119} & \textbf{0.9959} & 106 & \textbf{0.9959} \\
+  \texttt{PRON} & 655 & 115 & \textbf{0.9832} & \textbf{117} & 0.9740 \\
+  \texttt{SCONJ} & 227 & 97 & 0.9471 & \textbf{105} & \textbf{0.9515} \\
+  \texttt{X} & 63 & \textbf{67} & 0.6667 & 44 & \textbf{0.6825} \\
+  \texttt{AUX} & 490 & 52 & \textbf{0.9898} & \textbf{56} & \textbf{0.9898} \\
+  \texttt{NUM} & 392 & \textbf{49} & \textbf{0.9847} & 32 & 0.9796 \\
+  \texttt{CCONJ} & 412 & \textbf{30} & \textbf{0.9927} & 21 & 0.9854 \\
+  \texttt{SYM} & 98 & \textbf{28} & \textbf{0.9898} & 16 & \textbf{0.9898} \\
+  \texttt{PUNCT} & 2,242 & \textbf{6} & \textbf{1.0000} & 1 & \textbf{1.0000} \\
+  \texttt{INTJ} & 8 & \textbf{2} & \textbf{0.1250} & 0 & 0.0000 \\
+\midrule
+  \textbf{Global} & \textbf{21,664} & \textbf{3,409} & \textbf{0.9835} & 2,837 & 0.9827 \\
+\bottomrule
+\end{tabular}
+\endgroup
+\instablegendaMTL
+\end{table}
+
+% ══ mBERT (mB) — UAS por época ═════════════════════════════════
+\clearpage
+\begin{table}[p]
+\centering
+\caption{UAS (HEAD) por \'epoca de avalia\c{c}\~ao --- mBERT (mB).
+Valor m\'aximo por linha em \textbf{negrito}.}
+\label{tab:instab-mb-head}
+\begingroup
+\small\setlength{\tabcolsep}{10pt}\renewcommand{\arraystretch}{1.2}%
+\begin{tabular}{r r r r r}
+\toprule
+\textbf{\'Epoca} & \textbf{Lin} & \textbf{Biaff} & \textbf{sLin} & \textbf{sBiaff} \\
+\midrule
+   1 & 0.1128 & \textbf{0.1318} & 0.1021 & 0.1249 \\
+   6 & 0.5580 & \textbf{0.5951} & 0.5180 & 0.5744 \\
+  11 & 0.7559 & 0.7380 & 0.7537 & \textbf{0.7571} \\
+  16 & 0.8123 & 0.8107 & \textbf{0.8143} & 0.7861 \\
+  21 & \textbf{0.8732} & 0.8314 & 0.8483 & 0.8516 \\
+  26 & 0.8848 & 0.8481 & \textbf{0.8926} & 0.8470 \\
+  31 & \textbf{0.9049} & 0.8518 & 0.8993 & 0.8754 \\
+  36 & \textbf{0.9162} & 0.8572 & 0.9093 & 0.8796 \\
+\bottomrule
+\end{tabular}
+\endgroup
+\instablegendaFull
+\end{table}
+
+% ══ BERTimbau Base (BtB) — DEPREL ═══════════════════════════════════════════
+\clearpage
+\begin{table}[p]
+\centering
+\caption{Instabilidade por r\'otulo de depend\^encia (DEPREL) --- BERTimbau Base (BtB).
+As 20 categorias com maior n\'umero de esquecimentos (Lin) s\~ao exibidas.
+Fg.\ m\'aximo e Ac.F m\'axima por linha em \textbf{negrito}.}
+\label{tab:instab-btb-deprel}
+\begingroup
+\scriptsize\setlength{\tabcolsep}{2pt}\renewcommand{\arraystretch}{1.25}%
+\begin{tabular}{l r| r r| r r| r r| r r}
+\toprule
+\multicolumn{2}{c|}{}
+  & \multicolumn{2}{c|}{\textbf{Lin}}
+  & \multicolumn{2}{c|}{\textbf{Biaff}}
+  & \multicolumn{2}{c|}{\textbf{sLin}}
+  & \multicolumn{2}{c}{\textbf{sBiaff}} \\
+\textbf{DEPREL} & \textbf{N}
+  & \textit{Fg.} & \textit{Ac.F}
+  & \textit{Fg.} & \textit{Ac.F}
+  & \textit{Fg.} & \textit{Ac.F}
+  & \textit{Fg.} & \textit{Ac.F} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}\cmidrule(lr){7-8}\cmidrule(lr){9-10}
+  \texttt{nmod} & 1,729 & 982 & \textbf{0.9491} & 1,026 & 0.9468 & 659 & 0.9445 & \textbf{1,093} & \textbf{0.9491} \\
+  \texttt{obl} & 1,132 & 775 & 0.9090 & \textbf{897} & 0.8975 & 700 & 0.9011 & 789 & \textbf{0.9099} \\
+  \texttt{amod} & 927 & \textbf{229} & 0.9676 & 221 & \textbf{0.9709} & 190 & 0.9644 & 180 & 0.9676 \\
+  \texttt{obj} & 862 & \textbf{224} & 0.9710 & 202 & \textbf{0.9745} & 142 & 0.9710 & 162 & 0.9733 \\
+  \texttt{advcl} & 333 & 223 & 0.8829 & \textbf{343} & 0.8529 & 217 & \textbf{0.8889} & 243 & 0.8589 \\
+  \texttt{conj} & 630 & 216 & 0.9635 & \textbf{287} & \textbf{0.9651} & 196 & 0.9619 & 217 & \textbf{0.9651} \\
+  \texttt{nsubj} & 1,243 & 214 & 0.9678 & \textbf{265} & \textbf{0.9702} & 188 & 0.9670 & 224 & 0.9662 \\
+  \texttt{parataxis} & 101 & \textbf{178} & \textbf{0.7525} & 167 & \textbf{0.7525} & 170 & 0.7228 & 139 & \textbf{0.7525} \\
+  \texttt{flat\!:\!name} & 532 & 173 & 0.9680 & 150 & \textbf{0.9756} & 80 & 0.9680 & \textbf{236} & 0.9662 \\
+  \texttt{acl} & 186 & 163 & 0.8441 & 202 & \textbf{0.8817} & 137 & 0.8387 & \textbf{239} & 0.8441 \\
+  \texttt{root} & 1,144 & 141 & \textbf{0.9851} & \textbf{213} & 0.9790 & 149 & 0.9808 & 194 & 0.9764 \\
+  \texttt{xcomp} & 293 & 112 & 0.9659 & \textbf{137} & 0.9454 & 96 & 0.9556 & 112 & \textbf{0.9693} \\
+  \texttt{advmod} & 575 & \textbf{95} & 0.9809 & 73 & \textbf{0.9826} & 60 & 0.9809 & 74 & 0.9722 \\
+  \texttt{appos} & 153 & 92 & 0.9150 & \textbf{126} & 0.9346 & 75 & \textbf{0.9412} & 123 & 0.9150 \\
+  \texttt{acl\!:\!relcl} & 252 & 86 & 0.9762 & \textbf{101} & \textbf{0.9802} & 58 & 0.9722 & 65 & 0.9683 \\
+  \texttt{mark} & 404 & \textbf{78} & 0.9777 & 54 & \textbf{0.9827} & 65 & \textbf{0.9827} & 58 & 0.9777 \\
+  \texttt{fixed} & 117 & \textbf{71} & \textbf{0.9915} & 46 & 0.9744 & 41 & \textbf{0.9915} & 54 & 0.9658 \\
+  \texttt{case} & 2,234 & \textbf{69} & 0.9960 & 67 & 0.9978 & 41 & 0.9969 & 64 & \textbf{0.9982} \\
+  \texttt{ccomp} & 139 & \textbf{64} & \textbf{0.9281} & 58 & 0.9209 & 47 & 0.9209 & 51 & 0.9209 \\
+  \texttt{ccomp\!:\!speech} & 118 & 58 & \textbf{0.9661} & 68 & 0.9407 & 32 & 0.9492 & \textbf{76} & 0.9576 \\
+\midrule
+  \textbf{Global} & \textbf{19,239} & 4,664 & \textbf{0.9695} & \textbf{5,265} & 0.9689 & 3,702 & 0.9679 & 4,852 & 0.9684 \\
+\bottomrule
+\end{tabular}
+\endgroup
+\instablegendaFull
+\end{table}
+
+% ══ BERTimbau Base (BtB) — UPOS ════════════════════════════════════════════
+\clearpage
+\begin{table}[p]
+\centering
+\caption{Instabilidade por categoria morfossint\'atica (UPOS) --- BERTimbau Base (BtB).
+Apenas modelos MTL. Fg.\ m\'aximo e Ac.F m\'axima por linha em \textbf{negrito}.}
+\label{tab:instab-btb-upos}
+\begingroup
+\small\setlength{\tabcolsep}{6pt}\renewcommand{\arraystretch}{1.2}%
+\begin{tabular}{l r| r r| r r}
+\toprule
+\multicolumn{2}{c|}{}
+  & \multicolumn{2}{c|}{\textbf{Lin}}
+  & \multicolumn{2}{c}{\textbf{Biaff}} \\
+\textbf{UPOS} & \textbf{N}
+  & \textit{Fg.} & \textit{Ac.F}
+  & \textit{Fg.} & \textit{Ac.F} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}
+  \texttt{NOUN} & 3,819 & \textbf{386} & 0.9890 & 333 & \textbf{0.9893} \\
+  \texttt{ADJ} & 1,247 & \textbf{299} & 0.9727 & 254 & \textbf{0.9759} \\
+  \texttt{VERB} & 2,301 & \textbf{237} & 0.9865 & 226 & \textbf{0.9883} \\
+  \texttt{PROPN} & 1,822 & \textbf{174} & 0.9923 & 112 & \textbf{0.9951} \\
+  \texttt{X} & 91 & \textbf{116} & 0.7582 & 57 & \textbf{0.7802} \\
+  \texttt{ADV} & 602 & \textbf{88} & 0.9850 & 39 & \textbf{0.9884} \\
+  \texttt{SCONJ} & 227 & \textbf{78} & 0.9515 & 45 & \textbf{0.9736} \\
+  \texttt{DET} & 2,403 & \textbf{65} & \textbf{0.9971} & 47 & \textbf{0.9971} \\
+  \texttt{ADP} & 2,468 & \textbf{59} & 0.9984 & 16 & \textbf{0.9992} \\
+  \texttt{CCONJ} & 408 & \textbf{37} & \textbf{0.9926} & 19 & \textbf{0.9926} \\
+  \texttt{PRON} & 622 & 32 & \textbf{0.9904} & \textbf{47} & \textbf{0.9904} \\
+  \texttt{NUM} & 406 & 27 & \textbf{0.9852} & \textbf{30} & \textbf{0.9852} \\
+  \texttt{AUX} & 474 & 11 & \textbf{0.9958} & \textbf{12} & 0.9937 \\
+  \texttt{SYM} & 98 & 11 & \textbf{0.9796} & \textbf{24} & 0.9694 \\
+  \texttt{INTJ} & 9 & \textbf{4} & \textbf{0.1111} & \textbf{4} & 0.0000 \\
+  \texttt{PUNCT} & 2,242 & 3 & 0.9996 & \textbf{7} & \textbf{1.0000} \\
+\midrule
+  \textbf{Global} & \textbf{19,239} & \textbf{1,627} & 0.9895 & 1,272 & \textbf{0.9907} \\
+\bottomrule
+\end{tabular}
+\endgroup
+\instablegendaMTL
+\end{table}
+
+% ══ BERTimbau Base (BtB) — UAS por época ═════════════════════════════════
+\clearpage
+\begin{table}[p]
+\centering
+\caption{UAS (HEAD) por \'epoca de avalia\c{c}\~ao --- BERTimbau Base (BtB).
+Valor m\'aximo por linha em \textbf{negrito}.}
+\label{tab:instab-btb-head}
+\begingroup
+\small\setlength{\tabcolsep}{10pt}\renewcommand{\arraystretch}{1.2}%
+\begin{tabular}{r r r r r}
+\toprule
+\textbf{\'Epoca} & \textbf{Lin} & \textbf{Biaff} & \textbf{sLin} & \textbf{sBiaff} \\
+\midrule
+   1 & 0.1061 & \textbf{0.1246} & 0.0690 & 0.0856 \\
+   6 & 0.6471 & \textbf{0.6714} & 0.5982 & 0.6475 \\
+  11 & 0.8172 & 0.8231 & 0.8139 & \textbf{0.8291} \\
+  16 & \textbf{0.8800} & 0.8595 & 0.8582 & 0.8545 \\
+  21 & 0.8941 & 0.8661 & \textbf{0.9000} & 0.8925 \\
+  26 & 0.9026 & 0.8767 & \textbf{0.9120} & 0.8938 \\
+  31 & 0.9190 & 0.8819 & \textbf{0.9209} & 0.8997 \\
+  36 & \textbf{0.9273} & 0.8853 & 0.9266 & 0.8977 \\
+\bottomrule
+\end{tabular}
+\endgroup
+\instablegendaFull
+\end{table}
+
+% ══ BERTimbau Large (BtL) — DEPREL ═══════════════════════════════════════════
+\clearpage
+\begin{table}[p]
+\centering
+\caption{Instabilidade por r\'otulo de depend\^encia (DEPREL) --- BERTimbau Large (BtL).
+As 20 categorias com maior n\'umero de esquecimentos (Lin) s\~ao exibidas.
+Fg.\ m\'aximo e Ac.F m\'axima por linha em \textbf{negrito}.}
+\label{tab:instab-btl-deprel}
+\begingroup
+\scriptsize\setlength{\tabcolsep}{2pt}\renewcommand{\arraystretch}{1.25}%
+\begin{tabular}{l r| r r| r r| r r| r r}
+\toprule
+\multicolumn{2}{c|}{}
+  & \multicolumn{2}{c|}{\textbf{Lin}}
+  & \multicolumn{2}{c|}{\textbf{Biaff}}
+  & \multicolumn{2}{c|}{\textbf{sLin}}
+  & \multicolumn{2}{c}{\textbf{sBiaff}} \\
+\textbf{DEPREL} & \textbf{N}
+  & \textit{Fg.} & \textit{Ac.F}
+  & \textit{Fg.} & \textit{Ac.F}
+  & \textit{Fg.} & \textit{Ac.F}
+  & \textit{Fg.} & \textit{Ac.F} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}\cmidrule(lr){7-8}\cmidrule(lr){9-10}
+  \texttt{nmod} & 1,729 & 923 & 0.9468 & \textbf{2,057} & \textbf{0.9514} & 895 & 0.9479 & 895 & \textbf{0.9514} \\
+  \texttt{obl} & 1,132 & 900 & \textbf{0.9178} & \textbf{1,895} & 0.9037 & 896 & 0.9117 & 866 & 0.9002 \\
+  \texttt{amod} & 927 & 270 & 0.9590 & \textbf{1,122} & 0.9547 & 222 & 0.9579 & 206 & \textbf{0.9655} \\
+  \texttt{nsubj} & 1,243 & 264 & 0.9735 & \textbf{1,344} & \textbf{0.9791} & 219 & 0.9702 & 272 & 0.9767 \\
+  \texttt{advcl} & 333 & 229 & 0.8979 & \textbf{559} & \textbf{0.9099} & 204 & 0.8889 & 293 & 0.8769 \\
+  \texttt{root} & 1,144 & 225 & 0.9816 & \textbf{480} & 0.9825 & 142 & 0.9843 & 143 & \textbf{0.9851} \\
+  \texttt{acl} & 186 & 191 & 0.8226 & \textbf{339} & 0.8710 & 168 & 0.8710 & 221 & \textbf{0.8763} \\
+  \texttt{conj} & 630 & 189 & 0.9667 & \textbf{792} & \textbf{0.9794} & 154 & 0.9730 & 204 & 0.9746 \\
+  \texttt{parataxis} & 101 & 189 & 0.7327 & \textbf{213} & 0.7624 & 167 & 0.7624 & 162 & \textbf{0.7723} \\
+  \texttt{obj} & 862 & 189 & 0.9722 & \textbf{923} & 0.9710 & 147 & 0.9733 & 179 & \textbf{0.9745} \\
+  \texttt{flat\!:\!name} & 532 & 188 & 0.9718 & \textbf{678} & 0.9624 & 250 & 0.9680 & 179 & \textbf{0.9774} \\
+  \texttt{appos} & 153 & 118 & \textbf{0.9346} & \textbf{266} & 0.8954 & 119 & 0.9281 & 80 & 0.9281 \\
+  \texttt{xcomp} & 293 & 94 & \textbf{0.9693} & \textbf{349} & \textbf{0.9693} & 114 & 0.9659 & 92 & 0.9590 \\
+  \texttt{acl\!:\!relcl} & 252 & 90 & 0.9802 & \textbf{313} & \textbf{0.9921} & 80 & 0.9841 & 91 & 0.9802 \\
+  \texttt{advmod} & 575 & 89 & 0.9826 & \textbf{628} & \textbf{0.9843} & 60 & 0.9774 & 89 & 0.9757 \\
+  \texttt{det} & 2,384 & 71 & \textbf{0.9979} & \textbf{231} & 0.9971 & 74 & 0.9975 & 61 & 0.9971 \\
+  \texttt{case} & 2,234 & 68 & 0.9973 & \textbf{499} & \textbf{0.9982} & 74 & 0.9960 & 85 & 0.9973 \\
+  \texttt{mark} & 404 & 67 & \textbf{0.9876} & \textbf{488} & 0.9802 & 59 & 0.9728 & 64 & 0.9802 \\
+  \texttt{fixed} & 117 & 59 & \textbf{0.9744} & \textbf{141} & 0.9658 & 51 & \textbf{0.9744} & 37 & \textbf{0.9744} \\
+  \texttt{obl\!:\!agent} & 68 & \textbf{57} & 0.8971 & 39 & 0.9412 & 40 & \textbf{0.9559} & 41 & 0.9412 \\
+\midrule
+  \textbf{Global} & \textbf{19,239} & 4,948 & 0.9709 & \textbf{15,504} & \textbf{0.9717} & 4,545 & 0.9707 & 4,732 & 0.9713 \\
+\bottomrule
+\end{tabular}
+\endgroup
+\instablegendaFull
+\end{table}
+
+% ══ BERTimbau Large (BtL) — UPOS ════════════════════════════════════════════
+\clearpage
+\begin{table}[p]
+\centering
+\caption{Instabilidade por categoria morfossint\'atica (UPOS) --- BERTimbau Large (BtL).
+Apenas modelos MTL. Fg.\ m\'aximo e Ac.F m\'axima por linha em \textbf{negrito}.}
+\label{tab:instab-btl-upos}
+\begingroup
+\small\setlength{\tabcolsep}{6pt}\renewcommand{\arraystretch}{1.2}%
+\begin{tabular}{l r| r r| r r}
+\toprule
+\multicolumn{2}{c|}{}
+  & \multicolumn{2}{c|}{\textbf{Lin}}
+  & \multicolumn{2}{c}{\textbf{Biaff}} \\
+\textbf{UPOS} & \textbf{N}
+  & \textit{Fg.} & \textit{Ac.F}
+  & \textit{Fg.} & \textit{Ac.F} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}
+  \texttt{NOUN} & 3,819 & 385 & \textbf{0.9898} & \textbf{948} & 0.9890 \\
+  \texttt{ADJ} & 1,247 & 324 & \textbf{0.9703} & \textbf{1,497} & 0.9671 \\
+  \texttt{VERB} & 2,301 & 303 & 0.9857 & \textbf{1,496} & \textbf{0.9870} \\
+  \texttt{PROPN} & 1,822 & 163 & 0.9912 & \textbf{1,880} & \textbf{0.9929} \\
+  \texttt{X} & 91 & \textbf{108} & \textbf{0.8571} & 55 & \textbf{0.8571} \\
+  \texttt{ADV} & 602 & 99 & 0.9867 & \textbf{659} & \textbf{0.9900} \\
+  \texttt{DET} & 2,403 & 78 & \textbf{0.9975} & \textbf{1,222} & 0.9971 \\
+  \texttt{PRON} & 622 & 70 & \textbf{0.9904} & \textbf{651} & 0.9887 \\
+  \texttt{SCONJ} & 227 & 68 & \textbf{0.9604} & \textbf{276} & 0.9559 \\
+  \texttt{CCONJ} & 408 & 46 & 0.9877 & \textbf{429} & \textbf{0.9902} \\
+  \texttt{ADP} & 2,468 & 44 & \textbf{0.9992} & \textbf{774} & \textbf{0.9992} \\
+  \texttt{SYM} & 98 & 35 & \textbf{0.9898} & \textbf{56} & 0.9796 \\
+  \texttt{NUM} & 406 & 29 & \textbf{0.9852} & \textbf{412} & \textbf{0.9852} \\
+  \texttt{AUX} & 474 & 27 & \textbf{0.9958} & \textbf{500} & 0.9937 \\
+  \texttt{INTJ} & 9 & \textbf{11} & \textbf{0.2222} & 10 & \textbf{0.2222} \\
+  \texttt{PUNCT} & 2,242 & 11 & \textbf{1.0000} & \textbf{1,364} & \textbf{1.0000} \\
+\midrule
+  \textbf{Global} & \textbf{19,239} & 1,801 & \textbf{0.9901} & \textbf{12,229} & 0.9900 \\
+\bottomrule
+\end{tabular}
+\endgroup
+\instablegendaMTL
+\end{table}
+
+% ══ BERTimbau Large (BtL) — UAS por época ═════════════════════════════════
+\clearpage
+\begin{table}[p]
+\centering
+\caption{UAS (HEAD) por \'epoca de avalia\c{c}\~ao --- BERTimbau Large (BtL).
+Valor m\'aximo por linha em \textbf{negrito}.}
+\label{tab:instab-btl-head}
+\begingroup
+\small\setlength{\tabcolsep}{10pt}\renewcommand{\arraystretch}{1.2}%
+\begin{tabular}{r r r r r}
+\toprule
+\textbf{\'Epoca} & \textbf{Lin} & \textbf{Biaff} & \textbf{sLin} & \textbf{sBiaff} \\
+\midrule
+   1 & 0.1093 & \textbf{0.1363} & 0.0801 & 0.1025 \\
+   6 & 0.6881 & 0.3065 & 0.5967 & \textbf{0.7160} \\
+  11 & 0.8486 & 0.7508 & 0.8365 & \textbf{0.8637} \\
+  16 & 0.8672 & 0.8445 & 0.8531 & \textbf{0.8800} \\
+  21 & \textbf{0.9223} & 0.8786 & 0.9126 & 0.9014 \\
+  26 & \textbf{0.9263} & 0.8984 & 0.9237 & 0.9044 \\
+  31 & 0.9312 & 0.9000 & \textbf{0.9403} & 0.9083 \\
+  36 & 0.9436 & 0.8948 & \textbf{0.9470} & 0.9099 \\
+\bottomrule
+\end{tabular}
+\endgroup
+\instablegendaFull
+\end{table}
+
+% ══ JabuticaBERT (JaB) — DEPREL ═══════════════════════════════════════════
+\clearpage
+\begin{table}[p]
+\centering
+\caption{Instabilidade por r\'otulo de depend\^encia (DEPREL) --- JabuticaBERT (JaB).
+As 20 categorias com maior n\'umero de esquecimentos (Lin) s\~ao exibidas.
+Fg.\ m\'aximo e Ac.F m\'axima por linha em \textbf{negrito}.}
+\label{tab:instab-jab-deprel}
+\begingroup
+\scriptsize\setlength{\tabcolsep}{2pt}\renewcommand{\arraystretch}{1.25}%
+\begin{tabular}{l r| r r| r r| r r| r r}
+\toprule
+\multicolumn{2}{c|}{}
+  & \multicolumn{2}{c|}{\textbf{Lin}}
+  & \multicolumn{2}{c|}{\textbf{Biaff}}
+  & \multicolumn{2}{c|}{\textbf{sLin}}
+  & \multicolumn{2}{c}{\textbf{sBiaff}} \\
+\textbf{DEPREL} & \textbf{N}
+  & \textit{Fg.} & \textit{Ac.F}
+  & \textit{Fg.} & \textit{Ac.F}
+  & \textit{Fg.} & \textit{Ac.F}
+  & \textit{Fg.} & \textit{Ac.F} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}\cmidrule(lr){7-8}\cmidrule(lr){9-10}
+  \texttt{obl} & 1,519 & 1,513 & \textbf{0.8940} & 1,797 & 0.8835 & 1,563 & 0.8670 & \textbf{2,748} & 0.8729 \\
+  \texttt{nmod} & 2,226 & 1,420 & \textbf{0.9447} & 1,862 & \textbf{0.9447} & 1,542 & 0.9353 & \textbf{2,561} & 0.9420 \\
+  \texttt{amod} & 1,421 & 621 & \textbf{0.9444} & 638 & 0.9388 & 692 & 0.9402 & \textbf{1,969} & 0.9395 \\
+  \texttt{nsubj} & 1,512 & 588 & \textbf{0.9590} & 712 & 0.9544 & 562 & 0.9517 & \textbf{1,821} & 0.9537 \\
+  \texttt{advcl} & 448 & 500 & \textbf{0.8772} & 736 & 0.8504 & 494 & 0.8259 & \textbf{859} & 0.8304 \\
+  \texttt{conj} & 887 & 485 & 0.9188 & 620 & 0.9278 & 592 & 0.9256 & \textbf{1,225} & \textbf{0.9448} \\
+  \texttt{obj} & 1,248 & 469 & \textbf{0.9696} & 446 & \textbf{0.9696} & 467 & 0.9615 & \textbf{1,498} & 0.9647 \\
+  \texttt{root} & 1,639 & 399 & \textbf{0.9805} & 532 & 0.9780 & 480 & 0.9786 & \textbf{920} & 0.9793 \\
+  \texttt{acl} & 298 & 382 & \textbf{0.8523} & 520 & 0.8490 & 420 & 0.7886 & \textbf{647} & 0.7987 \\
+  \texttt{flat\!:\!name} & 626 & 307 & \textbf{0.9505} & 265 & 0.9329 & 343 & 0.9313 & \textbf{926} & 0.9297 \\
+  \texttt{xcomp} & 455 & 254 & 0.9385 & 234 & \textbf{0.9429} & 278 & 0.9011 & \textbf{620} & 0.9297 \\
+  \texttt{case} & 3,241 & 241 & \textbf{0.9948} & 188 & 0.9941 & 187 & 0.9929 & \textbf{622} & \textbf{0.9948} \\
+  \texttt{parataxis} & 128 & 235 & \textbf{0.7422} & 267 & 0.7266 & 260 & 0.6250 & \textbf{286} & 0.7266 \\
+  \texttt{acl\!:\!relcl} & 375 & 167 & \textbf{0.9867} & 249 & 0.9813 & 183 & 0.9600 & \textbf{606} & 0.9600 \\
+  \texttt{appos} & 180 & 163 & \textbf{0.9222} & 210 & 0.8833 & 194 & 0.8778 & \textbf{314} & 0.8667 \\
+  \texttt{det} & 2,406 & 159 & 0.9950 & 144 & \textbf{0.9963} & 177 & 0.9958 & \textbf{454} & 0.9946 \\
+  \texttt{advmod} & 648 & 141 & \textbf{0.9769} & 188 & 0.9691 & 246 & 0.9660 & \textbf{789} & 0.9645 \\
+  \texttt{nsubj\!:\!pass} & 150 & 128 & \textbf{0.9267} & 145 & 0.9200 & 125 & 0.8867 & \textbf{151} & 0.9133 \\
+  \texttt{ccomp} & 208 & 128 & 0.8654 & 173 & \textbf{0.9038} & 132 & 0.8606 & \textbf{312} & 0.8942 \\
+  \texttt{mark} & 472 & 127 & \textbf{0.9746} & 157 & 0.9725 & 172 & 0.9534 & \textbf{567} & 0.9682 \\
+\midrule
+  \textbf{Global} & \textbf{24,077} & 9,256 & \textbf{0.9585} & 11,115 & 0.9557 & 9,999 & 0.9487 & \textbf{22,076} & 0.9533 \\
+\bottomrule
+\end{tabular}
+\endgroup
+\instablegendaFull
+\end{table}
+
+% ══ JabuticaBERT (JaB) — UPOS ════════════════════════════════════════════
+\clearpage
+\begin{table}[p]
+\centering
+\caption{Instabilidade por categoria morfossint\'atica (UPOS) --- JabuticaBERT (JaB).
+Apenas modelos MTL. Fg.\ m\'aximo e Ac.F m\'axima por linha em \textbf{negrito}.}
+\label{tab:instab-jab-upos}
+\begingroup
+\small\setlength{\tabcolsep}{6pt}\renewcommand{\arraystretch}{1.2}%
+\begin{tabular}{l r| r r| r r}
+\toprule
+\multicolumn{2}{c|}{}
+  & \multicolumn{2}{c|}{\textbf{Lin}}
+  & \multicolumn{2}{c}{\textbf{Biaff}} \\
+\textbf{UPOS} & \textbf{N}
+  & \textit{Fg.} & \textit{Ac.F}
+  & \textit{Fg.} & \textit{Ac.F} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}
+  \texttt{NOUN} & 5,602 & \textbf{849} & \textbf{0.9884} & 588 & 0.9879 \\
+  \texttt{ADJ} & 1,847 & 770 & 0.9524 & \textbf{803} & \textbf{0.9545} \\
+  \texttt{VERB} & 3,390 & \textbf{674} & \textbf{0.9835} & 560 & 0.9829 \\
+  \texttt{PROPN} & 1,969 & \textbf{246} & \textbf{0.9883} & \textbf{246} & 0.9873 \\
+  \texttt{DET} & 2,425 & \textbf{173} & 0.9951 & 122 & \textbf{0.9959} \\
+  \texttt{ADP} & 3,558 & \textbf{164} & \textbf{0.9978} & 96 & 0.9975 \\
+  \texttt{PRON} & 634 & 159 & \textbf{0.9858} & \textbf{166} & \textbf{0.9858} \\
+  \texttt{ADV} & 676 & \textbf{133} & \textbf{0.9793} & 132 & 0.9734 \\
+  \texttt{SCONJ} & 227 & \textbf{118} & \textbf{0.9515} & 101 & 0.9339 \\
+  \texttt{AUX} & 504 & \textbf{85} & 0.9861 & 52 & \textbf{0.9921} \\
+  \texttt{X} & 85 & 59 & \textbf{0.7294} & \textbf{84} & 0.6941 \\
+  \texttt{NUM} & 405 & 53 & \textbf{0.9753} & \textbf{74} & 0.9728 \\
+  \texttt{CCONJ} & 411 & \textbf{41} & 0.9878 & 32 & \textbf{0.9927} \\
+  \texttt{SYM} & 96 & \textbf{30} & \textbf{0.9583} & 28 & \textbf{0.9583} \\
+  \texttt{PUNCT} & 2,240 & \textbf{14} & \textbf{0.9996} & 9 & 0.9991 \\
+  \texttt{INTJ} & 8 & 2 & 0.1250 & \textbf{7} & \textbf{0.2500} \\
+\midrule
+  \textbf{Global} & \textbf{24,077} & \textbf{3,570} & \textbf{0.9858} & 3,100 & 0.9854 \\
+\bottomrule
+\end{tabular}
+\endgroup
+\instablegendaMTL
+\end{table}
+
+% ══ JabuticaBERT (JaB) — UAS por época ═════════════════════════════════
+\clearpage
+\begin{table}[p]
+\centering
+\caption{UAS (HEAD) por \'epoca de avalia\c{c}\~ao --- JabuticaBERT (JaB).
+Valor m\'aximo por linha em \textbf{negrito}.}
+\label{tab:instab-jab-head}
+\begingroup
+\small\setlength{\tabcolsep}{10pt}\renewcommand{\arraystretch}{1.2}%
+\begin{tabular}{r r r r r}
+\toprule
+\textbf{\'Epoca} & \textbf{Lin} & \textbf{Biaff} & \textbf{sLin} & \textbf{sBiaff} \\
+\midrule
+   1 & 0.1111 & 0.1466 & 0.0867 & \textbf{0.4927} \\
+   6 & 0.4809 & \textbf{0.5406} & 0.4559 & 0.4732 \\
+  11 & 0.6618 & \textbf{0.7870} & 0.6921 & 0.7564 \\
+  16 & 0.7681 & \textbf{0.8470} & 0.7346 & 0.8305 \\
+  21 & 0.8282 & 0.8591 & 0.8188 & \textbf{0.8662} \\
+  26 & 0.8581 & \textbf{0.8749} & 0.8499 & 0.8746 \\
+  31 & 0.8581 & 0.8755 & 0.8597 & \textbf{0.8842} \\
+  36 & 0.8771 & 0.8781 & 0.8650 & \textbf{0.8930} \\
+\bottomrule
+\end{tabular}
+\endgroup
+\instablegendaFull
+\end{table}
+

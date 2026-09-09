@@ -1,0 +1,19 @@
+# Ambiente
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Dados e checkpoints (obter/treinar separadamente — ver README)
+data_dois/
+*.pt
+*.bin
+*.safetensors
+checkpoint-*/
+
+# Saídas de execução local
+notebooks/outputs_explicabilidade/
+*.pkl
+wandb/
+trainer_output/
+epoch_predictions/

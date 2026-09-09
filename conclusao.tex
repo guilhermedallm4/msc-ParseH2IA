@@ -1,0 +1,249 @@
+% ============================================================
+% Capítulo: Conclusão
+% ============================================================
+
+\chapter{Conclusão}
+\label{cap:conclusao}
+
+Este trabalho teve como objetivo desenvolver e avaliar o sistema \textbf{ParseH2IA}, um
+\textit{parser} de dependências sintáticas para o português brasileiro baseado em encoders
+BERT com ajuste fino completo, investigando o impacto de diferentes encoders pré-treinados e
+de duas arquiteturas de cabeçote de predição no desempenho das tarefas de HEAD, DEPREL e
+UPOS. Foram treinados e avaliados 16 modelos resultantes da combinação de quatro encoders
+— BERTimbau Large, BERTimbau Base, mBERT e JabuticaBERT — com duas arquiteturas de cabeçote
+(linear e biaffine) e dois regimes de treinamento (multi-tarefa com UPOS e ablação sem UPOS),
+todos avaliados no corpus Porttinari.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Sobre a Arquitetura Proposta}
+\label{sec:arq_proposta}
+% ─────────────────────────────────────────────────────────────────────────────
+
+É importante destacar a diferença entre a arquitetura do PortParser e a proposta pelo ParseH2IA.
+O PortParser~\citep{lopes2024towards} utiliza um encoder BERTimbau Large seguido de uma camada
+BiLSTM bidirecional e cabeçotes biaffine para HEAD e DEPREL, com ajuste fino completo de todos
+os parâmetros. O ParseH2IA, por sua vez, \textbf{suprime o BiLSTM} e conecta o encoder
+diretamente às cabeças de predição, adotando duas variantes:
+
+\begin{itemize}
+  \item \textbf{Cabeçote Linear}: o tensor de saída do encoder (após dropout) é projetado
+        diretamente por três camadas \texttt{nn.Linear} independentes para HEAD (100 classes),
+        DEPREL (44 rótulos) e UPOS ($N$ classes). A predição do arco HEAD é, portanto,
+        tratada como classificação multiclasse sobre posições relativas da sentença.
+
+  \item \textbf{Cabeçote Biaffine}: o tensor de saída do encoder é processado por quatro
+        MLPs especializadas (Linear\,+\,ELU\,+\,LayerNorm\,+\,Dropout,
+        $d_\text{arc}=500$, $d_\text{rel}=100$), seguidas por dois mecanismos de atenção
+        biaffine — um para arc/HEAD ($\text{out}=1$) e outro para rel/DEPREL
+        ($\text{out}=44$) — conforme proposto por~\citet{dozat2016deep}. A tarefa de UPOS
+        utiliza uma camada linear direta sobre a saída do encoder, sem passar pelas MLPs.
+\end{itemize}
+
+Em ambas as variantes, \textbf{todos os parâmetros do encoder são ajustados durante o
+treinamento} (\textit{full fine-tuning}), incluindo os pesos do BERT. A diferença
+arquitetural está inteiramente no cabeçote de predição.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Sobre o Conjunto de Dados}
+\label{sec:dataset_conclusao}
+% ─────────────────────────────────────────────────────────────────────────────
+
+Todos os modelos foram treinados e avaliados no corpus \textbf{Porttinari}~\citep{porttinari},
+um \textit{treebank} de dependências para o português brasileiro desenvolvido no padrão
+Universal Dependencies (UD). O corpus foi dividido nas partições padrão utilizadas ao longo
+do trabalho: \textbf{5.893 sentenças} de treinamento, \textbf{842 de validação} e
+\textbf{1.683 de teste} (33.580 tokens no conjunto de teste).
+
+O tamanho do corpus de treinamento é um fator relevante para a interpretação dos resultados.
+Com menos de seis mil sentenças de treino, o Porttinari representa um cenário de dados
+limitados (\textit{low-resource}) mesmo para modelos com ajuste fino completo. Esse contexto
+favorece modelos com menor número de parâmetros treináveis no cabeçote, pois a capacidade
+adicional do mecanismo biaffine — que inclui quatro MLPs e duas matrizes bilineares —
+introduz um risco maior de sobreajuste ao vocabulário de construções do corpus em comparação
+ao cabeçote linear, que projeta diretamente a saída do encoder com três camadas simples.
+
+O Porttinari apresenta ainda uma distribuição altamente assimétrica de rótulos de dependência:
+rótulos frequentes como \texttt{det}, \texttt{nsubj} e \texttt{punct} possuem milhares de
+ocorrências no treino, enquanto rótulos raros como \texttt{orphan}, \texttt{dislocated} e
+\texttt{vocative} contam com menos de 50 exemplos no conjunto de teste, o que explica o baixo
+desempenho consistente do sistema nesses rótulos independentemente da arquitetura do cabeçote.
+Ampliar o Porttinari com dados adicionais de outros corpora ou domínios textuais
+representaria ganho direto na cobertura dos rótulos minoritários.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Custo Computacional}
+\label{sec:custo_computacional}
+% ─────────────────────────────────────────────────────────────────────────────
+
+Todos os modelos foram treinados em uma única GPU \textbf{NVIDIA GeForce RTX 4090} (24 GB
+de VRAM), com \textit{batch size} de 16 amostras por dispositivo no treino e 32 na avaliação.
+O monitoramento dos experimentos foi realizado via \textbf{Weights \& Biases (WandB)}, no
+projeto \texttt{hf-optuna} da entidade \texttt{gdlima-universidade-federal-de-pelotas},
+disponível para consulta dos dados de treinamento de todos os modelos desenvolvidos neste
+trabalho.
+
+A Tabela~\ref{tab:custo_computacional} apresenta um resumo do custo computacional por fase
+do experimento, com os dados extraídos do WandB. Os valores de tempo por época referem-se
+à média das últimas 10 épocas de treinamento, excluindo a fase inicial de \textit{warmup}
+onde a variância é maior.
+
+% NOTA PARA O AUTOR: substitua os valores abaixo pelos dados reais extraídos do WandB.
+% Acesse: https://wandb.ai/gdlima-universidade-federal-de-pelotas/hf-optuna
+% Métricas relevantes: run_time total, step_time médio, GPU memory utilization.
+
+\begin{table}[ht]
+\centering
+\caption{Custo computacional estimado por fase experimental (GPU: RTX 4090).
+         Valores extraídos do WandB (\texttt{hf-optuna}).}
+\label{tab:custo_computacional}
+\setlength{\tabcolsep}{8pt}
+\begin{tabular}{l c c c}
+\toprule
+\textbf{Fase} & \textbf{Modelos} & \textbf{Tempo médio/época} & \textbf{Épocas} \\
+\midrule
+Busca Optuna (linear)   & 4 encoders × 10 trials & \textit{ver WandB} & 40 \\
+Busca Optuna (biaffine) & 4 encoders × 10 trials & \textit{ver WandB} & 40 \\
+Treino final (linear)   & 8 modelos              & \textit{ver WandB} & 40--41 \\
+Treino final (biaffine) & 8 modelos              & \textit{ver WandB} & 41--45 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Em termos relativos, os modelos com cabeçote biaffine apresentam maior custo de inferência
+por \textit{forward pass}, pois as quatro MLPs e as operações bilineares introduzem
+multiplicações matriciais adicionais em comparação ao cabeçote linear. Contudo, dado que o
+gargalo computacional no ajuste fino de modelos BERT concentra-se no encoder
+(auto-atenção com complexidade $\mathcal{O}(n^2)$ no comprimento da sequência), a diferença
+prática de tempo de treinamento entre os dois cabeçotes é pequena e se torna mais relevante
+apenas na inferência em produção.
+
+A busca de hiperparâmetros com 10 \textit{trials} por encoder e por arquitetura via Optuna,
+com validação cruzada em 5 partições, representou a etapa de maior custo computacional total:
+cada \textit{trial} exige 5 treinamentos completos, resultando em 50 execuções de 40 épocas
+por combinação encoder × cabeçote. O custo total da fase de busca, portanto, supera em
+ordem de magnitude o custo dos treinamentos finais.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Síntese dos Resultados}
+\label{sec:sintese}
+% ─────────────────────────────────────────────────────────────────────────────
+
+O melhor desempenho foi alcançado pela configuração \textbf{BERTimbau Large com cabeçote
+linear e aprendizado multi-tarefa} (BtL-Lin-MTL), com UAS de 94,99\%, LAS de 93,84\% e
+acurácia de UPOS de 99,28\%, representando uma diferença de 1,09 pontos percentuais em UAS
+em relação ao PortParser (96,08\%). Essa lacuna é atribuível às diferenças arquiteturais
+entre os dois sistemas: o PortParser utiliza BiLSTM sobre o encoder como camada intermediária
+de contextualização adicional e cabeçote biaffine otimizado para essa representação, enquanto
+o ParseH2IA opera sem o BiLSTM, com cabeçote linear diretamente sobre a saída do encoder.
+
+Os principais achados são:
+
+\begin{enumerate}
+  \item \textbf{Cabeçote linear supera o biaffine em três dos quatro encoders}: com margens
+        de até 5,78 pp em UAS (mBERT), o cabeçote linear demonstrou maior eficácia no
+        cenário de ajuste fino completo sobre o Porttinari. A hipótese central é que, com
+        corpus pequeno (5.893 sentenças de treino), o cabeçote linear generaliza melhor por
+        introduzir menos parâmetros e menos oportunidades de sobreajuste, enquanto o
+        biaffine, apesar de mais expressivo, não consegue aproveitar essa expressividade
+        por insuficiência de dados supervisionados.
+
+  \item \textbf{BERTimbau Large produz as melhores representações}: a hierarquia de
+        desempenho BtL\,$>$\,BtB\,$>$\,mBERT\,$>$\,JaB foi consistente ao longo de todo
+        o treinamento, confirmando que encoders maiores e pré-treinados especificamente em
+        português oferecem representações mais adequadas para o \textit{parsing}.
+
+  \item \textbf{MTL tem impacto marginal}: o ganho médio do aprendizado multi-tarefa com
+        UPOS sobre a ablação sem UPOS foi de apenas +0,33 pp em UAS para os modelos
+        lineares e negativo ($-$1,10 pp em média) para os biaffines. O UPOS, próximo
+        ao teto de desempenho, adiciona pouco sinal discriminativo ao ajuste fino.
+
+  \item \textbf{JabuticaBERT ficou abaixo do esperado}: o modelo monolíngue para o
+        português não superou o mBERT multilíngue em três das quatro variantes, possivelmente
+        em razão de diferenças de tokenização e de volume de dados de pré-treinamento
+        disponíveis para o corpus Porttinari especificamente.
+
+  \item \textbf{A análise de instabilidade revela dinâmicas ocultas}: o cabeçote biaffine
+        apresenta sistematicamente mais eventos de \textit{forgetting} por época, e rótulos
+        de alta frequência com fronteiras difusas (\texttt{nmod}, \texttt{obl}) concentram
+        a maior parte da instabilidade.
+\end{enumerate}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Contribuições}
+\label{sec:contribuicoes}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\paragraph{Contribuição empírica.} Este trabalho fornece a primeira comparação sistemática
+entre cabeçotes linear e biaffine — sem BiLSTM intermediário — com ajuste fino completo do
+encoder, para quatro encoders distintos, no corpus Porttinari. Os resultados documentam de
+forma controlada que a vantagem do biaffine sobre o linear, amplamente assumida na literatura,
+não se mantém em corpora de tamanho limitado quando o BiLSTM é suprimido. A comparação
+independente de hiperparâmetros por configuração (Apêndice~\ref{cap:resultados_hiperparametros})
+garante que as conclusões não são artefato de sub-otimização.
+
+\paragraph{Contribuição metodológica.} A metodologia de análise de instabilidade proposta —
+que rastreia predições por época e quantifica eventos de \textit{forgetting} e
+\textit{recovery} por rótulo e por token — oferece uma perspectiva complementar à avaliação
+por métricas finais. Ela permite distinguir rótulos difíceis por raridade ou ambiguidade
+intrínseca daqueles difíceis por instabilidade de otimização, informação diretamente útil
+para orientar decisões arquiteturais e de treinamento.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Trabalhos Futuros}
+\label{sec:trabalhos_futuros}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\paragraph{Inclusão do BiLSTM no ParseH2IA.} A principal diferença arquitetural entre o
+ParseH2IA e o PortParser é a ausência do BiLSTM. Avaliar sistematicamente o impacto da
+adição de uma camada BiLSTM bidirecional entre o encoder e os cabeçotes — na mesma estrutura
+de comparação linear/biaffine — permitiria isolar a contribuição dessa camada de
+contextualização adicional sobre o desempenho.
+
+\paragraph{Ampliação e diversificação do corpus.} Treinar e avaliar o ParseH2IA em outros
+\textit{treebanks} disponíveis para o português — como o GSD ou corpora de domínios
+específicos (jurídico, jornalístico, redes sociais) — permitiria avaliar a robustez das
+conclusões para além do Porttinari e verificar se a vantagem do cabeçote linear se mantém
+em distribuições de dados distintas ou com volumes maiores de treinamento.
+
+\paragraph{Decodificação estrutural.} A substituição da decodificação gulosa (\textit{greedy})
+por algoritmos de decodificação exata — como o algoritmo de Eisner para árvores
+projetivas~\citep{eisner1996} — garantiria que as predições constituem arborescências válidas,
+eliminando uma fonte de diferença em relação ao PortParser e potencialmente melhorando o LAS
+em construções ambíguas.
+
+\paragraph{Validação estatística.} Experimentos com múltiplas sementes aleatórias permitiriam
+calcular intervalos de confiança para as métricas reportadas, tornando as comparações entre
+modelos estatisticamente mais rigorosas — especialmente relevante para as diferenças pequenas
+observadas entre variantes MTL e ablação.
+
+\paragraph{Exploração do custo computacional via WandB.} Os dados de treinamento registrados
+no WandB (\texttt{hf-optuna}) permitem uma análise quantitativa detalhada de custo por
+configuração — tempo de GPU por época, memória utilizada, throughput de amostras — que pode
+orientar a escolha de arquitetura em cenários com restrições de hardware.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Considerações Finais}
+\label{sec:consideracoes_finais}
+% ─────────────────────────────────────────────────────────────────────────────
+
+Esta dissertação demonstrou que é possível construir sistemas de \textit{parsing} de
+dependências competitivos para o português brasileiro sem o BiLSTM intermediário presente no
+PortParser, utilizando cabeçotes de predição conectados diretamente ao encoder com ajuste fino
+completo. O ParseH2IA atingiu 94,99\% de UAS com a configuração BERTimbau Large + cabeçote
+linear + MTL, a menos de 1,1 pontos percentuais do estado da arte.
+
+O achado mais significativo — a superioridade do cabeçote linear sobre o biaffine em corpus
+de tamanho limitado — sugere que a escolha arquitetural não deve ser guiada apenas pelos
+resultados da literatura em cenários com corpora maiores. No Porttinari, com menos de seis mil
+sentenças de treino, a expressividade adicional do biaffine não se traduz em ganho de
+desempenho: a linearidade da projeção direta sobre o encoder é mais eficaz e mais estável.
+
+A análise de instabilidade introduzida neste trabalho também contribui com uma lente analítica
+nova para o estudo de \textit{parsers} neurais: o desempenho final esconde trajetórias de
+aprendizado muito distintas entre arquiteturas, e a estabilidade de convergência — medida
+pelos eventos de \textit{forgetting} e \textit{recovery} por rótulo — é um indicador
+complementar valioso para avaliar e comparar modelos além das métricas de acurácia final.
+
+Por fim, o projeto registrado no WandB e os 16 modelos treinados constituem um recurso
+empírico para a comunidade de PLN em português, permitindo reprodução dos experimentos,
+análise de custo computacional e ponto de partida para extensões futuras do ParseH2IA.

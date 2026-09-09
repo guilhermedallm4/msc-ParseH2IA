@@ -1,0 +1,212 @@
+% ============================================================
+% Capítulo: Introdução
+% ============================================================
+
+\chapter{Introdução}
+\label{cap:introducao}
+
+A linguagem é a principal forma de comunicação humana e constitui a base sobre a qual a maior
+parte do conhecimento produzido pela humanidade está registrado. Com a expansão da internet e
+das plataformas digitais — que, em 2025, reuniam mais de 5,56 bilhões de usuários conectados,
+dos quais 5,24 bilhões ativos em redes sociais — a produção de conteúdo textual atingiu volumes
+sem precedentes na história, gerando tanto oportunidades quanto desafios para sua análise
+automatizada. Nesse cenário, o Processamento de Linguagem Natural (PLN) emerge como área
+fundamental para o desenvolvimento de sistemas capazes de compreender, estruturar e extrair
+significado de textos em escala.
+
+Dentre as tarefas do PLN, a \textbf{análise sintática de dependências} (\textit{dependency
+parsing}) ocupa um papel central: ela permite identificar as relações gramaticais entre as
+palavras de uma sentença — qual palavra é núcleo (\textit{head}) de qual dependente, e qual
+função sintática (rótulo de dependência, \textit{DEPREL}) essa ligação expressa — produzindo
+uma representação estruturada da gramática da frase. Essa representação é fundamento para
+tarefas de maior complexidade semântica, como extração de informação, análise de sentimento
+baseada em aspecto (ABSA), resposta a perguntas e tradução automática~\citep{jurafsky2023speech}.
+Os fundamentos da análise sintática, do aprendizado profundo e dos modelos de linguagem que
+suportam este trabalho são apresentados no Capítulo~\ref{cap:referencial}.
+
+O desempenho dos \textit{parsers} de dependências avançou radicalmente com o surgimento dos
+modelos de linguagem pré-treinados baseados em \textit{Transformers}~\citep{vaswani2017attention},
+em particular o BERT~\citep{devlin2019bert}, cujas representações contextuais ricas permitiram
+que sistemas modernos atingissem acurácias próximas ao limite superior dos conjuntos de anotação
+humana em diversas línguas. O mecanismo de atenção biaffine proposto por~\citet{dozat2016deep}
+tornou-se o cabeçote de predição predominante em sistemas de estado da arte, por modelar
+explicitamente interações entre pares de tokens candidatos a arco de dependência.
+
+Paralelamente, estudos de \textit{probing}~\citep{tenney2019bert,hewitt2019structural,jawahar2019does}
+revelaram que o BERT codifica, de forma implícita e emergente, uma ampla gama de propriedades
+linguísticas — incluindo relações de dependência e estrutura de árvore sintática — em seus
+vetores de representação. Essa constatação levanta uma questão de natureza empírica relevante:
+\textit{se as representações do BERT já organizam sintaticamente o espaço vetorial, é
+necessário um cabeçote biaffine complexo, ou um cabeçote linear simples é suficiente — e
+potencialmente superior — mesmo em regime de ajuste fino completo?}
+
+É sobre essa questão que esta dissertação se debruça, apresentando o sistema
+\textbf{ParseH2IA}: um \textit{parser} de dependências sintáticas para o português brasileiro
+que remove a camada BiLSTM bidirecional presente no PortParser e conecta o encoder diretamente
+a cabeçotes de predição com ajuste fino completo, avaliado no corpus Porttinari.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Motivação}
+\label{sec:motivacao}
+% ─────────────────────────────────────────────────────────────────────────────
+
+O português brasileiro é uma das línguas mais faladas do mundo, com mais de 200 milhões de
+falantes nativos, e representa volume crescente de conteúdo digital em redes sociais,
+plataformas jornalísticas, sistemas jurídicos e repositórios científicos. Apesar de sua
+relevância, o português ainda é considerado uma língua de recursos relativamente limitados
+(\textit{lower-resource}) no contexto do PLN em comparação ao inglês: os conjuntos de dados
+anotados são menores e o volume de pesquisa publicada é proporcionalmente menor~\citep{real2020}.
+
+O \textbf{PortParser}~\citep{lopes2024towards} representa o estado da arte em \textit{parsing}
+de dependências para o português brasileiro: construído sobre o BERTimbau
+Large~\citep{souza2020bertimbau} com ajuste fino completo do encoder, uma camada BiLSTM
+bidirecional e mecanismo biaffine, atingiu 96,08\% de UAS (\textit{Unlabeled Attachment Score})
+e 94,61\% de LAS (\textit{Labeled Attachment Score}) no corpus Porttinari, constituindo o
+principal ponto de referência da área.
+
+A arquitetura do PortParser segue o padrão dominante na literatura: encoder contextual pré-treinado,
+seguido de uma camada BiLSTM para contextualização adicional, e cabeçotes biaffine para predição
+de arcos e rótulos. Contudo, o papel do BiLSTM nessa cadeia não está completamente
+elucidado: dada a já elevada capacidade de contextualização do BERT, o BiLSTM pode ser uma
+redundância arquitetural. Além disso, a escolha do mecanismo biaffine sobre alternativas mais
+simples — como projeções lineares diretas — raramente é investigada de forma controlada em
+cenários de corpus pequeno.
+
+Essa lacuna motiva a investigação conduzida no ParseH2IA: \textbf{suprimir o BiLSTM} e
+comparar sistematicamente cabeçotes linear e biaffine conectados diretamente ao encoder com
+ajuste fino completo, em quatro encoders distintos para o português, no corpus Porttinari.
+Se cabeçotes lineares atingirem desempenho comparável ou superior ao biaffine, isso simplifica
+substancialmente a arquitetura do sistema sem sacrifício de acurácia — resultado prático com
+implicações diretas para o desenvolvimento de ferramentas de PLN em português.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Objetivos}
+\label{sec:objetivos}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection*{Objetivo Geral}
+
+Desenvolver e avaliar o sistema ParseH2IA — um \textit{parser} de dependências sintáticas para
+o português brasileiro com ajuste fino completo do encoder e sem camada BiLSTM intermediária —
+comparando sistematicamente o impacto de quatro encoders pré-treinados e duas arquiteturas de
+cabeçote de predição (linear e biaffine) no desempenho do \textit{parsing}, e propondo uma
+metodologia de análise da dinâmica de estabilidade do treinamento por rastreamento de
+predições por época.
+
+\subsection*{Objetivos Específicos}
+
+\begin{enumerate}
+  \item Implementar o sistema ParseH2IA com arquitetura modular que suporte múltiplos encoders
+        BERT e múltiplas arquiteturas de cabeçote — linear (três camadas densas independentes
+        para HEAD, DEPREL e UPOS) e biaffine (quatro MLPs e dois mecanismos de atenção biaffine)
+        — operando sem camada BiLSTM intermediária.
+
+  \item Avaliar quatro encoders pré-treinados — BERTimbau Large, BERTimbau Base,
+        mBERT e JabuticaBERT — no corpus Porttinari, reportando desempenho em UAS, LAS e
+        acurácia de UPOS para cada configuração.
+
+  \item Comparar dois regimes de treinamento — multi-tarefa com UPOS (\textit{MTL}) e
+        ablação sem UPOS — em cruzamento com as quatro arquiteturas de encoder e dois
+        cabeçotes, totalizando 16 configurações experimentais.
+
+  \item Conduzir busca sistemática e independente de hiperparâmetros por configuração de
+        encoder e cabeçote, garantindo que as comparações não sejam confundidas por diferenças
+        de otimização.
+
+  \item Desenvolver e aplicar uma metodologia de análise de instabilidade do treinamento
+        baseada no rastreamento de predições por época, quantificando eventos de
+        \textit{forgetting} (acerto\,$\to$\,erro) e \textit{recovery} (erro\,$\to$\,acerto)
+        por rótulo de dependência e por token.
+
+  \item Interpretar os resultados experimentais à luz das características do corpus Porttinari
+        e das propriedades das representações BERT, avaliando em que medida a simplicidade
+        arquitetural do cabeçote linear é suficiente — ou superior — ao mecanismo biaffine
+        em cenário de corpus pequeno com ajuste fino completo.
+\end{enumerate}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Hipótese de Pesquisa}
+\label{sec:hipotese}
+% ─────────────────────────────────────────────────────────────────────────────
+
+A hipótese central desta dissertação é que, \textbf{sem a camada BiLSTM intermediária},
+um cabeçote linear é ao menos tão eficaz quanto o mecanismo biaffine para a tarefa de
+\textit{parsing} de dependências para o português brasileiro com ajuste fino completo —
+especialmente em cenários de corpus limitado, como o Porttinari (5.893 sentenças de treino)
+— porque o cabeçote linear introduz menos parâmetros e menor risco de sobreajuste em
+comparação ao biaffine, enquanto o ajuste fino completo do encoder compensa a menor
+expressividade arquitetural do cabeçote.
+
+Essa hipótese é sustentada por dois eixos de evidências. O primeiro é empírico: estudos de
+\textit{probing} demonstram que sondas lineares simples conseguem recuperar relações de
+dependência das representações BERT com alta acurácia~\citep{hewitt2019structural}, indicando
+que a informação sintática é linearmente acessível no espaço de representações do encoder.
+O segundo é prático: o cabeçote biaffine aplica quatro MLPs e transformações bilineares que
+adicionam substancialmente o número de parâmetros treináveis no cabeçote; em corpus de
+treinamento pequeno, essa capacidade adicional pode manifestar-se como sobreajuste em vez de
+generalização superior, enquanto o cabeçote linear, com seus três projetores independentes,
+atua como regularização implícita.
+
+Se confirmada, essa hipótese tem implicações práticas diretas: ao construir \textit{parsers}
+de dependências sem BiLSTM e com corpus limitado, a arquitetura linear é preferível ao biaffine,
+simplificando o sistema sem sacrifício de desempenho.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Metodologia}
+\label{sec:metodologia_intro}
+% ─────────────────────────────────────────────────────────────────────────────
+
+Para atingir os objetivos propostos, a metodologia do ParseH2IA compreende quatro etapas
+principais, detalhadas no Capítulo~\ref{cap:metodologia}:
+
+\begin{enumerate}
+  \item \textbf{Implementação do sistema}: desenvolvimento da arquitetura ParseH2IA com encoder
+        BERT com ajuste fino completo e cabeçotes modulares para HEAD, DEPREL e UPOS,
+        suprimindo a camada BiLSTM presente no PortParser~\citep{lopes2024towards}, nas
+        variantes linear e biaffine.
+
+  \item \textbf{Busca de hiperparâmetros}: otimização bayesiana de taxa de aprendizado,
+        \textit{weight decay} e \textit{warmup ratio} com validação cruzada em 5 \textit{folds},
+        conduzida independentemente para cada uma das 8 combinações encoder × cabeçote.
+
+  \item \textbf{Treinamento e avaliação}: treinamento dos 16 modelos com os hiperparâmetros
+        ótimos e avaliação no conjunto de teste do Porttinari, com reporte de UAS, LAS e
+        acurácia de UPOS em comparação ao PortParser como linha de base.
+
+  \item \textbf{Análise de instabilidade}: rastreamento das predições de cada token em cada
+        época do treinamento, computação de eventos de \textit{forgetting} e \textit{recovery}
+        por rótulo, e comparação da estabilidade de convergência entre arquiteturas e encoders.
+\end{enumerate}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Organização da Dissertação}
+\label{sec:organizacao}
+% ─────────────────────────────────────────────────────────────────────────────
+
+Esta dissertação está organizada da seguinte forma:
+
+O \textbf{Capítulo~\ref{cap:referencial}} apresenta o referencial teórico que fundamenta o
+trabalho: os conceitos de Inteligência Artificial, Aprendizado de Máquina e Aprendizado
+Profundo; os fundamentos da linguagem e do Processamento de Linguagem Natural; a análise
+sintática de constituência e de dependências; os modelos de linguagem pré-treinados baseados
+em \textit{Transformers}; e os trabalhos relacionados ao \textit{parsing} para o português
+brasileiro.
+
+O \textbf{Capítulo~\ref{cap:metodologia}} descreve a metodologia empregada no ParseH2IA:
+a arquitetura dos modelos, os encoders avaliados, os cabeçotes implementados, a estratégia
+de busca de hiperparâmetros e o processo de treinamento e avaliação.
+
+O \textbf{Capítulo~\ref{cap:resultados}} apresenta e discute os resultados obtidos pelos
+16 modelos treinados, comparando-os ao PortParser em UAS, LAS e acurácia de UPOS, analisando
+o impacto da arquitetura do cabeçote e do encoder, investigando a estabilidade de convergência
+e discutindo os achados à luz das características do corpus Porttinari e das representações
+BERT.
+
+O \textbf{Capítulo~\ref{cap:conclusao}} sintetiza as contribuições desta dissertação,
+discute as limitações do trabalho e aponta direções para investigações futuras.
+
+Os \textbf{Apêndices} reúnem o material de suporte utilizado ao longo da dissertação: as
+definições completas dos rótulos de dependência do Porttinari
+(Apêndice~\ref{cap:classe_deprel}), os resultados detalhados da busca de hiperparâmetros
+por configuração de modelo (Apêndice~\ref{cap:resultados_hiperparametros}) e as tabelas de
+desempenho por época de cada modelo treinado (Apêndice~\ref{cap:modelos_avaliados}).

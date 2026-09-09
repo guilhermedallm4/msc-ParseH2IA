@@ -1,0 +1,52 @@
+% JabuticaBERT — Biaffine (sem UPOS) (JaB-Biaff-sU)
+
+
+\begin{table}[ht]
+\centering
+\caption{Instabilidade DEPREL (esq.) e UAS por época (dir.) --- JaB-Biaff-sU. N\,=\,n.º tokens, Forg.\,=\,esquecimentos, Rec.\,=\,recuperações.}
+\label{tab:inst-modernJabuticaBERT-Base-1k-predictions-ablacao-biaffine}
+\begin{minipage}[t]{0.54\linewidth}
+\centering\tiny
+\begin{tabular}{lrrrrrrrr}
+\toprule
+\textbf{Rótulo} & \textbf{N} & \textbf{Forg.} & \textbf{Rec.} & \textbf{Osc.} & \textbf{A+E} & \textbf{Pico} & \textbf{Final} & \textbf{Drop} \\
+\midrule
+\texttt{obl} & 1,519 & 2,748 & 2,827 & 5,575 & 163 & 0.9111 & 0.8729 & 0.0382 \\
+\texttt{nmod} & 2,226 & 2,561 & 2,747 & 5,308 & 118 & 0.9524 & 0.9420 & 0.0103 \\
+\texttt{amod} & 1,421 & 1,969 & 2,002 & 3,971 & 63 & 0.9507 & 0.9395 & 0.0113 \\
+\texttt{nsubj} & 1,512 & 1,821 & 1,931 & 3,752 & 51 & 0.9570 & 0.9537 & 0.0033 \\
+\texttt{obj} & 1,248 & 1,498 & 1,581 & 3,079 & 38 & 0.9736 & 0.9647 & 0.0088 \\
+\texttt{conj} & 887 & 1,225 & 1,288 & 2,513 & 38 & 0.9583 & 0.9448 & 0.0135 \\
+\texttt{flat\!:\!name} & 626 & 926 & 931 & 1,857 & 30 & 0.9473 & 0.9297 & 0.0176 \\
+\texttt{root} & 1,639 & 920 & 960 & 1,880 & 31 & 0.9860 & 0.9793 & 0.0067 \\
+\texttt{advcl} & 448 & 859 & 980 & 1,839 & 58 & 0.8862 & 0.8304 & 0.0558 \\
+\texttt{advmod} & 648 & 789 & 832 & 1,621 & 14 & 0.9722 & 0.9645 & 0.0077 \\
+\texttt{acl} & 298 & 647 & 712 & 1,359 & 51 & 0.8490 & 0.7987 & 0.0503 \\
+\texttt{case} & 3,241 & 622 & 640 & 1,262 & 15 & 0.9960 & 0.9948 & 0.0012 \\
+\texttt{xcomp} & 455 & 620 & 678 & 1,298 & 23 & 0.9363 & 0.9297 & 0.0066 \\
+\texttt{acl\!:\!relcl} & 375 & 606 & 673 & 1,279 & 14 & 0.9760 & 0.9600 & 0.0160 \\
+\texttt{mark} & 472 & 567 & 598 & 1,165 & 10 & 0.9746 & 0.9682 & 0.0064 \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.42\linewidth}
+\centering\tiny
+\begin{tabular}{rrrrrr}
+\toprule
+\textbf{Ép.} & \textbf{UAS} & \textbf{Corr.} & \textbf{Forg.} & \textbf{Rec.} & \textbf{$\Delta$} \\
+\midrule
+1 & 0.4927 & 11,863 & 0 & 0 & +0 \\
+6 & 0.4732 & 11,394 & 1,688 & 3,384 & +1,696 \\
+11 & 0.7564 & 18,211 & 1,583 & 1,849 & +266 \\
+16 & 0.8305 & 19,996 & 1,377 & 1,302 & -75 \\
+21 & 0.8662 & 20,855 & 1,084 & 2,722 & +1,638 \\
+26 & 0.8746 & 21,057 & 825 & 595 & -230 \\
+31 & 0.8842 & 21,288 & 465 & 456 & -9 \\
+36 & 0.8930 & 21,501 & 275 & 396 & +121 \\
+41 & 0.8947 & 21,542 & 98 & 65 & -33 \\
+42 & 0.8961 & 21,575 & 65 & 98 & +33 \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\end{table}

@@ -1,0 +1,505 @@
+% Tabelas de instabilidade — geradas automaticamente dos CSVs
+% 4 encoders × 3 tabelas (DEPREL · UPOS · HEAD) = 12 tabelas
+
+\providecommand{\instablegendaFull}{%
+  \par\smallskip
+  {\footnotesize\raggedright
+  \textbf{Legenda:}
+  \textbf{Lin}\,=\,Linear com UPOS;
+  \textbf{Biaff}\,=\,Biaffine com UPOS;
+  \textbf{sLin}\,=\,sem UPOS Linear;
+  \textbf{sBiaff}\,=\,sem UPOS Biaffine.
+  Fg.\,=\,\textit{forgetting events} (acerto\,$\to$\,erro);
+  Ac.F\,=\,acur\'acia final no conjunto de teste.
+  Fg.\ m\'aximo e Ac.F m\'axima por linha em \textbf{negrito}.\par}%
+}
+\providecommand{\instablegendaMTL}{%
+  \par\smallskip
+  {\footnotesize\raggedright
+  \textbf{Legenda:}
+  \textbf{Lin}\,=\,Linear com UPOS;
+  \textbf{Biaff}\,=\,Biaffine com UPOS.
+  Fg.\,=\,\textit{forgetting events} (acerto\,$\to$\,erro);
+  Ac.F\,=\,acur\'acia final no conjunto de teste.
+  Fg.\ m\'aximo e Ac.F m\'axima por linha em \textbf{negrito}.\par}%
+}
+
+% ══ mBERT (mB) — DEPREL ═══════════════════════════════════════════
+\clearpage
+\begin{table}[p]
+\centering
+\caption{Instabilidade por r\'otulo de depend\^encia (DEPREL) --- mBERT (mB).
+As 20 categorias com maior n\'umero de esquecimentos (Lin) s\~ao exibidas.
+Fg.\ m\'aximo e Ac.F m\'axima por linha em \textbf{negrito}.}
+\label{tab:instab-mb-deprel}
+\begingroup
+\scriptsize\setlength{\tabcolsep}{2pt}\renewcommand{\arraystretch}{1.25}%
+\begin{tabular}{l r| r r| r r| r r| r r}
+\toprule
+\multicolumn{2}{c|}{}
+  & \multicolumn{2}{c|}{\textbf{Lin}}
+  & \multicolumn{2}{c|}{\textbf{Biaff}}
+  & \multicolumn{2}{c|}{\textbf{sLin}}
+  & \multicolumn{2}{c}{\textbf{sBiaff}} \\
+\textbf{DEPREL} & \textbf{N}
+  & \textit{Fg.} & \textit{Ac.F}
+  & \textit{Fg.} & \textit{Ac.F}
+  & \textit{Fg.} & \textit{Ac.F}
+  & \textit{Fg.} & \textit{Ac.F} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}\cmidrule(lr){7-8}\cmidrule(lr){9-10}
+  \texttt{nmod} & 2,035 & 1,517 & 0.9263 & \textbf{1,543} & 0.9366 & 1,263 & \textbf{0.9425} & 1,403 & 0.9351 \\
+  \texttt{obl} & 1,348 & 1,307 & \textbf{0.8895} & \textbf{1,423} & 0.8709 & 1,192 & 0.8642 & 1,187 & 0.8858 \\
+  \texttt{amod} & 1,190 & \textbf{544} & \textbf{0.9521} & \textbf{544} & 0.9420 & 470 & 0.9471 & 438 & 0.9471 \\
+  \texttt{nsubj} & 1,444 & \textbf{533} & \textbf{0.9550} & 472 & 0.9460 & 440 & 0.9488 & 485 & 0.9536 \\
+  \texttt{conj} & 832 & \textbf{525} & 0.9315 & 519 & 0.9339 & 373 & \textbf{0.9447} & 444 & 0.9423 \\
+  \texttt{advcl} & 406 & 524 & 0.8448 & \textbf{538} & 0.8498 & 433 & 0.8276 & 401 & \textbf{0.8621} \\
+  \texttt{acl} & 270 & 430 & 0.8037 & \textbf{462} & 0.8074 & 226 & 0.8148 & 373 & \textbf{0.8185} \\
+  \texttt{root} & 1,508 & \textbf{407} & \textbf{0.9808} & 398 & 0.9761 & 346 & 0.9781 & 379 & 0.9748 \\
+  \texttt{obj} & 1,143 & 349 & \textbf{0.9615} & \textbf{390} & \textbf{0.9615} & 312 & 0.9589 & 351 & 0.9563 \\
+  \texttt{parataxis} & 122 & 201 & 0.6885 & 226 & 0.7131 & 164 & 0.7377 & \textbf{248} & \textbf{0.7705} \\
+  \texttt{xcomp} & 390 & 198 & 0.9487 & \textbf{227} & 0.9385 & 224 & 0.9436 & 189 & \textbf{0.9564} \\
+  \texttt{case} & 2,239 & \textbf{184} & 0.9924 & 169 & 0.9942 & 167 & \textbf{0.9951} & 139 & 0.9924 \\
+  \texttt{flat\!:\!name} & 561 & 178 & 0.9608 & 137 & 0.9643 & \textbf{225} & 0.9590 & 215 & \textbf{0.9661} \\
+  \texttt{acl\!:\!relcl} & 342 & 171 & 0.9708 & \textbf{233} & 0.9620 & 176 & \textbf{0.9795} & 226 & 0.9766 \\
+  \texttt{advmod} & 602 & \textbf{159} & 0.9718 & 112 & 0.9718 & 153 & 0.9734 & 95 & \textbf{0.9751} \\
+  \texttt{appos} & 165 & 116 & \textbf{0.9273} & \textbf{137} & 0.8970 & 102 & \textbf{0.9273} & 136 & 0.9212 \\
+  \texttt{mark} & 404 & 107 & 0.9678 & \textbf{137} & \textbf{0.9728} & 104 & 0.9653 & 108 & 0.9678 \\
+  \texttt{det} & 2,406 & 106 & 0.9954 & \textbf{122} & \textbf{0.9958} & 104 & \textbf{0.9958} & 108 & 0.9946 \\
+  \texttt{nsubj\!:\!pass} & 127 & 95 & 0.8976 & \textbf{132} & \textbf{0.9449} & 61 & 0.9213 & 92 & 0.9213 \\
+  \texttt{ccomp} & 192 & 92 & \textbf{0.9635} & \textbf{134} & 0.9479 & 67 & 0.9375 & \textbf{134} & 0.9375 \\
+\midrule
+  \textbf{Global} & \textbf{21,664} & 8,501 & 0.9561 & \textbf{8,867} & 0.9539 & 7,140 & 0.9551 & 7,808 & \textbf{0.9566} \\
+\bottomrule
+\end{tabular}
+\endgroup
+\instablegendaFull
+\end{table}
+
+% ══ mBERT (mB) — UPOS ════════════════════════════════════════════
+\clearpage
+\begin{table}[p]
+\centering
+\caption{Instabilidade por categoria morfossint\'atica (UPOS) --- mBERT (mB).
+Apenas modelos MTL. Fg.\ m\'aximo e Ac.F m\'axima por linha em \textbf{negrito}.}
+\label{tab:instab-mb-upos}
+\begingroup
+\small\setlength{\tabcolsep}{6pt}\renewcommand{\arraystretch}{1.2}%
+\begin{tabular}{l r| r r| r r}
+\toprule
+\multicolumn{2}{c|}{}
+  & \multicolumn{2}{c|}{\textbf{Lin}}
+  & \multicolumn{2}{c}{\textbf{Biaff}} \\
+\textbf{UPOS} & \textbf{N}
+  & \textit{Fg.} & \textit{Ac.F}
+  & \textit{Fg.} & \textit{Ac.F} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}
+  \texttt{ADJ} & 1,611 & \textbf{851} & \textbf{0.9497} & 766 & 0.9423 \\
+  \texttt{VERB} & 3,075 & \textbf{769} & \textbf{0.9805} & 559 & \textbf{0.9805} \\
+  \texttt{NOUN} & 5,041 & \textbf{756} & \textbf{0.9808} & 669 & 0.9804 \\
+  \texttt{PROPN} & 1,821 & \textbf{213} & \textbf{0.9907} & 141 & \textbf{0.9907} \\
+  \texttt{ADV} & 631 & \textbf{134} & 0.9794 & 101 & \textbf{0.9826} \\
+  \texttt{ADP} & 2,473 & \textbf{121} & 0.9943 & 103 & \textbf{0.9968} \\
+  \texttt{DET} & 2,425 & \textbf{119} & \textbf{0.9959} & 106 & \textbf{0.9959} \\
+  \texttt{PRON} & 655 & 115 & \textbf{0.9832} & \textbf{117} & 0.9740 \\
+  \texttt{SCONJ} & 227 & 97 & 0.9471 & \textbf{105} & \textbf{0.9515} \\
+  \texttt{X} & 63 & \textbf{67} & 0.6667 & 44 & \textbf{0.6825} \\
+  \texttt{AUX} & 490 & 52 & \textbf{0.9898} & \textbf{56} & \textbf{0.9898} \\
+  \texttt{NUM} & 392 & \textbf{49} & \textbf{0.9847} & 32 & 0.9796 \\
+  \texttt{CCONJ} & 412 & \textbf{30} & \textbf{0.9927} & 21 & 0.9854 \\
+  \texttt{SYM} & 98 & \textbf{28} & \textbf{0.9898} & 16 & \textbf{0.9898} \\
+  \texttt{PUNCT} & 2,242 & \textbf{6} & \textbf{1.0000} & 1 & \textbf{1.0000} \\
+  \texttt{INTJ} & 8 & \textbf{2} & \textbf{0.1250} & 0 & 0.0000 \\
+\midrule
+  \textbf{Global} & \textbf{21,664} & \textbf{3,409} & \textbf{0.9835} & 2,837 & 0.9827 \\
+\bottomrule
+\end{tabular}
+\endgroup
+\instablegendaMTL
+\end{table}
+
+% ══ mBERT (mB) — UAS por época ═════════════════════════════════
+\clearpage
+\begin{table}[p]
+\centering
+\caption{UAS (HEAD) por \'epoca de avalia\c{c}\~ao --- mBERT (mB).
+Valor m\'aximo por linha em \textbf{negrito}.}
+\label{tab:instab-mb-head}
+\begingroup
+\small\setlength{\tabcolsep}{10pt}\renewcommand{\arraystretch}{1.2}%
+\begin{tabular}{r r r r r}
+\toprule
+\textbf{\'Epoca} & \textbf{Lin} & \textbf{Biaff} & \textbf{sLin} & \textbf{sBiaff} \\
+\midrule
+   1 & 0.1128 & \textbf{0.1318} & 0.1021 & 0.1249 \\
+   6 & 0.5580 & \textbf{0.5951} & 0.5180 & 0.5744 \\
+  11 & 0.7559 & 0.7380 & 0.7537 & \textbf{0.7571} \\
+  16 & 0.8123 & 0.8107 & \textbf{0.8143} & 0.7861 \\
+  21 & \textbf{0.8732} & 0.8314 & 0.8483 & 0.8516 \\
+  26 & 0.8848 & 0.8481 & \textbf{0.8926} & 0.8470 \\
+  31 & \textbf{0.9049} & 0.8518 & 0.8993 & 0.8754 \\
+  36 & \textbf{0.9162} & 0.8572 & 0.9093 & 0.8796 \\
+\bottomrule
+\end{tabular}
+\endgroup
+\instablegendaFull
+\end{table}
+
+% ══ BERTimbau Base (BtB) — DEPREL ═══════════════════════════════════════════
+\clearpage
+\begin{table}[p]
+\centering
+\caption{Instabilidade por r\'otulo de depend\^encia (DEPREL) --- BERTimbau Base (BtB).
+As 20 categorias com maior n\'umero de esquecimentos (Lin) s\~ao exibidas.
+Fg.\ m\'aximo e Ac.F m\'axima por linha em \textbf{negrito}.}
+\label{tab:instab-btb-deprel}
+\begingroup
+\scriptsize\setlength{\tabcolsep}{2pt}\renewcommand{\arraystretch}{1.25}%
+\begin{tabular}{l r| r r| r r| r r| r r}
+\toprule
+\multicolumn{2}{c|}{}
+  & \multicolumn{2}{c|}{\textbf{Lin}}
+  & \multicolumn{2}{c|}{\textbf{Biaff}}
+  & \multicolumn{2}{c|}{\textbf{sLin}}
+  & \multicolumn{2}{c}{\textbf{sBiaff}} \\
+\textbf{DEPREL} & \textbf{N}
+  & \textit{Fg.} & \textit{Ac.F}
+  & \textit{Fg.} & \textit{Ac.F}
+  & \textit{Fg.} & \textit{Ac.F}
+  & \textit{Fg.} & \textit{Ac.F} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}\cmidrule(lr){7-8}\cmidrule(lr){9-10}
+  \texttt{nmod} & 1,729 & 982 & \textbf{0.9491} & 1,026 & 0.9468 & 659 & 0.9445 & \textbf{1,093} & \textbf{0.9491} \\
+  \texttt{obl} & 1,132 & 775 & 0.9090 & \textbf{897} & 0.8975 & 700 & 0.9011 & 789 & \textbf{0.9099} \\
+  \texttt{amod} & 927 & \textbf{229} & 0.9676 & 221 & \textbf{0.9709} & 190 & 0.9644 & 180 & 0.9676 \\
+  \texttt{obj} & 862 & \textbf{224} & 0.9710 & 202 & \textbf{0.9745} & 142 & 0.9710 & 162 & 0.9733 \\
+  \texttt{advcl} & 333 & 223 & 0.8829 & \textbf{343} & 0.8529 & 217 & \textbf{0.8889} & 243 & 0.8589 \\
+  \texttt{conj} & 630 & 216 & 0.9635 & \textbf{287} & \textbf{0.9651} & 196 & 0.9619 & 217 & \textbf{0.9651} \\
+  \texttt{nsubj} & 1,243 & 214 & 0.9678 & \textbf{265} & \textbf{0.9702} & 188 & 0.9670 & 224 & 0.9662 \\
+  \texttt{parataxis} & 101 & \textbf{178} & \textbf{0.7525} & 167 & \textbf{0.7525} & 170 & 0.7228 & 139 & \textbf{0.7525} \\
+  \texttt{flat\!:\!name} & 532 & 173 & 0.9680 & 150 & \textbf{0.9756} & 80 & 0.9680 & \textbf{236} & 0.9662 \\
+  \texttt{acl} & 186 & 163 & 0.8441 & 202 & \textbf{0.8817} & 137 & 0.8387 & \textbf{239} & 0.8441 \\
+  \texttt{root} & 1,144 & 141 & \textbf{0.9851} & \textbf{213} & 0.9790 & 149 & 0.9808 & 194 & 0.9764 \\
+  \texttt{xcomp} & 293 & 112 & 0.9659 & \textbf{137} & 0.9454 & 96 & 0.9556 & 112 & \textbf{0.9693} \\
+  \texttt{advmod} & 575 & \textbf{95} & 0.9809 & 73 & \textbf{0.9826} & 60 & 0.9809 & 74 & 0.9722 \\
+  \texttt{appos} & 153 & 92 & 0.9150 & \textbf{126} & 0.9346 & 75 & \textbf{0.9412} & 123 & 0.9150 \\
+  \texttt{acl\!:\!relcl} & 252 & 86 & 0.9762 & \textbf{101} & \textbf{0.9802} & 58 & 0.9722 & 65 & 0.9683 \\
+  \texttt{mark} & 404 & \textbf{78} & 0.9777 & 54 & \textbf{0.9827} & 65 & \textbf{0.9827} & 58 & 0.9777 \\
+  \texttt{fixed} & 117 & \textbf{71} & \textbf{0.9915} & 46 & 0.9744 & 41 & \textbf{0.9915} & 54 & 0.9658 \\
+  \texttt{case} & 2,234 & \textbf{69} & 0.9960 & 67 & 0.9978 & 41 & 0.9969 & 64 & \textbf{0.9982} \\
+  \texttt{ccomp} & 139 & \textbf{64} & \textbf{0.9281} & 58 & 0.9209 & 47 & 0.9209 & 51 & 0.9209 \\
+  \texttt{ccomp\!:\!speech} & 118 & 58 & \textbf{0.9661} & 68 & 0.9407 & 32 & 0.9492 & \textbf{76} & 0.9576 \\
+\midrule
+  \textbf{Global} & \textbf{19,239} & 4,664 & \textbf{0.9695} & \textbf{5,265} & 0.9689 & 3,702 & 0.9679 & 4,852 & 0.9684 \\
+\bottomrule
+\end{tabular}
+\endgroup
+\instablegendaFull
+\end{table}
+
+% ══ BERTimbau Base (BtB) — UPOS ════════════════════════════════════════════
+\clearpage
+\begin{table}[p]
+\centering
+\caption{Instabilidade por categoria morfossint\'atica (UPOS) --- BERTimbau Base (BtB).
+Apenas modelos MTL. Fg.\ m\'aximo e Ac.F m\'axima por linha em \textbf{negrito}.}
+\label{tab:instab-btb-upos}
+\begingroup
+\small\setlength{\tabcolsep}{6pt}\renewcommand{\arraystretch}{1.2}%
+\begin{tabular}{l r| r r| r r}
+\toprule
+\multicolumn{2}{c|}{}
+  & \multicolumn{2}{c|}{\textbf{Lin}}
+  & \multicolumn{2}{c}{\textbf{Biaff}} \\
+\textbf{UPOS} & \textbf{N}
+  & \textit{Fg.} & \textit{Ac.F}
+  & \textit{Fg.} & \textit{Ac.F} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}
+  \texttt{NOUN} & 3,819 & \textbf{386} & 0.9890 & 333 & \textbf{0.9893} \\
+  \texttt{ADJ} & 1,247 & \textbf{299} & 0.9727 & 254 & \textbf{0.9759} \\
+  \texttt{VERB} & 2,301 & \textbf{237} & 0.9865 & 226 & \textbf{0.9883} \\
+  \texttt{PROPN} & 1,822 & \textbf{174} & 0.9923 & 112 & \textbf{0.9951} \\
+  \texttt{X} & 91 & \textbf{116} & 0.7582 & 57 & \textbf{0.7802} \\
+  \texttt{ADV} & 602 & \textbf{88} & 0.9850 & 39 & \textbf{0.9884} \\
+  \texttt{SCONJ} & 227 & \textbf{78} & 0.9515 & 45 & \textbf{0.9736} \\
+  \texttt{DET} & 2,403 & \textbf{65} & \textbf{0.9971} & 47 & \textbf{0.9971} \\
+  \texttt{ADP} & 2,468 & \textbf{59} & 0.9984 & 16 & \textbf{0.9992} \\
+  \texttt{CCONJ} & 408 & \textbf{37} & \textbf{0.9926} & 19 & \textbf{0.9926} \\
+  \texttt{PRON} & 622 & 32 & \textbf{0.9904} & \textbf{47} & \textbf{0.9904} \\
+  \texttt{NUM} & 406 & 27 & \textbf{0.9852} & \textbf{30} & \textbf{0.9852} \\
+  \texttt{AUX} & 474 & 11 & \textbf{0.9958} & \textbf{12} & 0.9937 \\
+  \texttt{SYM} & 98 & 11 & \textbf{0.9796} & \textbf{24} & 0.9694 \\
+  \texttt{INTJ} & 9 & \textbf{4} & \textbf{0.1111} & \textbf{4} & 0.0000 \\
+  \texttt{PUNCT} & 2,242 & 3 & 0.9996 & \textbf{7} & \textbf{1.0000} \\
+\midrule
+  \textbf{Global} & \textbf{19,239} & \textbf{1,627} & 0.9895 & 1,272 & \textbf{0.9907} \\
+\bottomrule
+\end{tabular}
+\endgroup
+\instablegendaMTL
+\end{table}
+
+% ══ BERTimbau Base (BtB) — UAS por época ═════════════════════════════════
+\clearpage
+\begin{table}[p]
+\centering
+\caption{UAS (HEAD) por \'epoca de avalia\c{c}\~ao --- BERTimbau Base (BtB).
+Valor m\'aximo por linha em \textbf{negrito}.}
+\label{tab:instab-btb-head}
+\begingroup
+\small\setlength{\tabcolsep}{10pt}\renewcommand{\arraystretch}{1.2}%
+\begin{tabular}{r r r r r}
+\toprule
+\textbf{\'Epoca} & \textbf{Lin} & \textbf{Biaff} & \textbf{sLin} & \textbf{sBiaff} \\
+\midrule
+   1 & 0.1061 & \textbf{0.1246} & 0.0690 & 0.0856 \\
+   6 & 0.6471 & \textbf{0.6714} & 0.5982 & 0.6475 \\
+  11 & 0.8172 & 0.8231 & 0.8139 & \textbf{0.8291} \\
+  16 & \textbf{0.8800} & 0.8595 & 0.8582 & 0.8545 \\
+  21 & 0.8941 & 0.8661 & \textbf{0.9000} & 0.8925 \\
+  26 & 0.9026 & 0.8767 & \textbf{0.9120} & 0.8938 \\
+  31 & 0.9190 & 0.8819 & \textbf{0.9209} & 0.8997 \\
+  36 & \textbf{0.9273} & 0.8853 & 0.9266 & 0.8977 \\
+\bottomrule
+\end{tabular}
+\endgroup
+\instablegendaFull
+\end{table}
+
+% ══ BERTimbau Large (BtL) — DEPREL ═══════════════════════════════════════════
+\clearpage
+\begin{table}[p]
+\centering
+\caption{Instabilidade por r\'otulo de depend\^encia (DEPREL) --- BERTimbau Large (BtL).
+As 20 categorias com maior n\'umero de esquecimentos (Lin) s\~ao exibidas.
+Fg.\ m\'aximo e Ac.F m\'axima por linha em \textbf{negrito}.}
+\label{tab:instab-btl-deprel}
+\begingroup
+\scriptsize\setlength{\tabcolsep}{2pt}\renewcommand{\arraystretch}{1.25}%
+\begin{tabular}{l r| r r| r r| r r| r r}
+\toprule
+\multicolumn{2}{c|}{}
+  & \multicolumn{2}{c|}{\textbf{Lin}}
+  & \multicolumn{2}{c|}{\textbf{Biaff}}
+  & \multicolumn{2}{c|}{\textbf{sLin}}
+  & \multicolumn{2}{c}{\textbf{sBiaff}} \\
+\textbf{DEPREL} & \textbf{N}
+  & \textit{Fg.} & \textit{Ac.F}
+  & \textit{Fg.} & \textit{Ac.F}
+  & \textit{Fg.} & \textit{Ac.F}
+  & \textit{Fg.} & \textit{Ac.F} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}\cmidrule(lr){7-8}\cmidrule(lr){9-10}
+  \texttt{nmod} & 1,729 & 923 & 0.9468 & \textbf{2,057} & \textbf{0.9514} & 895 & 0.9479 & 895 & \textbf{0.9514} \\
+  \texttt{obl} & 1,132 & 900 & \textbf{0.9178} & \textbf{1,895} & 0.9037 & 896 & 0.9117 & 866 & 0.9002 \\
+  \texttt{amod} & 927 & 270 & 0.9590 & \textbf{1,122} & 0.9547 & 222 & 0.9579 & 206 & \textbf{0.9655} \\
+  \texttt{nsubj} & 1,243 & 264 & 0.9735 & \textbf{1,344} & \textbf{0.9791} & 219 & 0.9702 & 272 & 0.9767 \\
+  \texttt{advcl} & 333 & 229 & 0.8979 & \textbf{559} & \textbf{0.9099} & 204 & 0.8889 & 293 & 0.8769 \\
+  \texttt{root} & 1,144 & 225 & 0.9816 & \textbf{480} & 0.9825 & 142 & 0.9843 & 143 & \textbf{0.9851} \\
+  \texttt{acl} & 186 & 191 & 0.8226 & \textbf{339} & 0.8710 & 168 & 0.8710 & 221 & \textbf{0.8763} \\
+  \texttt{conj} & 630 & 189 & 0.9667 & \textbf{792} & \textbf{0.9794} & 154 & 0.9730 & 204 & 0.9746 \\
+  \texttt{parataxis} & 101 & 189 & 0.7327 & \textbf{213} & 0.7624 & 167 & 0.7624 & 162 & \textbf{0.7723} \\
+  \texttt{obj} & 862 & 189 & 0.9722 & \textbf{923} & 0.9710 & 147 & 0.9733 & 179 & \textbf{0.9745} \\
+  \texttt{flat\!:\!name} & 532 & 188 & 0.9718 & \textbf{678} & 0.9624 & 250 & 0.9680 & 179 & \textbf{0.9774} \\
+  \texttt{appos} & 153 & 118 & \textbf{0.9346} & \textbf{266} & 0.8954 & 119 & 0.9281 & 80 & 0.9281 \\
+  \texttt{xcomp} & 293 & 94 & \textbf{0.9693} & \textbf{349} & \textbf{0.9693} & 114 & 0.9659 & 92 & 0.9590 \\
+  \texttt{acl\!:\!relcl} & 252 & 90 & 0.9802 & \textbf{313} & \textbf{0.9921} & 80 & 0.9841 & 91 & 0.9802 \\
+  \texttt{advmod} & 575 & 89 & 0.9826 & \textbf{628} & \textbf{0.9843} & 60 & 0.9774 & 89 & 0.9757 \\
+  \texttt{det} & 2,384 & 71 & \textbf{0.9979} & \textbf{231} & 0.9971 & 74 & 0.9975 & 61 & 0.9971 \\
+  \texttt{case} & 2,234 & 68 & 0.9973 & \textbf{499} & \textbf{0.9982} & 74 & 0.9960 & 85 & 0.9973 \\
+  \texttt{mark} & 404 & 67 & \textbf{0.9876} & \textbf{488} & 0.9802 & 59 & 0.9728 & 64 & 0.9802 \\
+  \texttt{fixed} & 117 & 59 & \textbf{0.9744} & \textbf{141} & 0.9658 & 51 & \textbf{0.9744} & 37 & \textbf{0.9744} \\
+  \texttt{obl\!:\!agent} & 68 & \textbf{57} & 0.8971 & 39 & 0.9412 & 40 & \textbf{0.9559} & 41 & 0.9412 \\
+\midrule
+  \textbf{Global} & \textbf{19,239} & 4,948 & 0.9709 & \textbf{15,504} & \textbf{0.9717} & 4,545 & 0.9707 & 4,732 & 0.9713 \\
+\bottomrule
+\end{tabular}
+\endgroup
+\instablegendaFull
+\end{table}
+
+% ══ BERTimbau Large (BtL) — UPOS ════════════════════════════════════════════
+\clearpage
+\begin{table}[p]
+\centering
+\caption{Instabilidade por categoria morfossint\'atica (UPOS) --- BERTimbau Large (BtL).
+Apenas modelos MTL. Fg.\ m\'aximo e Ac.F m\'axima por linha em \textbf{negrito}.}
+\label{tab:instab-btl-upos}
+\begingroup
+\small\setlength{\tabcolsep}{6pt}\renewcommand{\arraystretch}{1.2}%
+\begin{tabular}{l r| r r| r r}
+\toprule
+\multicolumn{2}{c|}{}
+  & \multicolumn{2}{c|}{\textbf{Lin}}
+  & \multicolumn{2}{c}{\textbf{Biaff}} \\
+\textbf{UPOS} & \textbf{N}
+  & \textit{Fg.} & \textit{Ac.F}
+  & \textit{Fg.} & \textit{Ac.F} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}
+  \texttt{NOUN} & 3,819 & 385 & \textbf{0.9898} & \textbf{948} & 0.9890 \\
+  \texttt{ADJ} & 1,247 & 324 & \textbf{0.9703} & \textbf{1,497} & 0.9671 \\
+  \texttt{VERB} & 2,301 & 303 & 0.9857 & \textbf{1,496} & \textbf{0.9870} \\
+  \texttt{PROPN} & 1,822 & 163 & 0.9912 & \textbf{1,880} & \textbf{0.9929} \\
+  \texttt{X} & 91 & \textbf{108} & \textbf{0.8571} & 55 & \textbf{0.8571} \\
+  \texttt{ADV} & 602 & 99 & 0.9867 & \textbf{659} & \textbf{0.9900} \\
+  \texttt{DET} & 2,403 & 78 & \textbf{0.9975} & \textbf{1,222} & 0.9971 \\
+  \texttt{PRON} & 622 & 70 & \textbf{0.9904} & \textbf{651} & 0.9887 \\
+  \texttt{SCONJ} & 227 & 68 & \textbf{0.9604} & \textbf{276} & 0.9559 \\
+  \texttt{CCONJ} & 408 & 46 & 0.9877 & \textbf{429} & \textbf{0.9902} \\
+  \texttt{ADP} & 2,468 & 44 & \textbf{0.9992} & \textbf{774} & \textbf{0.9992} \\
+  \texttt{SYM} & 98 & 35 & \textbf{0.9898} & \textbf{56} & 0.9796 \\
+  \texttt{NUM} & 406 & 29 & \textbf{0.9852} & \textbf{412} & \textbf{0.9852} \\
+  \texttt{AUX} & 474 & 27 & \textbf{0.9958} & \textbf{500} & 0.9937 \\
+  \texttt{INTJ} & 9 & \textbf{11} & \textbf{0.2222} & 10 & \textbf{0.2222} \\
+  \texttt{PUNCT} & 2,242 & 11 & \textbf{1.0000} & \textbf{1,364} & \textbf{1.0000} \\
+\midrule
+  \textbf{Global} & \textbf{19,239} & 1,801 & \textbf{0.9901} & \textbf{12,229} & 0.9900 \\
+\bottomrule
+\end{tabular}
+\endgroup
+\instablegendaMTL
+\end{table}
+
+% ══ BERTimbau Large (BtL) — UAS por época ═════════════════════════════════
+\clearpage
+\begin{table}[p]
+\centering
+\caption{UAS (HEAD) por \'epoca de avalia\c{c}\~ao --- BERTimbau Large (BtL).
+Valor m\'aximo por linha em \textbf{negrito}.}
+\label{tab:instab-btl-head}
+\begingroup
+\small\setlength{\tabcolsep}{10pt}\renewcommand{\arraystretch}{1.2}%
+\begin{tabular}{r r r r r}
+\toprule
+\textbf{\'Epoca} & \textbf{Lin} & \textbf{Biaff} & \textbf{sLin} & \textbf{sBiaff} \\
+\midrule
+   1 & 0.1093 & \textbf{0.1363} & 0.0801 & 0.1025 \\
+   6 & 0.6881 & 0.3065 & 0.5967 & \textbf{0.7160} \\
+  11 & 0.8486 & 0.7508 & 0.8365 & \textbf{0.8637} \\
+  16 & 0.8672 & 0.8445 & 0.8531 & \textbf{0.8800} \\
+  21 & \textbf{0.9223} & 0.8786 & 0.9126 & 0.9014 \\
+  26 & \textbf{0.9263} & 0.8984 & 0.9237 & 0.9044 \\
+  31 & 0.9312 & 0.9000 & \textbf{0.9403} & 0.9083 \\
+  36 & 0.9436 & 0.8948 & \textbf{0.9470} & 0.9099 \\
+\bottomrule
+\end{tabular}
+\endgroup
+\instablegendaFull
+\end{table}
+
+% ══ JabuticaBERT (JaB) — DEPREL ═══════════════════════════════════════════
+\clearpage
+\begin{table}[p]
+\centering
+\caption{Instabilidade por r\'otulo de depend\^encia (DEPREL) --- JabuticaBERT (JaB).
+As 20 categorias com maior n\'umero de esquecimentos (Lin) s\~ao exibidas.
+Fg.\ m\'aximo e Ac.F m\'axima por linha em \textbf{negrito}.}
+\label{tab:instab-jab-deprel}
+\begingroup
+\scriptsize\setlength{\tabcolsep}{2pt}\renewcommand{\arraystretch}{1.25}%
+\begin{tabular}{l r| r r| r r| r r| r r}
+\toprule
+\multicolumn{2}{c|}{}
+  & \multicolumn{2}{c|}{\textbf{Lin}}
+  & \multicolumn{2}{c|}{\textbf{Biaff}}
+  & \multicolumn{2}{c|}{\textbf{sLin}}
+  & \multicolumn{2}{c}{\textbf{sBiaff}} \\
+\textbf{DEPREL} & \textbf{N}
+  & \textit{Fg.} & \textit{Ac.F}
+  & \textit{Fg.} & \textit{Ac.F}
+  & \textit{Fg.} & \textit{Ac.F}
+  & \textit{Fg.} & \textit{Ac.F} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}\cmidrule(lr){7-8}\cmidrule(lr){9-10}
+  \texttt{obl} & 1,519 & 1,513 & \textbf{0.8940} & 1,797 & 0.8835 & 1,563 & 0.8670 & \textbf{2,748} & 0.8729 \\
+  \texttt{nmod} & 2,226 & 1,420 & \textbf{0.9447} & 1,862 & \textbf{0.9447} & 1,542 & 0.9353 & \textbf{2,561} & 0.9420 \\
+  \texttt{amod} & 1,421 & 621 & \textbf{0.9444} & 638 & 0.9388 & 692 & 0.9402 & \textbf{1,969} & 0.9395 \\
+  \texttt{nsubj} & 1,512 & 588 & \textbf{0.9590} & 712 & 0.9544 & 562 & 0.9517 & \textbf{1,821} & 0.9537 \\
+  \texttt{advcl} & 448 & 500 & \textbf{0.8772} & 736 & 0.8504 & 494 & 0.8259 & \textbf{859} & 0.8304 \\
+  \texttt{conj} & 887 & 485 & 0.9188 & 620 & 0.9278 & 592 & 0.9256 & \textbf{1,225} & \textbf{0.9448} \\
+  \texttt{obj} & 1,248 & 469 & \textbf{0.9696} & 446 & \textbf{0.9696} & 467 & 0.9615 & \textbf{1,498} & 0.9647 \\
+  \texttt{root} & 1,639 & 399 & \textbf{0.9805} & 532 & 0.9780 & 480 & 0.9786 & \textbf{920} & 0.9793 \\
+  \texttt{acl} & 298 & 382 & \textbf{0.8523} & 520 & 0.8490 & 420 & 0.7886 & \textbf{647} & 0.7987 \\
+  \texttt{flat\!:\!name} & 626 & 307 & \textbf{0.9505} & 265 & 0.9329 & 343 & 0.9313 & \textbf{926} & 0.9297 \\
+  \texttt{xcomp} & 455 & 254 & 0.9385 & 234 & \textbf{0.9429} & 278 & 0.9011 & \textbf{620} & 0.9297 \\
+  \texttt{case} & 3,241 & 241 & \textbf{0.9948} & 188 & 0.9941 & 187 & 0.9929 & \textbf{622} & \textbf{0.9948} \\
+  \texttt{parataxis} & 128 & 235 & \textbf{0.7422} & 267 & 0.7266 & 260 & 0.6250 & \textbf{286} & 0.7266 \\
+  \texttt{acl\!:\!relcl} & 375 & 167 & \textbf{0.9867} & 249 & 0.9813 & 183 & 0.9600 & \textbf{606} & 0.9600 \\
+  \texttt{appos} & 180 & 163 & \textbf{0.9222} & 210 & 0.8833 & 194 & 0.8778 & \textbf{314} & 0.8667 \\
+  \texttt{det} & 2,406 & 159 & 0.9950 & 144 & \textbf{0.9963} & 177 & 0.9958 & \textbf{454} & 0.9946 \\
+  \texttt{advmod} & 648 & 141 & \textbf{0.9769} & 188 & 0.9691 & 246 & 0.9660 & \textbf{789} & 0.9645 \\
+  \texttt{nsubj\!:\!pass} & 150 & 128 & \textbf{0.9267} & 145 & 0.9200 & 125 & 0.8867 & \textbf{151} & 0.9133 \\
+  \texttt{ccomp} & 208 & 128 & 0.8654 & 173 & \textbf{0.9038} & 132 & 0.8606 & \textbf{312} & 0.8942 \\
+  \texttt{mark} & 472 & 127 & \textbf{0.9746} & 157 & 0.9725 & 172 & 0.9534 & \textbf{567} & 0.9682 \\
+\midrule
+  \textbf{Global} & \textbf{24,077} & 9,256 & \textbf{0.9585} & 11,115 & 0.9557 & 9,999 & 0.9487 & \textbf{22,076} & 0.9533 \\
+\bottomrule
+\end{tabular}
+\endgroup
+\instablegendaFull
+\end{table}
+
+% ══ JabuticaBERT (JaB) — UPOS ════════════════════════════════════════════
+\clearpage
+\begin{table}[p]
+\centering
+\caption{Instabilidade por categoria morfossint\'atica (UPOS) --- JabuticaBERT (JaB).
+Apenas modelos MTL. Fg.\ m\'aximo e Ac.F m\'axima por linha em \textbf{negrito}.}
+\label{tab:instab-jab-upos}
+\begingroup
+\small\setlength{\tabcolsep}{6pt}\renewcommand{\arraystretch}{1.2}%
+\begin{tabular}{l r| r r| r r}
+\toprule
+\multicolumn{2}{c|}{}
+  & \multicolumn{2}{c|}{\textbf{Lin}}
+  & \multicolumn{2}{c}{\textbf{Biaff}} \\
+\textbf{UPOS} & \textbf{N}
+  & \textit{Fg.} & \textit{Ac.F}
+  & \textit{Fg.} & \textit{Ac.F} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}
+  \texttt{NOUN} & 5,602 & \textbf{849} & \textbf{0.9884} & 588 & 0.9879 \\
+  \texttt{ADJ} & 1,847 & 770 & 0.9524 & \textbf{803} & \textbf{0.9545} \\
+  \texttt{VERB} & 3,390 & \textbf{674} & \textbf{0.9835} & 560 & 0.9829 \\
+  \texttt{PROPN} & 1,969 & \textbf{246} & \textbf{0.9883} & \textbf{246} & 0.9873 \\
+  \texttt{DET} & 2,425 & \textbf{173} & 0.9951 & 122 & \textbf{0.9959} \\
+  \texttt{ADP} & 3,558 & \textbf{164} & \textbf{0.9978} & 96 & 0.9975 \\
+  \texttt{PRON} & 634 & 159 & \textbf{0.9858} & \textbf{166} & \textbf{0.9858} \\
+  \texttt{ADV} & 676 & \textbf{133} & \textbf{0.9793} & 132 & 0.9734 \\
+  \texttt{SCONJ} & 227 & \textbf{118} & \textbf{0.9515} & 101 & 0.9339 \\
+  \texttt{AUX} & 504 & \textbf{85} & 0.9861 & 52 & \textbf{0.9921} \\
+  \texttt{X} & 85 & 59 & \textbf{0.7294} & \textbf{84} & 0.6941 \\
+  \texttt{NUM} & 405 & 53 & \textbf{0.9753} & \textbf{74} & 0.9728 \\
+  \texttt{CCONJ} & 411 & \textbf{41} & 0.9878 & 32 & \textbf{0.9927} \\
+  \texttt{SYM} & 96 & \textbf{30} & \textbf{0.9583} & 28 & \textbf{0.9583} \\
+  \texttt{PUNCT} & 2,240 & \textbf{14} & \textbf{0.9996} & 9 & 0.9991 \\
+  \texttt{INTJ} & 8 & 2 & 0.1250 & \textbf{7} & \textbf{0.2500} \\
+\midrule
+  \textbf{Global} & \textbf{24,077} & \textbf{3,570} & \textbf{0.9858} & 3,100 & 0.9854 \\
+\bottomrule
+\end{tabular}
+\endgroup
+\instablegendaMTL
+\end{table}
+
+% ══ JabuticaBERT (JaB) — UAS por época ═════════════════════════════════
+\clearpage
+\begin{table}[p]
+\centering
+\caption{UAS (HEAD) por \'epoca de avalia\c{c}\~ao --- JabuticaBERT (JaB).
+Valor m\'aximo por linha em \textbf{negrito}.}
+\label{tab:instab-jab-head}
+\begingroup
+\small\setlength{\tabcolsep}{10pt}\renewcommand{\arraystretch}{1.2}%
+\begin{tabular}{r r r r r}
+\toprule
+\textbf{\'Epoca} & \textbf{Lin} & \textbf{Biaff} & \textbf{sLin} & \textbf{sBiaff} \\
+\midrule
+   1 & 0.1111 & 0.1466 & 0.0867 & \textbf{0.4927} \\
+   6 & 0.4809 & \textbf{0.5406} & 0.4559 & 0.4732 \\
+  11 & 0.6618 & \textbf{0.7870} & 0.6921 & 0.7564 \\
+  16 & 0.7681 & \textbf{0.8470} & 0.7346 & 0.8305 \\
+  21 & 0.8282 & 0.8591 & 0.8188 & \textbf{0.8662} \\
+  26 & 0.8581 & \textbf{0.8749} & 0.8499 & 0.8746 \\
+  31 & 0.8581 & 0.8755 & 0.8597 & \textbf{0.8842} \\
+  36 & 0.8771 & 0.8781 & 0.8650 & \textbf{0.8930} \\
+\bottomrule
+\end{tabular}
+\endgroup
+\instablegendaFull
+\end{table}

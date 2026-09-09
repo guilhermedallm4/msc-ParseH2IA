@@ -1,0 +1,352 @@
+% Tabelas comparativas por modelo base — geradas por latex_comparison_tables.py
+% Lin=Linear cU  Biaff=Biaffine cU  sLin=sem UPOS Linear  sBiaff=sem UPOS Biaffine
+% mB=mBERT  BtB=BERTimbau Base  BtL=BERTimbau Large  JaB=JabuticaBERT
+% \textbf{Negrito} = melhor resultado por rótulo.
+
+
+\begin{table}[ht]
+\centering\scriptsize
+\setlength{\tabcolsep}{3pt}
+\caption{Acurácia por rótulo --- mBERT (mB). \textbf{Lin}\,=\,Linear com UPOS, \textbf{Biaff}\,=\,Biaffine com UPOS, \textbf{sLin}\,=\,sem UPOS Linear, \textbf{sBiaff}\,=\,sem UPOS Biaffine. \textbf{Negrito}\,=\,melhor por rótulo.}
+\label{tab:acc-mbert}
+\begin{minipage}[t]{0.60\linewidth}
+\centering
+\begin{tabular}{l r  r r r r}
+\toprule
+\textbf{DEPREL} & \textbf{N} & \textbf{Lin} & \textbf{Biaff} & \textbf{sLin} & \textbf{sBiaff} \\
+\midrule
+\texttt{det} & 4,853 & 0.9948 & 0.9944 & 0.9936 & \textbf{0.9951} \\
+\texttt{nsubj} & 1,895 & \textbf{0.9546} & 0.9530 & \textbf{0.9546} & 0.9536 \\
+\texttt{root} & 1,683 & 0.9750 & \textbf{0.9774} & 0.9733 & 0.9750 \\
+\texttt{obj} & 1,476 & 0.9587 & 0.9587 & 0.9600 & \textbf{0.9621} \\
+\texttt{xcomp} & 475 & 0.9242 & 0.9284 & 0.9305 & \textbf{0.9326} \\
+\texttt{punct} & 4,443 & 0.9986 & 0.9984 & 0.9986 & \textbf{0.9989} \\
+\texttt{mark} & 828 & 0.9674 & 0.9686 & 0.9686 & \textbf{0.9698} \\
+\texttt{advcl} & 437 & 0.8741 & 0.8764 & 0.8741 & \textbf{0.8924} \\
+\texttt{case} & 4,532 & \textbf{0.9958} & \textbf{0.9958} & 0.9949 & 0.9954 \\
+\texttt{obl} & 1,746 & \textbf{0.9170} & 0.9026 & 0.9049 & 0.9066 \\
+\texttt{amod} & 1,318 & 0.9545 & \textbf{0.9598} & 0.9568 & 0.9522 \\
+\texttt{conj} & 960 & 0.9344 & 0.9417 & \textbf{0.9448} & 0.9406 \\
+\texttt{cc} & 833 & \textbf{0.9940} & 0.9916 & \textbf{0.9940} & 0.9928 \\
+\texttt{nmod} & 2,607 & 0.9425 & \textbf{0.9448} & 0.9444 & 0.9344 \\
+\texttt{advmod} & 1,222 & 0.9664 & \textbf{0.9681} & 0.9656 & 0.9632 \\
+\texttt{flat\!:\!name} & 686 & 0.9738 & 0.9781 & 0.9781 & \textbf{0.9825} \\
+\texttt{ccomp} & 218 & \textbf{0.9358} & 0.9174 & 0.9174 & 0.9174 \\
+\texttt{cop} & 595 & 0.9832 & 0.9849 & 0.9832 & \textbf{0.9899} \\
+\texttt{acl} & 307 & \textbf{0.8599} & 0.8306 & \textbf{0.8599} & 0.8436 \\
+\texttt{nummod} & 341 & 0.9472 & \textbf{0.9589} & 0.9472 & 0.9472 \\
+\texttt{acl\!:\!relcl} & 401 & \textbf{0.9526} & 0.9451 & 0.9501 & 0.9501 \\
+\texttt{ccomp\!:\!speech} & 130 & \textbf{0.9154} & 0.8692 & \textbf{0.9154} & 0.8923 \\
+\texttt{parataxis} & 160 & 0.7063 & 0.6937 & 0.6813 & \textbf{0.7250} \\
+\texttt{csubj} & 83 & \textbf{0.8193} & 0.7470 & \textbf{0.8193} & 0.7831 \\
+\texttt{aux\!:\!pass} & 203 & 0.9951 & 0.9901 & 0.9951 & \textbf{1.0000} \\
+\texttt{appos} & 208 & 0.9183 & \textbf{0.9375} & 0.9087 & 0.9279 \\
+\texttt{fixed} & 230 & 0.9696 & 0.9696 & 0.9739 & \textbf{0.9783} \\
+\texttt{nsubj\!:\!pass} & 144 & \textbf{0.9861} & 0.9722 & 0.9792 & 0.9792 \\
+\texttt{aux} & 145 & \textbf{0.9655} & 0.9517 & 0.9586 & 0.9448 \\
+\texttt{nsubj\!:\!outer} & 15 & \textbf{0.8667} & 0.8000 & 0.8000 & 0.8000 \\
+\texttt{obl\!:\!agent} & 110 & \textbf{0.9636} & \textbf{0.9636} & \textbf{0.9636} & 0.9364 \\
+\texttt{expl\!:\!impers} & 27 & 0.8148 & 0.8148 & 0.7778 & \textbf{0.8519} \\
+\texttt{expl} & 124 & 0.8952 & \textbf{0.9113} & \textbf{0.9113} & \textbf{0.9113} \\
+\texttt{discourse} & 51 & \textbf{0.6078} & 0.5686 & 0.5882 & 0.5490 \\
+\texttt{orphan} & 14 & \textbf{0.2857} & 0.1429 & 0.0714 & \textbf{0.2857} \\
+\texttt{dislocated} & 17 & 0.3529 & \textbf{0.5294} & 0.4118 & 0.3529 \\
+\texttt{flat} & 17 & \textbf{1.0000} & \textbf{1.0000} & \textbf{1.0000} & \textbf{1.0000} \\
+\texttt{flat\!:\!foreign} & 15 & \textbf{0.8000} & \textbf{0.8000} & 0.6000 & 0.6000 \\
+\texttt{iobj} & 19 & 0.7368 & \textbf{0.7895} & 0.7368 & \textbf{0.7895} \\
+\texttt{vocative} & 6 & 0.1667 & 0.1667 & 0.0000 & \textbf{0.3333} \\
+\midrule
+\textbf{Global} & \textbf{33,574} & \textbf{0.9665} & 0.9657 & 0.9657 & 0.9655 \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.37\linewidth}
+\centering
+\begin{tabular}{l r  r r}
+\toprule
+\textbf{UPOS} & \textbf{N} & \textbf{Lin} & \textbf{Biaff} \\
+\midrule
+\texttt{DET} & 4,904 & \textbf{0.9951} & \textbf{0.9951} \\
+\texttt{NOUN} & 6,309 & 0.9886 & \textbf{0.9892} \\
+\texttt{VERB} & 3,368 & 0.9857 & \textbf{0.9866} \\
+\texttt{PUNCT} & 4,443 & \textbf{0.9986} & \textbf{0.9986} \\
+\texttt{SCONJ} & 456 & 0.9408 & \textbf{0.9518} \\
+\texttt{ADP} & 5,019 & \textbf{0.9980} & 0.9974 \\
+\texttt{ADJ} & 1,691 & 0.9568 & \textbf{0.9574} \\
+\texttt{CCONJ} & 823 & \textbf{0.9927} & 0.9915 \\
+\texttt{ADV} & 1,272 & 0.9764 & \textbf{0.9780} \\
+\texttt{PROPN} & 2,209 & 0.9959 & \textbf{0.9964} \\
+\texttt{AUX} & 968 & \textbf{0.9979} & 0.9969 \\
+\texttt{NUM} & 622 & 0.9695 & \textbf{0.9775} \\
+\texttt{PRON} & 1,286 & \textbf{0.9821} & 0.9813 \\
+\texttt{SYM} & 120 & \textbf{1.0000} & \textbf{1.0000} \\
+\texttt{X} & 85 & 0.7059 & \textbf{0.7412} \\
+\texttt{INTJ} & 5 & \textbf{0.8000} & 0.6000 \\
+\midrule
+\textbf{Global} & \textbf{33,580} & 0.9888 & \textbf{0.9893} \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\end{table}
+
+
+\begin{table}[ht]
+\centering\scriptsize
+\setlength{\tabcolsep}{3pt}
+\caption{Acurácia por rótulo --- BERTimbau Base (BtB). \textbf{Lin}\,=\,Linear com UPOS, \textbf{Biaff}\,=\,Biaffine com UPOS, \textbf{sLin}\,=\,sem UPOS Linear, \textbf{sBiaff}\,=\,sem UPOS Biaffine. \textbf{Negrito}\,=\,melhor por rótulo.}
+\label{tab:acc-btb}
+\begin{minipage}[t]{0.60\linewidth}
+\centering
+\begin{tabular}{l r  r r r r}
+\toprule
+\textbf{DEPREL} & \textbf{N} & \textbf{Lin} & \textbf{Biaff} & \textbf{sLin} & \textbf{sBiaff} \\
+\midrule
+\texttt{det} & 4,853 & 0.9963 & 0.9963 & 0.9965 & \textbf{0.9967} \\
+\texttt{nsubj} & 1,895 & 0.9641 & \textbf{0.9689} & 0.9641 & 0.9668 \\
+\texttt{root} & 1,683 & 0.9804 & \textbf{0.9863} & 0.9828 & 0.9846 \\
+\texttt{obj} & 1,476 & 0.9763 & 0.9763 & 0.9722 & \textbf{0.9824} \\
+\texttt{xcomp} & 475 & 0.9579 & 0.9495 & 0.9516 & \textbf{0.9621} \\
+\texttt{punct} & 4,443 & 0.9984 & 0.9986 & 0.9991 & \textbf{0.9993} \\
+\texttt{mark} & 828 & 0.9807 & 0.9807 & 0.9819 & \textbf{0.9855} \\
+\texttt{advcl} & 437 & 0.9176 & \textbf{0.9268} & 0.9039 & 0.9016 \\
+\texttt{case} & 4,532 & 0.9971 & \textbf{0.9982} & 0.9978 & 0.9976 \\
+\texttt{obl} & 1,746 & 0.9318 & \textbf{0.9376} & 0.9341 & 0.9296 \\
+\texttt{amod} & 1,318 & 0.9697 & 0.9689 & 0.9605 & \textbf{0.9742} \\
+\texttt{conj} & 960 & 0.9510 & 0.9500 & 0.9385 & \textbf{0.9573} \\
+\texttt{cc} & 833 & 0.9964 & 0.9964 & \textbf{0.9976} & 0.9964 \\
+\texttt{nmod} & 2,607 & 0.9490 & 0.9517 & 0.9524 & \textbf{0.9532} \\
+\texttt{advmod} & 1,222 & 0.9673 & \textbf{0.9755} & 0.9705 & 0.9697 \\
+\texttt{flat\!:\!name} & 686 & \textbf{0.9723} & 0.9679 & 0.9694 & 0.9679 \\
+\texttt{ccomp} & 218 & 0.9404 & 0.9404 & \textbf{0.9541} & 0.9312 \\
+\texttt{cop} & 595 & 0.9933 & \textbf{0.9966} & \textbf{0.9966} & 0.9933 \\
+\texttt{acl} & 307 & 0.8567 & \textbf{0.8893} & 0.8697 & 0.8730 \\
+\texttt{nummod} & 341 & 0.9501 & \textbf{0.9619} & 0.9501 & 0.9531 \\
+\texttt{acl\!:\!relcl} & 401 & 0.9551 & \textbf{0.9601} & 0.9526 & 0.9576 \\
+\texttt{ccomp\!:\!speech} & 130 & \textbf{0.9462} & 0.9231 & 0.9385 & 0.9231 \\
+\texttt{parataxis} & 160 & 0.7438 & 0.6875 & \textbf{0.7688} & 0.7562 \\
+\texttt{csubj} & 83 & 0.8554 & 0.9277 & 0.9157 & \textbf{0.9398} \\
+\texttt{aux\!:\!pass} & 203 & \textbf{1.0000} & 0.9901 & 0.9951 & 0.9951 \\
+\texttt{appos} & 208 & 0.9279 & 0.9375 & 0.9279 & \textbf{0.9423} \\
+\texttt{fixed} & 230 & \textbf{0.9783} & 0.9739 & 0.9652 & 0.9739 \\
+\texttt{nsubj\!:\!pass} & 144 & \textbf{0.9931} & 0.9514 & 0.9861 & 0.9792 \\
+\texttt{aux} & 145 & \textbf{0.9724} & \textbf{0.9724} & \textbf{0.9724} & 0.9655 \\
+\texttt{nsubj\!:\!outer} & 15 & \textbf{0.8667} & 0.7333 & \textbf{0.8667} & 0.7333 \\
+\texttt{obl\!:\!agent} & 110 & 0.9636 & \textbf{0.9909} & 0.9818 & 0.9727 \\
+\texttt{expl\!:\!impers} & 27 & 0.8889 & \textbf{0.9259} & \textbf{0.9259} & 0.8889 \\
+\texttt{expl} & 124 & 0.9194 & \textbf{0.9274} & 0.9113 & 0.8871 \\
+\texttt{discourse} & 51 & \textbf{0.6863} & 0.6471 & \textbf{0.6863} & 0.6667 \\
+\texttt{orphan} & 14 & 0.1429 & 0.1429 & 0.1429 & \textbf{0.2143} \\
+\texttt{dislocated} & 17 & 0.4706 & \textbf{0.5294} & 0.3529 & 0.4706 \\
+\texttt{flat} & 17 & \textbf{1.0000} & \textbf{1.0000} & \textbf{1.0000} & \textbf{1.0000} \\
+\texttt{flat\!:\!foreign} & 15 & 0.7333 & 0.7333 & 0.7333 & \textbf{0.8667} \\
+\texttt{iobj} & 19 & 0.8947 & 0.8947 & \textbf{0.9474} & 0.8947 \\
+\texttt{vocative} & 6 & 0.3333 & 0.3333 & \textbf{0.5000} & 0.1667 \\
+\midrule
+\textbf{Global} & \textbf{33,574} & 0.9734 & \textbf{0.9750} & 0.9734 & 0.9749 \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.37\linewidth}
+\centering
+\begin{tabular}{l r  r r}
+\toprule
+\textbf{UPOS} & \textbf{N} & \textbf{Lin} & \textbf{Biaff} \\
+\midrule
+\texttt{DET} & 4,904 & \textbf{0.9969} & 0.9967 \\
+\texttt{NOUN} & 6,309 & 0.9921 & \textbf{0.9933} \\
+\texttt{VERB} & 3,368 & \textbf{0.9911} & \textbf{0.9911} \\
+\texttt{PUNCT} & 4,443 & 0.9984 & \textbf{0.9986} \\
+\texttt{SCONJ} & 456 & 0.9605 & \textbf{0.9649} \\
+\texttt{ADP} & 5,019 & \textbf{0.9992} & 0.9990 \\
+\texttt{ADJ} & 1,691 & \textbf{0.9746} & \textbf{0.9746} \\
+\texttt{CCONJ} & 823 & \textbf{0.9951} & \textbf{0.9951} \\
+\texttt{ADV} & 1,272 & 0.9796 & \textbf{0.9827} \\
+\texttt{PROPN} & 2,209 & \textbf{0.9964} & 0.9959 \\
+\texttt{AUX} & 968 & 0.9979 & \textbf{1.0000} \\
+\texttt{NUM} & 622 & 0.9759 & \textbf{0.9807} \\
+\texttt{PRON} & 1,286 & \textbf{0.9860} & 0.9852 \\
+\texttt{SYM} & 120 & \textbf{1.0000} & \textbf{1.0000} \\
+\texttt{X} & 85 & \textbf{0.7647} & 0.7529 \\
+\texttt{INTJ} & 5 & \textbf{0.8000} & \textbf{0.8000} \\
+\midrule
+\textbf{Global} & \textbf{33,580} & 0.9922 & \textbf{0.9927} \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\end{table}
+
+
+\begin{table}[ht]
+\centering\scriptsize
+\setlength{\tabcolsep}{3pt}
+\caption{Acurácia por rótulo --- BERTimbau Large (BtL). \textbf{Lin}\,=\,Linear com UPOS, \textbf{Biaff}\,=\,Biaffine com UPOS, \textbf{sLin}\,=\,sem UPOS Linear, \textbf{sBiaff}\,=\,sem UPOS Biaffine. \textbf{Negrito}\,=\,melhor por rótulo.}
+\label{tab:acc-btl}
+\begin{minipage}[t]{0.60\linewidth}
+\centering
+\begin{tabular}{l r  r r r r}
+\toprule
+\textbf{DEPREL} & \textbf{N} & \textbf{Lin} & \textbf{Biaff} & \textbf{sLin} & \textbf{sBiaff} \\
+\midrule
+\texttt{det} & 4,853 & \textbf{0.9965} & 0.9953 & 0.9963 & 0.9963 \\
+\texttt{nsubj} & 1,895 & 0.9699 & \textbf{0.9736} & 0.9704 & 0.9715 \\
+\texttt{root} & 1,683 & 0.9857 & 0.9881 & 0.9822 & \textbf{0.9899} \\
+\texttt{obj} & 1,476 & 0.9776 & \textbf{0.9810} & 0.9756 & 0.9770 \\
+\texttt{xcomp} & 475 & \textbf{0.9579} & \textbf{0.9579} & \textbf{0.9579} & \textbf{0.9579} \\
+\texttt{punct} & 4,443 & 0.9984 & 0.9982 & 0.9986 & \textbf{0.9989} \\
+\texttt{mark} & 828 & 0.9831 & 0.9855 & 0.9795 & \textbf{0.9867} \\
+\texttt{advcl} & 437 & \textbf{0.9359} & 0.9176 & 0.9153 & 0.9108 \\
+\texttt{case} & 4,532 & 0.9967 & \textbf{0.9978} & 0.9965 & 0.9969 \\
+\texttt{obl} & 1,746 & 0.9341 & \textbf{0.9376} & 0.9364 & \textbf{0.9376} \\
+\texttt{amod} & 1,318 & 0.9734 & \textbf{0.9810} & 0.9689 & 0.9750 \\
+\texttt{conj} & 960 & 0.9604 & 0.9635 & 0.9521 & \textbf{0.9656} \\
+\texttt{cc} & 833 & \textbf{0.9964} & 0.9928 & 0.9952 & 0.9940 \\
+\texttt{nmod} & 2,607 & \textbf{0.9586} & 0.9582 & 0.9501 & 0.9513 \\
+\texttt{advmod} & 1,222 & 0.9746 & \textbf{0.9763} & 0.9722 & 0.9730 \\
+\texttt{flat\!:\!name} & 686 & 0.9796 & 0.9738 & 0.9767 & \textbf{0.9825} \\
+\texttt{ccomp} & 218 & 0.9541 & 0.9541 & 0.9587 & \textbf{0.9633} \\
+\texttt{cop} & 595 & 0.9950 & \textbf{0.9983} & \textbf{0.9983} & 0.9950 \\
+\texttt{acl} & 307 & \textbf{0.8958} & 0.8925 & 0.8893 & 0.8795 \\
+\texttt{nummod} & 341 & 0.9560 & 0.9589 & 0.9501 & \textbf{0.9648} \\
+\texttt{acl\!:\!relcl} & 401 & \textbf{0.9676} & 0.9626 & 0.9576 & 0.9576 \\
+\texttt{ccomp\!:\!speech} & 130 & 0.9385 & 0.9385 & \textbf{0.9538} & 0.9462 \\
+\texttt{parataxis} & 160 & 0.7312 & \textbf{0.7812} & 0.7500 & 0.7562 \\
+\texttt{csubj} & 83 & 0.9036 & \textbf{0.9398} & 0.9036 & 0.9277 \\
+\texttt{aux\!:\!pass} & 203 & 0.9951 & 0.9951 & \textbf{1.0000} & 0.9901 \\
+\texttt{appos} & 208 & \textbf{0.9375} & 0.9327 & 0.9279 & 0.9231 \\
+\texttt{fixed} & 230 & 0.9739 & 0.9739 & \textbf{0.9783} & \textbf{0.9783} \\
+\texttt{nsubj\!:\!pass} & 144 & \textbf{0.9931} & 0.9861 & 0.9861 & 0.9861 \\
+\texttt{aux} & 145 & 0.9586 & \textbf{0.9793} & 0.9586 & 0.9448 \\
+\texttt{nsubj\!:\!outer} & 15 & \textbf{0.9333} & 0.8000 & 0.8667 & 0.8000 \\
+\texttt{obl\!:\!agent} & 110 & \textbf{1.0000} & 0.9727 & 0.9818 & 0.9818 \\
+\texttt{expl\!:\!impers} & 27 & \textbf{0.8889} & 0.8519 & 0.8148 & 0.8519 \\
+\texttt{expl} & 124 & 0.9274 & 0.9274 & 0.9194 & \textbf{0.9677} \\
+\texttt{discourse} & 51 & 0.7059 & \textbf{0.7451} & 0.6275 & 0.6667 \\
+\texttt{orphan} & 14 & 0.3571 & \textbf{0.4286} & 0.2143 & 0.2143 \\
+\texttt{dislocated} & 17 & 0.4706 & \textbf{0.5882} & 0.3529 & 0.4706 \\
+\texttt{flat} & 17 & \textbf{1.0000} & \textbf{1.0000} & \textbf{1.0000} & \textbf{1.0000} \\
+\texttt{flat\!:\!foreign} & 15 & \textbf{0.9333} & 0.8667 & 0.8000 & 0.8667 \\
+\texttt{iobj} & 19 & \textbf{0.8947} & \textbf{0.8947} & 0.8421 & \textbf{0.8947} \\
+\texttt{vocative} & 6 & \textbf{0.6667} & 0.5000 & \textbf{0.6667} & 0.3333 \\
+\midrule
+\textbf{Global} & \textbf{33,574} & 0.9771 & \textbf{0.9780} & 0.9748 & 0.9766 \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.37\linewidth}
+\centering
+\begin{tabular}{l r  r r}
+\toprule
+\textbf{UPOS} & \textbf{N} & \textbf{Lin} & \textbf{Biaff} \\
+\midrule
+\texttt{DET} & 4,904 & \textbf{0.9967} & 0.9957 \\
+\texttt{NOUN} & 6,309 & 0.9921 & \textbf{0.9933} \\
+\texttt{VERB} & 3,368 & 0.9920 & \textbf{0.9923} \\
+\texttt{PUNCT} & 4,443 & 0.9982 & \textbf{0.9984} \\
+\texttt{SCONJ} & 456 & 0.9649 & \textbf{0.9759} \\
+\texttt{ADP} & 5,019 & 0.9984 & \textbf{0.9988} \\
+\texttt{ADJ} & 1,691 & 0.9787 & \textbf{0.9840} \\
+\texttt{CCONJ} & 823 & \textbf{0.9951} & 0.9939 \\
+\texttt{ADV} & 1,272 & \textbf{0.9843} & \textbf{0.9843} \\
+\texttt{PROPN} & 2,209 & \textbf{0.9964} & 0.9959 \\
+\texttt{AUX} & 968 & 0.9969 & \textbf{0.9990} \\
+\texttt{NUM} & 622 & 0.9775 & \textbf{0.9807} \\
+\texttt{PRON} & 1,286 & 0.9883 & \textbf{0.9907} \\
+\texttt{SYM} & 120 & \textbf{0.9917} & \textbf{0.9917} \\
+\texttt{X} & 85 & \textbf{0.8353} & 0.7765 \\
+\texttt{INTJ} & 5 & \textbf{0.8000} & \textbf{0.8000} \\
+\midrule
+\textbf{Global} & \textbf{33,580} & 0.9928 & \textbf{0.9934} \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\end{table}
+
+
+\begin{table}[ht]
+\centering\scriptsize
+\setlength{\tabcolsep}{3pt}
+\caption{Acurácia por rótulo --- JabuticaBERT (JaB). \textbf{Lin}\,=\,Linear com UPOS, \textbf{Biaff}\,=\,Biaffine com UPOS, \textbf{sLin}\,=\,sem UPOS Linear, \textbf{sBiaff}\,=\,sem UPOS Biaffine. \textbf{Negrito}\,=\,melhor por rótulo.}
+\label{tab:acc-jab}
+\begin{minipage}[t]{0.60\linewidth}
+\centering
+\begin{tabular}{l r  r r r r}
+\toprule
+\textbf{DEPREL} & \textbf{N} & \textbf{Lin} & \textbf{Biaff} & \textbf{sLin} & \textbf{sBiaff} \\
+\midrule
+\texttt{det} & 4,853 & \textbf{0.9936} & \textbf{0.9936} & 0.9920 & 0.9928 \\
+\texttt{nsubj} & 1,895 & 0.9530 & \textbf{0.9546} & 0.9520 & 0.9520 \\
+\texttt{root} & 1,683 & 0.9786 & \textbf{0.9840} & 0.9762 & 0.9780 \\
+\texttt{obj} & 1,476 & 0.9627 & \textbf{0.9634} & 0.9593 & 0.9593 \\
+\texttt{xcomp} & 475 & \textbf{0.9326} & 0.9305 & 0.8947 & \textbf{0.9326} \\
+\texttt{punct} & 4,443 & \textbf{0.9991} & \textbf{0.9991} & 0.9989 & \textbf{0.9991} \\
+\texttt{mark} & 828 & \textbf{0.9771} & 0.9758 & 0.9638 & 0.9722 \\
+\texttt{advcl} & 437 & \textbf{0.8993} & 0.8810 & 0.8856 & 0.8810 \\
+\texttt{case} & 4,532 & 0.9951 & 0.9956 & 0.9943 & \textbf{0.9962} \\
+\texttt{obl} & 1,746 & \textbf{0.9158} & 0.9055 & 0.9015 & 0.9021 \\
+\texttt{amod} & 1,318 & 0.9514 & \textbf{0.9552} & 0.9476 & 0.9476 \\
+\texttt{conj} & 960 & \textbf{0.9313} & 0.9260 & 0.9198 & 0.9240 \\
+\texttt{cc} & 833 & 0.9916 & \textbf{0.9940} & 0.9928 & 0.9892 \\
+\texttt{nmod} & 2,607 & 0.9379 & \textbf{0.9428} & 0.9367 & 0.9382 \\
+\texttt{advmod} & 1,222 & \textbf{0.9648} & \textbf{0.9648} & 0.9558 & 0.9599 \\
+\texttt{flat\!:\!name} & 686 & 0.9519 & 0.9548 & 0.9490 & \textbf{0.9577} \\
+\texttt{ccomp} & 218 & \textbf{0.9174} & \textbf{0.9174} & \textbf{0.9174} & 0.8945 \\
+\texttt{cop} & 595 & \textbf{0.9899} & \textbf{0.9899} & 0.9832 & \textbf{0.9899} \\
+\texttt{acl} & 307 & \textbf{0.8306} & \textbf{0.8306} & 0.8274 & 0.8176 \\
+\texttt{nummod} & 341 & 0.9384 & \textbf{0.9472} & 0.9443 & 0.9443 \\
+\texttt{acl\!:\!relcl} & 401 & 0.9476 & \textbf{0.9576} & 0.9476 & 0.9401 \\
+\texttt{ccomp\!:\!speech} & 130 & 0.8769 & 0.8615 & \textbf{0.8846} & 0.8462 \\
+\texttt{parataxis} & 160 & 0.6625 & 0.6813 & 0.6813 & \textbf{0.7188} \\
+\texttt{csubj} & 83 & 0.7831 & \textbf{0.8193} & 0.7711 & 0.7711 \\
+\texttt{aux\!:\!pass} & 203 & \textbf{0.9951} & 0.9852 & 0.9852 & 0.9803 \\
+\texttt{appos} & 208 & 0.9087 & 0.9038 & \textbf{0.9231} & 0.9135 \\
+\texttt{fixed} & 230 & \textbf{0.9565} & \textbf{0.9565} & 0.9478 & 0.9304 \\
+\texttt{nsubj\!:\!pass} & 144 & \textbf{0.9722} & 0.9583 & 0.9514 & 0.9653 \\
+\texttt{aux} & 145 & 0.9241 & \textbf{0.9448} & 0.9241 & 0.9241 \\
+\texttt{nsubj\!:\!outer} & 15 & \textbf{0.8000} & 0.6667 & \textbf{0.8000} & \textbf{0.8000} \\
+\texttt{obl\!:\!agent} & 110 & 0.9455 & \textbf{0.9545} & 0.9364 & 0.9455 \\
+\texttt{expl\!:\!impers} & 27 & \textbf{0.8889} & 0.8519 & \textbf{0.8889} & \textbf{0.8889} \\
+\texttt{expl} & 124 & 0.9032 & \textbf{0.9274} & 0.9032 & 0.8871 \\
+\texttt{discourse} & 51 & 0.6471 & 0.5882 & 0.5882 & \textbf{0.6667} \\
+\texttt{orphan} & 14 & 0.2143 & \textbf{0.3571} & 0.0714 & 0.0000 \\
+\texttt{dislocated} & 17 & \textbf{0.4118} & 0.2353 & 0.3529 & 0.2353 \\
+\texttt{flat} & 17 & \textbf{0.9412} & \textbf{0.9412} & \textbf{0.9412} & \textbf{0.9412} \\
+\texttt{flat\!:\!foreign} & 15 & 0.5333 & \textbf{0.7333} & 0.3333 & 0.4667 \\
+\texttt{iobj} & 19 & \textbf{0.7895} & \textbf{0.7895} & 0.7368 & 0.6842 \\
+\texttt{vocative} & 6 & \textbf{0.1667} & 0.0000 & 0.0000 & \textbf{0.1667} \\
+\midrule
+\textbf{Global} & \textbf{33,574} & 0.9647 & \textbf{0.9651} & 0.9608 & 0.9622 \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.37\linewidth}
+\centering
+\begin{tabular}{l r  r r}
+\toprule
+\textbf{UPOS} & \textbf{N} & \textbf{Lin} & \textbf{Biaff} \\
+\midrule
+\texttt{DET} & 4,904 & 0.9931 & \textbf{0.9941} \\
+\texttt{NOUN} & 6,309 & 0.9887 & \textbf{0.9914} \\
+\texttt{VERB} & 3,368 & \textbf{0.9881} & 0.9863 \\
+\texttt{PUNCT} & 4,443 & \textbf{0.9991} & \textbf{0.9991} \\
+\texttt{SCONJ} & 456 & \textbf{0.9627} & 0.9583 \\
+\texttt{ADP} & 5,019 & 0.9968 & \textbf{0.9976} \\
+\texttt{ADJ} & 1,691 & 0.9503 & \textbf{0.9556} \\
+\texttt{CCONJ} & 823 & 0.9891 & \textbf{0.9939} \\
+\texttt{ADV} & 1,272 & \textbf{0.9780} & 0.9748 \\
+\texttt{PROPN} & 2,209 & \textbf{0.9914} & \textbf{0.9914} \\
+\texttt{AUX} & 968 & 0.9897 & \textbf{0.9948} \\
+\texttt{NUM} & 622 & 0.9662 & \textbf{0.9727} \\
+\texttt{PRON} & 1,286 & \textbf{0.9798} & \textbf{0.9798} \\
+\texttt{SYM} & 120 & 0.9917 & \textbf{1.0000} \\
+\texttt{X} & 85 & \textbf{0.7647} & \textbf{0.7647} \\
+\texttt{INTJ} & 5 & \textbf{0.8000} & \textbf{0.8000} \\
+\midrule
+\textbf{Global} & \textbf{33,580} & 0.9881 & \textbf{0.9892} \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\end{table}

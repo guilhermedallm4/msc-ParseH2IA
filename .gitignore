@@ -1,0 +1,26 @@
+# Ambiente Python
+.venv/
+__pycache__/
+*.pyc
+
+# Pesos de modelos e estados de treino — grandes demais para o GitHub
+# (limite de 100 MB por arquivo). Guardados fora do git.
+best_models_ablacao_biaffine/
+best_models_ablacao_linear/
+best_models_portparser/
+biaffine_BERTImbau_base/
+biaffine_BERTimbau_large/
+biaffine_Jabuticabert/
+biaffine_mbert_base/
+linear_BERTimbau_base/
+linear_JabuticaBERT_1k/
+linear_mbert_base/
+*.safetensors
+optimizer.pt
+scheduler.pt
+
+# Predições por época (11 GB de JSONs)
+epoch_predictions/
+
+# Logs locais do Weights & Biases (já sincronizados no servidor)
+wandb/

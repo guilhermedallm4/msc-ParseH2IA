@@ -1,0 +1,172 @@
+% Gerado por layerwise_comparison_aaai.py — não editar manualmente
+% Requer: \usepackage{booktabs, multirow}
+
+\begin{table}[t]
+\centering
+\caption{Layer-wise read-out (logit lens) on the Porttinari test set (1,683 sentences, 33,580 tokens). Heads are trained on layer~12; early exit reads all tasks from layer $L$.}
+\label{tab:early-exit}
+\begin{tabular}{llcccc}
+\toprule
+Model & $L$ & UPOS & DEPREL & UAS & LAS \\
+\midrule
+\multirow{5}{*}{Linear/BERTimbau} & 12 (full) & 99.22 & 97.33 & 93.74 & 92.49 \\
+ & 11 & 99.06 & 97.26 & 76.34 & 75.33 \\
+ & 10 & 98.92 & 96.81 & 45.18 & 44.34 \\
+ & 9 & 95.96 & 93.47 & 31.34 & 29.73 \\
+ & 8 & 80.90 & 74.58 & 16.58 & 13.23 \\
+\midrule
+\multirow{5}{*}{Biaffine/BERTimbau} & 12 (full) & 99.27 & 97.49 & 89.84 & 88.71 \\
+ & 11 & 99.20 & 95.41 & 85.55 & 84.31 \\
+ & 10 & 99.13 & 93.62 & 77.95 & 76.65 \\
+ & 9 & 98.88 & 89.47 & 57.11 & 55.39 \\
+ & 8 & 98.29 & 80.94 & 39.37 & 36.25 \\
+\midrule
+\multirow{5}{*}{Linear/mBERT} & 12 (full) & 98.88 & 96.63 & 92.70 & 91.04 \\
+ & 11 & 98.78 & 96.48 & 64.57 & 63.42 \\
+ & 10 & 97.09 & 95.02 & 15.27 & 14.82 \\
+ & 9 & 88.86 & 83.66 & 4.41 & 3.93 \\
+ & 8 & 75.75 & 57.19 & 0.73 & 0.56 \\
+\midrule
+\multirow{5}{*}{Biaffine/mBERT} & 12 (full) & 98.93 & 96.55 & 86.92 & 85.42 \\
+ & 11 & 98.89 & 87.35 & 77.46 & 70.78 \\
+ & 10 & 98.48 & 37.67 & 43.36 & 17.62 \\
+ & 9 & 96.85 & 11.71 & 21.37 & 3.22 \\
+ & 8 & 91.06 & 6.59 & 14.89 & 1.52 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Final-layer contrasts with 95\% CI and two-sided $p$-values from a paired bootstrap over sentences (10,000 resamples; shared resample indices).}
+\label{tab:significance}
+\begin{tabular}{llcc}
+\toprule
+Contrast & Metric & $\Delta$ [95\% CI] & $p$ \\
+\midrule
+Biaffine $-$ Linear (BERTimbau) & UPOS accuracy & +0.04 [-0.03, +0.12] & 0.2482 \\
+ & DEPREL accuracy & +0.16 [+0.01, +0.31] & 0.0382 \\
+ & UAS & -3.91 [-4.50, -3.33] & $<$0.0001 \\
+ & LAS & -3.78 [-4.38, -3.20] & $<$0.0001 \\
+\midrule
+Biaffine $-$ Linear (mBERT) & UPOS accuracy & +0.05 [-0.04, +0.15] & 0.2898 \\
+ & DEPREL accuracy & -0.08 [-0.24, +0.08] & 0.3362 \\
+ & UAS & -5.78 [-6.47, -5.10] & $<$0.0001 \\
+ & LAS & -5.62 [-6.30, -4.94] & $<$0.0001 \\
+\midrule
+BERTimbau $-$ mBERT (Linear) & UPOS accuracy & +0.34 [+0.24, +0.44] & $<$0.0001 \\
+ & DEPREL accuracy & +0.69 [+0.52, +0.87] & $<$0.0001 \\
+ & UAS & +1.04 [+0.52, +1.57] & $<$0.0001 \\
+ & LAS & +1.45 [+0.92, +1.98] & $<$0.0001 \\
+\midrule
+BERTimbau $-$ mBERT (Biaffine) & UPOS accuracy & +0.33 [+0.23, +0.43] & $<$0.0001 \\
+ & DEPREL accuracy & +0.94 [+0.74, +1.14] & $<$0.0001 \\
+ & UAS & +2.92 [+2.19, +3.62] & $<$0.0001 \\
+ & LAS & +3.28 [+2.56, +4.00] & $<$0.0001 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Block-skip ablation (UPOS / LAS): embeddings fed directly into a subset of encoder blocks. Depth is compositional: the last block alone, or iterated, fails across architectures and pretraining regimes.}
+\label{tab:block-skip}
+\begin{tabular}{lcccc}
+\toprule
+ & \multicolumn{2}{c}{BERTimbau} & \multicolumn{2}{c}{mBERT} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+Active blocks & Linear & Biaffine & Linear & Biaffine \\
+\midrule
+All blocks (normal) & 99.22 / 92.49 & 99.27 / 88.71 & 98.88 / 91.04 & 98.93 / 85.42 \\
+Block 12 only & 53.76 / 1.71 & 51.49 / 2.26 & 44.87 / 1.50 & 36.50 / 2.13 \\
+Block 12 $\times$12 & 13.20 / 0.50 & 8.06 / 0.39 & 7.13 / 0.29 & 6.59 / 2.63 \\
+Blocks 11--12 & 51.44 / 2.30 & 44.53 / 1.48 & 41.65 / 2.14 & 37.99 / 1.20 \\
+Blocks 9--12 & 65.28 / 4.68 & 63.00 / 4.06 & 47.11 / 3.41 & 44.96 / 2.68 \\
+Blocks 7--12 & 71.38 / 9.30 & 68.43 / 7.22 & 60.01 / 6.76 & 63.75 / 4.01 \\
+None (embeddings) & 21.92 / 0.74 & 47.10 / 0.80 & 19.89 / 0.60 & 13.58 / 0.20 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Support-weighted mean convergence layer per task (first layer with acc $\geq 95\%$ of final).}
+\label{tab:convergence}
+\begin{tabular}{lccc}
+\toprule
+Model & UPOS & DEPREL & HEAD \\
+\midrule
+Linear/BERTimbau & 8.3 & 9.2 & 11.6 \\
+Biaffine/BERTimbau & 6.1 & 8.8 & 11.1 \\
+Linear/mBERT & 9.2 & 9.2 & 11.8 \\
+Biaffine/mBERT & 8.4 & 11.6 & 11.7 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Replication across independent training runs (ablation checkpoints trained without the UPOS head). Half-resolution depth = first layer with UAS $\geq 50\%$ of its final value.}
+\label{tab:replication}
+\begin{tabular}{lcccc}
+\toprule
+ & \multicolumn{2}{c}{LAS} & \multicolumn{2}{c}{Half-res.\ layer} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+Model & Main & Indep. & Main & Indep. \\
+\midrule
+Linear/BERTimbau & 92.49 & 92.23 & 11 & 11 \\
+Biaffine/BERTimbau & 88.71 & 89.71 & 9 & 9 \\
+Linear/mBERT & 91.04 & 90.81 & 11 & 11 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Information vs.\ behavior: layer at which each read-out reaches 95\% of its final value. Per-layer trained probes (5 seeds, $\sigma \leq 0.003$) locate information much earlier than the deployed logit-lens read-out, and the biaffine encoder stores head attachment in a relational format invisible to single-token probes (final probe accuracy in parentheses).}
+\label{tab:probes}
+\begin{tabular}{llcc}
+\toprule
+Model & Task & Probe & Logit lens \\
+\midrule
+Linear/BERTimbau & UPOS & 2 (99.21) & 9 \\
+ & DEPREL & 6 (97.35) & 9 \\
+ & HEAD & 11 (93.68) & 12 \\
+\midrule
+Biaffine/BERTimbau & UPOS & 2 (99.26) & 7 \\
+ & DEPREL & 6 (97.14) & 10 \\
+ & HEAD & 3 (25.95) & 11 \\
+\midrule
+Linear/mBERT & UPOS & 3 (98.88) & 10 \\
+ & DEPREL & 6 (96.62) & 10 \\
+ & HEAD & 11 (92.64) & 12 \\
+\midrule
+Biaffine/mBERT & UPOS & 3 (98.93) & 9 \\
+ & DEPREL & 7 (96.33) & 12 \\
+ & HEAD & 5 (24.35) & 12 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Head families retrained (3 seeds, mean; $\sigma \leq 0.003$) on the FROZEN 24-layer biaffine-fine-tuned encoder, at each task\textquotesingle s saturation layer. A freshly trained pairwise (biaffine) head recovers near-deployed attachment from intermediate layers; a freshly trained positional (linear) head cannot extract head positions from the same frozen representations at any depth. Deployed end-to-end MTL shown for reference.}
+\label{tab:frozen}
+\begin{tabular}{llcccc}
+\toprule
+Head & Layer & UPOS & DEPREL & UAS & LAS \\
+\midrule
+\multirow{4}{*}{Linear} & 10 (UPOS sat.) & 99.03 & 90.24 & 27.55 & 26.21 \\
+ & 18 (DEPREL sat.) & 99.33 & 97.50 & 34.39 & 33.89 \\
+ & 23 (HEAD sat.) & 99.34 & 97.68 & 30.42 & 30.03 \\
+ & 24 (final) & 99.35 & 97.69 & 29.97 & 29.59 \\
+\midrule
+\multirow{4}{*}{Biaffine} & 10 (UPOS sat.) & 98.99 & 90.65 & 49.46 & 47.76 \\
+ & 18 (DEPREL sat.) & 99.33 & 97.47 & 89.39 & 88.28 \\
+ & 23 (HEAD sat.) & 99.33 & 97.60 & 91.10 & 89.99 \\
+ & 24 (final) & 99.34 & 97.66 & 91.24 & 90.16 \\
+\midrule
+Deployed MTL & 24 (end-to-end) & 99.34 & 97.79 & 91.52 & 90.56 \\
+\bottomrule
+\end{tabular}
+\end{table}

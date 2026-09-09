@@ -1,0 +1,460 @@
+% ============================================================
+% Capítulo 2 — Referencial Teórico (versão reescrita)
+% ParseH2IA — Guilherme Dallman Lima, 2026
+% ============================================================
+
+\chapter{Referencial Teórico}
+\label{cap:referencial}
+
+Este capítulo apresenta os fundamentos teóricos necessários para a compreensão do presente
+trabalho. A organização segue a lógica da dissertação: primeiro, descreve-se a tarefa central
+— a análise de dependências sintáticas e o padrão Universal Dependencies —; em seguida,
+apresentam-se os modelos de linguagem pré-treinados baseados em Transformers e as
+evidências de que esses modelos codificam estrutura sintática de forma linearmente acessível;
+depois, discutem-se as arquiteturas de predição empregadas (linear e biaffine); por fim,
+introduz-se o aprendizado multi-tarefa como paradigma que permite aproveitar a correlação entre
+as tarefas auxiliar (UPOS) e principal (DEPREL/HEAD) investigadas neste trabalho.
+
+% ============================================================
+\section{Processamento de Linguagem Natural e Análise Sintática}
+\label{sec:pln}
+% ============================================================
+
+O Processamento de Linguagem Natural (do inglês \textit{Natural Language Processing} —
+NLP) é a área da inteligência artificial voltada ao tratamento e à interpretação automatizada de
+texto e fala \cite{jurafsky2023speech}. Dentre as tarefas de NLP, a \textbf{análise sintática}
+ocupa uma posição central: ela estrutura as relações gramaticais entre as palavras de uma
+sentença e produz uma representação formal que serve de base para tarefas mais complexas,
+como extração de informação, análise de sentimento baseada em aspecto, tradução automática e
+resposta a perguntas. Neste trabalho, aborda-se especificamente a análise de dependências
+sintáticas para o português brasileiro.
+
+% ------------------------------------------------------------
+\subsection{Análise de Constituência e Análise de Dependências}
+\label{subsec:tipos-analise}
+% ------------------------------------------------------------
+
+A análise sintática pode ser conduzida segundo dois paradigmas principais, ilustrados na
+Figura~\ref{fig:parsing_contituencia}.
+
+Na \textbf{análise de constituência} (\textit{Constituency Parsing}), a sentença é segmentada
+em sintagmas hierárquicos — Sintagma Nominal (SN), Sintagma Verbal (SV), etc. — que se
+encaixam em uma árvore cujo nó raiz é a sentença inteira. A relação modelada é do tipo
+parte-todo \cite{fernandez2022multitask}.
+
+Na \textbf{análise de dependências} (\textit{Dependency Parsing}), a unidade central é a
+palavra (\textit{token}), e as relações modeladas são binárias e direcionadas: cada palavra
+dependente está ligada a exatamente uma palavra governante (\textit{head}), com uma etiqueta
+que descreve a função sintática dessa relação (sujeito, objeto, modificador, etc.). O resultado
+é uma árvore de dependências enraizada no verbo principal da sentença, conforme exemplificado
+na Figura~\ref{fig:dep_tree_example}.
+
+A análise de dependências tem três vantagens práticas para o presente trabalho: (i) representa
+diretamente as relações gramaticais entre palavras, sem a necessidade de constituintes
+intermediários; (ii) é mais robusta para línguas com ordem de palavras flexível, como o
+português; e (iii) é o paradigma adotado pelo padrão Universal Dependencies, utilizado no
+corpus Porttinari-base \cite{porttinari}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{Dissertação/Imagens/parser_constituency.png}
+    \caption{Exemplo de árvore de análise de constituência para a sentença
+             ``A menina brinca no parque.''}
+    \label{fig:parsing_contituencia}
+\end{figure}
+
+% ------------------------------------------------------------
+\subsection{Universal Dependencies e o Formato de Anotação}
+\label{subsec:ud}
+% ------------------------------------------------------------
+
+O projeto \textit{Universal Dependencies} (UD) define um esquema de anotação morfossintática e
+sintática com consistência interlinguística, atualmente abrangendo mais de cem línguas e
+trezentos \textit{treebanks} \cite{UniversalDependencies}. O esquema se baseou nas dependências
+universais de Stanford \cite{de2014universal}, nas etiquetas de classe gramatical do Google
+\cite{petrov2011universal} e na Interlingua Interset para morfologia. O objetivo central é
+disponibilizar categorias e diretrizes que permitam a anotação consistente de construções
+semelhantes entre línguas distintas.
+
+A Tabela~\ref{tab:ud-example} apresenta o formato CoNLL-U adotado pelo UD. Cada linha
+representa um \textit{token} e contém dez campos: \textbf{ID} (posição na sentença),
+\textbf{FORM} (forma superficial), \textbf{LEMMA} (forma canônica), \textbf{UPOS} (classe
+morfossintática universal), \textbf{XPOS} (classe específica do idioma), \textbf{FEATS}
+(atributos morfológicos, como gênero, número e tempo verbal), \textbf{HEAD} (índice do
+governante), \textbf{DEPREL} (rótulo da relação de dependência), \textbf{DEPS} (dependências
+secundárias) e \textbf{MISC} (informações adicionais).
+
+\begin{table}[h]
+\centering
+\resizebox{1.05\textwidth}{!}{%
+\renewcommand{\arraystretch}{2}
+\sffamily
+\begin{tabular}{
+>{\centering\arraybackslash}p{0.2\textwidth}
+>{\arraybackslash}p{0.15\textwidth}
+>{\arraybackslash}p{0.1\textwidth}
+>{\centering\arraybackslash}p{0.1\textwidth}
+>{\centering\arraybackslash}p{0.1\textwidth}
+>{\arraybackslash}p{0.1\textwidth}
+>{\centering\arraybackslash}p{0.2\textwidth}
+>{\arraybackslash}p{0.15\textwidth}
+>{\arraybackslash}p{0.2\textwidth}
+>{\arraybackslash}p{0.2\textwidth}
+}
+\toprule
+\textbf{ID} & \textbf{FORM} & \textbf{LEMMA} & \textbf{UPOS} & \textbf{XPOS} &
+\textbf{FEATS} & \textbf{HEAD} & \textbf{DEPREL} & \textbf{DEPS} & \textbf{MISC} \\
+\midrule
+1 & O & o & DET & \_ &
+\makecell[l]{Definite=Def\\Gender=Masc\\Number=Sing\\PronType=Art} &
+2 & det & 2:det & \_ \\
+2 & canal & canal & NOUN & \_ &
+\makecell[l]{Gender=Masc\\Number=Sing} &
+3 & nsubj & 3:nsubj & \_ \\
+3 & terá & ter & VERB & \_ &
+\makecell[l]{Mood=Ind\\Number=Sing\\Person=3\\Tense=Fut\\VerbForm=Fin} &
+0 & root & 0:root & \_ \\
+4 & o & o & DET & \_ &
+\makecell[l]{Definite=Def\\Gender=Masc\\Number=Sing\\PronType=Art} &
+5 & det & 5:det & \_ \\
+5 & conteúdo & conteúdo & NOUN & \_ &
+\makecell[l]{Gender=Masc\\Number=Sing} &
+3 & obj & \makecell[l]{3:obj\\6:nsubj:pass} & \_ \\
+6 & reformulado & reformular & VERB & \_ &
+\makecell[l]{Gender=Masc\\Number=Sing\\VerbForm=Part\\Voice=Pass} &
+3 & xcomp & 3:xcomp & SpaceAfter=No \\
+7 & . & . & PUNCT & \_ & \_ & 3 & punct & 3:punct & \_ \\
+\bottomrule
+\end{tabular}%
+}
+\caption{Sentença anotada no formato CoNLL-U (padrão Universal Dependencies).}
+\label{tab:ud-example}
+\end{table}
+
+As relações entre palavras são representadas por conexões unidirecionadas, partindo de um
+nó raiz (ROOT). Palavras que funcionam como núcleos (governadores) podem ter uma ou mais
+palavras dependentes. A Figura~\ref{fig:dep_tree_example} ilustra a árvore de dependências
+para a sentença ``A menina brinca no parque.'', com as etiquetas DEPREL anotadas nos arcos.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Dissertação/Imagens/arvore_dep.png}
+    \caption{Árvore de dependências sintáticas para ``A menina brinca no parque.''
+             As etiquetas nos arcos indicam as relações DEPREL: \texttt{det} (determinante),
+             \texttt{nsubj} (sujeito nominal), \texttt{obl} (oblíquo), \texttt{case}
+             (marcador de caso), \texttt{punct} (pontuação).}
+    \label{fig:dep_tree_example}
+\end{figure}
+
+O projeto UD define 17 classes morfossintáticas universais (UPOS) e um conjunto de relações de
+dependência (DEPREL) — como \texttt{nsubj}, \texttt{obj}, \texttt{nmod}, \texttt{obl},
+\texttt{amod} — extensíveis por subtipos específicos de cada língua quando necessário. As
+classes UPOS e os rótulos DEPREL utilizados neste trabalho seguem as diretrizes do
+Porttinari-base \cite{porttinari}, detalhadas no Apêndice~\ref{ap:classes}.
+
+% ------------------------------------------------------------
+\subsection{Características do Português Brasileiro Relevantes para o Parsing}
+\label{subsec:ptbr}
+% ------------------------------------------------------------
+
+O português brasileiro é uma língua morfologicamente rica: os verbos flexionam em pessoa,
+número, tempo, modo, aspecto e voz; os nominais flexionam em gênero e número; e a posição
+relativa dos argumentos é mais flexível do que em línguas de ordem rígida como o inglês.
+Essa riqueza morfológica e a relativa liberdade de ordem de palavras trazem dois desafios
+específicos para o parsing de dependências.
+
+Primeiro, a desambiguação morfossintática é mais exigente: uma mesma forma superficial pode
+corresponder a classes gramaticais distintas dependendo do contexto (por exemplo, ``para''
+como verbo ou preposição), o que demanda representações contextualizadas para ser resolvida
+com precisão. Segundo, relações de dependência de longa distância são mais comuns: fenômenos
+como topicalização e deslocamento de constituintes criam dependências entre palavras distantes
+na sequência linear, tornando mais difícil a predição do \textit{head} correto.
+
+Estudos anteriores demonstraram que modelos monolíngues especializados no português, como o
+BERTimbau \cite{souza2020bertimbau}, tendem a superar modelos multilíngues como o mBERT
+\cite{devlin2019bert} em tarefas morfossintáticas para o português brasileiro, em parte por
+capturarem padrões morfológicos específicos da língua durante o pré-treinamento em corpora
+monolingues de maior qualidade \cite{lopes2024towards}.
+
+% ============================================================
+\section{Modelos de Linguagem Pré-treinados}
+\label{sec:llm}
+% ============================================================
+
+O estado da arte em análise sintática para o português é dominado por abordagens baseadas em
+\textit{encoders} Transformer pré-treinados. Esta seção descreve a arquitetura Transformer,
+o modelo BERT e o processo de ajuste fino, que constituem a base dos quatro encoders avaliados
+nesta dissertação.
+
+% ------------------------------------------------------------
+\subsection{Arquitetura Transformer}
+\label{subsec:transformer}
+% ------------------------------------------------------------
+
+O Transformer \cite{vaswani2017attention} é uma arquitetura de redes neurais introduzida em
+2017 para tarefas de tradução automática. Diferentemente de arquiteturas recorrentes (RNNs,
+LSTMs), o Transformer processa toda a sequência de entrada em paralelo, capturando dependências
+de longo alcance sem o problema do gradiente evanescente. A arquitetura completa, composta por
+um codificador e um decodificador, é ilustrada na Figura~\ref{fig:transformer}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.65\textwidth]{Dissertação/Imagens/transformer.png}
+    \caption{Arquitetura Transformer \cite{vaswani2017attention}. O codificador (esquerda)
+             processa a sequência de entrada; o decodificador (direita) gera a sequência de
+             saída condicionada ao codificador.}
+    \label{fig:transformer}
+\end{figure}
+
+O bloco fundamental do Transformer é a \textbf{atenção multi-cabeça}
+(\textit{multi-head attention}). Dado um conjunto de consultas $Q$, chaves $K$ e valores $V$,
+a atenção escalada por produto escalar é definida como:
+
+\begin{equation}
+\text{Attention}(Q,K,V) = \text{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\right)V,
+\end{equation}
+
+\noindent
+onde $d_k$ é a dimensão dos vetores de chave e o fator $1/\sqrt{d_k}$ evita que os produtos
+escalares cresçam para valores que saturem a softmax. A atenção multi-cabeça executa $h$
+atenções em paralelo sobre subespaços projetados e concatena os resultados:
+
+\begin{equation}
+\text{MultiHead}(Q,K,V) = \text{Concat}(\text{head}_1,\ldots,\text{head}_h)\,W_O,
+\end{equation}
+
+\noindent
+onde cada $\text{head}_i = \text{Attention}(QW_i^Q,\, KW_i^K,\, VW_i^V)$. Isso permite que
+o modelo atenda simultaneamente a informações em diferentes posições e subespaços de
+representação.
+
+Como o Transformer não utiliza recorrência, a ordem da sequência é injetada por meio de
+\textbf{codificação posicional}, somada aos \textit{embeddings} de entrada:
+
+\begin{equation}
+PE_{(pos,\,2i)}   = \sin\!\left(\frac{pos}{10000^{2i/d_{\text{model}}}}\right),\quad
+PE_{(pos,\,2i+1)} = \cos\!\left(\frac{pos}{10000^{2i/d_{\text{model}}}}\right).
+\end{equation}
+
+Cada camada do codificador contém, além da atenção multi-cabeça, uma rede \textit{feed-forward}
+totalmente conectada aplicada posição a posição, seguida de normalização de camada e conexão
+residual. As saídas de cada camada mantêm a mesma dimensionalidade, permitindo o empilhamento
+de $N$ blocos idênticos para maior capacidade de abstração.
+
+% ------------------------------------------------------------
+\subsection{BERT: Pré-treino Bidirecional}
+\label{subsec:bert}
+% ------------------------------------------------------------
+
+O BERT (\textit{Bidirectional Encoder Representations from Transformers}) \cite{devlin2019bert}
+é um \textit{encoder} Transformer pré-treinado que utiliza exclusivamente o componente de
+codificação, sem decodificador. Isso o torna apropriado para tarefas de compreensão de
+linguagem, onde o objetivo é produzir representações ricas para cada token da entrada, e não
+gerar sequências novas.
+
+O BERT é pré-treinado por dois objetivos complementares:
+
+\begin{itemize}
+    \item \textbf{Modelagem de Linguagem Mascarada} (\textit{Masked Language Modeling} —
+    MLM): aproximadamente 15\% dos tokens de entrada são substituídos por um token especial
+    \texttt{[MASK]}, e o modelo é treinado a prever os tokens originais a partir do contexto
+    bidirecional restante. Ao contrário de modelos autorregressivos (da esquerda para a
+    direita), o MLM permite que cada posição utilize informação tanto do lado esquerdo quanto
+    do direito, produzindo representações bidirecionalmente contextualizadas.
+
+    \item \textbf{Predição da Próxima Sentença} (\textit{Next Sentence Prediction} — NSP):
+    o modelo aprende a classificar se duas sentenças ocorrem consecutivamente no corpus
+    original, adquirindo noções de coerência discursiva.
+\end{itemize}
+
+O BERT opera com contexto de até 512 tokens. Tokens especiais \texttt{[CLS]} e \texttt{[SEP]}
+delimitam as entradas. A saída do encoder é um tensor $\mathbf{H} \in \mathbb{R}^{B \times L
+\times d}$, onde $B$ é o tamanho do lote, $L$ o comprimento máximo da sequência e $d$ a
+dimensão oculta ($d = 768$ para modelos Base e $d = 1024$ para modelos Large). As saídas
+posicionais $\mathbf{h}_i$ são utilizadas diretamente como representações dos tokens nas
+tarefas de anotação.
+
+Neste trabalho são avaliados quatro \textit{encoders}: mBERT (multilíngue)
+\cite{devlin2019bert}, BERTimbau Base e BERTimbau Large (monolíngues para o português
+brasileiro) \cite{souza2020bertimbau}, e JabuticaBERT (monolíngue, com vocabulário expandido
+baseado no ModernBERT) \cite{thiago}.
+
+% ------------------------------------------------------------
+\subsection{Ajuste Fino}
+\label{subsec:finetuning}
+% ------------------------------------------------------------
+
+O \textbf{ajuste fino} (\textit{fine-tuning}) consiste em inicializar um modelo com os pesos
+pré-treinados e continuar o treinamento sobre dados anotados para a tarefa alvo
+\cite{devlin2019bert}. Durante esse processo, todos os parâmetros — tanto os da tarefa quanto
+os do encoder — são atualizados conjuntamente por retropropagação. O ajuste fino completo
+(\textit{full fine-tuning}) é o regime adotado nesta dissertação: o encoder não é mantido
+congelado, e seus parâmetros são adaptados junto com os cabeçotes de predição. Essa
+abordagem contrasta com estratégias de adaptação mais parcimoniosas (como \textit{adapters}
+ou \textit{LoRA}), mas é justificada pelo corpus de dimensão moderada e pela necessidade de
+máxima especialização das representações para tarefas sintáticas.
+
+% ------------------------------------------------------------
+\subsection{O que o BERT Aprende: Evidências de Probing Sintático}
+\label{subsec:probing}
+% ------------------------------------------------------------
+
+Uma questão central para esta dissertação é: \emph{em que medida as representações produzidas
+por um encoder BERT já codificam estrutura sintática, e em que forma essa informação está
+disponível?} Essa pergunta tem motivação direta nos resultados da dissertação — a
+\textbf{superioridade consistente do cabeçote linear sobre o biaffine} — e encontra respaldo
+em uma série de estudos de \textit{probing} (investigação de representações).
+
+\textbf{Tenney et al.} \cite{tenney2019bert} investigaram em quais camadas do BERT diferentes
+tipos de informação linguística estão codificados. Usando classificadores lineares (\textit{edge
+probes}) treinados sobre as representações de cada camada, os autores mostraram que o BERT
+``redesobre o pipeline clássico de NLP'': informação morfossintática (POS) emerge nas camadas
+iniciais, informação sintática local (dependências de curto alcance, constituência) concentra-se
+nas camadas intermediárias, e informação semântica de ordem superior aparece nas camadas mais
+profundas. Crucialmente, a performance dos probes lineares nas camadas intermediárias para
+tarefas sintáticas é alta, indicando que essa informação está linearmente acessível nas
+representações.
+
+\textbf{Hewitt e Manning} \cite{hewitt2019structural} propuseram uma sonda estrutural
+(\textit{structural probe}) para verificar se as distâncias entre pares de palavras no espaço
+de representação do BERT são proporcionais às distâncias na árvore de dependências sintáticas.
+A hipótese é que, se existir uma transformação linear $B$ tal que
+$\lVert B(\mathbf{h}_i - \mathbf{h}_j) \rVert_2 \approx d_{\text{tree}}(i, j)$, então a
+estrutura sintática está geometricamente codificada de forma linearmente acessível. Os
+resultados mostraram que tal transformação existe e recupera com alta precisão a árvore de
+dependências a partir das representações do BERT, sem treinamento adicional além da sonda
+linear. Isso fornece evidência direta de que \textbf{a estrutura de dependências está
+implicitamente representada no espaço linear do encoder}.
+
+\textbf{Jawahar et al.} \cite{jawahar2019does} confirmaram resultados complementares: as
+camadas intermediárias do BERT capturam informações sobre estrutura frasal (sintagmas) e
+hierarquia sintática, enquanto as camadas superiores processam relações semânticas mais
+abstratas. Probes lineares treinados sobre representações extraídas diretamente do encoder
+classificam relações de dependência com acurácia substancialmente acima do acaso.
+
+Em conjunto, esses trabalhos embasam a hipótese central desta dissertação: \textbf{o encoder
+BERT, após ajuste fino completo, organiza suas representações de modo que a estrutura
+sintática seja linearmente acessível, favorecendo cabeçotes de predição simples (lineares)
+como sondas diretas dessa organização latente}. Isso explica por que o cabeçote linear, apesar
+de parametricamente mais simples que o biaffine, consegue superar este último quando o corpus
+de treinamento é limitado: ele extrai eficientemente a informação sintática já disponível no
+encoder, enquanto o cabeçote biaffine — com sua maior capacidade paramétrica — incorre em
+maior risco de sobreajuste.
+
+% ============================================================
+\section{Arquiteturas de Predição para Parsing de Dependências}
+\label{sec:cabecotes}
+% ============================================================
+
+O parsing de dependências envolve duas predições por token: (i) qual token é o governante
+(\textit{head}) — tarefa HEAD — e (ii) qual é a relação sintática entre o token e seu
+governante — tarefa DEPREL. Esta seção descreve as duas arquiteturas de cabeçote avaliadas
+neste trabalho: o cabeçote linear e o cabeçote biaffine.
+
+% ------------------------------------------------------------
+\subsection{Cabeçote Linear}
+\label{subsec:linear}
+% ------------------------------------------------------------
+
+No cabeçote linear, a saída do encoder $\mathbf{H} \in \mathbb{R}^{B \times L \times d}$ é
+projetada por camadas densas independentes para cada tarefa. Para a tarefa HEAD, a projeção
+mapeia cada representação de token para uma distribuição sobre $N_{\text{head}}$ posições
+candidatas; para DEPREL, para os 44 rótulos de dependência do Porttinari; e para UPOS, para
+os $N_u$ rótulos morfossintáticos. A predição de HEAD no cabeçote linear trata a tarefa como
+uma classificação sobre posições absolutas da sentença, sem modelar explicitamente a interação
+entre pares de tokens.
+
+Essa arquitetura tem capacidade paramétrica reduzida, o que atua como regularização implícita
+em cenários de dados limitados. Ao mesmo tempo, conforme discutido na
+Seção~\ref{subsec:probing}, as representações do BERT já codificam informação sintática em
+forma linearmente acessível, de modo que uma projeção linear pode ser suficiente para extrair
+essa estrutura latente sem necessidade de aprendizado adicional de interações entre pares.
+
+% ------------------------------------------------------------
+\subsection{Atenção Biaffine para Parsing de Dependências}
+\label{subsec:biaffine}
+% ------------------------------------------------------------
+
+O mecanismo de atenção biaffine para parsing de dependências foi proposto por
+\citeauthor{dozat2016deep} \cite{dozat2016deep} e representa o estado da arte em sistemas de
+parsing graph-based. A ideia central é modelar explicitamente a compatibilidade entre cada
+par de tokens na sentença, projetando as representações do encoder para papéis especializados
+antes de calcular os escores de dependência.
+
+Para cada token, quatro MLPs especializadas projetam a representação do encoder para papéis
+distintos: cabeça de arco, dependente de arco, cabeça de relação e dependente de relação.
+Em seguida, um operador bilinear calcula, para cada par de tokens $(i,j)$, um escore que
+modela a compatibilidade entre a representação do dependente $i$ e a do candidato a cabeça
+$j$ — tanto para a existência do arco quanto para o rótulo da relação. A implementação
+detalhada, incluindo as equações e as dimensões das matrizes de peso, é apresentada na
+Seção~\ref{subsec:biaffine_met}.
+
+A operação bilinear modela interações multiplicativas entre as representações do dependente
+e da cabeça, o que torna o mecanismo estritamente mais expressivo do que uma projeção linear
+sobre a representação de um único token. Em corpus de grande porte, essa expressividade
+adicional resulta em ganhos consistentes de desempenho. Entretanto, a maior capacidade
+paramétrica aumenta o risco de sobreajuste em corpus pequenos, como o Porttinari-base
+(5.893 sentenças de treinamento), motivando a comparação direta com o cabeçote linear
+conduzida nesta dissertação.
+
+% ============================================================
+\section{Aprendizado Multi-Tarefa}
+\label{sec:mtl}
+% ============================================================
+
+O \textbf{aprendizado multi-tarefa} (\textit{Multi-Task Learning} — MTL) é um paradigma que
+treina um único modelo para resolver simultaneamente múltiplas tarefas relacionadas,
+aproveitando a correlação entre elas para melhorar a generalização em cada tarefa individual
+\cite{caruana1997multitask}. Em vez de treinar modelos independentes para cada tarefa, o MTL
+induz ao compartilhamento de representações internas, funcionando como uma forma de
+regularização implícita que reduz o risco de sobreajuste.
+
+% ------------------------------------------------------------
+\subsection{Hard Parameter Sharing}
+\label{subsec:hard-sharing}
+% ------------------------------------------------------------
+
+O \textit{hard parameter sharing} é a estratégia de MTL adotada nesta dissertação. Nela, um
+único encoder compartilha todos os seus parâmetros entre as tarefas, enquanto cada tarefa
+possui seu próprio cabeçote de predição. A função de perda total é a soma das perdas
+individuais:
+
+\begin{equation}
+\mathcal{L} = \mathcal{L}_{\text{HEAD}} + \mathcal{L}_{\text{DEPREL}} + \mathcal{L}_{\text{UPOS}}.
+\end{equation}
+
+\noindent
+Dessa forma, os gradientes de todas as tarefas propagam-se pelos mesmos parâmetros do encoder,
+forçando as representações a capturarem características úteis para cada uma delas. Quando as
+tarefas estão correlacionadas, esse compartilhamento melhora as representações de cada tarefa
+individual; quando as tarefas são independentes ou conflitantes, o compartilhamento pode
+prejudicar o desempenho.
+
+A alternativa — o \textit{soft parameter sharing} — mantém encoders separados por tarefa e
+introduz um mecanismo de regularização para aproximar seus parâmetros. Embora mais flexível,
+essa abordagem é parametricamente mais custosa e não foi adotada neste trabalho.
+
+% ------------------------------------------------------------
+\subsection{UPOS como Tarefa Auxiliar: Motivação para o MTL}
+\label{subsec:mtl-upos}
+% ------------------------------------------------------------
+
+A escolha de UPOS como tarefa auxiliar para o parsing de dependências é motivada pela
+correlação linguística entre classe morfossintática e função sintática. Intuitivamente,
+saber que uma palavra é um verbo favorece a predição de que ela seja raiz ou núcleo verbal,
+enquanto saber que é um pronome pessoal favorece a predição de sujeito ou objeto. Essa
+correlação torna as tarefas estatisticamente interdependentes: a distribuição de rótulos
+DEPREL condicionada ao UPOS não é uniforme.
+
+A dependência estatística entre UPOS e DEPREL é verificada empiricamente no corpus
+Porttinari-base por meio de métricas como Informação Mútua Normalizada (NMI) e V de Cramér,
+cuja formalização e resultados numéricos são apresentados na Seção~\ref{subsec:corr}. Os
+resultados confirmam forte associação entre as duas variáveis e fundamentam quantitativamente
+o uso de UPOS como sinal auxiliar no treinamento conjunto.
+
+Trabalhos anteriores em línguas morfologicamente ricas confirmam que informações
+morfossintáticas compartilhadas em um modelo MTL melhoram o desempenho de parsing de
+dependências, especialmente para rótulos de menor frequência
+\cite{kondratyuk201975}. Nesta dissertação, adicionalmente investiga-se o impacto da
+remoção do sinal UPOS por meio de um estudo de ablação, detalhado na
+Seção~\ref{subsec:ablacao}.

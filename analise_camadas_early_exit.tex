@@ -1,0 +1,177 @@
+% ============================================================
+% Seção: Análise por Camada, Explicabilidade e Saída Antecipada
+% ------------------------------------------------------------
+% Para inserir no capítulo de Resultados e Discussão (resultados.tex)
+% via \input{analise_camadas_early_exit}, ou como capítulo próprio
+% trocando \section por \chapter.
+%
+% Fontes dos números:
+%   layerwise_probe_results.csv, layerwise_early_exit_comparison*.csv,
+%   layerwise_frozen_heads_results.csv, upos_early_exit_results.csv,
+%   upos_early_exit_benchmark.csv
+% Scripts: layerwise_probes.py, layerwise_comparison_aaai.py,
+%   layerwise_frozen_heads.py, upos_early_exit.py
+% Referências bibliográficas: as chaves abaixo seguem layerwise_aaai.bib
+%   (tenney2019bert, nostalgebraist2020logitlens, hewitt2019structural,
+%    xin2020deebert, fan2020layerdrop, dozat2017biaffine) — adicionar as
+%   entradas correspondentes ao .bib da dissertação.
+% ============================================================
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Análise por Camada, Explicabilidade e Saída Antecipada}
+\label{sec:analise_camadas}
+% ─────────────────────────────────────────────────────────────────────────────
+
+Os experimentos apresentados nas seções anteriores avaliam os modelos como caixas-pretas:
+mede-se o desempenho final de cada configuração, mas não \emph{onde}, ao longo da profundidade
+do encoder, cada tarefa é efetivamente resolvida. Esta seção complementa essa avaliação com um
+estudo de explicabilidade por camada dos modelos do ParseH2IA, conduzido sobre o conjunto de
+teste do Porttinari (1.683 sentenças; 33.580 \textit{tokens}), e explora uma consequência
+prática direta desse estudo: a construção de um classificador UPOS com \textbf{saída antecipada}
+(\textit{early exit}), que reduz substancialmente o custo computacional de inferência com perda
+mínima de acurácia.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsection{Onde Cada Tarefa se Resolve: Informação versus Comportamento}
+\label{subsec:camadas_leitura}
+% ─────────────────────────────────────────────────────────────────────────────
+
+A literatura de interpretabilidade estabeleceu que as camadas do BERT recapitulam o
+\textit{pipeline} clássico de PLN --- morfologia nas camadas inferiores, sintaxe nas
+intermediárias, semântica nas superiores~\citep{tenney2019bert}. Para verificar como essa
+organização se manifesta nos modelos deste trabalho, cada camada do encoder foi interrogada
+com dois instrumentos complementares:
+
+\begin{enumerate}
+  \item \textbf{\textit{Logit lens}}~\citep{nostalgebraist2020logitlens}: os cabeçotes finais
+        treinados são aplicados aos estados ocultos de cada camada intermediária, medindo o que
+        o modelo implantado consegue \emph{extrair} de cada profundidade (\emph{comportamento});
+  \item \textbf{Sondas lineares por camada} (\textit{probes})~\citep{hewitt2019structural}:
+        classificadores lineares treinados sobre os estados ocultos congelados de cada camada
+        (cinco sementes, $\sigma \leq 0{,}003$), medindo a informação linearmente decodificável
+        presente em cada profundidade (\emph{informação}).
+\end{enumerate}
+
+Os dois instrumentos contam histórias diferentes --- e é precisamente essa dissociação que
+fundamenta o experimento de saída antecipada. Nas sondas, a informação de UPOS
+\textbf{satura muito cedo}: no encoder do BERTimbau Base com cabeçote linear, a sonda atinge
+90,9\% já na camada de \textit{embeddings} (camada 0), 96,4\% na camada 2, 98,1\% na camada 3 e
+99,0\% na camada 5, contra 99,3\% na camada final. A hierarquia
+UPOS\,$\rightarrow$\,DEPREL\,$\rightarrow$\,HEAD emerge em todos os modelos: DEPREL satura nas
+camadas 8--9 e a ligação sintática (HEAD) só se resolve no quarto superior da rede (camadas de
+convergência ponderadas por suporte: 8,3 / 9,2 / 11,6 para o modelo linear; 6,1 / 8,8 / 11,1
+para o biaffine).
+
+Pelo \textit{logit lens}, entretanto, os cabeçotes finais \textbf{não conseguem ler} essa
+informação precoce: aplicados à camada 8, recuperam apenas 80,9\% de acurácia de UPOS, e somente
+na camada 10 se aproximam do desempenho final (98,9\%). A informação está presente desde a
+camada 3, mas em uma calibração que o cabeçote da camada 12 não decodifica. A distinção é
+central: \emph{a camada em que a informação existe e a camada em que o modelo implantado a
+utiliza não coincidem}, e qualquer técnica de eficiência baseada em truncamento de profundidade
+precisa levar em conta qual das duas perguntas está respondendo.
+
+Um terceiro experimento estabelece o vínculo causal entre as duas leituras: re-treinando
+famílias completas de cabeçotes sobre o encoder \textbf{congelado} do BERTimbau Large (24
+camadas), nas camadas de saturação de cada tarefa, o desempenho implantado é quase integralmente
+recuperado --- ler UPOS na camada 10 custa 0,3 ponto percentual, DEPREL na camada 18 custa 0,3 e
+HEAD na camada 23 custa 0,4 ponto de UAS em relação ao modelo fim-a-fim. Ou seja, o modelo
+implantado extrai muito pouco da profundidade além do ponto de saturação de cada tarefa; basta
+que o cabeçote de leitura seja \emph{calibrado para a camada de saída}, em vez de emprestado da
+camada final.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsection{Saída Antecipada Dedicada para UPOS}
+\label{subsec:early_exit_upos}
+% ─────────────────────────────────────────────────────────────────────────────
+
+Se a informação de UPOS satura por volta da camada 3 e um cabeçote calibrado consegue lê-la,
+segue-se uma consequência de engenharia imediata: \textbf{um etiquetador morfossintático
+dedicado não precisa executar o encoder completo}. Para quantificar essa hipótese, foi
+construído um modelo de saída antecipada composto por duas peças: (i)~o encoder do modelo
+BtB-Lin-MTL \textbf{fisicamente truncado} na camada $k$ --- as camadas $k{+}1, \dots, 12$ são
+removidas do grafo de computação, de modo que a economia de FLOPs é real, e não apenas uma
+leitura intermediária de uma rede executada por inteiro --- e (ii)~uma \textbf{camada linear
+simples} ($768 \times 16$ parâmetros, um classificador por \textit{token} sobre o primeiro
+subtoken de cada palavra) treinada sobre as representações congeladas da camada $k$. O encoder
+permanece congelado e idêntico ao do \textit{parser} original; apenas os cerca de 12 mil
+parâmetros do classificador são otimizados (AdamW, 30 épocas, três sementes), sobre o conjunto
+de treino completo do Porttinari.
+
+A Tabela~\ref{tab:early_exit_upos} apresenta a acurácia de UPOS no conjunto de teste e a
+latência de inferência medida em GPU (NVIDIA RTX~4090, lotes de 32 sentenças, tokenização
+pré-computada, conjunto de teste completo) para saídas nas camadas 2 a 6, tendo como referência
+o mesmo protocolo na camada 12. A variabilidade entre sementes é desprezível
+($\sigma \leq 0{,}0002$ em todas as configurações).
+
+\begin{table}[ht]
+\centering
+\caption{Saída antecipada dedicada para UPOS: acurácia (média de três sementes), parâmetros e
+         latência do encoder truncado na camada $k$ + classificador linear, no conjunto de
+         teste do Porttinari. $\Delta$ indica a diferença em pontos percentuais para o modelo
+         MTL implantado (99,22\%). Latência medida em GPU RTX~4090 com lotes de 32 sentenças.}
+\label{tab:early_exit_upos}
+\begin{tabular}{ccccc}
+\toprule
+\textbf{Camada de saída} & \textbf{Acurácia UPOS (\%)} & \textbf{$\Delta$ (p.p.)} &
+\textbf{Parâmetros (M)} & \textbf{\textit{Speedup}} \\
+\midrule
+2            & 96,94 & $-2{,}28$ & 37,5  & 5,33$\times$ \\
+3            & 98,35 & $-0{,}87$ & 44,6  & 3,67$\times$ \\
+4            & 98,72 & $-0{,}50$ & 51,6  & 2,85$\times$ \\
+5            & 99,03 & $-0{,}19$ & 58,7  & 2,32$\times$ \\
+6            & 99,15 & $-0{,}07$ & 65,8  & 1,96$\times$ \\
+\midrule
+12 (referência) & 99,22 & --- & 108,3 & 1,00$\times$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Três pontos merecem destaque. Primeiro, o classificador linear treinado na camada 12 reproduz
+exatamente a acurácia do modelo MTL implantado (99,22\%), validando o protocolo: nada se perde
+por substituir o cabeçote original pelo classificador re-treinado. Segundo, confirmando a
+leitura das sondas, \textbf{a saída na camada 3 atinge 98,35\% de acurácia com
+\textit{speedup} de 3,67$\times$} --- uma redução de aproximadamente 73\% na latência ao custo
+de 0,87 ponto percentual. O \textit{speedup} medido fica abaixo do teto teórico de
+$4\times$ ($12/3$ camadas) devido aos custos fixos de \textit{embeddings} e lançamento de
+\textit{kernels}, o que reforça a importância de medir latência real em vez de estimar por
+FLOPs. Terceiro, \textbf{a camada 5 constitui o melhor compromisso} quando a meta é preservar
+o desempenho: 99,03\% de acurácia (0,19 ponto abaixo do modelo completo, e ainda próxima dos
+99,09\% do PortParser~\citep{lopes2024towards}) por menos da metade do custo de inferência
+(2,32$\times$).
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsection{Custo Computacional e Limites da Saída Antecipada}
+\label{subsec:custo_computacional}
+% ─────────────────────────────────────────────────────────────────────────────
+
+O resultado anterior deve ser lido com uma dupla qualificação, que decorre diretamente da
+análise por camada.
+
+Primeiro, a economia só se materializa quando a tarefa de UPOS é servida
+\textbf{isoladamente} --- por exemplo, em um serviço de etiquetagem morfossintática dedicado,
+em pré-processamento de grandes corpora ou em cenários de latência restrita. No modelo MTL
+completo, o encoder precisa ser executado até as camadas superiores de qualquer forma, pois a
+ligação sintática só se resolve no quarto superior da rede; uma saída antecipada de UPOS na
+camada 3, nesse contexto, não desliga camada alguma e, portanto, não gera economia.
+
+Segundo, a viabilidade da saída antecipada é \textbf{fortemente dependente da tarefa}. A
+ablação causal de truncamento aplicada às três tarefas simultaneamente mostra que interromper
+o encoder na camada 10 custa menos de 0,5 ponto percentual em UPOS e DEPREL, mas
+\textbf{30 a 49 pontos de UAS}: no modelo linear, o UAS despenca de 93,74\% para 45,18\%. A
+estrutura de dependências é composta sequencialmente pelas camadas superiores e não sobrevive
+ao truncamento --- técnicas de \textit{early exit} e poda de
+profundidade~\citep{xin2020deebert, fan2020layerdrop}, formuladas sob a hipótese de que camadas
+superiores apenas refinam decisões já tomadas, sacrificam silenciosamente exatamente a
+estrutura que se forma por último. O efeito é ainda mais severo em encoders multilíngues, alvo
+natural dessas técnicas em cenários de implantação: no mBERT, a última camada sozinha contribui
+com 28,1 pontos de UAS, contra 17,4 no BERTimbau.
+
+Em síntese, a análise por camada oferece um critério baseado em explicabilidade para decidir
+\emph{quando} a saída antecipada é segura: ela é adequada para as tarefas cuja informação
+satura cedo (etiquetagem morfossintática), desde que o cabeçote de leitura seja calibrado para
+a camada de saída, e é estruturalmente inviável para a predição de ligações sintáticas, cuja
+resolução se concentra causalmente no topo da rede. Para o caso do UPOS no Porttinari, o
+resultado prático é um etiquetador com $\sim$41\% dos parâmetros e cerca de um quarto da
+latência do modelo completo, mantendo acurácia acima de 98\% --- e, na configuração
+conservadora (camada 5), um etiquetador duas vezes mais rápido que permanece competitivo com o
+estado da arte para o português brasileiro.

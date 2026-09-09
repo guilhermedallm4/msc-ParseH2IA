@@ -1,0 +1,81 @@
+% JabuticaBERT — Linear (com UPOS) (JaB-Lin-cU)
+
+
+\begin{table}[ht]
+\centering
+\caption{Top-15 instabilidade DEPREL (esq.) e UPOS (dir.) --- JaB-Lin-cU. N\,=\,n.º tokens, Forg.\,=\,esquecimentos, Rec.\,=\,recuperações, Osc.\,=\,oscilações, A+E\,=\,aprendeu+esqueceu.}
+\label{tab:inst-predictions-results-jabuticabert-linear}
+\begin{minipage}[t]{0.54\linewidth}
+\centering\tiny
+\begin{tabular}{lrrrrrrrr}
+\toprule
+\textbf{Rótulo} & \textbf{N} & \textbf{Forg.} & \textbf{Rec.} & \textbf{Osc.} & \textbf{A+E} & \textbf{Pico} & \textbf{Final} & \textbf{Drop} \\
+\midrule
+\texttt{obl} & 1,519 & 1,513 & 2,578 & 4,091 & 133 & 0.9105 & 0.8940 & 0.0165 \\
+\texttt{nmod} & 2,226 & 1,420 & 1,690 & 3,110 & 114 & 0.9555 & 0.9447 & 0.0108 \\
+\texttt{amod} & 1,421 & 621 & 1,839 & 2,460 & 65 & 0.9543 & 0.9444 & 0.0099 \\
+\texttt{nsubj} & 1,512 & 588 & 1,600 & 2,188 & 47 & 0.9590 & 0.9590 & 0.0000 \\
+\texttt{advcl} & 448 & 500 & 893 & 1,393 & 35 & 0.8862 & 0.8772 & 0.0089 \\
+\texttt{conj} & 887 & 485 & 1,300 & 1,785 & 65 & 0.9493 & 0.9188 & 0.0304 \\
+\texttt{obj} & 1,248 & 469 & 1,667 & 2,136 & 30 & 0.9768 & 0.9696 & 0.0072 \\
+\texttt{root} & 1,639 & 399 & 781 & 1,180 & 30 & 0.9854 & 0.9805 & 0.0049 \\
+\texttt{acl} & 298 & 382 & 636 & 1,018 & 37 & 0.8859 & 0.8523 & 0.0336 \\
+\texttt{flat\!:\!name} & 626 & 307 & 901 & 1,208 & 22 & 0.9728 & 0.9505 & 0.0224 \\
+\texttt{xcomp} & 455 & 254 & 681 & 935 & 18 & 0.9604 & 0.9385 & 0.0220 \\
+\texttt{case} & 3,241 & 241 & 307 & 548 & 14 & 0.9960 & 0.9948 & 0.0012 \\
+\texttt{parataxis} & 128 & 235 & 330 & 565 & 24 & 0.7812 & 0.7422 & 0.0391 \\
+\texttt{acl\!:\!relcl} & 375 & 167 & 537 & 704 & 5 & 0.9893 & 0.9867 & 0.0027 \\
+\texttt{appos} & 180 & 163 & 329 & 492 & 8 & 0.9444 & 0.9222 & 0.0222 \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.42\linewidth}
+\centering\tiny
+\begin{tabular}{lrrrrrrrr}
+\toprule
+\textbf{Rótulo} & \textbf{N} & \textbf{Forg.} & \textbf{Rec.} & \textbf{Osc.} & \textbf{A+E} & \textbf{Pico} & \textbf{Final} & \textbf{Drop} \\
+\midrule
+\texttt{NOUN} & 5,602 & 849 & 1,123 & 1,972 & 63 & 0.9902 & 0.9884 & 0.0018 \\
+\texttt{ADJ} & 1,847 & 770 & 2,521 & 3,291 & 68 & 0.9626 & 0.9524 & 0.0103 \\
+\texttt{VERB} & 3,390 & 674 & 1,196 & 1,870 & 49 & 0.9876 & 0.9835 & 0.0041 \\
+\texttt{PROPN} & 1,969 & 246 & 1,822 & 2,068 & 20 & 0.9903 & 0.9883 & 0.0020 \\
+\texttt{DET} & 2,425 & 173 & 279 & 452 & 12 & 0.9971 & 0.9951 & 0.0021 \\
+\texttt{ADP} & 3,558 & 164 & 243 & 407 & 6 & 0.9980 & 0.9978 & 0.0003 \\
+\texttt{PRON} & 634 & 159 & 716 & 875 & 7 & 0.9890 & 0.9858 & 0.0032 \\
+\texttt{ADV} & 676 & 133 & 771 & 904 & 8 & 0.9808 & 0.9793 & 0.0015 \\
+\texttt{SCONJ} & 227 & 118 & 334 & 452 & 11 & 0.9692 & 0.9515 & 0.0176 \\
+\texttt{AUX} & 504 & 85 & 582 & 667 & 5 & 0.9881 & 0.9861 & 0.0020 \\
+\texttt{X} & 85 & 59 & 121 & 180 & 7 & 0.7412 & 0.7294 & 0.0118 \\
+\texttt{NUM} & 405 & 53 & 448 & 501 & 6 & 0.9802 & 0.9753 & 0.0049 \\
+\texttt{CCONJ} & 411 & 41 & 447 & 488 & 2 & 0.9903 & 0.9878 & 0.0024 \\
+\texttt{SYM} & 96 & 30 & 122 & 152 & 2 & 0.9688 & 0.9583 & 0.0104 \\
+\texttt{PUNCT} & 2,240 & 14 & 14 & 28 & 1 & 1.0000 & 0.9996 & 0.0004 \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\end{table}
+
+
+\begin{table}[ht]
+\centering\scriptsize
+\caption{UAS por época --- JaB-Lin-cU. Fg\,=\,forgetting (acerto$\to$erro). Rc\,=\,recovery (erro$\to$acerto).}
+\label{tab:uas-predictions-results-jabuticabert-linear}
+\begin{tabular}{rrrr rrrr rrrr rrrr}
+\toprule
+\textbf{Ép.} & \textbf{UAS} & \textbf{Fg} & \textbf{Rc} & \textbf{Ép.} & \textbf{UAS} & \textbf{Fg} & \textbf{Rc} & \textbf{Ép.} & \textbf{UAS} & \textbf{Fg} & \textbf{Rc} & \textbf{Ép.} & \textbf{UAS} & \textbf{Fg} & \textbf{Rc} \\
+\midrule
+1 & 0.1111 & 0 & 0 & 2 & 0.1837 & 698 & 2,444 & 3 & 0.2615 & 1,096 & 2,971 & 4 & 0.3509 & 1,137 & 3,289 \\
+5 & 0.4448 & 1,959 & 4,220 & 6 & 0.4809 & 2,699 & 3,568 & 7 & 0.5126 & 2,439 & 3,203 & 8 & 0.5848 & 1,515 & 3,253 \\
+9 & 0.6124 & 3,370 & 4,033 & 10 & 0.6970 & 1,830 & 3,867 & 11 & 0.6618 & 3,506 & 2,659 & 12 & 0.7622 & 1,689 & 4,106 \\
+13 & 0.7630 & 2,022 & 2,042 & 14 & 0.7319 & 2,829 & 2,079 & 15 & 0.7840 & 1,610 & 2,866 & 16 & 0.7681 & 2,282 & 1,898 \\
+17 & 0.8024 & 1,735 & 2,561 & 18 & 0.8173 & 1,628 & 1,986 & 19 & 0.8276 & 1,470 & 1,718 & 20 & 0.8128 & 1,972 & 1,617 \\
+21 & 0.8282 & 1,329 & 1,699 & 22 & 0.8555 & 1,080 & 1,739 & 23 & 0.8598 & 1,021 & 1,124 & 24 & 0.8523 & 1,183 & 1,001 \\
+25 & 0.8484 & 1,185 & 1,091 & 26 & 0.8581 & 929 & 1,164 & 27 & 0.8671 & 770 & 985 & 28 & 0.8595 & 920 & 738 \\
+29 & 0.8638 & 866 & 969 & 30 & 0.8536 & 1,034 & 788 & 31 & 0.8581 & 962 & 1,071 & 32 & 0.8713 & 632 & 950 \\
+33 & 0.8663 & 631 & 511 & 34 & 0.8683 & 454 & 501 & 35 & 0.8719 & 398 & 485 & 36 & 0.8771 & 317 & 443 \\
+37 & 0.8768 & 213 & 205 & 38 & 0.8788 & 124 & 174 & 39 & 0.8764 & 136 & 76 & 40 & 0.8779 & 59 & 96 \\
+41 & 0.8779 & 0 & 0 &  & & &  &  & & &  &  & & &  \\
+\bottomrule
+\end{tabular}
+\end{table}

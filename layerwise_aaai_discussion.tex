@@ -1,0 +1,202 @@
+% ══════════════════════════════════════════════════════════════════════════════
+% Abstract + Discussion — análise por camada para o artigo AAAI (versão 2)
+% Números gerados por: layerwise_comparison_aaai.py (bootstrap pareado, 10k resamples),
+%   layerwise_probes.py (probes por camada, 5 seeds), layerwise_large_analysis.py
+%   (BERTimbau-large, 24 camadas), layerwise_independent_runs.py (replicação).
+% Tabelas: latex_tables/layerwise_aaai_tables.tex  (tab:early-exit, tab:significance,
+%          tab:block-skip, tab:convergence, tab:replication, tab:probes)
+% Figuras: imagens/layerwise_fig_per_layer.pdf   → \label{fig:per-layer}
+%          imagens/layerwise_fig_convergence.pdf → \label{fig:convergence}
+%          imagens/layerwise_fig_task_depth.pdf  → \label{fig:task-depth}
+%          imagens/layerwise_fig_probes.pdf      → \label{fig:probes}
+%          imagens/layerwise_fig_scale.pdf       → \label{fig:scale}
+% ══════════════════════════════════════════════════════════════════════════════
+
+% ── Sugestão de título ─────────────────────────────────────────────────────────
+% Information, Behavior, and Format: Where Syntax Lives in BERT Depends on Who Is
+% Asking
+
+\begin{abstract}
+Where inside a fine-tuned Transformer does syntax form? We show that the answer
+depends on the read-out used to ask the question. In a controlled study of
+multi-task dependency parsers for Brazilian Portuguese (Porttinari), we cross
+two decoder architectures (linear and biaffine heads) with two pretraining
+regimes (monolingual BERTimbau, multilingual mBERT), and interrogate every
+encoder layer with three read-outs: the deployed final-layer heads (logit
+lens), per-layer trained linear probes (5 seeds, $\sigma \leq 0.003$), and two
+causal ablations (early exit and block skip), with paired bootstrap tests over
+1{,}683 test sentences. The three read-outs give three different answers.
+Probes find part-of-speech information nearly saturated by layer~3 in all
+encoders; the deployed heads only \emph{use} it from layers 6--9; and
+attachment behavior is causally decided in the top quarter of the network---a
+profile that replicates across independent training runs and transfers, at the
+same \emph{relative} depth, from 12 to 24 layers. Most strikingly, single-token
+probes recover head positions from the linear model's encoder (93.7\%) but
+stay at chance-level (\!$\sim$26\%) on the biaffine encoder at every layer and
+scale, although the biaffine parser attaches 90\% of tokens correctly: the
+decoder dictates the representational \emph{format}, and format-blind probing
+would declare a 90-UAS encoder syntax-free. Multilingual pretraining defers
+syntactic behavior toward the top layers and its LAS penalty more than doubles
+under the biaffine head ($+1.45$ vs.\ $+3.28$ points, $p<10^{-4}$). These
+results caution that probing claims of the form ``layer $k$ encodes $P$'' are
+not properties of an encoder, and that depth-truncation efficiency techniques
+silently sacrifice exactly the structure that forms last.
+\end{abstract}
+
+% ── Contribuições (para a introdução) ─────────────────────────────────────────
+% \begin{itemize}
+% \item A controlled 2$\times$2 study (decoder architecture $\times$ pretraining
+%   regime) of where dependency syntax forms in BERT, interrogated with three
+%   read-outs: logit lens, per-layer trained probes, and causal ablations;
+% \item Evidence that the three read-outs dissociate: information (probes),
+%   behavior (logit lens/early exit), and representational format (probe
+%   failure on biaffine encoders) give different---and individually
+%   misleading---answers to ``where syntax lives'';
+% \item A characterization of the multilingual penalty as \emph{behavioral
+%   depth deferral}, with a significant interaction between pretraining regime
+%   and decoder architecture;
+% \item Robustness evidence: the depth profile replicates across independent
+%   training runs, and transfers at constant relative depth from 12 to 24
+%   layers.
+% \end{itemize}
+
+\section{Discussion}
+\label{sec:layerwise-discussion}
+
+\paragraph{Information, behavior, and format are three different questions.}
+Our central methodological finding is a three-way dissociation
+(Table~\ref{tab:probes}, Figures~\ref{fig:per-layer} and~\ref{fig:probes}).
+\emph{Information}: linear probes trained per layer find UPOS nearly saturated
+by layer 3 ($\geq$98\% in all four encoders, including mBERT) and DEPREL by
+layers 8--9---far earlier, and far more uniformly across models, than any
+behavioral measure suggests. \emph{Behavior}: the deployed models, read
+through their own final-layer heads, only commit to those decisions at layers
+6--9 (UPOS) and 9--12 (DEPREL), and the early-exit ablation confirms the
+behavioral profile causally. \emph{Format}: single-token probes recover head
+positions from the linear model's encoder (93.7\% at layer 12) but remain flat
+at 24--26\% on the biaffine encoders \emph{at every layer}, in the base and in
+the 24-layer model alike---even though those parsers attach ~90\% of tokens
+correctly. The explanation is architectural: a linear per-token head can only
+solve attachment if the encoder compresses ``my head is at position $k$'' into
+each token vector, whereas a biaffine scorer reads attachment from token
+\emph{pairs}, so the encoder is never pressured to store it in a linearly
+token-decodable form. A standard probing study, applied to the biaffine
+encoder, would conclude that it does not represent syntactic heads at all.
+Claims of the form ``layer $k$ of model $M$ encodes property $P$'' are
+therefore not properties of an encoder: they are properties of an encoder, the
+objective that fine-tuned it, and the read-out used to interrogate it.
+
+\paragraph{The NLP pipeline is emergent; its depth is set by the decoder.}
+All four models reproduce the ordering UPOS $\rightarrow$ DEPREL $\rightarrow$
+HEAD along depth (Table~\ref{tab:convergence}, Figure~\ref{fig:task-depth}),
+extending \citet{tenney2019bert} to a morphologically rich Romance language
+and parsing-specific fine-tuning. The \emph{location} of each stage, however,
+moves with the decoder: on BERTimbau, the biaffine head pulls behavioral UPOS
+convergence from layer 8.3 to 6.1 and DEPREL from 9.2 to 8.8. Since the probes
+show the underlying information profiles to be nearly identical across the two
+encoders, this shift is a change in where the computation \emph{commits}, not
+in where the information exists---reinforcing that behavioral and
+informational depth must be reported separately.
+
+\paragraph{The multilingual penalty is behavioral depth deferral.}
+At the final layer, mBERT matches the monolingual encoder on tagging (98.9\%
+vs.\ 99.2\% UPOS) but loses 1.0--2.9 UAS points depending on the decoder
+(Table~\ref{tab:significance}). The per-layer curves locate the loss: mBERT
+postpones syntactic resolution toward the top of the stack. With a linear
+head, attachment at layer 11 is 64.6\% for mBERT against 76.3\% for BERTimbau,
+and the final layer alone contributes $+28.1$ UAS points ($+17.4$ for
+BERTimbau). The probes show a milder informational deferral (head
+decodability at layer 8: 66.3\% vs.\ 80.4\%), so the behavioral bottleneck
+amplifies an informational one. We interpret the deferral as the cost of
+cross-lingual sharing: lower multilingual layers serve a language-neutral
+lexical space, and language-specific syntactic configuration is assembled only
+after the input is effectively situated in Portuguese. Crucially, the two
+experimental axes interact: the monolingual LAS advantage is $+1.45$ points
+$[+0.92, +1.98]$ under the linear head but $+3.28$ $[+2.56, +4.00]$ under the
+biaffine head (both $p<10^{-4}$). A structured decoder relies on
+representations that crystallize early enough to be refined; when the encoder
+delivers them late, the decoder inherits the bottleneck. Architecture
+rankings validated on monolingual encoders therefore need not transfer to
+multilingual ones---which is where compute-constrained, low-resource
+deployments actually use them.
+
+\paragraph{The depth profile is robust: independent runs and $2\times$ scale.}
+Two robustness checks argue that these profiles are properties of the training
+setup rather than accidents of a single run. First, independent training runs
+(ablation checkpoints trained without the UPOS task, i.e., under a different
+multi-task mixture) reproduce final LAS within one point and yield
+\emph{identical} half-resolution depths---the first layer reaching 50\% of
+final UAS is 11/11 (linear/BERTimbau), 9/9 (biaffine/BERTimbau), and 11/11
+(linear/mBERT) for main/independent runs (Table~\ref{tab:replication}).
+Probe-level training variance is negligible (5 seeds, $\sigma \leq 0.003$).
+Second, the profile transfers across scale at constant \emph{relative} depth:
+in the 24-layer BERTimbau-large parsers, LAS remains below 10\% until
+$\ell/L \approx 0.7$ and resolves in the top quarter of the network,
+overlapping the 12-layer curves when depth is normalized
+(Figure~\ref{fig:scale}). Depth deferral is measured in fractions of the
+network, not in absolute layers---consistent with relative-depth analyses of
+pretrained encoders and relevant to practitioners choosing truncation points
+at different scales.
+
+\paragraph{Depth is a compositional chain, not an ensemble of refiners.}
+The block-skip ablation (Table~\ref{tab:block-skip}) rejects the reading of
+Transformer depth as iterative refinement of a shared representation
+\citep{jastrzebski2018residual}. Feeding embeddings directly into the last
+block yields 27--54\% UPOS and $\leq$2.3 LAS across all five models (including
+the 24-layer one); iterating that block to match the FLOPs of the full network
+is \emph{worse than the raw embeddings} for tagging. The converse asymmetry
+completes the picture: the bottom 8 layers alone retain 76--98\% UPOS but only
+0.7--39.4 UAS. Lower layers build a manifold on which upper-layer functions
+are defined; off that manifold, upper blocks are not merely suboptimal but
+destructive. For efficient-inference research (early exit, LayerDrop, depth
+pruning, distillation) the implication is task-dependent and sharp: tagging
+tolerates truncation at layer 10 with $<$0.5 point loss, while relational
+structure is destroyed ($-48.6$ UAS at layer 10 for the monolingual linear
+model)---and multilingual encoders, the natural deployment target of such
+techniques, are the most vulnerable because they concentrate syntax in
+exactly the layers truncation removes.
+
+\paragraph{Reading the saturation layer with calibrated heads.}
+Retraining full head families (3 seeds, $\sigma \leq 0.003$) on the
+\emph{frozen} 24-layer biaffine encoder at each task's saturation layer
+(Table~\ref{tab:frozen}) closes the loop causally. With calibrated read-outs,
+the saturation layers support near-deployed performance: UPOS at layer 10
+costs 0.3 points, DEPREL at layer 18 costs 0.3, and attachment at layer 23
+costs 0.4 UAS relative to the end-to-end model (91.10 vs.\ 91.52). And the
+format finding survives calibration: a freshly trained pairwise (biaffine)
+head recovers 89.4--91.2 UAS from layers 18--24, while a freshly trained
+positional (linear) head extracts at most 34.4 UAS from the \emph{same}
+frozen representations---even at the final layer (30.0), and decreasingly so
+with depth (34.4 at 18 vs.\ 30.0 at 24): the encoder commits progressively to
+the relational format as it refines. Sixty UAS points separate two trained
+read-outs on identical inputs; that is the measurable distance between
+information being present and being present in a token-decodable format.
+
+\paragraph{Limitations.}
+Logit-lens numbers for intermediate layers remain lower bounds on decodable
+information; the per-layer probes tighten this for token-level formats, and
+the retrained biaffine heads act as calibrated pairwise probes for the
+24-layer model---extending pairwise probing to every layer of every encoder
+is future work. Our point is precisely that the choice of probe family
+changes the conclusion.
+Results cover one language and corpus (Brazilian Portuguese, Porttinari); the
+scale replication uses the ablation checkpoint on the linear side (no
+full-MTL linear-large checkpoint was retained), and fold-level retraining of
+all four main configurations was not performed---the paired bootstrap
+controls sentence-sampling variance, the independent-run replication and
+probe seeds bound training variance partially. Decoding is greedy (no MST),
+matching the deployed models under study.
+
+% ── Referências citadas nesta seção (adicionar ao .bib se ausentes) ───────────
+% @inproceedings{tenney2019bert, title={BERT Rediscovers the Classical NLP
+%   Pipeline}, author={Tenney, Ian and Das, Dipanjan and Pavlick, Ellie},
+%   booktitle={ACL}, year={2019}}
+% @article{jastrzebski2018residual, title={Residual Connections Encourage
+%   Iterative Inference}, author={Jastrz{\k{e}}bski, Stanis{\l}aw and others},
+%   journal={ICLR}, year={2018}}
+% @inproceedings{dozat2017biaffine, title={Deep Biaffine Attention for Neural
+%   Dependency Parsing}, author={Dozat, Timothy and Manning, Christopher D.},
+%   booktitle={ICLR}, year={2017}}
+% @inproceedings{hewitt2019structural, title={A Structural Probe for Finding
+%   Syntax in Word Representations}, author={Hewitt, John and Manning,
+%   Christopher D.}, booktitle={NAACL}, year={2019}}

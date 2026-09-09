@@ -1,0 +1,223 @@
+% ============================================================
+% Capítulo — Trabalhos Relacionados
+% ParseH2IA — Guilherme Dallman Lima, 2026
+% ============================================================
+
+\chapter{Trabalhos Relacionados}
+\label{cap:relacionados}
+
+Este capítulo revisa os trabalhos mais diretamente relacionados à presente dissertação
+ao longo de três eixos: (i) sistemas de parsing de dependências para o português sob o
+padrão Universal Dependencies; (ii) arquiteturas que combinam encoders BERT com mecanismos
+biaffine e/ou lineares para parsing sintático; e (iii) estratégias de aprendizado
+multitarefa que exploram a correlação entre tarefas morfossintáticas e sintáticas,
+especialmente em línguas morfologicamente ricas. A Tabela~\ref{tab:related_works_comparison}
+ao final do capítulo sintetiza as principais dimensões de comparação entre os trabalhos
+revisados e a proposta desta dissertação.
+
+% ------------------------------------------------------------
+\subsection*{Towards PortParser — a Highly Accurate Parsing System for Brazilian Portuguese
+             Following the Universal Dependencies Framework}
+% ------------------------------------------------------------
+
+O PortParser \cite{lopes2024towards} é o principal sistema de análise sintática de
+dependências para o português brasileiro sob o padrão Universal Dependencies e constitui
+o baseline central desta dissertação. O trabalho realiza uma investigação sistemática dos
+fatores que influenciam o desempenho do parsing: escolha do encoder, arquitetura neural,
+número de épocas de treinamento e tamanho dos embeddings.
+
+Os autores partem de três sistemas de referência consolidados — UDPipe~1.3
+\cite{straka2017tokenizing}, UDPipe~2 e Stanza \cite{qi-etal-2020-stanza} — e demonstram
+que a substituição do \textit{backbone} por encoders BERT produz ganhos expressivos sobre
+as arquiteturas recorrentes. A comparação entre mBERT \cite{devlin2019bert} e BERTimbau
+\cite{souza2020bertimbau} mostra que o modelo monolíngue especializado no português supera
+consistentemente o multilíngue, atingindo aproximadamente 99\% de acurácia em PoS tagging
+e próximo de 96\% de UAS e 95\% de LAS no corpus Porttinari. O sistema vencedor combina
+BERTimbau Large com uma camada BiLSTM bidirecional adicional e mecanismo de atenção
+biaffine \cite{dozat2016deep} para predição conjunta de HEAD e DEPREL.
+
+O trabalho também conduz uma análise qualitativa dos erros do parser, identificando padrões
+sistemáticos associados a construções sintáticas de menor representatividade no corpus.
+
+A contribuição desta dissertação em relação ao PortParser está em demonstrar que a camada
+BiLSTM intermediária pode ser suprimida: conectar o encoder diretamente a cabeçotes de
+predição com ajuste fino completo — em especial o cabeçote linear — produz resultados
+competitivos (a menos de 1,1 pontos percentuais em UAS) com parametrização
+significativamente mais simples.
+
+% ------------------------------------------------------------
+\subsection*{75 Languages, 1 Model: Parsing Universal Dependencies Universally}
+% ------------------------------------------------------------
+
+O trabalho de \citeauthor{kondratyuk201975} \cite{kondratyuk201975} propõe o UDify, um
+único modelo treinado simultaneamente sobre 75 línguas e todos os \textit{treebanks}
+disponíveis no UD~2.3, utilizando o BERT multilíngue (mBERT) como encoder compartilhado.
+O UDify combina um cabeçote biaffine para HEAD e DEPREL com cabeçotes lineares para UPOS,
+morfologia e lematização, em regime de \textit{hard parameter sharing} — o mesmo paradigma
+de compartilhamento adotado nesta dissertação. O modelo estabeleceu o estado da arte em
+parsing multilíngue na época de sua publicação e demonstrou que um único encoder pré-treinado,
+sem componentes recorrentes adicionais, é suficiente para obter desempenho competitivo em
+tarefas UD diversas.
+
+Do ponto de vista metodológico, o UDify antecipa diretamente a configuração investigada
+nesta dissertação: encoder pré-treinado + cabeçotes de predição especializados + MTL sobre
+tarefas Universal Dependencies. As diferenças são de escopo e de foco analítico. O UDify
+prioriza a cobertura de 75 línguas com um único encoder fixo (mBERT), sem comparar
+arquiteturas de cabeçote diferentes; esta dissertação, por contraste, foca no português
+brasileiro com quatro encoders distintos e compara sistematicamente cabeçotes linear e
+biaffine em condições experimentais controladas (mesmo corpus, mesmo protocolo de busca
+de hiperparâmetros). O UDify tampouco investiga a relação entre capacidade paramétrica do
+cabeçote e risco de sobreajuste em corpus de dimensão limitada — questão central neste
+trabalho.
+
+Adicionalmente, o UDify inclui lematização e morfologia como tarefas adicionais, enquanto
+esta dissertação restringe o MTL a UPOS, HEAD e DEPREL, as três tarefas com maior correlação
+linguística direta. Por fim, o UDify não analisa a instabilidade de treinamento ao longo das
+épocas por rótulo de dependência, aspecto que constitui uma das contribuições metodológicas
+desta dissertação.
+
+% ------------------------------------------------------------
+\subsection*{Universal Grammatical Dependencies for Portuguese with CINTIL Data,
+             LX Processing and CLARIN Support}
+% ------------------------------------------------------------
+
+O trabalho de \citeauthor{branco-etal-2022-universal} apresenta um conjunto abrangente de
+recursos linguísticos para o português segundo as diretrizes UD. O estudo introduz dois
+recursos principais: o CINTIL-UPos, corpus anotado com etiquetas morfossintáticas e traços
+morfológicos, e o CINTIL-UDep, \textit{treebank} anotado com dependências sintáticas.
+A construção dos corpora emprega dupla anotação manual com adjudicação especializada,
+garantindo alta consistência linguística.
+
+Com base nesses recursos, os autores desenvolveram o LX-UTagger, baseado em BERTimbau para
+etiquetagem morfossintática, e o LX-UDParser, parser de dependências baseado em estratégias
+\textit{transition-based}. Os resultados reportados atingem aproximadamente 99\% de acurácia
+em PoS e cerca de 90,87\% de UAS e 88,01\% de LAS. O trabalho destaca-se pela disponibilização
+pública de recursos e ferramentas voltados principalmente ao português europeu, com cobertura
+também do português brasileiro.
+
+Em relação a esta dissertação, o trabalho complementa o cenário de recursos para o português
+no padrão UD e reforça que encoders baseados em BERTimbau são altamente competitivos para
+tarefas morfossintáticas. Contudo, o LX-UDParser adota uma arquitetura \textit{transition-based}
+— fundamentalmente diferente da abordagem \textit{graph-based} com cabeçotes lineares e
+biaffine investigada aqui — e não realiza comparação entre arquiteturas de cabeçote nem
+experimentos de aprendizado multitarefa.
+
+% ------------------------------------------------------------
+\subsection*{Etiquetagem Morfossintática Multigênero para o Português do Brasil Segundo
+             o Modelo Universal Dependencies}
+% ------------------------------------------------------------
+
+O estudo de \citeauthor{stilpetrogold} investiga a etiquetagem morfossintática multigênero
+para o português brasileiro usando o padrão UD, com foco em domínios textuais além do
+jornalístico: textos acadêmicos e conteúdo gerado por usuários. Os autores comparam
+arquiteturas BiLSTM com modelos pré-treinados, demonstrando que o BERTimbau apresenta o
+melhor desempenho, alcançando aproximadamente 99\% de acurácia em PoS tagging. O estudo
+também evidencia que modelos treinados em múltiplos gêneros apresentam maior robustez em
+cenários de transferência entre domínios.
+
+A relevância deste trabalho para a presente dissertação reside em dois aspectos. Primeiro,
+ele confirma empiricamente a superioridade das representações contextualizadas do BERT sobre
+arquiteturas recorrentes para tarefas morfossintáticas em português, respaldando a escolha
+dos encoders avaliados no ParseH2IA. Segundo, os resultados sobre generalização multigênero
+fornecem contexto sobre os limites do corpus Porttinari-base — majoritariamente jornalístico
+— e apontam para o risco de sobreajuste ao domínio de treinamento, o que reforça a
+importância da regularização implícita provida pelo cabeçote linear.
+
+% ------------------------------------------------------------
+\subsection*{Multi-task Learning by Using Contextualized Word Representations
+             for Syntactic Parsing of a Morphologically Rich Language}
+% ------------------------------------------------------------
+
+O trabalho de \citeauthor{ehsan2025multi} propõe uma arquitetura multitarefa para parsing
+sintático aplicada ao urdu, língua morfologicamente rica e com ordem SOV. O estudo combina
+parsing de constituintes e parsing de dependências em um único modelo baseado em BiLSTM,
+explorando representações compartilhadas entre estruturas sintáticas distintas por meio de
+embeddings contextuais ELMo. Os autores investigam tanto o regime de tarefa única quanto o
+multitarefa, demonstrando que o compartilhamento de representações sintáticas melhora
+consistentemente os resultados em LAS e reduz ambiguidades entre relações sintáticas
+semanticamente próximas.
+
+O trabalho fornece evidência empírica importante de que estratégias multitarefa são eficazes
+para parsing em línguas morfologicamente ricas, embasando a escolha do MTL nesta dissertação.
+A análise das matrizes de erro e das ambiguidades sintáticas também é metodologicamente afim
+à análise de instabilidade por rótulo conduzida aqui. A principal diferença reside na
+tecnologia empregada: \citeauthor{ehsan2025multi} utilizam BiLSTM e ELMo — arquiteturas
+anteriores à consolidação dos Transformers — enquanto esta dissertação baseia-se
+inteiramente em encoders BERT com ajuste fino completo, o que elimina a necessidade de
+componentes recorrentes separados e permite comparação direta entre cabeçotes de predição.
+
+% ------------------------------------------------------------
+\begin{table*}[htbp]
+\centering
+\caption{Comparação entre os trabalhos relacionados e a proposta desta dissertação.}
+\label{tab:related_works_comparison}
+\renewcommand{\arraystretch}{1.5}
+\setlength{\tabcolsep}{4pt}
+
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{p{3.0cm} p{3.2cm} p{1.6cm} p{1.0cm} p{0.8cm} p{4.8cm}}
+\toprule
+\textbf{Trabalho} &
+\textbf{Arquitetura} &
+\textbf{Língua} &
+\textbf{MTL} &
+\textbf{UD} &
+\textbf{Relação com esta dissertação} \\
+\midrule
+
+PortParser \cite{lopes2024towards} &
+BERTimbau Large + BiLSTM + Biaffine &
+PT-BR &
+Parcial &
+Sim &
+Baseline principal. Referência de desempenho para parsing UD no português brasileiro.
+Esta dissertação suprime o BiLSTM e compara cabeçotes linear e biaffine. \\
+
+UDify \cite{kondratyuk201975} &
+mBERT + Biaffine (HEAD/DEPREL) + Linear (UPOS/morfo) &
+75 línguas &
+Sim &
+Sim &
+Pioneiro no paradigma encoder BERT + MTL + biaffine para UD. Não compara linear vs.\
+biaffine nem analisa efeito do tamanho do corpus sobre a escolha de cabeçote. \\
+
+CINTIL / LX-UDParser \cite{branco-etal-2022-universal} &
+BERTimbau + \textit{Transition-based} &
+PT-EU/BR &
+Não &
+Sim &
+Referência em recursos linguísticos UD para o português.
+Arquitetura \textit{transition-based} contrasta com a abordagem \textit{graph-based} desta dissertação. \\
+
+Stil/PetroGold \cite{stilpetrogold} &
+BiLSTM / BERTimbau &
+PT-BR &
+Não &
+Parcial &
+Evidencia a importância de representações contextualizadas e a robustez multigênero
+para tarefas morfossintáticas. \\
+
+\citeauthor{ehsan2025multi} \cite{ehsan2025multi} &
+BiLSTM + ELMo &
+Urdu &
+Sim &
+Sim &
+Demonstra empiricamente os benefícios do MTL para parsing em línguas morfologicamente ricas.
+Usa arquitetura pré-Transformer. \\
+
+\midrule
+
+\textbf{Esta dissertação} &
+BERT\textsuperscript{*} + Linear / Biaffine &
+PT-BR &
+Sim &
+Sim &
+Suprime o BiLSTM do PortParser; compara 4 encoders $\times$ 2 cabeçotes $\times$ 2 regimes
+de treinamento (MTL e ablação sem UPOS); propõe análise de instabilidade por rótulo ao
+longo das épocas. \\
+
+\bottomrule
+\multicolumn{6}{l}{\footnotesize \textsuperscript{*}BERTimbau Large, BERTimbau Base, mBERT e JabuticaBERT.}
+\end{tabular}%
+}
+\end{table*}

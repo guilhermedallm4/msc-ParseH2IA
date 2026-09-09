@@ -1,0 +1,13 @@
+Criação venv
+
+chmod +x setup_python.sh
+./setup_python.sh
+
+Install
+
+pip install -r requirements_all.txt
+
+Screen
+
+chmod +x run_optuna_screen.sh
+./run_optuna_screen.sh

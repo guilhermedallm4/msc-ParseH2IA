@@ -1,0 +1,2 @@
+model,uas,las,total_tokens,architecture
+amadeusai/modernJabuticaBERT-Base-1k,0.9003573555687909,0.8844848123883264,33580,biaffine_ablacao_sem_upos

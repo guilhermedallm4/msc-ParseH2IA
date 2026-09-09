@@ -1,0 +1,85 @@
+% Modelo: BERTimbau Large — Biaffine (com UPOS)
+\begin{table}[ht]
+\centering
+\caption{Acurácia por rótulo --- BtL-Biaff-cU (BERTimbau Large — Biaffine (com UPOS)). DEPREL Acc.\,=\,0.9779, UPOS Acc.\,=\,0.9934.}
+\label{tab:acc-predict-test-df-bertimbau-large-biaffine}
+\begin{minipage}[t]{0.55\linewidth}
+\centering\scriptsize
+\begin{tabular}{lrrr}
+\toprule
+\textbf{DEPREL} & \textbf{Tot.} & \textbf{Ok} & \textbf{Acc.} \\
+\midrule
+\texttt{det} & 4,853 & 4,830 & 0.9953 \\
+\texttt{case} & 4,532 & 4,522 & 0.9978 \\
+\texttt{punct} & 4,443 & 4,435 & 0.9982 \\
+\texttt{nmod} & 2,607 & 2,498 & 0.9582 \\
+\texttt{nsubj} & 1,895 & 1,845 & 0.9736 \\
+\texttt{obl} & 1,746 & 1,637 & 0.9376 \\
+\texttt{root} & 1,683 & 1,663 & 0.9881 \\
+\texttt{obj} & 1,476 & 1,448 & 0.9810 \\
+\texttt{amod} & 1,318 & 1,293 & 0.9810 \\
+\texttt{advmod} & 1,222 & 1,193 & 0.9763 \\
+\texttt{conj} & 960 & 925 & 0.9635 \\
+\texttt{cc} & 833 & 827 & 0.9928 \\
+\texttt{mark} & 828 & 816 & 0.9855 \\
+\texttt{flat\!:\!name} & 686 & 668 & 0.9738 \\
+\texttt{cop} & 595 & 594 & 0.9983 \\
+\texttt{xcomp} & 475 & 455 & 0.9579 \\
+\texttt{advcl} & 437 & 401 & 0.9176 \\
+\texttt{acl\!:\!relcl} & 401 & 386 & 0.9626 \\
+\texttt{nummod} & 341 & 327 & 0.9589 \\
+\texttt{acl} & 307 & 274 & 0.8925 \\
+\texttt{fixed} & 230 & 224 & 0.9739 \\
+\texttt{ccomp} & 218 & 208 & 0.9541 \\
+\texttt{appos} & 208 & 194 & 0.9327 \\
+\texttt{aux\!:\!pass} & 203 & 202 & 0.9951 \\
+\texttt{parataxis} & 160 & 125 & 0.7812 \\
+\texttt{aux} & 145 & 142 & 0.9793 \\
+\texttt{nsubj\!:\!pass} & 144 & 142 & 0.9861 \\
+\texttt{ccomp\!:\!speech} & 130 & 122 & 0.9385 \\
+\texttt{expl} & 124 & 115 & 0.9274 \\
+\texttt{obl\!:\!agent} & 110 & 107 & 0.9727 \\
+\texttt{csubj} & 83 & 78 & 0.9398 \\
+\texttt{discourse} & 51 & 38 & 0.7451 \\
+\texttt{expl\!:\!impers} & 27 & 23 & 0.8519 \\
+\texttt{iobj} & 19 & 17 & 0.8947 \\
+\texttt{dislocated} & 17 & 10 & 0.5882 \\
+\texttt{flat} & 17 & 17 & 1.0000 \\
+\texttt{nsubj\!:\!outer} & 15 & 12 & 0.8000 \\
+\texttt{flat\!:\!foreign} & 15 & 13 & 0.8667 \\
+\texttt{orphan} & 14 & 6 & 0.4286 \\
+\texttt{vocative} & 6 & 3 & 0.5000 \\
+\midrule
+\textbf{Total} & \textbf{33,574} & \textbf{32,835} & \textbf{0.9780} \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.42\linewidth}
+\centering\scriptsize
+\begin{tabular}{lrrr}
+\toprule
+\textbf{UPOS} & \textbf{Tot.} & \textbf{Ok} & \textbf{Acc.} \\
+\midrule
+\texttt{NOUN} & 6,309 & 6,267 & 0.9933 \\
+\texttt{ADP} & 5,019 & 5,013 & 0.9988 \\
+\texttt{DET} & 4,904 & 4,883 & 0.9957 \\
+\texttt{PUNCT} & 4,443 & 4,436 & 0.9984 \\
+\texttt{VERB} & 3,368 & 3,342 & 0.9923 \\
+\texttt{PROPN} & 2,209 & 2,200 & 0.9959 \\
+\texttt{ADJ} & 1,691 & 1,664 & 0.9840 \\
+\texttt{PRON} & 1,286 & 1,274 & 0.9907 \\
+\texttt{ADV} & 1,272 & 1,252 & 0.9843 \\
+\texttt{AUX} & 968 & 967 & 0.9990 \\
+\texttt{CCONJ} & 823 & 818 & 0.9939 \\
+\texttt{NUM} & 622 & 610 & 0.9807 \\
+\texttt{SCONJ} & 456 & 445 & 0.9759 \\
+\texttt{SYM} & 120 & 119 & 0.9917 \\
+\texttt{X} & 85 & 66 & 0.7765 \\
+\texttt{INTJ} & 5 & 4 & 0.8000 \\
+\midrule
+\textbf{Total} & \textbf{33,580} & \textbf{33,360} & \textbf{0.9934} \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\end{table}

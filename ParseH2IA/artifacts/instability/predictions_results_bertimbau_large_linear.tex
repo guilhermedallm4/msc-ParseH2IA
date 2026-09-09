@@ -1,0 +1,81 @@
+% BERTimbau Large — Linear (com UPOS) (BtL-Lin-cU)
+
+
+\begin{table}[ht]
+\centering
+\caption{Top-15 instabilidade DEPREL (esq.) e UPOS (dir.) --- BtL-Lin-cU. N\,=\,n.º tokens, Forg.\,=\,esquecimentos, Rec.\,=\,recuperações, Osc.\,=\,oscilações, A+E\,=\,aprendeu+esqueceu.}
+\label{tab:inst-predictions-results-bertimbau-large-linear}
+\begin{minipage}[t]{0.54\linewidth}
+\centering\tiny
+\begin{tabular}{lrrrrrrrr}
+\toprule
+\textbf{Rótulo} & \textbf{N} & \textbf{Forg.} & \textbf{Rec.} & \textbf{Osc.} & \textbf{A+E} & \textbf{Pico} & \textbf{Final} & \textbf{Drop} \\
+\midrule
+\texttt{nmod} & 1,729 & 923 & 984 & 1,907 & 86 & 0.9688 & 0.9468 & 0.0220 \\
+\texttt{obl} & 1,132 & 900 & 1,829 & 2,729 & 76 & 0.9355 & 0.9178 & 0.0177 \\
+\texttt{amod} & 927 & 270 & 370 & 640 & 31 & 0.9763 & 0.9590 & 0.0173 \\
+\texttt{nsubj} & 1,243 & 264 & 1,147 & 1,411 & 24 & 0.9799 & 0.9735 & 0.0064 \\
+\texttt{advcl} & 333 & 229 & 528 & 757 & 20 & 0.9039 & 0.8979 & 0.0060 \\
+\texttt{root} & 1,144 & 225 & 368 & 593 & 20 & 0.9869 & 0.9816 & 0.0052 \\
+\texttt{acl} & 186 & 191 & 344 & 535 & 28 & 0.8978 & 0.8226 & 0.0753 \\
+\texttt{obj} & 862 & 189 & 1,027 & 1,216 & 19 & 0.9826 & 0.9722 & 0.0104 \\
+\texttt{conj} & 630 & 189 & 798 & 987 & 17 & 0.9810 & 0.9667 & 0.0143 \\
+\texttt{parataxis} & 101 & 189 & 263 & 452 & 22 & 0.8218 & 0.7327 & 0.0891 \\
+\texttt{flat\!:\!name} & 532 & 188 & 476 & 664 & 11 & 0.9812 & 0.9718 & 0.0094 \\
+\texttt{appos} & 153 & 118 & 261 & 379 & 8 & 0.9804 & 0.9346 & 0.0458 \\
+\texttt{xcomp} & 293 & 94 & 378 & 472 & 4 & 0.9761 & 0.9693 & 0.0068 \\
+\texttt{acl\!:\!relcl} & 252 & 90 & 337 & 427 & 5 & 0.9960 & 0.9802 & 0.0159 \\
+\texttt{advmod} & 575 & 89 & 207 & 296 & 6 & 0.9861 & 0.9826 & 0.0035 \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.42\linewidth}
+\centering\tiny
+\begin{tabular}{lrrrrrrrr}
+\toprule
+\textbf{Rótulo} & \textbf{N} & \textbf{Forg.} & \textbf{Rec.} & \textbf{Osc.} & \textbf{A+E} & \textbf{Pico} & \textbf{Final} & \textbf{Drop} \\
+\midrule
+\texttt{NOUN} & 3,819 & 385 & 440 & 825 & 28 & 0.9927 & 0.9898 & 0.0029 \\
+\texttt{ADJ} & 1,247 & 324 & 519 & 843 & 29 & 0.9767 & 0.9703 & 0.0064 \\
+\texttt{VERB} & 2,301 & 303 & 299 & 602 & 32 & 0.9904 & 0.9857 & 0.0048 \\
+\texttt{PROPN} & 1,822 & 163 & 241 & 404 & 16 & 0.9945 & 0.9912 & 0.0033 \\
+\texttt{X} & 91 & 108 & 186 & 294 & 10 & 0.9560 & 0.8571 & 0.0989 \\
+\texttt{ADV} & 602 & 99 & 318 & 417 & 6 & 0.9900 & 0.9867 & 0.0033 \\
+\texttt{DET} & 2,403 & 78 & 90 & 168 & 6 & 0.9983 & 0.9975 & 0.0008 \\
+\texttt{PRON} & 622 & 70 & 502 & 572 & 5 & 0.9936 & 0.9904 & 0.0032 \\
+\texttt{SCONJ} & 227 & 68 & 286 & 354 & 7 & 0.9736 & 0.9604 & 0.0132 \\
+\texttt{CCONJ} & 408 & 46 & 447 & 493 & 4 & 0.9926 & 0.9877 & 0.0049 \\
+\texttt{ADP} & 2,468 & 44 & 63 & 107 & 1 & 0.9996 & 0.9992 & 0.0004 \\
+\texttt{SYM} & 98 & 35 & 132 & 167 & 1 & 1.0000 & 0.9898 & 0.0102 \\
+\texttt{NUM} & 406 & 29 & 405 & 434 & 3 & 0.9901 & 0.9852 & 0.0049 \\
+\texttt{AUX} & 474 & 27 & 496 & 523 & 1 & 0.9979 & 0.9958 & 0.0021 \\
+\texttt{PUNCT} & 2,242 & 11 & 12 & 23 & 0 & 1.0000 & 1.0000 & 0.0000 \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\end{table}
+
+
+\begin{table}[ht]
+\centering\scriptsize
+\caption{UAS por época --- BtL-Lin-cU. Fg\,=\,forgetting (acerto$\to$erro). Rc\,=\,recovery (erro$\to$acerto).}
+\label{tab:uas-predictions-results-bertimbau-large-linear}
+\begin{tabular}{rrrr rrrr rrrr rrrr}
+\toprule
+\textbf{Ép.} & \textbf{UAS} & \textbf{Fg} & \textbf{Rc} & \textbf{Ép.} & \textbf{UAS} & \textbf{Fg} & \textbf{Rc} & \textbf{Ép.} & \textbf{UAS} & \textbf{Fg} & \textbf{Rc} & \textbf{Ép.} & \textbf{UAS} & \textbf{Fg} & \textbf{Rc} \\
+\midrule
+1 & 0.1093 & 0 & 0 & 2 & 0.1868 & 638 & 2,130 & 3 & 0.3103 & 950 & 3,326 & 4 & 0.4601 & 1,160 & 4,042 \\
+5 & 0.6059 & 1,579 & 4,383 & 6 & 0.6881 & 1,550 & 3,132 & 7 & 0.7742 & 1,220 & 2,876 & 8 & 0.7847 & 1,704 & 1,906 \\
+9 & 0.8102 & 1,224 & 1,716 & 10 & 0.8039 & 2,012 & 1,891 & 11 & 0.8486 & 1,346 & 2,205 & 12 & 0.8667 & 1,163 & 1,511 \\
+13 & 0.8352 & 1,724 & 1,118 & 14 & 0.8522 & 1,368 & 1,695 & 15 & 0.8769 & 989 & 1,464 & 16 & 0.8672 & 1,302 & 1,117 \\
+17 & 0.8894 & 943 & 1,370 & 18 & 0.8952 & 923 & 1,034 & 19 & 0.9011 & 813 & 926 & 20 & 0.9279 & 454 & 970 \\
+21 & 0.9223 & 632 & 524 & 22 & 0.9169 & 675 & 571 & 23 & 0.9253 & 533 & 695 & 24 & 0.9305 & 455 & 554 \\
+25 & 0.9284 & 507 & 468 & 26 & 0.9263 & 526 & 486 & 27 & 0.9244 & 554 & 516 & 28 & 0.9347 & 322 & 521 \\
+29 & 0.9306 & 417 & 337 & 30 & 0.9353 & 255 & 347 & 31 & 0.9312 & 321 & 242 & 32 & 0.9335 & 245 & 288 \\
+33 & 0.9397 & 177 & 296 & 34 & 0.9395 & 188 & 185 & 35 & 0.9431 & 134 & 203 & 36 & 0.9436 & 128 & 138 \\
+37 & 0.9429 & 91 & 78 & 38 & 0.9465 & 58 & 126 & 39 & 0.9431 & 100 & 36 & 40 & 0.9443 & 24 & 46 \\
+41 & 0.9443 & 0 & 0 &  & & &  &  & & &  &  & & &  \\
+\bottomrule
+\end{tabular}
+\end{table}
